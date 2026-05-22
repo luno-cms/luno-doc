@@ -1,0 +1,154 @@
+/* ── Brand colors ── */
+:root {
+  --vp-c-brand-1: #0ea5e9;
+  --vp-c-brand-2: #38bdf8;
+  --vp-c-brand-3: #7dd3fc;
+  --vp-c-brand-soft: rgba(14, 165, 233, 0.12);
+}
+
+/* ── Dark mode: LP に合わせた背景・表面色 ── */
+.dark {
+  --vp-c-bg: #080b0f;
+  --vp-c-bg-soft: #0e1520;
+  --vp-c-bg-mute: #111827;
+  --vp-c-bg-elv: #0e1520;
+
+  --vp-c-text-1: #f1f5f9;
+  --vp-c-text-2: #94a3b8;
+  --vp-c-text-3: #64748b;
+
+  --vp-c-divider: rgba(14, 165, 233, 0.12);
+  --vp-c-border: rgba(14, 165, 233, 0.15);
+
+  /* nav */
+  --vp-nav-bg-color: rgba(8, 11, 15, 0.85);
+
+  /* sidebar */
+  --vp-sidebar-bg-color: #080b0f;
+}
+
+/* ── Nav bar ── */
+.dark .VPNav {
+  border-bottom: 1px solid rgba(14, 165, 233, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Logo: LPと同じグロー ── */
+.VPNavBarTitle .logo {
+  filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.4));
+}
+
+/* ── Hero ── */
+.dark .VPHero .name {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .VPHero .tagline {
+  color: #94a3b8;
+}
+
+/* ── ボタン ── */
+.dark .VPButton.medium.brand {
+  background: #0ea5e9;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+  color: #fff;
+}
+.dark .VPButton.medium.brand:hover {
+  background: #38bdf8;
+  border-color: #38bdf8;
+}
+.dark .VPButton.medium.alt {
+  background: transparent;
+  border-color: rgba(14, 165, 233, 0.4);
+  color: #0ea5e9;
+}
+.dark .VPButton.medium.alt:hover {
+  border-color: #0ea5e9;
+  background: rgba(14, 165, 233, 0.08);
+}
+
+/* ── Feature cards ── */
+.dark .VPFeature {
+  background: #0e1520;
+  border: 1px solid rgba(14, 165, 233, 0.15);
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.dark .VPFeature:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.08);
+}
+.dark .VPFeature .icon {
+  background: rgba(14, 165, 233, 0.1);
+  border-radius: 8px;
+}
+
+/* ── Sidebar ── */
+.dark .VPSidebarItem.level-0 > .item > .text {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.dark .VPSidebarItem.is-active > .item > .link > .text {
+  color: #0ea5e9;
+}
+.dark .VPSidebarItem > .item > .link:hover > .text {
+  color: #38bdf8;
+}
+
+/* ── Code blocks ── */
+.dark div[class*='language-'] {
+  background: #0a0f1a !important;
+  border: 1px solid rgba(14, 165, 233, 0.12);
+}
+
+/* ── Inline code ── */
+.dark :not(pre) > code {
+  background: rgba(14, 165, 233, 0.1);
+  color: #38bdf8;
+  border-radius: 4px;
+}
+
+/* ── Links ── */
+.dark .vp-doc a {
+  color: #0ea5e9;
+  text-decoration: none;
+}
+.dark .vp-doc a:hover {
+  color: #38bdf8;
+  text-decoration: underline;
+}
+
+/* ── Table ── */
+.dark .vp-doc table thead tr {
+  background: #0e1520;
+}
+.dark .vp-doc table tr:nth-child(2n) {
+  background: rgba(14, 165, 233, 0.04);
+}
+
+/* ── Custom block (tip/warning/danger) ── */
+.dark .custom-block.tip {
+  background: rgba(14, 165, 233, 0.08);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+/* ── Search ── */
+.dark .VPLocalSearchBox {
+  --vp-local-search-bg: #0e1520;
+  --vp-local-search-highlight-bg: rgba(14, 165, 233, 0.2);
+}
+
+/* ── Force dark mode always (LP はダークのみ) ── */
+@media (prefers-color-scheme: light) {
+  :root:not(.light) {
+    color-scheme: dark;
+  }
+}

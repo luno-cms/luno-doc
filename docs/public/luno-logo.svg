@@ -1,0 +1,8 @@
+<svg width="110" height="25" viewBox="40 35 220 50" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(40, 35)" fill="#0ea5e9">
+    <path d="M0 0 V50 H32 L42 40 H12 V0 Z"/>
+    <path d="M58.5 0 V40 Q58.5 50 78.5 50 Q98.5 50 98.5 40 V0 H88.5 V40 Q88.5 42 78.5 42 Q68.5 42 68.5 40 V0 Z"/>
+    <path d="M115 50 V0 H125 L145 30 V0 H155 V50 H145 L125 20 V50 Z"/>
+    <path d="M170 25 Q170 0 195 0 Q220 0 220 25 Q220 50 195 50 Q170 50 170 25 M180 25 Q180 42 195 42 Q210 42 210 25 Q210 8 195 8 Q180 8 180 25"/>
+  </g>
+</svg>

@@ -1,0 +1,435 @@
+# luno HCMS — Full API Reference for AI Agents
+
+> luno is a headless CMS built on Cloudflare Workers + PostgreSQL (via Hyperdrive). This document provides the complete Public API specification for AI agents and automated systems.
+> Base URL: https://{your-domain}/public/v1
+> No authentication required. All responses are JSON.
+
+---
+
+## Content Model
+
+```
+Form Set  (content type, identified by slug, e.g. "blog")
+  └── Entry  (individual content item, identified by slug)
+        └── Revision  (versioned content; only "published" revisions returned)
+              └── Snapshot  (field values at this revision)
+```
+
+Only entries with a `published` revision appear in the Public API responses.
+
+---
+
+## All Endpoints
+
+### GET /form-sets/{slug}
+
+Returns form set metadata and the published content of the primary entry.
+Primary entry preference order: slug `main` → slug `_legacy` → oldest entry.
+
+Query parameters:
+- `locale` (string, optional) — filter localized field values (e.g., "ja", "en")
+
+Response:
+```json
+{
+  "formSet": { "id": "uuid", "slug": "string", "name": "string", "description": "string|null" },
+  "entry": { "id": "uuid", "slug": "string" },
+  "revision": { "id": "uuid", "revision": 3, "updatedAt": "ISO8601" },
+  "data": { "<field_key>": "<value>" },
+  "mediaUrls": { "<field_key>": "https://..." }
+}
+```
+
+---
+
+### GET /form-sets/{formSetSlug}/entries
+
+Returns a paginated list of published entries in a form set.
+
+Query parameters:
+- `page` (integer, default 1) — page number, 1-based
+- `limit` (integer, default 20, max 100) — items per page
+- `offset` (integer) — alternative to `page`; byte offset into result set
+- `locale` (string) — filter localized field values
+- `q` (string) — full-text search keyword (Business plan+)
+- `sort` (string) — sort key, e.g., `created_at:desc`, `updated_at:asc`, `published_date:asc`
+- `include_snapshot` (boolean, default false) — include `snapshot` (field values) and `mediaUrls` in each item
+
+Response:
+```json
+{
+  "formSet": { "id": "uuid", "slug": "string", "name": "string", "description": "string|null" },
+  "total": 42,
+  "limit": 20,
+  "offset": 0,
+  "items": [
+    {
+      "entry": { "id": "uuid", "slug": "string" },
+      "published": {
+        "revisionId": "uuid",
+        "revision": 3,
+        "updatedAt": "ISO8601",
+        "snapshot": { "<field_key>": "<value>" },   // only if include_snapshot=true
+        "mediaUrls": { "<field_key>": "https://..." } // only if include_snapshot=true
+      }
+    }
+  ]
+}
+```
+
+---
+
+### GET /form-sets/{formSetSlug}/entries/{entrySlug}
+
+Returns full published content for a specific entry.
+
+Behavior: if the entry's slug has changed, returns HTTP 301 with `Location` header pointing to the new URL. Clients should follow redirects.
+
+Query parameters:
+- `locale` (string, optional) — filter localized field values
+
+Response:
+```json
+{
+  "formSet": { "id": "uuid", "slug": "string", "name": "string" },
+  "entry": { "id": "uuid", "slug": "string" },
+  "revision": { "id": "uuid", "revision": 3, "updatedAt": "ISO8601" },
+  "data": { "<field_key>": "<value>" },
+  "mediaUrls": { "<field_key>": "https://..." },
+  "widgetRoles": { "<field_key>": "title|thumbnail|description|date|category" }
+}
+```
+
+---
+
+### GET /content/by-path
+
+Look up content by an import path (set during content migration from external systems).
+
+Query parameters:
+- `path` (string, required) — the import path value
+- `locale` (string, optional)
+
+Returns same structure as single entry endpoint.
+
+---
+
+### GET /content/by-slug
+
+Look up content using form set slug and entry slug as query parameters.
+
+Query parameters:
+- `formSetSlug` (string, required)
+- `slug` (string, required)
+- `locale` (string, optional)
+
+Returns same structure as single entry endpoint.
+
+---
+
+### GET /content/by-external-id
+
+Look up content by external system entity identifier.
+
+Query parameters:
+- `sourceType` (string, required, max 50) — external system name, e.g., "wordpress", "shopify"
+- `entityType` (string, required, max 200) — entity type, e.g., "post", "product"
+- `externalId` (string, required, max 2000) — the external system's identifier
+
+Returns same structure as single entry endpoint.
+
+---
+
+### GET /preview/revisions
+
+Fetch an unpublished revision using a signed JWT token (generated from the admin panel).
+
+Query parameters:
+- `token` (string, required) — JWT signed with the server's secret, valid 15 minutes
+
+Returns 401 after token expiry. Returns same structure as single entry endpoint.
+Works for all revision statuses including `draft`.
+
+---
+
+### GET /media/{assetId}
+
+Serve a media file (image, document, etc.) from Cloudflare R2.
+
+Response headers:
+- `Content-Type`: MIME type of the file
+- `Cache-Control: public, max-age=31536000` — 1-year CDN + browser cache
+- `ETag`: opaque identifier for conditional requests
+
+Accepts `Accept: image/webp` header — returns WebP-optimized image when available.
+
+---
+
+### GET /sitemap.xml
+
+XML sitemap (Sitemap Protocol 0.9) covering all published entries across all form sets.
+Includes `<loc>`, `<lastmod>`, `<changefreq>`, and `<priority>`.
+
+---
+
+### GET /form-sets/{slug}/sitemap.xml
+
+XML sitemap for a single form set's published entries only.
+
+---
+
+### GET /form-sets/{formSetSlug}/entries/{entrySlug}/schema.json
+
+schema.org JSON-LD structured data for the entry. Suitable for `<script type="application/ld+json">`.
+
+Response:
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "string",
+  "description": "string",
+  "image": "https://...",
+  "datePublished": "ISO8601",
+  "dateModified": "ISO8601",
+  "author": { "@type": "Organization", "name": "string" }
+}
+```
+
+---
+
+### GET /form-sets/{formSetSlug}/entries/{entrySlug}/ogp.json
+
+Open Graph Protocol metadata as a JSON object.
+
+Response:
+```json
+{
+  "og:title": "string",
+  "og:description": "string",
+  "og:image": "https://...",
+  "og:url": "https://...",
+  "og:type": "article",
+  "og:site_name": "string",
+  "twitter:card": "summary_large_image"
+}
+```
+
+---
+
+### POST /contact-forms/{slug}/submit
+
+Submit a contact form.
+
+Request:
+```
+Content-Type: application/json
+{ "<field_key>": "<value>", ... }
+```
+
+Success response (200):
+```json
+{ "ok": true, "submissionId": "uuid" }
+```
+
+Error response (400):
+```json
+{ "error": { "code": "VALIDATION_ERROR", "message": "string" } }
+```
+
+---
+
+### GET /llms.txt
+
+Short AI-readable API summary (llms.txt spec). Suitable for system prompts.
+
+---
+
+### GET /llms-full.txt
+
+This document — full API specification for AI agents.
+
+---
+
+## Field Types
+
+All field values appear inside the `data` object.
+
+| Field Type | Value Type | Notes |
+|---|---|---|
+| `text` | string | Single-line. Localizable when `localizable: true`. |
+| `textarea` | string | Multi-line plain text. Localizable when `localizable: true`. |
+| `tiptap` | string (HTML) | Rich text. Localizable when `localizable: true`. |
+| `number` | number | Integer or decimal. |
+| `boolean` | boolean | `true` or `false`. |
+| `date` | string | ISO 8601 date `"2025-01-15"` or datetime `"2025-01-15T09:00:00Z"`. |
+| `select` | string | Single selected value. |
+| `radio` | string | Single selected value. |
+| `multiselect` | string[] | Array of selected values. |
+| `image` | string | Asset UUID. Resolve to URL via `mediaUrls[key]`. |
+| `file` | string | Asset UUID. Resolve to URL via `mediaUrls[key]`. |
+| `video_embed` | string | Embed URL (YouTube, Vimeo, etc.). |
+| `entry_ref` | string | Slug of the referenced entry in the linked form set. |
+
+### Localized Field Values
+
+When a field has `localizable: true`, add `?locale=<code>` to requests (e.g., `?locale=ja`).
+If the requested locale has no value, the default locale's value is returned.
+
+---
+
+## Pagination
+
+All list endpoints support page-based or offset-based pagination.
+
+```
+GET /form-sets/{slug}/entries?page=2&limit=50
+```
+
+Response fields:
+- `total` — total number of matching published entries
+- `limit` — items per page as requested
+- `offset` — starting index of this page (0-based)
+
+Algorithm to iterate all pages:
+1. Request page 1 with desired limit
+2. Process `items`
+3. Continue if `offset + limit < total`, incrementing `page`
+
+Python example:
+```python
+page = 1
+limit = 100
+all_items = []
+
+while True:
+    res = await client.get(url, params={"page": page, "limit": limit, "include_snapshot": "true"})
+    data = res.json()
+    all_items.extend(data["items"])
+    if data["offset"] + limit >= data["total"]:
+        break
+    page += 1
+```
+
+---
+
+## Caching
+
+All public content endpoints support HTTP conditional requests:
+
+- `ETag` response header — opaque identifier for the current content version
+- `If-None-Match` request header — send back the ETag to receive `304 Not Modified` if unchanged
+- `Cache-Control: public, max-age=60` — CDN and browser caching for 60 seconds
+- Media endpoint: `Cache-Control: public, max-age=31536000` (1 year, immutable)
+
+---
+
+## Error Codes
+
+| Code | HTTP Status | Meaning |
+|---|---|---|
+| `NOT_FOUND` | 404 | Form set or entry does not exist or is not published |
+| `VALIDATION_ERROR` | 400 | Missing or invalid query parameters |
+| `UNAUTHORIZED` | 401 | Token missing, expired, or invalid (preview endpoint only) |
+| `FORBIDDEN` | 403 | Access denied |
+| `PLAN_REQUIRED` | 403 | Full-text search (`?q=`) requires Business plan or above |
+| `CONFLICT` | 409 | Conflict (e.g., duplicate slug on write operations) |
+| `INTERNAL_ERROR` | 500 | Unexpected server error; retry after a delay |
+
+---
+
+## HTTP Status Codes
+
+| Status | Meaning |
+|---|---|
+| 200 | Success |
+| 301 | Entry slug changed — follow `Location` header to new URL |
+| 304 | Content unchanged — use cached version (ETag match) |
+| 400 | Bad request |
+| 401 | Authentication required or invalid (preview only) |
+| 403 | Forbidden (plan required or access denied) |
+| 404 | Not found |
+| 500 | Server error |
+
+---
+
+## Revision Workflow Reference
+
+| Status | Meaning | Visible in Public API |
+|---|---|---|
+| `draft` | Work in progress | No |
+| `pending_review` | Submitted for approval | No |
+| `scheduled` | Approved, auto-publishes at `publish_at` | No |
+| `published` | Live, returned by Public API | Yes |
+| `rejected` | Returned for rework | No |
+| `superseded` | Replaced by a newer published revision | No |
+
+---
+
+## Webhook Payloads (for integrations)
+
+luno sends HTTP POST to configured webhook URLs when entries change.
+
+Event types:
+- `entry.published` — entry goes live (immediate or scheduled)
+- `entry.updated` — published entry's content is replaced
+- `entry.deleted` — entry is removed
+
+Payload:
+```json
+{
+  "event": "entry.published",
+  "tenant_id": "uuid",
+  "form_set_slug": "string",
+  "entry_slug": "string",
+  "entry_id": "uuid",
+  "published_at": "ISO8601",
+  "data": { "<field_key>": "<value>" }
+}
+```
+
+Signature header: `X-Luno-Signature: sha256=<HMAC-SHA256 hex digest of raw body>`
+
+Verification (Node.js):
+```js
+const sig = "sha256=" + crypto.createHmac("sha256", secret).update(rawBody, "utf8").digest("hex");
+crypto.timingSafeEqual(Buffer.from(receivedSig), Buffer.from(sig));
+```
+
+---
+
+## Agent API (Admin, requires API key)
+
+AI agents can create and publish content using an API key (`luno_agent_` prefix).
+
+Base URL: https://{your-domain}/admin/v1
+Authentication: `Authorization: Bearer luno_agent_<key>`
+
+Endpoints:
+- `GET  /form-sets` — list form sets
+- `GET  /form-sets/{id}/entries` — list entries (all statuses)
+- `POST /form-sets/{id}/entries` — create entry
+- `GET  /revisions/{id}` — get revision
+- `PATCH /revisions/{id}` — update revision fields
+- `POST /revisions/{id}/publish` — publish a revision
+
+---
+
+## Deployment Architecture
+
+- **API**: Cloudflare Workers (Hono framework)
+- **Database**: PostgreSQL via Cloudflare Hyperdrive
+- **Media**: Cloudflare R2 (S3-compatible object storage)
+- **Admin panel**: Vite 6 + React + Mantine v8 (Cloudflare Pages)
+- **Image variants**: Cloudflare Workers Queue (async processing)
+- **Scheduled publishing**: Cloudflare Workers Cron Triggers (every minute)
+
+---
+
+## Documentation
+
+- Guide: https://doc.luno.rest/en/guide/getting-started
+- Public API Reference: https://doc.luno.rest/en/api/public-api
+- AI Agents Guide: https://doc.luno.rest/en/api/ai-agents
+- Webhooks: https://doc.luno.rest/en/api/webhooks
+- Self-hosting: https://doc.luno.rest/en/self-hosting/
