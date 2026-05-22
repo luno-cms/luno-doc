@@ -23,10 +23,8 @@ jobs:
 
       - run: pnpm build
 
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: fa280119cb4facc5b32ad13c01ef1e94
-          command: pages deploy docs/.vitepress/dist --project-name=luno-doc --branch=main
+      - name: Deploy
+        run: npx wrangler pages deploy docs/.vitepress/dist --project-name=luno-doc --branch=main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: fa280119cb4facc5b32ad13c01ef1e94
