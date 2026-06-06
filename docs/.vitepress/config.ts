@@ -5,11 +5,6 @@ export default defineConfig({
   description: "Headless CMS powered by Cloudflare Workers",
   base: "/",
 
-  rewrites: {
-    "ja/docs/embed.md": "ja/guide/embed.md",
-    "en/docs/embed.md": "en/guide/embed.md",
-  },
-
   sitemap: {
     hostname: "https://doc.luno.rest",
   },
