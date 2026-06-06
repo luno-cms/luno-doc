@@ -215,4 +215,4 @@ AI が生成したコンテンツは必ず人間がレビューしてから公�
 
 - [AI エージェント向けガイド](/ja/api/ai-agents) — MCP サーバーと API キーの設定
 - [フォームビルダー](/ja/guide/form-builder) — フォームセットの作成
-- [ウィジェット埋め込み](/ja/guide/widgets) — CSS カスタマイズの詳細
+- [サイトへの埋め込み](/ja/guide/embed) — CSS カスタマイズの詳細

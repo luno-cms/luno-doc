@@ -12,6 +12,9 @@ hero:
       text: はじめに
       link: /ja/guide/getting-started
     - theme: alt
+      text: サイトへの埋め込み
+      link: /ja/guide/embed
+    - theme: alt
       text: 公開 API リファレンス
       link: /ja/api/public-api
 

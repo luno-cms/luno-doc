@@ -5,6 +5,11 @@ export default defineConfig({
   description: "Headless CMS powered by Cloudflare Workers",
   base: "/",
 
+  rewrites: {
+    "ja/docs/embed.md": "ja/guide/embed.md",
+    "en/docs/embed.md": "en/guide/embed.md",
+  },
+
   sitemap: {
     hostname: "https://doc.luno.rest",
   },
@@ -31,7 +36,7 @@ export default defineConfig({
                 { text: "フォームビルダー", link: "/ja/guide/form-builder" },
                 { text: "メディア管理", link: "/ja/guide/media" },
                 { text: "コンタクトフォーム", link: "/ja/guide/contact-forms" },
-                { text: "ウィジェット埋め込み", link: "/ja/guide/widgets" },
+                { text: "サイトへの埋め込み", link: "/ja/guide/embed" },
                 { text: "SEO・サイトマップ", link: "/ja/guide/seo" },
                 { text: "AI アシスト", link: "/ja/guide/ai-assist" },
                 { text: "スケジュール公開", link: "/ja/guide/schedule" },
@@ -83,7 +88,7 @@ export default defineConfig({
                 { text: "Form Builder", link: "/en/guide/form-builder" },
                 { text: "Media Management", link: "/en/guide/media" },
                 { text: "Contact Forms", link: "/en/guide/contact-forms" },
-                { text: "Widget Embedding", link: "/en/guide/widgets" },
+                { text: "Embed on Your Site", link: "/en/guide/embed" },
                 { text: "SEO & Sitemaps", link: "/en/guide/seo" },
                 { text: "AI Assist", link: "/en/guide/ai-assist" },
                 { text: "Scheduled Publishing", link: "/en/guide/schedule" },

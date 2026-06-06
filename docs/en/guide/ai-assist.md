@@ -215,4 +215,4 @@ AI can produce inaccurate, outdated, or inappropriate content. Use luno's approv
 
 - [AI Agents Guide](/en/api/ai-agents) — MCP server setup and API key management
 - [Form Builder](/en/guide/form-builder) — Building form sets that AI can suggest fields for
-- [Widget Embedding](/en/guide/widgets) — CSS customization in detail
+- [Embed on Your Site](/en/guide/embed) — CSS customization in detail
