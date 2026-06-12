@@ -46,13 +46,14 @@ curl https://your-domain.com/admin/v1/form-sets \
 
 | Property | Value |
 |---|---|
-| **Authentication** | API key (`luno_agent_` prefix) |
-| **Purpose** | Content operations from AI agents and CI/CD pipelines |
-| **Issue keys** | Settings → API Keys in the admin panel |
+| **Authentication** | Agent API key (`sk-agent-` prefix) |
+| **Purpose** | Content and schema operations from AI agents and automation |
+| **Issue keys** | Settings → Agent API Keys (`/settings/api-keys`) |
+| **Scopes** | `content` (entries/revisions) or `schema` (+ Form Set / Contact setup) |
 
 ```bash
-curl https://your-domain.com/admin/v1/form-sets \
-  -H "Authorization: Bearer luno_agent_your-api-key-here"
+curl https://api.luno.rest/admin/v1/form-sets \
+  -H "Authorization: Bearer sk-agent-xxxxxxxx"
 ```
 
 ## Authentication Details
@@ -75,11 +76,13 @@ curl -X POST https://your-domain.com/admin/v1/auth/login/password \
 
 Include the token as `Authorization: Bearer <token>` in subsequent requests.
 
-### Issuing an API Key (Agent API)
+### Issuing an Agent API Key
 
-1. Open the admin panel → **Settings → API Keys → New API Key**
-2. Set a name and permission scope
-3. Copy the generated key (`luno_agent_xxxx`) — it's shown only once
+1. Open the admin panel → **Settings → Agent API Keys → New key**
+2. Set a name and choose a scope (`content` or `schema`)
+3. Copy the generated key (`sk-agent-…`) — it's shown only once
+
+Use a **`schema`** key only for initial setup (blog template, contact forms). Revoke it after setup and use a **`content`** key for day-to-day work. Agent keys cannot delete Form Sets or Contact Forms.
 
 ::: warning Keep API keys secret
 Never commit API keys to version control or embed them in client-side code. Store them as server-side environment variables.

@@ -61,8 +61,7 @@ luno organizes content as:
 
 ### AI Reference
 
-- `GET /llms.txt` — This file (short API summary)
-- `GET /llms-full.txt` — Full API specification for AI agents
+- `GET /llms.txt` — Published content index for AI agents (this summary lives at doc.luno.rest)
 
 ## Response Structure (Single Entry)
 
@@ -111,5 +110,4 @@ The Public API has no form set list endpoint. Use these approaches:
 
 - Full API reference: https://doc.luno.rest/en/api/public-api
 - AI agents guide: https://doc.luno.rest/en/api/ai-agents
-- Webhooks docs: https://doc.luno.rest/en/api/webhooks
-- llms-full.txt: https://{your-domain}/public/v1/llms-full.txt
+- MCP package: https://www.npmjs.com/package/@luno-cms/mcp

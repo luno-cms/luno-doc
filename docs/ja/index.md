@@ -30,7 +30,7 @@ features:
     details: エントリ一覧・詳細・メディアを認証なしで取得できます。フロントエンド・Jamstack サイトから直接利用可能。
   - icon: 🤖
     title: AI エージェント対応
-    details: llms.txt / llms-full.txt エンドポイントを標準搭載。エージェントが API 仕様・コンテンツ構造を自律的に把握できます。
+    details: サイトごとの llms.txt に加え、MCP（@luno-cms/mcp）とスコープ付きエージェント API キー（content / schema）で Claude・Cursor から操作できます。
   - icon: 🪝
     title: Webhook
     details: エントリの公開・更新・削除イベントを HMAC-SHA256 署名付きで配信。外部システムとのリアルタイム連携に。

@@ -27,7 +27,7 @@ features:
     details: Fetch entries, media, and more without authentication. Works directly from any frontend or Jamstack site.
   - icon: 🤖
     title: AI Agent Ready
-    details: Built-in llms.txt and llms-full.txt endpoints let AI agents autonomously discover API specs and content structure.
+    details: llms.txt per site plus MCP (@luno-cms/mcp) and scoped agent API keys (content / schema) for Claude and Cursor.
   - icon: 🪝
     title: Webhooks
     details: Deliver entry publish/update/delete events with HMAC-SHA256 signatures for real-time external integrations.

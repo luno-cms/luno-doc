@@ -444,21 +444,13 @@ curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
 
 ### GET /llms.txt
 
-AI-readable API summary in Markdown (compliant with [llms.txt spec](https://llmstxt.org/)).
+AI-readable published content index in Markdown ([llms.txt spec](https://llmstxt.org/)).
 
 ```bash
 curl https://your-domain.com/public/v1/llms.txt
 ```
 
-### GET /llms-full.txt
-
-Extended AI reference with full endpoint specifications.
-
-```bash
-curl https://your-domain.com/public/v1/llms-full.txt
-```
-
-See the [AI Agents Guide](/en/api/ai-agents) for MCP setup and usage examples.
+For MCP setup, agent key scopes, and Admin API usage, see the [AI Agents Guide](/en/api/ai-agents) and [doc.luno.rest](https://doc.luno.rest/en/api/ai-agents).
 
 ---
 

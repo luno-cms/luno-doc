@@ -175,8 +175,8 @@ AI エージェントが管理 API を直接呼び出す場合：
 
 ```bash
 # エージェント API でエントリを作成
-curl -X POST https://your-domain.com/admin/v1/form-sets/{formSetId}/entries \
-  -H "Authorization: Bearer luno_agent_your-api-key" \
+curl -X POST https://api.luno.rest/admin/v1/form-sets/{formSetId}/entries \
+  -H "Authorization: Bearer sk-agent-xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
     "slug": "ai-generated-post",

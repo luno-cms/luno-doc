@@ -473,21 +473,13 @@ curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
 
 ### GET /llms.txt
 
-AI クローラー・エージェント向けのテキスト形式 API 概要（[llms.txt 仕様](https://llmstxt.org/) 準拠）を返します。
+AI クローラー・エージェント向けの**公開コンテンツ一覧**（[llms.txt 仕様](https://llmstxt.org/) 準拠）を返します。
 
 ```bash
 curl https://your-domain.com/public/v1/llms.txt
 ```
 
-### GET /llms-full.txt
-
-より詳細な AI 向けリファレンスを返します。
-
-```bash
-curl https://your-domain.com/public/v1/llms-full.txt
-```
-
-詳細は [AI エージェント向けガイド](/ja/api/ai-agents) を参照してください。
+MCP 設定・エージェントキーのスコープ・管理 API の詳細は [AI エージェント向けガイド](/ja/api/ai-agents) を参照してください。
 
 ---
 

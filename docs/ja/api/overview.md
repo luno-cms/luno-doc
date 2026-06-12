@@ -47,14 +47,14 @@ curl https://your-domain.com/admin/v1/form-sets \
 
 | 項目 | 詳細 |
 |---|---|
-| **認証** | API キー（`luno_agent_` プレフィックス） |
-| **用途** | AI エージェント・CI/CD からのコンテンツ操作 |
-| **API キーの発行** | 管理画面「設定」→「API キー」 |
+| **認証** | エージェント API キー（`sk-agent-` プレフィックス） |
+| **用途** | AI エージェント・自動化からのコンテンツ / スキーマ操作 |
+| **キーの発行** | 管理画面「設定」→「エージェント API キー」（`/settings/api-keys`） |
+| **スコープ** | `content`（記事運用）/ `schema`（Form Set・Contact セットアップ） |
 
 ```bash
-# API キーで呼び出す
-curl https://your-domain.com/admin/v1/form-sets \
-  -H "Authorization: Bearer luno_agent_your-api-key-here"
+curl https://api.luno.rest/admin/v1/form-sets \
+  -H "Authorization: Bearer sk-agent-xxxxxxxx"
 ```
 
 ## 認証の詳細
@@ -79,13 +79,15 @@ curl -X POST https://your-domain.com/admin/v1/auth/login/password \
 
 以降のリクエストでは `Authorization: Bearer <token>` ヘッダーを付けます。
 
-### API キー認証（エージェント API）
+### エージェント API キー認証
 
-API キーは管理画面から発行します：
+キーは管理画面から発行します：
 
-1. 「設定」→「API キー」→「新規作成」
-2. 名前と権限スコープを設定
-3. 発行されたキー（`luno_agent_xxxx`）を安全な場所に保存
+1. 「設定」→「エージェント API キー」→「新規作成」
+2. 名前とスコープ（`content` または `schema`）を選択
+3. 表示されたキー（`sk-agent-…`）を安全な場所に保存
+
+初期セットアップのみ **`schema`** キーを使い、完了後は revoke して日常運用は **`content`** キーを使うことを推奨します。エージェントキーでは Form Set / Contact Form の削除はできません。
 
 ::: warning キーの取り扱い
 API キーは発行時に一度だけ表示されます。GitHub リポジトリやフロントエンドのコードに直接埋め込まないでください。サーバーサイドの環境変数として管理してください。

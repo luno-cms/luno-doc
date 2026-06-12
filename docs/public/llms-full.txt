@@ -398,20 +398,32 @@ crypto.timingSafeEqual(Buffer.from(receivedSig), Buffer.from(sig));
 
 ---
 
-## Agent API (Admin, requires API key)
+## Agent API (Admin, requires agent API key)
 
-AI agents can create and publish content using an API key (`luno_agent_` prefix).
+AI agents can create and publish content using an agent API key (`sk-agent-` prefix).
 
 Base URL: https://{your-domain}/admin/v1
-Authentication: `Authorization: Bearer luno_agent_<key>`
+Authentication: `Authorization: Bearer sk-agent_<key>`
 
-Endpoints:
+Key scopes:
+- `content` (default) — entries, revisions, publish, media, read schema
+- `schema` — above plus Form Set blueprint apply, builtin template apply, Contact Form create/update (no delete)
+
+MCP server: `npx -y @luno-cms/mcp` (env: `LUNO_API_URL=https://{your-domain}/admin`, `LUNO_AGENT_KEY=sk-agent-…`)
+Docs: https://doc.luno.rest/en/api/ai-agents
+
+Endpoints (content scope):
 - `GET  /form-sets` — list form sets
 - `GET  /form-sets/{id}/entries` — list entries (all statuses)
 - `POST /form-sets/{id}/entries` — create entry
 - `GET  /revisions/{id}` — get revision
 - `PATCH /revisions/{id}` — update revision fields
 - `POST /revisions/{id}/publish` — publish a revision
+
+Schema scope additionally:
+- `POST /form-blueprints/apply`
+- `POST /form-set-templates/{id}/apply`
+- `POST /contact-forms`
 
 ---
 

@@ -1,11 +1,11 @@
 ---
 title: AI Agents Guide
-description: Complete guide for AI agents using luno — MCP server setup for Claude, API key authentication, llms.txt, content operations via the Agent API, and best practices.
+description: Complete guide for AI agents using luno — MCP server setup for Claude and Cursor, agent API key scopes, llms.txt, content operations, and best practices.
 ---
 
 # AI Agents Guide
 
-This page covers everything an AI agent (Claude, GPT, or any LLM-based system) needs to read and manage luno content — from no-auth public content reading to full content creation via the Agent API and MCP.
+This page covers everything an AI agent (Claude, GPT, Cursor, or any LLM-based system) needs to read and manage luno content — from no-auth public content reading to full content creation via the Agent API and MCP.
 
 ## Overview
 
@@ -14,26 +14,37 @@ luno supports three integration models for AI agents:
 | Method | Auth | Capability |
 |---|---|---|
 | **Public API** | None | Read published content |
-| **MCP Server** | API key | Full content ops via Claude Desktop / Cursor |
-| **Agent API** | API key | Programmatic content creation and publishing |
+| **MCP Server** | Agent API key | Content and schema ops via Claude Desktop / Cursor |
+| **Agent API** | Agent API key | Same Admin API routes, programmatic access |
+
+**MCP package:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) (`npx -y @luno-cms/mcp`)
 
 ## MCP Server Setup
 
-luno ships a Model Context Protocol (MCP) server that lets Claude, Cursor, and other MCP-compatible tools interact with your CMS directly in natural language.
+luno ships a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that lets Claude, Cursor, and other MCP-compatible tools interact with your CMS in natural language.
+
+### Environment variables
+
+| Variable | Example | Description |
+|---|---|---|
+| `LUNO_API_URL` | `https://api.luno.rest/admin` | Admin API base (**include `/admin`**, no trailing slash) |
+| `LUNO_AGENT_KEY` | `sk-agent-…` | Agent API key from the admin panel |
+
+For local development use `http://127.0.0.1:8787/admin`.
 
 ### Claude Desktop
 
-Edit `~/Library/Application Support/Claude/config.json` (macOS) or `%APPDATA%\Claude\config.json` (Windows):
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
 ```json
 {
   "mcpServers": {
     "luno": {
       "command": "npx",
-      "args": ["-y", "@luno/mcp-server"],
+      "args": ["-y", "@luno-cms/mcp"],
       "env": {
-        "LUNO_API_URL": "https://your-domain.com",
-        "LUNO_API_KEY": "luno_agent_your-api-key-here"
+        "LUNO_API_URL": "https://api.luno.rest/admin",
+        "LUNO_AGENT_KEY": "sk-agent-xxxxxxxx"
       }
     }
   }
@@ -54,62 +65,113 @@ In Cursor settings under **MCP**, add:
 {
   "luno": {
     "command": "npx",
-    "args": ["-y", "@luno/mcp-server"],
+    "args": ["-y", "@luno-cms/mcp"],
     "env": {
-      "LUNO_API_URL": "https://your-domain.com",
-      "LUNO_API_KEY": "luno_agent_your-api-key-here"
+      "LUNO_API_URL": "https://api.luno.rest/admin",
+      "LUNO_AGENT_KEY": "sk-agent-xxxxxxxx"
     }
   }
 }
 ```
 
-## Issuing an API Key
+The admin panel also shows a copy-paste MCP snippet after you issue a key (**Settings → Agent API Keys**).
 
-AI agents that call the Admin API (including the MCP server) need an API key.
+## Issuing an Agent API Key
 
-1. Open **Settings → API Keys → New API Key** in the admin panel
-2. Set a descriptive name (e.g., `Claude Agent`, `CI Deploy Bot`)
-3. Configure the permission scope
-4. Save and **copy the key** (`luno_agent_xxxx`) — it's shown only once
+AI agents that call the Admin API (including the MCP server) need an **agent API key**.
+
+1. Open **Settings → Agent API Keys** (`/settings/api-keys`) in the admin panel
+2. Set a descriptive name (e.g., `Claude Agent`, `Setup Bot`)
+3. Choose a **scope** (see below)
+4. Save and **copy the key** (`sk-agent-…`) — it is shown only once
 
 ::: warning Protect your API key
 - Never expose it in client-side code or Git repositories
 - Store it as a server-side environment variable or in a secret manager
-- If compromised, revoke it from the API Keys settings page and generate a new one
+- If compromised, revoke it from the Agent API Keys page and generate a new one
 :::
+
+## Key Scopes
+
+Each agent key has a `scope` that limits what it can do. Keys are bound to the project where they were issued (`X-Project-Id` is not required).
+
+| Scope | Use for | Capabilities |
+|---|---|---|
+| **`content`** (default) | Day-to-day content work | Read schema, create/update entries, save/publish revisions, list media |
+| **`schema`** | Initial project setup | Everything in `content`, plus Form Set blueprint apply, builtin template apply, Contact Form create/update |
+
+### Recommended workflow
+
+1. **Setup (short-lived):** issue a **`schema`** key → apply blog template, create contact forms
+2. **Operations (long-lived):** issue a **`content`** key → create and publish articles
+3. **After setup:** revoke the `schema` key
+
+### What agent keys cannot do (any scope)
+
+- Delete Form Sets or Contact Forms
+- Delete form blocks or field definitions
+- Issue other API keys, invite members, or change billing / SNS settings
+
+Calling a schema-only endpoint with a `content` key returns **403 Forbidden**.
+
+## MCP Tools
+
+Tools exposed by `@luno-cms/mcp`:
+
+### Content (`content` scope)
+
+| Tool | Description |
+|---|---|
+| `get_tenant_schema` | Project-wide schema (all form sets) |
+| `list_form_sets` / `get_form_set_schema` | Form set list and field definitions |
+| `list_entries` / `get_entry` | Entry list and detail |
+| `create_entry` / `update_entry` | Create entries and update slugs |
+| `list_revisions` / `save_revision` / `publish_revision` | Revision workflow |
+| `submit_entry_for_review` | Submit for approval |
+| `list_media` | Media library list |
+
+### Schema setup (`schema` scope required)
+
+| Tool | Admin API |
+|---|---|
+| `apply_form_blueprint` | `POST /admin/v1/form-blueprints/apply` |
+| `apply_builtin_form_template` | `POST /admin/v1/form-set-templates/:id/apply` |
+| `create_contact_form` | `POST /admin/v1/contact-forms` |
 
 ## llms.txt
 
-luno provides [llms.txt-compliant](https://llmstxt.org/) endpoints that give AI agents a machine-readable summary of the API:
+luno provides a [llms.txt-compliant](https://llmstxt.org/) endpoint per site that lists **published content** (form sets and entry URLs):
 
 ```bash
-# Short summary (suitable for system prompts)
+curl https://api.luno.rest/public/v1/llms.txt
+# Or on your project's public host:
 curl https://your-domain.com/public/v1/llms.txt
-
-# Full specification (all endpoints and field types)
-curl https://your-domain.com/public/v1/llms-full.txt
 ```
 
-Embed the content of `llms.txt` in your system prompt to give the agent context about what content is available and how to access it:
+Embed the response in a system prompt so the agent knows what content exists:
 
 ```
 [System prompt]
-You are a content assistant for a developer blog. You have access to the following CMS API:
+You are a content assistant for a developer blog. Available CMS content:
 
 {contents of llms.txt}
 
-Use the API to answer questions about our content and help draft new articles.
+Use the Public API to read entries and the Agent API (via MCP) to draft new articles.
 ```
 
+For full API specifications, use this documentation site ([Public API](/en/api/public-api), [AI Agents Guide](/en/api/ai-agents)) rather than a separate `llms-full.txt` endpoint.
+
 ## Reading Content (No Auth Required)
+
+Public API base: `https://{your-domain}/public/v1`
 
 ### Discover available content
 
 ```bash
-# Step 1: Get the API overview and form set list
+# Step 1: Published content index
 curl https://your-domain.com/public/v1/llms.txt
 
-# Step 2: Browse the sitemap to see what content exists
+# Step 2: Sitemap
 curl https://your-domain.com/public/v1/sitemap.xml
 ```
 
@@ -204,33 +266,26 @@ async function fetchEntries(
   if (!res.ok) throw new Error(`API error ${res.status}: ${res.statusText}`)
   return res.json()
 }
-
-async function fetchEntry(formSetSlug: string, entrySlug: string) {
-  const res = await fetch(`${BASE_URL}/form-sets/${formSetSlug}/entries/${entrySlug}`, {
-    redirect: 'follow',  // automatically follow 301 redirects on slug changes
-  })
-  if (res.status === 404) throw new Error(`Entry not found: ${entrySlug}`)
-  if (!res.ok) throw new Error(`API error ${res.status}`)
-  return res.json()
-}
 ```
 
 ## Writing Content via the Agent API
 
-Use an API key to create, update, and publish entries from an AI agent.
+Agent API base: `https://{your-domain}/admin/v1`
+
+Authenticate with `Authorization: Bearer sk-agent-…`.
 
 ### List form sets
 
 ```bash
-curl https://your-domain.com/admin/v1/form-sets \
-  -H "Authorization: Bearer luno_agent_your-api-key"
+curl https://api.luno.rest/admin/v1/form-sets \
+  -H "Authorization: Bearer sk-agent-xxxxxxxx"
 ```
 
 ### Create an entry
 
 ```bash
-curl -X POST "https://your-domain.com/admin/v1/form-sets/{formSetId}/entries" \
-  -H "Authorization: Bearer luno_agent_your-api-key" \
+curl -X POST "https://api.luno.rest/admin/v1/form-sets/{formSetId}/entries" \
+  -H "Authorization: Bearer sk-agent-xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
     "slug": "ai-generated-post-2025",
@@ -243,25 +298,13 @@ curl -X POST "https://your-domain.com/admin/v1/form-sets/{formSetId}/entries" \
   }'
 ```
 
-### Update a revision
+### Save and publish a revision
+
+Use MCP tools `save_revision` and `publish_revision`, or call the Admin API directly:
 
 ```bash
-curl -X PATCH "https://your-domain.com/admin/v1/revisions/{revisionId}" \
-  -H "Authorization: Bearer luno_agent_your-api-key" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "fields": {
-      "title": "Updated Title",
-      "body": "<p>Updated body content...</p>"
-    }
-  }'
-```
-
-### Publish a revision
-
-```bash
-curl -X POST "https://your-domain.com/admin/v1/revisions/{revisionId}/publish" \
-  -H "Authorization: Bearer luno_agent_your-api-key"
+curl -X POST "https://api.luno.rest/admin/v1/revisions/{revisionId}/publish" \
+  -H "Authorization: Bearer sk-agent-xxxxxxxx"
 ```
 
 ## Example Claude Conversations (with MCP)
@@ -283,6 +326,12 @@ curl -X POST "https://your-domain.com/admin/v1/revisions/{revisionId}/publish" \
 > User: The "getting-started" post looks good, go ahead and publish it.
 >
 > Claude: [calls luno MCP → publishes revision] Published. It's now live at `/blog/getting-started`.
+
+**Initial setup (schema key):**
+
+> User: Apply the blog template and create a contact form.
+>
+> Claude: [calls `apply_builtin_form_template` and `create_contact_form`] Form set and contact form are ready.
 
 ## Field Value Types
 
@@ -307,19 +356,20 @@ Resolve `image` / `file` UUIDs using `mediaUrls[fieldKey]` from the response.
 | HTTP Status | Code | How to handle |
 |---|---|---|
 | 400 | `VALIDATION_ERROR` | Fix the request parameters per the error message |
-| 401 | `UNAUTHORIZED` | API key is invalid or missing |
+| 401 | `UNAUTHORIZED` | API key is invalid, revoked, or missing |
+| 403 | `FORBIDDEN` | Scope too narrow (e.g., blueprint apply with `content` key) |
 | 403 | `PLAN_REQUIRED` | Full-text search (`?q=`) requires Business plan+ |
-| 404 | `NOT_FOUND` | Verify the slug is spelled correctly |
+| 404 | `NOT_FOUND` | Verify the slug or ID |
 | 301 | — | Slug changed — follow the `Location` header |
 | 304 | — | Content unchanged — use cached version |
 
 ## Best Practices
 
-1. **Start with `llms.txt`** to understand what content types are available
-2. **Use `include_snapshot=true`** on list requests to avoid per-entry round trips
-3. **Follow 301 redirects** — slugs can change after entries are renamed
-4. **Cache with ETags** — send `If-None-Match` to avoid re-downloading unchanged content
-5. **Check `offset + limit >= total`** to determine if there are more pages
+1. **Start with `llms.txt`** to see what published content exists
+2. **Use separate keys** — `schema` for setup, `content` for daily ops; revoke setup keys when done
+3. **Use `include_snapshot=true`** on list requests to avoid per-entry round trips
+4. **Follow 301 redirects** — slugs can change after entries are renamed
+5. **Cache with ETags** — send `If-None-Match` to avoid re-downloading unchanged content
 6. **Review before publishing** — use the draft → pending_review → published workflow even for AI-generated content
 
 ## Next Steps
@@ -327,3 +377,4 @@ Resolve `image` / `file` UUIDs using `mediaUrls[fieldKey]` from the response.
 - [AI Assist](/en/guide/ai-assist) — AI features inside the admin panel
 - [Public API Reference](/en/api/public-api) — Complete endpoint specifications
 - [API Overview](/en/api/overview) — Authentication and rate limits
+- [npm: @luno-cms/mcp](https://www.npmjs.com/package/@luno-cms/mcp) — MCP server package
