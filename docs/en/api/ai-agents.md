@@ -138,6 +138,12 @@ Tools exposed by `@luno-cms/mcp`:
 | `apply_builtin_form_template` | `POST /admin/v1/form-set-templates/:id/apply` |
 | `create_contact_form` | `POST /admin/v1/contact-forms` |
 
+### dryRun (schema apply preview)
+
+`apply_form_blueprint` and `apply_builtin_form_template` accept **`dryRun: true`**. The API returns `{ dryRun: true, operations: [...] }` without writing to the database — use this before initial setup to preview form sets, forms, and fields.
+
+CLI equivalents: `hcms form apply --dry-run`, `hcms template apply --dry-run`.
+
 ## llms.txt
 
 luno provides a [llms.txt-compliant](https://llmstxt.org/) endpoint per site that lists **published content** (form sets and entry URLs):

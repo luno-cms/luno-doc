@@ -45,7 +45,7 @@ Recommended: `schema` key for initial setup → revoke → `content` key for ong
 
 **Content (`content` scope):** `get_tenant_schema`, `list_form_sets`, `get_form_set_schema`, `list_entries`, `get_entry`, `create_entry`, `update_entry`, `list_revisions`, `save_revision`, `publish_revision`, `submit_entry_for_review`, `list_media`
 
-**Schema (`schema` scope):** `apply_form_blueprint`, `apply_builtin_form_template`, `create_contact_form`
+**Schema (`schema` scope):** `apply_form_blueprint`, `apply_builtin_form_template` (both support `dryRun: true`), `create_contact_form`
 
 ## API reference
 

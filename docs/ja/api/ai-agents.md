@@ -131,6 +131,12 @@ GitHub・フロントエンドのコード・チャットに貼り付けない�
 | `apply_builtin_form_template` | `POST /admin/v1/form-set-templates/:id/apply` |
 | `create_contact_form` | `POST /admin/v1/contact-forms` |
 
+### dryRun（スキーマ適用のプレビュー）
+
+`apply_form_blueprint` と `apply_builtin_form_template` は **`dryRun: true`** を渡せます。DB に書き込まず `{ dryRun: true, operations: [...] }` が返るので、blog テンプレ適用前に作成内容を確認してください。
+
+CLI: `hcms form apply --dry-run` / `hcms template apply --dry-run`
+
 ## llms.txt
 
 各サイトは [llms.txt 仕様](https://llmstxt.org/) に沿ったエンドポイントで、**公開済みコンテンツ**の一覧を返します。
