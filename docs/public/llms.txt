@@ -1,113 +1,88 @@
-# luno HCMS — Public API
+# LUNO Documentation
 
-> luno is a headless CMS built on Cloudflare Workers + PostgreSQL. The Public API requires no authentication. Base URL: https://{your-domain}/public/v1
+> Official docs for integrating with LUNO — headless CMS on Cloudflare Workers with MCP for AI coding agents.
 
-## Key Facts
+This file is for **AI agents and developers** wiring Cursor, Claude Desktop, or custom automation to LUNO. For product overview and pricing, read https://luno.rest/llms.txt first.
 
-- No API key or token required for the Public API
-- All responses are JSON (Content-Type: application/json)
-- Pagination: `?page=1&limit=20` (max limit: 100)
-- Responses include `ETag` for conditional requests (304 Not Modified)
-- CORS: `Access-Control-Allow-Origin: *` — call from any browser
-- Cache-Control: `public, max-age=60` on content endpoints
+## Start here
 
-## Content Model
+- [AI Agents Guide (EN)](https://doc.luno.rest/en/api/ai-agents): MCP setup, agent API keys, scopes, llms.txt per site, best practices
+- [AI エージェント向けガイド (JA)](https://doc.luno.rest/ja/api/ai-agents): 上記の日本語版
+- [Quick Start (EN)](https://doc.luno.rest/en/guide/getting-started): First project in the admin console
+- [クイックスタート (JA)](https://doc.luno.rest/ja/guide/getting-started): 管理画面での初期セットアップ
 
-luno organizes content as:
+## MCP (Model Context Protocol)
 
-- **Form Set** — a content type (e.g., "blog", "news", "products")
-- **Entry** — an individual piece of content with a URL-safe `slug`
-- **Revision** — a version of an entry; only `published` revisions are returned
-
-## Endpoints
-
-### Content
-
-- `GET /form-sets/{slug}` — Form set info + primary entry content (slug "main" preferred)
-- `GET /form-sets/{slug}/entries` — Paginated list of published entries
-- `GET /form-sets/{slug}/entries/{entry_slug}` — Single published entry (301 if slug changed)
-- `GET /content/by-path?path=` — Look up by import path
-- `GET /content/by-slug?formSetSlug=&slug=` — Look up by form set + entry slug
-- `GET /content/by-external-id?sourceType=&entityType=&externalId=` — Look up by external ID
-
-### Query Parameters (entries list)
-
-- `page` (int, default 1) — page number
-- `limit` (int, default 20, max 100) — items per page
-- `offset` (int) — alternative to page
-- `locale` (string) — filter localized field values (e.g., "ja", "en")
-- `q` (string) — full-text search (Business plan+)
-- `sort` (string) — sort key, e.g., "created_at:desc", "updated_at:asc"
-- `include_snapshot` (boolean) — include field values and mediaUrls in list response
-
-### Media
-
-- `GET /media/{assetId}` — Serve uploaded media file (image, document, etc.)
-
-### Preview
-
-- `GET /preview/revisions?token=` — Fetch unpublished revision with signed JWT (15-min validity)
-
-### SEO / Sitemap
-
-- `GET /sitemap.xml` — XML sitemap for all published entries
-- `GET /form-sets/{slug}/sitemap.xml` — XML sitemap for one form set
-- `GET /form-sets/{slug}/entries/{slug}/schema.json` — schema.org JSON-LD
-- `GET /form-sets/{slug}/entries/{slug}/ogp.json` — Open Graph Protocol metadata
-
-### Contact Forms
-
-- `POST /contact-forms/{slug}/submit` — Submit a contact form (JSON body)
-
-### AI Reference
-
-- `GET /llms.txt` — Published content index for AI agents (this summary lives at doc.luno.rest)
-
-## Response Structure (Single Entry)
+Package: `@luno-cms/mcp` — https://www.npmjs.com/package/@luno-cms/mcp
 
 ```json
 {
-  "formSet": { "id": "uuid", "slug": "blog", "name": "Blog" },
-  "entry": { "id": "uuid", "slug": "my-post" },
-  "revision": { "id": "uuid", "revision": 3, "updatedAt": "2025-01-15T10:00:00Z" },
-  "data": { "<field_key>": "<value>" },
-  "mediaUrls": { "<field_key>": "https://{your-domain}/public/v1/media/<assetId>" },
-  "widgetRoles": { "<field_key>": "title|thumbnail|description|..." }
+  "mcpServers": {
+    "luno": {
+      "command": "npx",
+      "args": ["-y", "@luno-cms/mcp"],
+      "env": {
+        "LUNO_API_URL": "https://api.luno.rest/admin",
+        "LUNO_AGENT_KEY": "sk-agent-xxxxxxxx"
+      }
+    }
+  }
 }
 ```
 
-The `data` object keys match field keys defined in the form set.
+Issue keys in the admin console: **Settings → Agent API Keys** (`https://console.luno.rest/settings/api-keys`).
 
-## Field Value Types
+### Agent key scopes
 
-- text / textarea → string
-- tiptap → string (HTML)
-- number → number
-- boolean → boolean
-- date → string (ISO 8601)
-- select / radio → string
-- multiselect → string[]
-- image / file → string (asset UUID; resolve via `mediaUrls[key]`)
-- video_embed → string (URL)
-- entry_ref → string (referenced entry slug)
+| Scope | Use for |
+|-------|---------|
+| `content` | Entries, revisions, publish, media (daily operations) |
+| `schema` | Above + Form Set blueprint apply, builtin templates, Contact Form create/update (setup only; no delete) |
 
-## Error Format
+Recommended: `schema` key for initial setup → revoke → `content` key for ongoing work.
 
-```json
-{ "error": { "code": "NOT_FOUND", "message": "Published entry not found" } }
+### MCP tools
+
+**Content (`content` scope):** `get_tenant_schema`, `list_form_sets`, `get_form_set_schema`, `list_entries`, `get_entry`, `create_entry`, `update_entry`, `list_revisions`, `save_revision`, `publish_revision`, `submit_entry_for_review`, `list_media`
+
+**Schema (`schema` scope):** `apply_form_blueprint`, `apply_builtin_form_template`, `create_contact_form`
+
+## API reference
+
+- [API Overview (EN)](https://doc.luno.rest/en/api/overview): Public / Admin / Agent APIs, auth, errors
+- [Public API (EN)](https://doc.luno.rest/en/api/public-api): Read published content (no auth)
+- [Webhooks (EN)](https://doc.luno.rest/en/api/webhooks): Publish events with HMAC signatures
+- [公開 API (JA)](https://doc.luno.rest/ja/api/public-api): 公開 API 日本語
+- [API 概要 (JA)](https://doc.luno.rest/ja/api/overview): 認証・エラーコード
+
+Public API base: `https://{your-domain}/public/v1`  
+Agent API base: `https://api.luno.rest/admin/v1` (Bearer `sk-agent-…`)
+
+## Per-site content discovery
+
+Each LUNO project exposes published content for agents:
+
+```bash
+curl https://api.luno.rest/public/v1/llms.txt
+# or on the project's public host:
+curl https://your-domain.com/public/v1/llms.txt
 ```
 
-Common codes: `NOT_FOUND` (404), `VALIDATION_ERROR` (400), `PLAN_REQUIRED` (403), `UNAUTHORIZED` (401)
+## Guides
 
-## Discovering Form Sets
+- [Content Management](https://doc.luno.rest/en/guide/content-management)
+- [Form Builder](https://doc.luno.rest/en/guide/form-builder)
+- [Embed on Your Site](https://doc.luno.rest/en/guide/embed)
+- [SEO & Sitemaps](https://doc.luno.rest/en/guide/seo)
+- [Contact Forms](https://doc.luno.rest/en/guide/contact-forms)
+- [Self-Hosting](https://doc.luno.rest/en/self-hosting/)
 
-The Public API has no form set list endpoint. Use these approaches:
-1. Fetch `/public/v1/llms.txt` — lists available form sets when configured
-2. Parse `/public/v1/sitemap.xml` — URL pattern reveals form set slugs
-3. Ask the site administrator
+## Extended reference
 
-## Optional Links
+- [llms-full.txt](https://doc.luno.rest/llms-full.txt): Long-form Public API + Agent API field reference on this docs site
 
-- Full API reference: https://doc.luno.rest/en/api/public-api
-- AI agents guide: https://doc.luno.rest/en/api/ai-agents
-- MCP package: https://www.npmjs.com/package/@luno-cms/mcp
+## Related
+
+- Product & pricing: https://luno.rest/llms.txt
+- Sign up: https://console.luno.rest/register
+- Admin console: https://console.luno.rest

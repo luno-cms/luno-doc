@@ -1,8 +1,9 @@
-# luno HCMS — Full API Reference for AI Agents
+# luno — Full API Reference for AI Agents
 
-> luno is a headless CMS built on Cloudflare Workers + PostgreSQL (via Hyperdrive). This document provides the complete Public API specification for AI agents and automated systems.
-> Base URL: https://{your-domain}/public/v1
-> No authentication required. All responses are JSON.
+> Extended Public + Agent API reference. **Start with the curated index:** https://doc.luno.rest/llms.txt  
+> Product overview & pricing: https://luno.rest/llms.txt
+
+luno is a headless CMS on Cloudflare Workers + PostgreSQL (Hyperdrive). Public API base: `https://{your-domain}/public/v1` (no auth). Agent API: `https://api.luno.rest/admin/v1` with `Authorization: Bearer sk-agent-…`.
 
 ---
 
