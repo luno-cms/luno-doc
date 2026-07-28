@@ -23,19 +23,72 @@ luno は以下の 3 つの方法で AI エージェントと連携できます�
 
 luno は [Model Context Protocol（MCP）](https://modelcontextprotocol.io/) に対応しており、Claude Desktop や Cursor から自然言語で CMS を操作できます。
 
-### 環境変数
+**パッケージ:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) — 手順の正本は npm の README です。
+
+### 推奨: 既存サイト + Cursor / Claude Code / Codex
+
+**サイトリポジトリのルート**で:
+
+```bash
+cd my-existing-site
+npx @luno-cms/mcp setup
+# → 1) Claude Code  2) Cursor  3) Codex を選択
+```
+
+| 選択 | 書き込まれるもの |
+|---|---|
+| Claude Code | `.claude/skills/luno/` + `.mcp.json` |
+| Cursor | `.cursor/skills/luno/` + `.cursor/mcp.json` |
+| Codex | `.agents/skills/luno/` + `.codex/config.toml` |
+
+**キーの正本は `.agents/luno/`**（gitignore。コミットされるのは `*.example` のみ）:
+
+| ファイル | 用途 |
+|---|---|
+| `.agents/luno/dev.env` | ローカル API（`http://127.0.0.1:8787/admin`） |
+| `.agents/luno/stg.env` | staging（`https://stg-api.luno.rest/admin`） |
+| `.agents/luno/prod.env` | production（`https://api.luno.rest/admin`） |
+| `.agents/luno/env` | いま有効な環境（`env switch` で更新） |
+
+各 `*.env` の中身:
+
+```bash
+LUNO_API_URL=https://api.luno.rest/admin
+LUNO_AGENT_KEY=sk-agent-xxxxxxxx
+```
+
+その後:
+
+1. 管理画面 **設定 → エージェント API キー** でキーを発行
+2. エージェントで `/luno` に貼るか、非対話で:
+
+```bash
+npx @luno-cms/mcp env set-key stg 'sk-agent-…'
+npx @luno-cms/mcp env switch stg
+npx @luno-cms/mcp env status
+```
+
+MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`  
+（`npx @luno-cms/mcp run stg` は `.agents/luno/stg.env` を読みます）
+
+::: tip
+`.agents/luno/*.env` は **Git に入れないでください**。環境・サイトごとにキーを分けるのが安全です。
+:::
+
+### 環境変数（MCP プロセスが読む値）
 
 | 変数 | 例 | 説明 |
 |---|---|---|
 | `LUNO_API_URL` | `https://api.luno.rest/admin` | 管理 API のベース（**`/admin` まで含む**、末尾スラッシュなし） |
 | `LUNO_AGENT_KEY` | `sk-agent-…` | 管理画面で発行したエージェント API キー |
 
-ローカル開発では `http://127.0.0.1:8787/admin` を指定します。
+キーは MCP JSON に直書きせず、`.agents/luno/{dev,stg,prod}.env` に置くのを推奨します。ローカル API は `http://127.0.0.1:8787/admin`。
 
-### Claude Desktop の設定
+### 代替: MCP 設定の `env` に直書き（Claude Desktop / 一時利用）
 
-macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`  
-Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+`setup` / `.agents/luno/` を使わない場合は、クライアント設定に変数を直接書けます。
+
+**Claude Desktop** — macOS: `~/Library/Application Support/Claude/claude_desktop_config.json` / Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
 {
@@ -52,24 +105,9 @@ Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 }
 ```
 
-### Cursor での設定
+**Cursor** — Settings → MCP、またはプロジェクトの `.cursor/mcp.json` に同様の形。キー発行後、管理画面 **設定 → エージェント API キー** にも貼り付け用スニペットが出ます。
 
-Cursor の **Settings → MCP** に以下を追加します。
-
-```json
-{
-  "luno": {
-    "command": "npx",
-    "args": ["-y", "@luno-cms/mcp"],
-    "env": {
-      "LUNO_API_URL": "https://api.luno.rest/admin",
-      "LUNO_AGENT_KEY": "sk-agent-xxxxxxxx"
-    }
-  }
-}
-```
-
-キー発行後、管理画面 **設定 → エージェント API キー**（`/settings/api-keys`）にも MCP 設定スニペットが表示されます。
+日常のサイト開発では `npx @luno-cms/mcp setup` を使い、キーを `.agents/luno/` に置いて `dev` / `stg` / `prod` を切り替えてください。
 
 ## エージェント API キーの発行
 
@@ -90,14 +128,14 @@ GitHub・フロントエンドのコード・チャットに貼り付けない�
 
 | スコープ | 用途 | できること |
 |---|---|---|
-| **`content`**（既定） | 日常のコンテンツ運用 | スキーマ読み取り、エントリ作成・更新、リビジョン保存・公開、メディア一覧 |
-| **`schema`** | 初期セットアップ | `content` のすべて + Blueprint 適用、Builtin テンプレ適用、Contact Form 作成・更新 |
+| **`full`**（推奨） | 記事 + スキーマ設定 | エントリ・メディア・Form Set / Contact / Blueprint |
+| **`content`** | 記事のみ | スキーマ読み取り、エントリ作成・更新、リビジョン保存・公開、メディア一覧 |
+| **`schema`** | 互換エイリアス | `full` と同権限 |
 
 ### 推奨フロー
 
-1. **セットアップ（短期）:** **`schema`** キーを発行 → blog テンプレ適用、Contact Form 作成
-2. **運用（常用）:** **`content`** キーを発行 → 記事の作成・公開
-3. **セットアップ完了後:** `schema` キーを revoke
+1. 普段は **`full`** キー（記事だけに絞るなら **`content`**）
+2. 必要なら Blueprint / テンプレ適用用に短期キーを使い、終わったら revoke
 
 ### エージェントキーでは不可（スコープ問わず）
 

@@ -23,18 +23,72 @@ luno supports three integration models for AI agents:
 
 luno ships a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that lets Claude, Cursor, and other MCP-compatible tools interact with your CMS in natural language.
 
-### Environment variables
+**Package:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) — the npm README is the canonical setup guide.
+
+### Recommended: existing site + Cursor / Claude Code / Codex
+
+From the **root of your site repository**:
+
+```bash
+cd my-existing-site
+npx @luno-cms/mcp setup
+# → pick 1) Claude Code  2) Cursor  3) Codex
+```
+
+| Choice | What gets written |
+|---|---|
+| Claude Code | `.claude/skills/luno/` + `.mcp.json` |
+| Cursor | `.cursor/skills/luno/` + `.cursor/mcp.json` |
+| Codex | `.agents/skills/luno/` + `.codex/config.toml` |
+
+**Keys live under `.agents/luno/`** (gitignored; only `*.example` is committed):
+
+| File | Role |
+|---|---|
+| `.agents/luno/dev.env` | Local API (`http://127.0.0.1:8787/admin`) |
+| `.agents/luno/stg.env` | Staging (`https://stg-api.luno.rest/admin`) |
+| `.agents/luno/prod.env` | Production (`https://api.luno.rest/admin`) |
+| `.agents/luno/env` | Active env (updated by `env switch`) |
+
+Each `*.env` holds:
+
+```bash
+LUNO_API_URL=https://api.luno.rest/admin
+LUNO_AGENT_KEY=sk-agent-xxxxxxxx
+```
+
+Then:
+
+1. Issue a key in the admin panel (**Settings → Agent API Keys**)
+2. Paste it via `/luno` in the agent, or non-interactively:
+
+```bash
+npx @luno-cms/mcp env set-key stg 'sk-agent-…'
+npx @luno-cms/mcp env switch stg
+npx @luno-cms/mcp env status
+```
+
+MCP server names: `luno-dev` / `luno-stg` / `luno-prod`  
+(`npx @luno-cms/mcp run stg` loads `.agents/luno/stg.env`)
+
+::: tip
+Do **not** commit `.agents/luno/*.env`. Keep secrets out of git; use one key per environment / site as needed.
+:::
+
+### Environment variables (what the MCP process reads)
 
 | Variable | Example | Description |
 |---|---|---|
 | `LUNO_API_URL` | `https://api.luno.rest/admin` | Admin API base (**include `/admin`**, no trailing slash) |
 | `LUNO_AGENT_KEY` | `sk-agent-…` | Agent API key from the admin panel |
 
-For local development use `http://127.0.0.1:8787/admin`.
+Prefer storing these in `.agents/luno/{dev,stg,prod}.env` rather than pasting keys into shared MCP JSON. For local API use `http://127.0.0.1:8787/admin`.
 
-### Claude Desktop
+### Alternative: inline `env` in MCP config (Claude Desktop / one-off)
 
-Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+If you are not using `setup` / `.agents/luno/`, you can put the variables directly in the MCP client config.
+
+**Claude Desktop** — edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
 ```json
 {
@@ -51,30 +105,9 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) o
 }
 ```
 
-Restart Claude Desktop. You can now say:
+**Cursor** — Settings → MCP, or project `.cursor/mcp.json` with the same shape. The admin panel also shows a copy-paste snippet after you issue a key (**Settings → Agent API Keys**).
 
-> "List the latest 5 blog posts in luno."
-
-> "Create a draft blog post titled 'Cloudflare Workers in 2025' and suggest an outline."
-
-### Cursor
-
-In Cursor settings under **MCP**, add:
-
-```json
-{
-  "luno": {
-    "command": "npx",
-    "args": ["-y", "@luno-cms/mcp"],
-    "env": {
-      "LUNO_API_URL": "https://api.luno.rest/admin",
-      "LUNO_AGENT_KEY": "sk-agent-xxxxxxxx"
-    }
-  }
-}
-```
-
-The admin panel also shows a copy-paste MCP snippet after you issue a key (**Settings → Agent API Keys**).
+For day-to-day site work, prefer `npx @luno-cms/mcp setup` so keys stay in `.agents/luno/` and you can switch `dev` / `stg` / `prod`.
 
 ## Issuing an Agent API Key
 
@@ -97,14 +130,14 @@ Each agent key has a `scope` that limits what it can do. Keys are bound to the p
 
 | Scope | Use for | Capabilities |
 |---|---|---|
-| **`content`** (default) | Day-to-day content work | Read schema, create/update entries, save/publish revisions, list media |
-| **`schema`** | Initial project setup | Everything in `content`, plus Form Set blueprint apply, builtin template apply, Contact Form create/update |
+| **`full`** (recommended) | Articles + schema setup | Entries, media, Form Set / Contact / Blueprint |
+| **`content`** | Articles only | Read schema, create/update entries, save/publish revisions, list media |
+| **`schema`** | Compatibility alias | Same capabilities as `full` |
 
 ### Recommended workflow
 
-1. **Setup (short-lived):** issue a **`schema`** key → apply blog template, create contact forms
-2. **Operations (long-lived):** issue a **`content`** key → create and publish articles
-3. **After setup:** revoke the `schema` key
+1. Day-to-day: issue a **`full`** key (or **`content`** if you want articles only)
+2. Optional: use a short-lived key for initial blueprint / template apply, then revoke it if you prefer tighter long-lived scopes
 
 ### What agent keys cannot do (any scope)
 
