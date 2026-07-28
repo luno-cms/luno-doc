@@ -15,6 +15,19 @@ This file is for **AI agents and developers** wiring Cursor, Claude Desktop, or 
 
 Package: `@luno-cms/mcp` — https://www.npmjs.com/package/@luno-cms/mcp
 
+**Recommended (existing site):**
+
+```bash
+cd my-site
+npx @luno-cms/mcp setup   # Cursor / Claude Code / Codex
+npx @luno-cms/mcp env set-key stg 'sk-agent-…'
+npx @luno-cms/mcp env switch stg
+```
+
+Keys live in **`.agents/luno/{dev,stg,prod}.env`** (gitignored). Details: [AI Agents Guide](https://doc.luno.rest/en/api/ai-agents).
+
+Alternative (inline env for one-off / Claude Desktop):
+
 ```json
 {
   "mcpServers": {
@@ -36,16 +49,15 @@ Issue keys in the admin console: **Settings → Agent API Keys** (`https://conso
 
 | Scope | Use for |
 |-------|---------|
-| `content` | Entries, revisions, publish, media (daily operations) |
-| `schema` | Above + Form Set blueprint apply, builtin templates, Contact Form create/update (setup only; no delete) |
-
-Recommended: `schema` key for initial setup → revoke → `content` key for ongoing work.
+| `full` (recommended) | Entries + Form Set / Contact / Blueprint |
+| `content` | Entries, revisions, publish, media only |
+| `schema` | Same as `full` (compat alias) |
 
 ### MCP tools
 
-**Content (`content` scope):** `get_tenant_schema`, `list_form_sets`, `get_form_set_schema`, `list_entries`, `get_entry`, `create_entry`, `update_entry`, `list_revisions`, `save_revision`, `publish_revision`, `submit_entry_for_review`, `list_media`
+**Content (`content` / `full`):** `get_tenant_schema`, `list_form_sets`, `get_form_set_schema`, `list_entries`, `get_entry`, `create_entry`, `update_entry`, `list_revisions`, `save_revision`, `publish_revision`, `submit_entry_for_review`, `list_media`, `upload_media`
 
-**Schema (`schema` scope):** `apply_form_blueprint`, `apply_builtin_form_template` (both support `dryRun: true`), `create_contact_form`
+**Schema (`full` / `schema`):** `apply_form_blueprint`, `apply_builtin_form_template`, `apply_master_blueprint` (support `dryRun: true`), `create_contact_form`
 
 ## API reference
 
