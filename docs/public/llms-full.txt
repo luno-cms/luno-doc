@@ -407,11 +407,14 @@ Base URL: https://{your-domain}/admin/v1
 Authentication: `Authorization: Bearer sk-agent_<key>`
 
 Key scopes:
-- `content` (default) — entries, revisions, publish, media, read schema
-- `schema` — above plus Form Set blueprint apply, builtin template apply, Contact Form create/update (no delete)
+- `full` (recommended) — entries, media, Form Set / Contact / Blueprint
+- `content` — entries, revisions, publish, media, read schema
+- `schema` — same as `full` (compat alias)
 
-MCP server: `npx -y @luno-cms/mcp` (env: `LUNO_API_URL=https://{your-domain}/admin`, `LUNO_AGENT_KEY=sk-agent-…`)
+MCP: `npx @luno-cms/mcp setup` then keys in `.agents/luno/{dev,stg,prod}.env` (gitignored).
+Or `npx -y @luno-cms/mcp` with `LUNO_API_URL` + `LUNO_AGENT_KEY`.
 Docs: https://doc.luno.rest/en/api/ai-agents
+npm: https://www.npmjs.com/package/@luno-cms/mcp
 
 Endpoints (content scope):
 - `GET  /form-sets` — list form sets
