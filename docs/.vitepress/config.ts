@@ -1,8 +1,8 @@
 import { defineConfig } from "vitepress";
 
 /**
- * Sidebar IA: Console-aligned groups (案 A) + Start.
- * Hub visual: Neon Products (flat+icons) / Platform (案 B look).
+ * Sidebar + top nav share the same Console-aligned groups.
+ * Hub visual: Neon Products (flat+icons) / Platform.
  */
 const jaSidebar = [
   {
@@ -25,7 +25,7 @@ const jaSidebar = [
   {
     text: "コンテンツ",
     items: [
-      { text: "Content", link: "/ja/products/content" },
+      { text: "Headless CMS", link: "/ja/products/content" },
       { text: "Masters", link: "/ja/products/masters" },
       { text: "多言語", link: "/ja/products/localization" },
       { text: "コンテンツ管理", link: "/ja/guide/content-management" },
@@ -39,7 +39,7 @@ const jaSidebar = [
   {
     text: "配信・コンタクト",
     items: [
-      { text: "Contact", link: "/ja/products/contact" },
+      { text: "Contact Form", link: "/ja/products/contact" },
       { text: "Embed & Pub", link: "/ja/products/embed" },
       { text: "コンタクト実装", link: "/ja/guide/contact-forms" },
       { text: "埋め込み実装", link: "/ja/guide/embed" },
@@ -105,7 +105,7 @@ const enSidebar = [
   {
     text: "Content",
     items: [
-      { text: "Content", link: "/en/products/content" },
+      { text: "Headless CMS", link: "/en/products/content" },
       { text: "Masters", link: "/en/products/masters" },
       { text: "Localization", link: "/en/products/localization" },
       { text: "Content management", link: "/en/guide/content-management" },
@@ -119,7 +119,7 @@ const enSidebar = [
   {
     text: "Deliver & Contact",
     items: [
-      { text: "Contact", link: "/en/products/contact" },
+      { text: "Contact Form", link: "/en/products/contact" },
       { text: "Embed & Pub", link: "/en/products/embed" },
       { text: "Contact implementation", link: "/en/guide/contact-forms" },
       { text: "Embed implementation", link: "/en/guide/embed" },
@@ -164,6 +164,38 @@ const enSidebar = [
   },
 ];
 
+/** Top nav mirrors sidebar groups (same labels / same links). */
+function navFromSidebar(
+  sidebar: typeof jaSidebar,
+  extras: { text: string; link: string; target?: string; rel?: string }[],
+) {
+  const groups = sidebar.map((group) => ({
+    text: group.text,
+    items: flattenNavItems(group.items),
+  }));
+  return [...groups, ...extras];
+}
+
+function flattenNavItems(
+  items: {
+    text: string;
+    link?: string;
+    collapsed?: boolean;
+    items?: { text: string; link?: string; items?: any[] }[];
+  }[],
+): { text: string; link: string }[] {
+  const out: { text: string; link: string }[] = [];
+  for (const item of items) {
+    if (item.link) out.push({ text: item.text, link: item.link });
+    if (item.items) {
+      for (const child of item.items) {
+        if (child.link) out.push({ text: child.text, link: child.link });
+      }
+    }
+  }
+  return out;
+}
+
 export default defineConfig({
   title: "LUNO",
   description: "AI-native content operations platform",
@@ -191,24 +223,7 @@ export default defineConfig({
           prev: "前のページ",
           next: "次のページ",
         },
-        nav: [
-          { text: "スタート", link: "/ja/guide/getting-started" },
-          {
-            text: "プロダクト",
-            items: [
-              { text: "Content", link: "/ja/products/content" },
-              { text: "Contact", link: "/ja/products/contact" },
-              { text: "Embed & Pub", link: "/ja/products/embed" },
-              { text: "AI Agents", link: "/ja/products/agents" },
-              { text: "Masters", link: "/ja/products/masters" },
-              { text: "Webhooks", link: "/ja/products/webhooks" },
-              { text: "公開 API キー", link: "/ja/products/public-api-keys" },
-              { text: "多言語", link: "/ja/products/localization" },
-              { text: "プラン", link: "/ja/products/plans" },
-            ],
-          },
-          { text: "公開 API", link: "/ja/api/public-api" },
-          { text: "サイト・プラン", link: "/ja/products/plans" },
+        nav: navFromSidebar(jaSidebar, [
           {
             text: "ログイン",
             link: "https://console.luno.rest/login",
@@ -221,7 +236,7 @@ export default defineConfig({
             target: "_blank",
             rel: "noopener",
           },
-        ],
+        ]),
         sidebar: {
           "/ja/": jaSidebar,
         },
@@ -236,24 +251,7 @@ export default defineConfig({
           prev: "Previous",
           next: "Next",
         },
-        nav: [
-          { text: "Start", link: "/en/guide/getting-started" },
-          {
-            text: "Products",
-            items: [
-              { text: "Content", link: "/en/products/content" },
-              { text: "Contact", link: "/en/products/contact" },
-              { text: "Embed & Pub", link: "/en/products/embed" },
-              { text: "AI Agents", link: "/en/products/agents" },
-              { text: "Masters", link: "/en/products/masters" },
-              { text: "Webhooks", link: "/en/products/webhooks" },
-              { text: "Public API keys", link: "/en/products/public-api-keys" },
-              { text: "Localization", link: "/en/products/localization" },
-              { text: "Plans", link: "/en/products/plans" },
-            ],
-          },
-          { text: "Public API", link: "/en/api/public-api" },
-          { text: "Site & Plans", link: "/en/products/plans" },
+        nav: navFromSidebar(enSidebar, [
           {
             text: "Log in",
             link: "https://console.luno.rest/login",
@@ -266,7 +264,7 @@ export default defineConfig({
             target: "_blank",
             rel: "noopener",
           },
-        ],
+        ]),
         sidebar: {
           "/en/": enSidebar,
         },
@@ -280,8 +278,5 @@ export default defineConfig({
     search: {
       provider: "local",
     },
-    socialLinks: [
-      { icon: "github", link: "https://github.com/luno-cms/luno" },
-    ],
   },
 });

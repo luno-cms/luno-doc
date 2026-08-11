@@ -5,7 +5,7 @@ prev:
   text: Done state B · Console
   link: /en/guide/paths/console
 next:
-  text: Content
+  text: Headless CMS
   link: /en/products/content
 ---
 

@@ -221,11 +221,10 @@
 }
 
 .hub-link-item__icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
   display: block;
-  color: var(--vp-c-text-1);
 }
 
 .hub-link-item__mark {
@@ -236,14 +235,13 @@
   height: 44px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: color-mix(in srgb, var(--vp-c-bg-soft) 70%, var(--vp-c-bg));
-  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-divider);
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 55%, var(--vp-c-bg));
 }
 
-.hub-link-item__mark img {
-  width: 26px;
-  height: 26px;
-  display: block;
+/* Only invert true monochrome marks (Next / Cursor / GitHub) */
+.dark .hub-link-item__icon--mono {
+  filter: invert(1);
 }
 
 .hub-link-item__text {
@@ -264,11 +262,6 @@
   font-size: 0.84rem;
   color: var(--vp-c-text-2);
   line-height: 1.35;
-}
-
-.dark .hub-link-item__icon,
-.dark .hub-link-item__mark img {
-  filter: invert(1);
 }
 
 @media (max-width: 720px) {

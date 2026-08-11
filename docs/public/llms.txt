@@ -22,8 +22,8 @@ This file is for **AI agents and developers** wiring Cursor, Claude Desktop, or 
 
 ## Products
 
-- [Content](https://doc.luno.rest/en/products/content) · [JA](https://doc.luno.rest/ja/products/content) — Form sets, entries, approval, publish
-- [Contact](https://doc.luno.rest/en/products/contact) · [JA](https://doc.luno.rest/ja/products/contact) — Forms, notify, contact.luno.rest
+- [Headless CMS](https://doc.luno.rest/en/products/content) · [JA](https://doc.luno.rest/ja/products/content) — Form sets, entries, approval, publish
+- [Contact Form](https://doc.luno.rest/en/products/contact) · [JA](https://doc.luno.rest/ja/products/contact) — Forms, notify, contact.luno.rest
 - [Embed & Pub](https://doc.luno.rest/en/products/embed) · [JA](https://doc.luno.rest/ja/products/embed) — widget.js, iframe, pub.luno.rest
 - [AI Agents](https://doc.luno.rest/en/products/agents) · [JA](https://doc.luno.rest/ja/products/agents) — MCP, agent keys, llms.txt
 - [Webhooks](https://doc.luno.rest/en/products/webhooks) · [JA](https://doc.luno.rest/ja/products/webhooks) — HMAC publish events

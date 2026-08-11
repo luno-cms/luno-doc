@@ -14,7 +14,7 @@ next:
 luno organizes content around **Entries** and **Revisions**. This page explains the full lifecycle from draft creation through publishing, and the features available at each stage.
 
 ::: tip Do this now (3 lines)
-1. Check the done state on [Content overview](/en/products/content)  
+1. Check the done state on [Headless CMS overview](/en/products/content)  
 2. In Console, move draft → (review) → **Published**  
 3. Confirm the Public API list returns with `include_snapshot=true`  
 :::

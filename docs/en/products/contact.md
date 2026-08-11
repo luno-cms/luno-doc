@@ -1,15 +1,15 @@
 ---
-title: Contact
-description: LUNO Contact — intake, autoreply, notifications, contact.luno.rest. Done-state checklist and do-now steps.
+title: Contact Form
+description: LUNO Contact Form — intake, autoreply, notifications, contact.luno.rest. Done-state checklist and do-now steps.
 prev:
-  text: Content
+  text: Headless CMS
   link: /en/products/content
 next:
   text: Embed & Pub
   link: /en/products/embed
 ---
 
-# Contact
+# Contact Form
 
 Handle contact **intake, notifications, and auto-replies**. POST from your frontend to the public API, or host on `contact.luno.rest`.
 

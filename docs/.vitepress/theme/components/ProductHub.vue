@@ -105,13 +105,13 @@ const copy = {
         items: [
           {
             icon: "content",
-            title: "Content",
+            title: "Headless CMS",
             body: "15 種フィールド、リビジョン、レビュー、スケジュール公開。",
             href: "/ja/products/content",
           },
           {
             icon: "contact",
-            title: "Contact",
+            title: "Contact Form",
             body: "受信・自動返信・チャット通知。contact.luno.rest ホスト。",
             href: "/ja/products/contact",
           },
@@ -180,6 +180,7 @@ const copy = {
         title: "Next.js",
         href: "/ja/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
+        mono: true,
       },
       {
         key: "astro",
@@ -201,6 +202,7 @@ const copy = {
         body: "Cursor に LUNO を接続",
         href: "/ja/products/agents",
         logo: "/connect/cursor.svg",
+        mono: true,
       },
       {
         key: "claude-code",
@@ -236,6 +238,7 @@ const copy = {
         body: "GitHub からエージェント連携",
         href: "/ja/products/agents",
         logo: "/connect/github.svg",
+        mono: true,
       },
       {
         key: "openai",
@@ -329,13 +332,13 @@ const copy = {
         items: [
           {
             icon: "content",
-            title: "Content",
+            title: "Headless CMS",
             body: "15 field types, revisions, review, scheduled publishing.",
             href: "/en/products/content",
           },
           {
             icon: "contact",
-            title: "Contact",
+            title: "Contact Form",
             body: "Inbox, autoreply, chat notify. Host on contact.luno.rest.",
             href: "/en/products/contact",
           },
@@ -404,6 +407,7 @@ const copy = {
         title: "Next.js",
         href: "/en/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
+        mono: true,
       },
       {
         key: "astro",
@@ -425,6 +429,7 @@ const copy = {
         body: "Connect LUNO to Cursor",
         href: "/en/products/agents",
         logo: "/connect/cursor.svg",
+        mono: true,
       },
       {
         key: "claude-code",
@@ -460,6 +465,7 @@ const copy = {
         body: "Agent workflows from GitHub",
         href: "/en/products/agents",
         logo: "/connect/github.svg",
+        mono: true,
       },
       {
         key: "openai",
@@ -617,13 +623,16 @@ const copy = {
           class="hub-link-item"
           :href="item.href"
         >
-          <img
-            class="hub-link-item__icon"
-            :src="item.logo"
-            alt=""
-            width="28"
-            height="28"
-          />
+          <span class="hub-link-item__mark" aria-hidden="true">
+            <img
+              class="hub-link-item__icon"
+              :class="{ 'hub-link-item__icon--mono': item.mono }"
+              :src="item.logo"
+              alt=""
+              width="28"
+              height="28"
+            />
+          </span>
           <span class="hub-link-item__name">{{ item.title }}</span>
         </a>
       </div>
@@ -642,7 +651,14 @@ const copy = {
           :href="item.href"
         >
           <span class="hub-link-item__mark" aria-hidden="true">
-            <img :src="item.logo" alt="" width="28" height="28" />
+            <img
+              class="hub-link-item__icon"
+              :class="{ 'hub-link-item__icon--mono': item.mono }"
+              :src="item.logo"
+              alt=""
+              width="28"
+              height="28"
+            />
           </span>
           <span class="hub-link-item__text">
             <span class="hub-link-item__name">{{ item.title }}</span>

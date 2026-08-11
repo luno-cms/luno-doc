@@ -1,15 +1,15 @@
 ---
-title: Content · Console / Agents
-description: LUNO Content — Form Set・エントリ・承認・公開。完成形チェックと今すぐやる手順（経路 B Console / 経路 A Agents）。
+title: Headless CMS · Console / Agents
+description: LUNO Headless CMS — Form Set・エントリ・承認・公開。完成形チェックと今すぐやる手順（経路 B Console / 経路 A Agents）。
 prev:
   text: 完成形 C · API only
   link: /ja/guide/paths/api
 next:
-  text: Contact
+  text: Contact Form
   link: /ja/products/contact
 ---
 
-# Content
+# Headless CMS
 
 コンテンツの**定義・作成・承認・公開**を一つのフローで回します。Form Set で型を決め、エントリとリビジョンで版管理し、公開 API / Pub / Embed へ届けます。
 

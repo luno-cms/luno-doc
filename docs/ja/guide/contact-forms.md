@@ -2,7 +2,7 @@
 title: コンタクトフォーム
 description: luno のコンタクトフォーム機能のセットアップ、公開 API からの送信、メール通知、フロントエンド実装例を説明します。
 prev:
-  text: Contact
+  text: Contact Form
   link: /ja/products/contact
 next:
   text: 埋め込み実装

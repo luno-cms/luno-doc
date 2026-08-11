@@ -2,7 +2,7 @@
 title: Embed & Pub · API only
 description: LUNO Embed & Pub — widget.js, iframe, pub.luno.rest. Done-state checklist and do-now steps (pairs with path C API only).
 prev:
-  text: Contact
+  text: Contact Form
   link: /en/products/contact
 next:
   text: AI Agents

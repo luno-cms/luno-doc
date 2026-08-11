@@ -1,15 +1,15 @@
 ---
-title: Contact
-description: LUNO Contact — 受信・自動返信・通知・contact.luno.rest。完成形チェックと今すぐやる手順。
+title: Contact Form
+description: LUNO Contact Form — 受信・自動返信・通知・contact.luno.rest。完成形チェックと今すぐやる手順。
 prev:
-  text: Content
+  text: Headless CMS
   link: /ja/products/content
 next:
   text: Embed & Pub
   link: /ja/products/embed
 ---
 
-# Contact
+# Contact Form
 
 お問い合わせの**受付・通知・自動返信**を管理します。自前フロントから公開 API に POST するか、`contact.luno.rest` でホスト公開できます。
 

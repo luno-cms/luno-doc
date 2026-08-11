@@ -14,7 +14,7 @@ next:
 luno のコンテンツ管理は **エントリ（Entry）** と **リビジョン（Revision）** を中心に設計されています。このページでは、コンテンツの作成から公開まで、承認ワークフローの全体像と各操作の詳細を説明します。
 
 ::: tip 今すぐやる（3 行）
-1. [Content 概要](/ja/products/content) の完成形を確認する  
+1. [Headless CMS 概要](/ja/products/content) の完成形を確認する  
 2. Console で下書き →（必要ならレビュー）→ **公開** まで進める  
 3. 公開 API で `include_snapshot=true` の一覧が返ることを確認する  
 :::

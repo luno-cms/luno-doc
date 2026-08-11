@@ -2,7 +2,7 @@
 title: Embed & Pub · API only
 description: LUNO Embed & Pub — widget.js・iframe・pub.luno.rest。完成形チェックと今すぐやる手順（経路 C API only と相性）。
 prev:
-  text: Contact
+  text: Contact Form
   link: /ja/products/contact
 next:
   text: AI Agents

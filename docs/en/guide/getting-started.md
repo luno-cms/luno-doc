@@ -221,7 +221,7 @@ For paste-ready list/detail examples in Next.js, Astro, and Nuxt, see [Framework
 
 ## Next Steps
 
-- [Content overview](/en/products/content) — Content surface at a glance
+- [Headless CMS overview](/en/products/content) — Content surface at a glance
 - [Content Management](/en/guide/content-management) — Revisions, scheduled publishing, previews
 - [Form Builder](/en/guide/form-builder) — Field types and model design
 - [Public API](/en/api/public-api) — Endpoint reference (path C)

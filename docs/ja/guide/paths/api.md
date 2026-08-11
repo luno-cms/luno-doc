@@ -5,7 +5,7 @@ prev:
   text: 完成形 B · Console
   link: /ja/guide/paths/console
 next:
-  text: Content
+  text: Headless CMS
   link: /ja/products/content
 ---
 

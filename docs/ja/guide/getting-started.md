@@ -224,7 +224,7 @@ Next.js / Astro / Nuxt の一覧・詳細の貼り付け例は [フレームワ�
 
 ## 次のステップ
 
-- [Content 概要](/ja/products/content) — コンテンツ面の全体像
+- [Headless CMS 概要](/ja/products/content) — コンテンツ面の全体像
 - [コンテンツ管理](/ja/guide/content-management) — リビジョン・スケジュール公開・プレビュー
 - [フォームビルダー](/ja/guide/form-builder) — フィールドとモデル設計
 - [公開 API](/ja/api/public-api) — エンドポイント仕様（経路 C）

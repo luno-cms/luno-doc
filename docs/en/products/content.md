@@ -1,15 +1,15 @@
 ---
-title: Content · Console / Agents
-description: LUNO Content — form sets, entries, approval, publish. Done-state checklist and do-now steps (path B Console / path A Agents).
+title: Headless CMS · Console / Agents
+description: LUNO Headless CMS — form sets, entries, approval, publish. Done-state checklist and do-now steps (path B Console / path A Agents).
 prev:
   text: Done state C · API only
   link: /en/guide/paths/api
 next:
-  text: Contact
+  text: Contact Form
   link: /en/products/contact
 ---
 
-# Content
+# Headless CMS
 
 Define, create, approve, and publish content in one flow. Form Sets shape the model; entries and revisions manage versions; public API, Pub, and Embed deliver the result.
 

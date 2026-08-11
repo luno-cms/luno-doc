@@ -9,6 +9,7 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ## 2026-08-11
 
+- 製品名を Headless CMS / Contact Form に変更し、サイドバーとトップナビの構成を同期
 - ハブ Connect を Framework / AI Agent に分離し、公式アイコン＋名前の Neon 風一覧に変更
 - IA を Console 寄せに再編（スタート / コンテンツ / 配信・コンタクト / 連携・自動化 / サイト・プラン）
 - ハブを Products（細いアイコン）+ Platform の Neon 見せ方に整理

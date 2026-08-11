@@ -2,7 +2,7 @@
 title: Contact Forms
 description: Set up contact forms in luno HCMS, submit them from the public API, handle email notifications, and integrate with your frontend in vanilla JS, React, or Next.js.
 prev:
-  text: Contact
+  text: Contact Form
   link: /en/products/contact
 next:
   text: Embed implementation
