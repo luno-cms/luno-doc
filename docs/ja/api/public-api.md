@@ -5,6 +5,12 @@ description: luno の公開 API 全エンドポイントの仕様、クエリパ
 
 # 公開 API リファレンス
 
+## API only {#api-only}
+
+::: tip スタート経路 C
+管理画面なしで公開コンテンツを読む入口です。ほかの経路: [Agents（MCP）](/ja/products/agents) · [Console クイックスタート](/ja/guide/getting-started#console)。
+:::
+
 認証不要（サイト設定で公開 API キー必須の場合を除く）。すべてのレスポンスは `Content-Type: application/json` です（`/media/:assetId` と XML エンドポイントを除く）。
 
 ## ベース URL

@@ -1,13 +1,32 @@
 ---
 title: Quick Start
-description: Get luno HCMS running in 5 minutes — log in, create your first entry, publish it, and fetch it via the public API.
+description: Get started with LUNO — pick Agents (MCP), Console, or API only, then publish or fetch your first content.
 ---
 
 # Quick Start
 
-luno is a **headless CMS** built on Cloudflare Workers. You manage content in the admin panel, then deliver it via an authentication-free public API to your website or app. This guide gets you to your first published API response in 5 minutes.
+LUNO is an AI-native content operations platform. Start on the path that matches your goal.
 
-## Step 1: Log In to the Admin Panel
+## Choose a path
+
+| Path | Best for | Time | Start here |
+|---|---|---|---|
+| **A. Agents (MCP)** | Operate content from Cursor / Claude Code / Codex | ~5 min | [AI Agents](/en/products/agents) → [full guide](/en/api/ai-agents) |
+| **B. Console** | Learn create → approve → publish in the admin UI | ~10 min | [Steps on this page](#console) |
+| **C. API only** | Read published content and wire your site | ~3 min | [Public API](/en/api/public-api#api-only) |
+
+```bash
+# Path A (recommended / fastest)
+npx @luno-cms/mcp setup
+```
+
+Path B continues below. For A and C, follow the links above.
+
+## Start with Console {#console}
+
+Sign in to the admin panel, publish your first entry, and fetch it from the public API.
+
+### Step 1: Log In to the Admin Panel
 
 Open your luno admin URL (e.g., `https://cms.example.com`) and sign in.
 
@@ -20,7 +39,7 @@ Open your luno admin URL (e.g., `https://cms.example.com`) and sign in.
 Contact your project admin and ask them to send an invitation to your email address.
 :::
 
-## Step 2: Understand the Layout
+### Step 2: Understand the Layout
 
 After signing in, the left sidebar shows your navigation:
 
@@ -35,13 +54,13 @@ After signing in, the left sidebar shows your navigation:
 | **Widgets** | Configure embeddable content widgets |
 | **Settings** | Form sets, Webhooks, API keys, and more |
 
-## Step 3: Create Your First Entry
+### Step 3: Create Your First Entry
 
-### Select a Form Set
+#### Select a Form Set
 
 Click on a form set in the sidebar (e.g., "Blog", "News"). Form sets define the structure of your content. Your admin will have created them in advance.
 
-### Create a New Entry
+#### Create a New Entry
 
 Click **New Entry** and fill in the fields:
 
@@ -51,7 +70,7 @@ Click **New Entry** and fill in the fields:
 
 When done, click **Save**. The entry is saved as a **draft**.
 
-### Submit for Review → Approve → Publish
+#### Submit for Review → Approve → Publish
 
 Use the status button in the top-right corner to move through the publishing workflow:
 
@@ -69,11 +88,11 @@ Draft → Submit for Review → Approve → Published
 **tenant_admin** (administrator) can perform all operations including approval and publishing. **tenant_user** (regular user) can create, edit, and submit for review. See [Content Management](/en/guide/content-management) for details.
 :::
 
-## Step 4: Fetch Your Content via the Public API
+### Step 4: Fetch Your Content via the Public API
 
-Once published, you can retrieve the content without any authentication.
+Once published, you can retrieve the content without any authentication. Prefer [`/public/p/{projectId}/v1`](/en/api/public-api) in production.
 
-### Verify with curl
+#### Verify with curl
 
 ```bash
 # Get all published entries in your form set
@@ -108,7 +127,7 @@ Response:
 }
 ```
 
-### Fetch a single entry with all field values
+##### Fetch a single entry with all field values
 
 ```bash
 # Add include_snapshot=true to get field values in the response
@@ -136,7 +155,7 @@ Response:
 
 The `data` object keys match the field keys you defined in the form set. The `mediaUrls` object provides fully-qualified URLs for image and file fields.
 
-### JavaScript / TypeScript
+#### JavaScript / TypeScript
 
 ```typescript
 const BASE = 'https://cms.example.com/public/v1'
@@ -167,7 +186,7 @@ items.forEach(({ entry, published }) => {
 })
 ```
 
-### Next.js integration
+#### Next.js integration
 
 ```typescript
 // app/blog/page.tsx
@@ -203,7 +222,8 @@ export default async function BlogPage() {
 
 ## Next Steps
 
-- [Content Management](/en/guide/content-management) — Revisions, scheduled publishing, and previews
-- [Form Builder](/en/guide/form-builder) — Field types and content model design
-- [Public API Reference](/en/api/public-api) — Complete endpoint reference
-- [AI Agents Guide](/en/api/ai-agents) — MCP server setup and API keys
+- [Content overview](/en/products/content) — Content surface at a glance
+- [Content Management](/en/guide/content-management) — Revisions, scheduled publishing, previews
+- [Form Builder](/en/guide/form-builder) — Field types and model design
+- [Public API](/en/api/public-api) — Endpoint reference (path C)
+- [AI Agents](/en/products/agents) — Start with MCP (path A)

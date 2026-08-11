@@ -5,12 +5,22 @@ const jaSidebar = [
     text: "スタート",
     items: [
       { text: "製品ハブ", link: "/ja/" },
-      { text: "クイックスタート", link: "/ja/guide/getting-started" },
-      { text: "AI エージェント", link: "/ja/api/ai-agents" },
+      { text: "クイックスタート（3経路）", link: "/ja/guide/getting-started" },
+      { text: "AI Agents 概要", link: "/ja/products/agents" },
     ],
   },
   {
-    text: "プロダクト",
+    text: "プロダクト概要",
+    items: [
+      { text: "Content", link: "/ja/products/content" },
+      { text: "Contact", link: "/ja/products/contact" },
+      { text: "Embed & Pub", link: "/ja/products/embed" },
+      { text: "AI Agents", link: "/ja/products/agents" },
+      { text: "Webhooks", link: "/ja/products/webhooks" },
+    ],
+  },
+  {
+    text: "ガイド",
     items: [
       { text: "コンテンツ管理", link: "/ja/guide/content-management" },
       { text: "フォームビルダー", link: "/ja/guide/form-builder" },
@@ -46,12 +56,22 @@ const enSidebar = [
     text: "Start",
     items: [
       { text: "Product hub", link: "/en/" },
-      { text: "Quick start", link: "/en/guide/getting-started" },
-      { text: "AI agents", link: "/en/api/ai-agents" },
+      { text: "Quick start (3 paths)", link: "/en/guide/getting-started" },
+      { text: "AI Agents overview", link: "/en/products/agents" },
     ],
   },
   {
-    text: "Products",
+    text: "Product overviews",
+    items: [
+      { text: "Content", link: "/en/products/content" },
+      { text: "Contact", link: "/en/products/contact" },
+      { text: "Embed & Pub", link: "/en/products/embed" },
+      { text: "AI Agents", link: "/en/products/agents" },
+      { text: "Webhooks", link: "/en/products/webhooks" },
+    ],
+  },
+  {
+    text: "Guides",
     items: [
       { text: "Content management", link: "/en/guide/content-management" },
       { text: "Form builder", link: "/en/guide/form-builder" },
@@ -112,11 +132,11 @@ export default defineConfig({
           {
             text: "プロダクト",
             items: [
-              { text: "コンテンツ", link: "/ja/guide/content-management" },
-              { text: "コンタクト", link: "/ja/guide/contact-forms" },
-              { text: "埋め込み", link: "/ja/guide/embed" },
-              { text: "AI エージェント", link: "/ja/api/ai-agents" },
-              { text: "Webhook", link: "/ja/api/webhooks" },
+              { text: "Content", link: "/ja/products/content" },
+              { text: "Contact", link: "/ja/products/contact" },
+              { text: "Embed", link: "/ja/products/embed" },
+              { text: "AI Agents", link: "/ja/products/agents" },
+              { text: "Webhooks", link: "/ja/products/webhooks" },
             ],
           },
           { text: "API", link: "/ja/api/overview" },
@@ -149,11 +169,11 @@ export default defineConfig({
           {
             text: "Products",
             items: [
-              { text: "Content", link: "/en/guide/content-management" },
-              { text: "Contact", link: "/en/guide/contact-forms" },
-              { text: "Embed", link: "/en/guide/embed" },
-              { text: "AI agents", link: "/en/api/ai-agents" },
-              { text: "Webhooks", link: "/en/api/webhooks" },
+              { text: "Content", link: "/en/products/content" },
+              { text: "Contact", link: "/en/products/contact" },
+              { text: "Embed", link: "/en/products/embed" },
+              { text: "AI Agents", link: "/en/products/agents" },
+              { text: "Webhooks", link: "/en/products/webhooks" },
             ],
           },
           { text: "API", link: "/en/api/overview" },

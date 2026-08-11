@@ -5,6 +5,10 @@ description: AI エージェントが luno を利用するための完全ガイ�
 
 # AI エージェント向けガイド
 
+::: tip スタート経路 A
+このページは **Agents（MCP）** 経路の詳細です。全体の入口は [クイックスタート](/ja/guide/getting-started) と [AI Agents 概要](/ja/products/agents) を参照してください。
+:::
+
 このページでは、AI エージェント（Claude・GPT・Cursor など LLM ベースのシステム）が luno を使ってコンテンツを読み取り・作成・管理するための設定と API の使い方を説明します。
 
 ## luno の AI 連携の概要

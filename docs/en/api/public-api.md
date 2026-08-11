@@ -5,6 +5,12 @@ description: Complete specification of all luno Public API endpoints with reques
 
 # Public API Reference
 
+## API only {#api-only}
+
+::: tip Start path C
+Read published content without the admin console. Other paths: [Agents (MCP)](/en/products/agents) · [Console quick start](/en/guide/getting-started#console).
+:::
+
 No authentication required by default (unless the project requires a public API key). All responses are `Content-Type: application/json` (except `/media/:assetId` and XML endpoints).
 
 ## Base URLs

@@ -1,13 +1,32 @@
 ---
 title: クイックスタート
-description: luno HCMS の管理画面にログインして、最初のコンテンツを作成・公開し、公開 API からデータを取得するまでの手順です。5 分で完了します。
+description: LUNO のはじめ方 — Agents（MCP）・Console・API only の3経路から選び、管理画面または公開 API まで進めます。
 ---
 
 # クイックスタート
 
-luno は **ヘッドレス CMS** です。管理画面でコンテンツを作成・管理し、認証不要の公開 API 経由で Web サイトやアプリに配信します。このガイドでは 5 分でコンテンツを公開 API から取得できる状態にします。
+LUNO は AI ネイティブなコンテンツ運用プラットフォームです。目的に合わせて次のどれかから始めてください。
 
-## ステップ 1：管理画面にログイン
+## 経路を選ぶ
+
+| 経路 | 向いている人 | 所要 | 入口 |
+|---|---|---|---|
+| **A. Agents（MCP）** | Cursor / Claude Code / Codex でコンテンツを触りたい | 約 5 分 | [AI Agents](/ja/products/agents) → [詳細ガイド](/ja/api/ai-agents) |
+| **B. Console** | 管理画面で作成・承認・公開を理解したい | 約 10 分 | [このページの手順](#console) |
+| **C. API only** | 公開済みコンテンツを読む・サイトに繋ぐだけ | 約 3 分 | [公開 API](/ja/api/public-api#api-only) |
+
+```bash
+# 経路 A（推奨・最短）
+npx @luno-cms/mcp setup
+```
+
+経路 B の手順は以下です。経路 A / C は上のリンク先へ進んでください。
+
+## Console で始める {#console}
+
+管理画面にログインし、最初のエントリを公開して公開 API から取得できる状態にします。
+
+### ステップ 1：管理画面にログイン
 
 luno の管理画面 URL（例: `https://cms.example.com`）にアクセスします。
 
@@ -22,7 +41,7 @@ luno の管理画面 URL（例: `https://cms.example.com`）にアクセスし�
 プロジェクトの管理者に連絡して、あなたのメールアドレスへの招待を送ってもらってください。
 :::
 
-## ステップ 2：画面構成を確認する
+### ステップ 2：画面構成を確認する
 
 ログイン後、左のサイドバーにナビゲーションが表示されます。
 
@@ -37,13 +56,13 @@ luno の管理画面 URL（例: `https://cms.example.com`）にアクセスし�
 | **ウィジェット** | 外部サイト埋め込みコンテンツの設定 |
 | **設定** | フォームセット・Webhook・API キーなどの設定 |
 
-## ステップ 3：最初のエントリを作成する
+### ステップ 3：最初のエントリを作成する
 
-### フォームセットを選ぶ
+#### フォームセットを選ぶ
 
 サイドバーから目的のフォームセット（例：「ブログ」「お知らせ」）をクリックします。フォームセットはコンテンツの型定義です。管理者が事前に作成してあります。
 
-### エントリを新規作成する
+#### エントリを新規作成する
 
 「新規エントリ」ボタンをクリックして各フィールドに値を入力します。
 
@@ -53,7 +72,7 @@ luno の管理画面 URL（例: `https://cms.example.com`）にアクセスし�
 
 入力が完了したら「保存」をクリックします。エントリは **下書き（draft）** として保存されます。
 
-### レビュー申請 → 承認 → 公開
+#### レビュー申請 → 承認 → 公開
 
 保存後、右上のステータスボタンから公開フローを進めます：
 
@@ -71,11 +90,11 @@ luno の管理画面 URL（例: `https://cms.example.com`）にアクセスし�
 **tenant_admin**（管理者）はすべての操作が可能です。**tenant_user**（一般ユーザー）はレビュー申請まで操作できます。詳細は[コンテンツ管理](/ja/guide/content-management)を参照してください。
 :::
 
-## ステップ 4：公開 API でデータを取得する
+### ステップ 4：公開 API でデータを取得する
 
-公開後すぐに、認証なしで公開 API からコンテンツを取得できます。
+公開後すぐに、認証なしで公開 API からコンテンツを取得できます。本番では [`/public/p/{projectId}/v1`](/ja/api/public-api) を推奨します。
 
-### curl で確認する
+#### curl で確認する
 
 ```bash
 # 公開済みエントリ一覧を取得
@@ -110,7 +129,7 @@ curl https://cms.example.com/public/v1/form-sets/blog/entries
 }
 ```
 
-### 特定エントリを全フィールド付きで取得する
+#### 特定エントリを全フィールド付きで取得する
 
 ```bash
 # include_snapshot=true でフィールド値も含めて取得
@@ -138,7 +157,7 @@ curl "https://cms.example.com/public/v1/form-sets/blog/entries/my-first-post?inc
 
 `data` オブジェクトのキーはフォームセットで定義したフィールドの `key` と対応します。`mediaUrls` には画像フィールドの完全な URL が入ります。
 
-### JavaScript / TypeScript での取得例
+#### JavaScript / TypeScript での取得例
 
 ```typescript
 const BASE = 'https://cms.example.com/public/v1'
@@ -169,7 +188,7 @@ items.forEach(({ entry, published }) => {
 })
 ```
 
-### Next.js での使用例
+#### Next.js での使用例
 
 ```typescript
 // app/blog/page.tsx
@@ -205,7 +224,8 @@ export default async function BlogPage() {
 
 ## 次のステップ
 
-- [コンテンツ管理](/ja/guide/content-management) — リビジョン管理・スケジュール公開・プレビューの詳細
-- [フォームビルダー](/ja/guide/form-builder) — フィールドタイプとコンテンツモデルの設計
-- [公開 API リファレンス](/ja/api/public-api) — 全エンドポイントの仕様
-- [AI エージェント向けガイド](/ja/api/ai-agents) — MCP サーバー・API キーの設定
+- [Content 概要](/ja/products/content) — コンテンツ面の全体像
+- [コンテンツ管理](/ja/guide/content-management) — リビジョン・スケジュール公開・プレビュー
+- [フォームビルダー](/ja/guide/form-builder) — フィールドとモデル設計
+- [公開 API](/ja/api/public-api) — エンドポイント仕様（経路 C）
+- [AI Agents](/ja/products/agents) — MCP で始める（経路 A）

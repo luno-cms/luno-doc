@@ -5,6 +5,10 @@ description: Complete guide for AI agents using luno — MCP server setup for Cl
 
 # AI Agents Guide
 
+::: tip Start path A
+This is the deep guide for the **Agents (MCP)** path. For the map of all paths, see [Quick start](/en/guide/getting-started) and the [AI Agents overview](/en/products/agents).
+:::
+
 This page covers everything an AI agent (Claude, GPT, Cursor, or any LLM-based system) needs to read and manage luno content — from no-auth public content reading to full content creation via the Agent API and MCP.
 
 ## Overview
