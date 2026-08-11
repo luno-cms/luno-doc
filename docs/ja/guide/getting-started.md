@@ -209,30 +209,9 @@ async function getPost(slug: string) {
 
 `data` のキーはフォームセットのフィールド `key` と対応します。`mediaUrls` に画像の完全 URL が入ります。
 
-#### Next.js での使用例
+#### フレームワーク別レシピ
 
-```ts
-// app/blog/page.tsx
-export default async function BlogPage() {
-  const res = await fetch(
-    'https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true',
-    { next: { revalidate: 60 } }
-  )
-  const { items } = await res.json()
-
-  return (
-    <ul>
-      {items.map(({ entry, published }) => (
-        <li key={entry.slug}>
-          <a href={`/blog/${entry.slug}`}>
-            {published.snapshot?.title}
-          </a>
-        </li>
-      ))}
-    </ul>
-  )
-}
-```
+Next.js / Astro / Nuxt の一覧・詳細の貼り付け例は [フレームワーク別レシピ](/ja/guide/frameworks/) を参照してください。
 
 ## トラブルシューティング
 
@@ -249,4 +228,5 @@ export default async function BlogPage() {
 - [コンテンツ管理](/ja/guide/content-management) — リビジョン・スケジュール公開・プレビュー
 - [フォームビルダー](/ja/guide/form-builder) — フィールドとモデル設計
 - [公開 API](/ja/api/public-api) — エンドポイント仕様（経路 C）
+- [フレームワーク別レシピ](/ja/guide/frameworks/) — Next.js / Astro / Nuxt
 - [AI Agents](/ja/products/agents) — MCP で始める（経路 A）

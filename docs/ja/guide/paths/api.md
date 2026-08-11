@@ -65,6 +65,7 @@ curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?inclu
 | 目的 | ページ |
 |---|---|
 | エンドポイント一覧 | [公開 API](/ja/api/public-api#api-only) |
+| サイトに繋ぐ | [フレームワーク別レシピ](/ja/guide/frameworks/)（Next.js / Astro / Nuxt） |
 | 埋め込みで載せる | [Embed & Pub](/ja/products/embed) |
 | 公開イベントで再生成 | [Webhooks](/ja/products/webhooks) |
 | 中身を書く | [経路 A · Agents](/ja/guide/paths/agents) / [経路 B · Console](/ja/guide/paths/console) |

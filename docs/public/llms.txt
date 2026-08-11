@@ -28,6 +28,13 @@ This file is for **AI agents and developers** wiring Cursor, Claude Desktop, or 
 - [AI Agents](https://doc.luno.rest/en/products/agents) · [JA](https://doc.luno.rest/ja/products/agents) — MCP, agent keys, llms.txt
 - [Webhooks](https://doc.luno.rest/en/products/webhooks) · [JA](https://doc.luno.rest/ja/products/webhooks) — HMAC publish events
 
+## Framework recipes (Path C)
+
+- [Overview](https://doc.luno.rest/en/guide/frameworks/) · [JA](https://doc.luno.rest/ja/guide/frameworks/) — Next.js / Astro / Nuxt
+- [Next.js](https://doc.luno.rest/en/guide/frameworks/nextjs) · [JA](https://doc.luno.rest/ja/guide/frameworks/nextjs)
+- [Astro](https://doc.luno.rest/en/guide/frameworks/astro) · [JA](https://doc.luno.rest/ja/guide/frameworks/astro)
+- [Nuxt](https://doc.luno.rest/en/guide/frameworks/nuxt) · [JA](https://doc.luno.rest/ja/guide/frameworks/nuxt)
+
 ## MCP (Model Context Protocol)
 
 Package: `@luno-cms/mcp` — https://www.npmjs.com/package/@luno-cms/mcp

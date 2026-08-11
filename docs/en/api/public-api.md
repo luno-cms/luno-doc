@@ -14,7 +14,7 @@ next:
 ## API only {#api-only}
 
 ::: tip Start path C
-Read published content without the admin console. Other paths: [Agents (MCP)](/en/products/agents) · [Console quick start](/en/guide/getting-started#console).
+Read published content without the admin console. Site wiring: [Framework recipes](/en/guide/frameworks/). Other paths: [Agents (MCP)](/en/products/agents) · [Console quick start](/en/guide/getting-started#console).
 :::
 
 No authentication required by default (unless the project requires a public API key). All responses are `Content-Type: application/json` (except `/media/:assetId` and XML endpoints).

@@ -33,6 +33,16 @@ const jaSidebar = [
     ],
   },
   {
+    text: "フレームワーク",
+    collapsed: true,
+    items: [
+      { text: "概要", link: "/ja/guide/frameworks/" },
+      { text: "Next.js", link: "/ja/guide/frameworks/nextjs" },
+      { text: "Astro", link: "/ja/guide/frameworks/astro" },
+      { text: "Nuxt", link: "/ja/guide/frameworks/nuxt" },
+    ],
+  },
+  {
     text: "ガイド",
     items: [
       { text: "コンテンツ管理", link: "/ja/guide/content-management" },
@@ -90,6 +100,16 @@ const enSidebar = [
       { text: "Embed & Pub", link: "/en/products/embed" },
       { text: "AI Agents", link: "/en/products/agents" },
       { text: "Webhooks", link: "/en/products/webhooks" },
+    ],
+  },
+  {
+    text: "Frameworks",
+    collapsed: true,
+    items: [
+      { text: "Overview", link: "/en/guide/frameworks/" },
+      { text: "Next.js", link: "/en/guide/frameworks/nextjs" },
+      { text: "Astro", link: "/en/guide/frameworks/astro" },
+      { text: "Nuxt", link: "/en/guide/frameworks/nuxt" },
     ],
   },
   {

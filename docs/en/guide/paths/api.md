@@ -65,6 +65,7 @@ curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?inclu
 | Goal | Page |
 |---|---|
 | Endpoint reference | [Public API](/en/api/public-api#api-only) |
+| Wire a site | [Framework recipes](/en/guide/frameworks/) (Next.js / Astro / Nuxt) |
 | Drop-in UI | [Embed & Pub](/en/products/embed) |
 | Rebuild on publish | [Webhooks](/en/products/webhooks) |
 | Write content | [Path A · Agents](/en/guide/paths/agents) / [Path B · Console](/en/guide/paths/console) |

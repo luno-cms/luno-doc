@@ -141,9 +141,23 @@ const copy = {
       {
         key: "nextjs",
         title: "Next.js",
-        body: "Public API",
-        href: "/ja/api/public-api#api-only",
+        body: "Framework recipe",
+        href: "/ja/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
+      },
+      {
+        key: "astro",
+        title: "Astro",
+        body: "Framework recipe",
+        href: "/ja/guide/frameworks/astro",
+        logo: "/connect/astro.svg",
+      },
+      {
+        key: "nuxt",
+        title: "Nuxt",
+        body: "Framework recipe",
+        href: "/ja/guide/frameworks/nuxt",
+        logo: "/connect/nuxt.svg",
       },
       {
         key: "widget",
@@ -156,6 +170,7 @@ const copy = {
     refs: [
       { title: "API 概要", href: "/ja/api/overview" },
       { title: "公開 API", href: "/ja/api/public-api" },
+      { title: "フレームワーク", href: "/ja/guide/frameworks/" },
       { title: "Webhook", href: "/ja/api/webhooks" },
       { title: "環境変数", href: "/ja/self-hosting/env-vars" },
       { title: "デプロイ", href: "/ja/self-hosting/deployment" },
@@ -273,9 +288,23 @@ const copy = {
       {
         key: "nextjs",
         title: "Next.js",
-        body: "Public API",
-        href: "/en/api/public-api#api-only",
+        body: "Framework recipe",
+        href: "/en/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
+      },
+      {
+        key: "astro",
+        title: "Astro",
+        body: "Framework recipe",
+        href: "/en/guide/frameworks/astro",
+        logo: "/connect/astro.svg",
+      },
+      {
+        key: "nuxt",
+        title: "Nuxt",
+        body: "Framework recipe",
+        href: "/en/guide/frameworks/nuxt",
+        logo: "/connect/nuxt.svg",
       },
       {
         key: "widget",
@@ -288,6 +317,7 @@ const copy = {
     refs: [
       { title: "API overview", href: "/en/api/overview" },
       { title: "Public API", href: "/en/api/public-api" },
+      { title: "Frameworks", href: "/en/guide/frameworks/" },
       { title: "Webhooks", href: "/en/api/webhooks" },
       { title: "Environment variables", href: "/en/self-hosting/env-vars" },
       { title: "Deployment", href: "/en/self-hosting/deployment" },

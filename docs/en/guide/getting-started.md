@@ -206,30 +206,9 @@ Response:
 
 `data` keys match form-set field keys. `mediaUrls` holds fully-qualified asset URLs.
 
-#### Next.js integration
+#### Framework recipes
 
-```ts
-// app/blog/page.tsx
-export default async function BlogPage() {
-  const res = await fetch(
-    'https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true',
-    { next: { revalidate: 60 } }
-  )
-  const { items } = await res.json()
-
-  return (
-    <ul>
-      {items.map(({ entry, published }) => (
-        <li key={entry.slug}>
-          <a href={`/blog/${entry.slug}`}>
-            {published.snapshot?.title as string}
-          </a>
-        </li>
-      ))}
-    </ul>
-  )
-}
-```
+For paste-ready list/detail examples in Next.js, Astro, and Nuxt, see [Framework recipes](/en/guide/frameworks/).
 
 ## Troubleshooting
 
@@ -246,4 +225,5 @@ export default async function BlogPage() {
 - [Content Management](/en/guide/content-management) — Revisions, scheduled publishing, previews
 - [Form Builder](/en/guide/form-builder) — Field types and model design
 - [Public API](/en/api/public-api) — Endpoint reference (path C)
+- [Framework recipes](/en/guide/frameworks/) — Next.js / Astro / Nuxt
 - [AI Agents](/en/products/agents) — Start with MCP (path A)

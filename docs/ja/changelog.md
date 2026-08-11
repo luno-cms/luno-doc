@@ -9,6 +9,7 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ## 2026-08-11
 
+- フレームワーク別レシピ（Next.js / Astro / Nuxt）を追加し、Connect・サイドバー・llms.txt に接続
 - AI アシストに「今すぐやる」3 行を追加
 - ハブのコピーボタンをカードリンクから分離し、コピー成功表示を安定化
 - GitHub Actions を checkout/setup-node/pnpm-action の現行 major に更新（Node 20 警告対策）
