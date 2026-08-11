@@ -58,7 +58,9 @@ const copy = {
     start: [
       {
         key: "mcp",
-        badge: "A · Agents · ~5 min",
+        badgeLabel: "AGENTS",
+        badgeTime: "~5 MIN",
+        marker: "hot",
         title: "MCP で始める",
         body: "サイトリポジトリで setup。Cursor / Claude Code / Codex から操作。",
         href: "/ja/guide/paths/agents",
@@ -67,7 +69,9 @@ const copy = {
       },
       {
         key: "console",
-        badge: "B · Console · ~10 min",
+        badgeLabel: "CONSOLE",
+        badgeTime: "~10 MIN",
+        marker: "hot",
         title: "管理画面で始める",
         body: "ログインから最初の公開まで。承認とスケジュール公開の入口。",
         href: "/ja/guide/paths/console",
@@ -76,7 +80,9 @@ const copy = {
       },
       {
         key: "api",
-        badge: "C · API only · ~3 min",
+        badgeLabel: "API",
+        badgeTime: "~3 MIN",
+        marker: "cool",
         title: "公開 API で読む",
         body: "認証不要（または公開キー）でエントリ・マスタ・メディアを取得。",
         href: "/ja/guide/paths/api",
@@ -225,7 +231,9 @@ const copy = {
     start: [
       {
         key: "mcp",
-        badge: "A · Agents · ~5 min",
+        badgeLabel: "AGENTS",
+        badgeTime: "~5 MIN",
+        marker: "hot",
         title: "Start with MCP",
         body: "Run setup in your site repo. Operate from Cursor / Claude Code / Codex.",
         href: "/en/guide/paths/agents",
@@ -234,7 +242,9 @@ const copy = {
       },
       {
         key: "console",
-        badge: "B · Console · ~10 min",
+        badgeLabel: "CONSOLE",
+        badgeTime: "~10 MIN",
+        marker: "hot",
         title: "Start in Console",
         body: "From sign-in to first publish—approvals and scheduled publishing.",
         href: "/en/guide/paths/console",
@@ -243,7 +253,9 @@ const copy = {
       },
       {
         key: "api",
-        badge: "C · API only · ~3 min",
+        badgeLabel: "API",
+        badgeTime: "~3 MIN",
+        marker: "cool",
         title: "Read via Public API",
         body: "Fetch entries, masters, and media with no auth (or a public key).",
         href: "/en/guide/paths/api",
@@ -412,7 +424,16 @@ const copy = {
           class="hub-card hub-card--start"
         >
           <a class="hub-card__main" :href="item.href">
-            <span class="hub-badge">{{ item.badge }}</span>
+            <span
+              class="hub-badge"
+              :class="
+                item.marker === 'cool' ? 'hub-badge--cool' : 'hub-badge--hot'
+              "
+            >
+              <span class="hub-badge__mark" aria-hidden="true" />
+              <span class="hub-badge__label">{{ item.badgeLabel }}</span>
+              <span class="hub-badge__time">{{ item.badgeTime }}</span>
+            </span>
             <h3>{{ item.title }}</h3>
             <p>{{ item.body }}</p>
           </a>

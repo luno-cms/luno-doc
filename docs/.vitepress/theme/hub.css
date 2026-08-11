@@ -191,16 +191,50 @@ a.hub-card,
   color: var(--vp-c-brand-1);
 }
 
+/* Neon-like start badge: ▶ LABEL  ~N MIN */
 .hub-badge {
   align-self: flex-start;
-  font-size: 0.7rem;
-  font-weight: 650;
-  letter-spacing: 0.03em;
-  color: var(--vp-c-text-2);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 999px;
-  padding: 3px 9px;
-  background: var(--vp-c-bg-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hub-badge__mark {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent currentColor;
+  flex-shrink: 0;
+}
+
+.hub-badge--hot {
+  color: #ef4444;
+}
+
+.hub-badge--cool {
+  color: #10b981;
+}
+
+.hub-badge__label {
+  color: var(--vp-c-text-1);
+}
+
+.hub-badge__time {
+  color: var(--vp-c-text-3);
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .hub-cmd {
