@@ -137,7 +137,8 @@
   padding: 18px 18px 16px;
   border-radius: 10px;
   border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg);
+  /* Slightly softer than page bg — barely there wash */
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 70%, var(--vp-c-bg));
   text-decoration: none !important;
   color: inherit;
   transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
@@ -383,11 +384,12 @@ a.hub-card,
 
 .dark .hub-card {
   box-shadow: none;
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 55%, var(--vp-c-bg));
 }
 
 .dark .hub-card:hover {
   box-shadow: none;
-  background: #111827;
+  background: var(--vp-c-bg-soft);
 }
 
 /* Page layout: hub sits in the content column (sidebar offset handled by VPContent) */
