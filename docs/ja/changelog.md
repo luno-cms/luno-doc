@@ -11,7 +11,7 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 - メディア / SEO / スケジュール公開に「今すぐやる」3 行を追加
 - ハブのモバイル横スクロール（長いコピーコマンド）を修正
-- `packageManager`（pnpm）を package.json に固定
+- `packageManager`（pnpm@10）を package.json に固定し、CI と揃えた
 - コンテンツ管理・フォームビルダー冒頭に「今すぐやる」3 行を追加
 - Prev/Next をスタート → 完成形 A/B/C → プロダクト概要 → 深層ガイドの旅順に再配線
 - Changelog 運用ルールを README に明記
