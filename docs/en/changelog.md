@@ -9,6 +9,7 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
+- Added Neon-style sidebar section icons and start-card play badges
 - Coverage: Masters / Public API keys / Localization / Plans overviews
 - Added thin framework recipes (Next.js / Astro / Nuxt) and wired Connect, sidebar, and llms.txt
 - Added 3-line do-now tips on AI Assist
