@@ -51,8 +51,12 @@ const copy = {
     productsTitle: "プロダクト",
     productsLead:
       "名前のついた製品面と、その下のプラットフォーム能力。",
-    connectTitle: "つなぐ",
-    connectLead: "ツールを選んで、すぐ使える入口へ。",
+    frameworksTitle: "フレームワークをつなぐ",
+    frameworksLead:
+      "フレームワーク別レシピで、公開 API・埋め込み・再検証までの接続を確認。",
+    agentsTitle: "AI ツールとエージェント",
+    agentsLead:
+      "LUNO は MCP で AI コーディングツールと連携します。エディタを選んでセットアップへ。",
     refTitle: "リファレンス",
     refLead: "認証・エンドポイント・運用設定。",
     copyLabel: "コピー",
@@ -170,55 +174,75 @@ const copy = {
         ],
       },
     ],
-    connect: [
-      {
-        key: "cursor",
-        title: "Cursor",
-        body: "MCP setup",
-        href: "/ja/products/agents",
-        logo: "/connect/cursor.svg",
-      },
-      {
-        key: "claude",
-        title: "Claude Code",
-        body: "MCP setup",
-        href: "/ja/products/agents",
-        logo: "/connect/claude.svg",
-      },
-      {
-        key: "codex",
-        title: "Codex",
-        body: "MCP setup",
-        href: "/ja/products/agents",
-        logo: "/connect/codex.svg",
-      },
+    frameworks: [
       {
         key: "nextjs",
         title: "Next.js",
-        body: "Framework recipe",
         href: "/ja/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
       },
       {
         key: "astro",
         title: "Astro",
-        body: "Framework recipe",
         href: "/ja/guide/frameworks/astro",
         logo: "/connect/astro.svg",
       },
       {
         key: "nuxt",
         title: "Nuxt",
-        body: "Framework recipe",
         href: "/ja/guide/frameworks/nuxt",
         logo: "/connect/nuxt.svg",
       },
+    ],
+    agents: [
       {
-        key: "widget",
-        title: "Widget",
-        body: "Embed / Pub",
-        href: "/ja/products/embed",
-        logo: "/connect/widget.svg",
+        key: "cursor",
+        title: "Cursor",
+        body: "Cursor に LUNO を接続",
+        href: "/ja/products/agents",
+        logo: "/connect/cursor.svg",
+      },
+      {
+        key: "claude-code",
+        title: "Claude Code",
+        body: "Claude Code に LUNO を接続",
+        href: "/ja/products/agents",
+        logo: "/connect/claude-code.svg",
+      },
+      {
+        key: "claude",
+        title: "Claude",
+        body: "Claude に LUNO を接続",
+        href: "/ja/products/agents",
+        logo: "/connect/claude.svg",
+      },
+      {
+        key: "codex",
+        title: "Codex",
+        body: "Codex に LUNO を接続",
+        href: "/ja/products/agents",
+        logo: "/connect/codex.svg",
+      },
+      {
+        key: "copilot",
+        title: "GitHub Copilot",
+        body: "Copilot に LUNO を接続",
+        href: "/ja/products/agents",
+        logo: "/connect/copilot.svg",
+      },
+      {
+        key: "github",
+        title: "GitHub",
+        body: "GitHub からエージェント連携",
+        href: "/ja/products/agents",
+        logo: "/connect/github.svg",
+      },
+      {
+        key: "openai",
+        title: "OpenAI",
+        body: "OpenAI ツールから接続",
+        href: "/ja/products/agents",
+        logo: "/connect/openai.svg",
       },
     ],
     refs: [
@@ -251,8 +275,12 @@ const copy = {
     productsTitle: "Products",
     productsLead:
       "Named product surfaces for content ops—plus platform capabilities underneath.",
-    connectTitle: "Connect",
-    connectLead: "Pick a tool and jump to the right setup.",
+    frameworksTitle: "Connect your framework",
+    frameworksLead:
+      "Browse framework recipes for Public API, embed, and revalidation.",
+    agentsTitle: "AI tools and agents",
+    agentsLead:
+      "LUNO integrates with AI coding tools through MCP. Pick your editor for setup.",
     refTitle: "Reference",
     refLead: "Auth, endpoints, and ops configuration.",
     copyLabel: "Copy",
@@ -370,55 +398,75 @@ const copy = {
         ],
       },
     ],
-    connect: [
-      {
-        key: "cursor",
-        title: "Cursor",
-        body: "MCP setup",
-        href: "/en/products/agents",
-        logo: "/connect/cursor.svg",
-      },
-      {
-        key: "claude",
-        title: "Claude Code",
-        body: "MCP setup",
-        href: "/en/products/agents",
-        logo: "/connect/claude.svg",
-      },
-      {
-        key: "codex",
-        title: "Codex",
-        body: "MCP setup",
-        href: "/en/products/agents",
-        logo: "/connect/codex.svg",
-      },
+    frameworks: [
       {
         key: "nextjs",
         title: "Next.js",
-        body: "Framework recipe",
         href: "/en/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
       },
       {
         key: "astro",
         title: "Astro",
-        body: "Framework recipe",
         href: "/en/guide/frameworks/astro",
         logo: "/connect/astro.svg",
       },
       {
         key: "nuxt",
         title: "Nuxt",
-        body: "Framework recipe",
         href: "/en/guide/frameworks/nuxt",
         logo: "/connect/nuxt.svg",
       },
+    ],
+    agents: [
       {
-        key: "widget",
-        title: "Widget",
-        body: "Embed / Pub",
-        href: "/en/products/embed",
-        logo: "/connect/widget.svg",
+        key: "cursor",
+        title: "Cursor",
+        body: "Connect LUNO to Cursor",
+        href: "/en/products/agents",
+        logo: "/connect/cursor.svg",
+      },
+      {
+        key: "claude-code",
+        title: "Claude Code",
+        body: "Connect LUNO to Claude Code",
+        href: "/en/products/agents",
+        logo: "/connect/claude-code.svg",
+      },
+      {
+        key: "claude",
+        title: "Claude",
+        body: "Connect LUNO to Claude",
+        href: "/en/products/agents",
+        logo: "/connect/claude.svg",
+      },
+      {
+        key: "codex",
+        title: "Codex",
+        body: "Connect LUNO to Codex",
+        href: "/en/products/agents",
+        logo: "/connect/codex.svg",
+      },
+      {
+        key: "copilot",
+        title: "GitHub Copilot",
+        body: "Connect LUNO to Copilot",
+        href: "/en/products/agents",
+        logo: "/connect/copilot.svg",
+      },
+      {
+        key: "github",
+        title: "GitHub",
+        body: "Agent workflows from GitHub",
+        href: "/en/products/agents",
+        logo: "/connect/github.svg",
+      },
+      {
+        key: "openai",
+        title: "OpenAI",
+        body: "Connect from OpenAI tools",
+        href: "/en/products/agents",
+        logo: "/connect/openai.svg",
       },
     ],
     refs: [
@@ -559,21 +607,47 @@ const copy = {
 
     <section class="hub-section">
       <header class="hub-section__head">
-        <h2>{{ copy[locale].connectTitle }}</h2>
-        <p>{{ copy[locale].connectLead }}</p>
+        <h2>{{ copy[locale].frameworksTitle }}</h2>
+        <p>{{ copy[locale].frameworksLead }}</p>
       </header>
-      <div class="hub-grid hub-grid--connect">
+      <div class="hub-link-grid hub-link-grid--frameworks">
         <a
-          v-for="item in copy[locale].connect"
+          v-for="item in copy[locale].frameworks"
           :key="item.key"
-          class="hub-card hub-card--connect"
+          class="hub-link-item"
           :href="item.href"
         >
-          <span class="hub-connect__logo" aria-hidden="true">
-            <img :src="item.logo" :alt="''" width="28" height="28" />
+          <img
+            class="hub-link-item__icon"
+            :src="item.logo"
+            alt=""
+            width="28"
+            height="28"
+          />
+          <span class="hub-link-item__name">{{ item.title }}</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="hub-section">
+      <header class="hub-section__head">
+        <h2>{{ copy[locale].agentsTitle }}</h2>
+        <p>{{ copy[locale].agentsLead }}</p>
+      </header>
+      <div class="hub-link-grid hub-link-grid--agents">
+        <a
+          v-for="item in copy[locale].agents"
+          :key="item.key"
+          class="hub-link-item hub-link-item--agent"
+          :href="item.href"
+        >
+          <span class="hub-link-item__mark" aria-hidden="true">
+            <img :src="item.logo" alt="" width="28" height="28" />
           </span>
-          <h3>{{ item.title }}</h3>
-          <span class="hub-connect__meta">{{ item.body }}</span>
+          <span class="hub-link-item__text">
+            <span class="hub-link-item__name">{{ item.title }}</span>
+            <span class="hub-link-item__meta">{{ item.body }}</span>
+          </span>
         </a>
       </div>
     </section>

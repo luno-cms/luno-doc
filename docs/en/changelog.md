@@ -9,6 +9,7 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
+- Split hub Connect into Framework / AI Agent lists with official icons (Neon-style, no cards)
 - Rebuilt sidebar IA to match Console (Start / Content / Deliver & Contact / Connect & Automate / Site & Plans)
 - Hub: Products (thin icons) + Platform, Neon-style presentation
 - Added Neon-style sidebar section icons and start-card play badges
