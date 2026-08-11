@@ -18,7 +18,7 @@
 
   --vp-c-divider: #e2e8f0;
   --vp-c-border: #e2e8f0;
-  --vp-c-gutter: #e2e8f0;
+  --vp-c-gutter: #e2e8f0; /* nav hairline */
 
   --vp-nav-bg-color: rgba(255, 255, 255, 0.86);
   --vp-sidebar-bg-color: #ffffff;
@@ -43,6 +43,7 @@
 
   --vp-c-divider: rgba(148, 163, 184, 0.16);
   --vp-c-border: rgba(148, 163, 184, 0.18);
+  --vp-c-gutter: rgba(148, 163, 184, 0.16);
 
   --vp-nav-bg-color: rgba(11, 18, 32, 0.88);
   --vp-sidebar-bg-color: #0b1220;
@@ -52,6 +53,17 @@
 .VPNav {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* Full-bleed header hairline (VitePress offsets it under the sidebar by default) */
+.VPNavBar .divider {
+  padding-left: 0 !important;
+  width: 100%;
+}
+
+.VPNavBar .divider-line {
+  width: 100%;
+  background-color: var(--vp-c-gutter);
 }
 
 /* Separator below the nav only — full-height border-right cuts through the header */
