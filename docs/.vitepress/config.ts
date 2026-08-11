@@ -74,9 +74,8 @@ const jaSidebar = [
     ],
   },
   {
-    text: "サイト・プラン",
+    text: "サイト",
     items: [
-      { text: "プラン", link: "/ja/products/plans" },
       { text: "セルフホスト概要", link: "/ja/self-hosting/" },
       { text: "環境変数", link: "/ja/self-hosting/env-vars" },
       { text: "デプロイ", link: "/ja/self-hosting/deployment" },
@@ -154,9 +153,8 @@ const enSidebar = [
     ],
   },
   {
-    text: "Site & Plans",
+    text: "Site",
     items: [
-      { text: "Plans", link: "/en/products/plans" },
       { text: "Self-hosting", link: "/en/self-hosting/" },
       { text: "Environment variables", link: "/en/self-hosting/env-vars" },
       { text: "Deployment", link: "/en/self-hosting/deployment" },

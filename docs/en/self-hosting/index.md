@@ -9,28 +9,7 @@ luno runs entirely on Cloudflare's edge infrastructure. Every component is open-
 
 ## Architecture
 
-```
-                    ┌─────────────────────────────────────────┐
-Internet            │          Cloudflare Edge                 │
-                    │                                          │
-Browsers / APIs  →  │  ┌──────────────────┐  ┌─────────────┐ │
-                    │  │   Workers API     │  │    Pages    │ │
-Admins           →  │  │   (Hono)         │  │  (Admin SPA)│ │
-                    │  └────────┬──────────┘  └─────────────┘ │
-                    │           │                              │
-                    │  ┌────────┴──────────┐  ┌─────────────┐ │
-                    │  │   Hyperdrive      │  │     R2      │ │
-                    │  │  (connection pool)│  │   (Media)   │ │
-                    │  └────────┬──────────┘  └─────────────┘ │
-                    │           │                              │
-                    └───────────┼──────────────────────────────┘
-                                │
-                    ┌───────────┴───────────┐
-                    │      PostgreSQL        │
-                    │  (Neon / Supabase /   │
-                    │   Railway / self)     │
-                    └───────────────────────┘
-```
+<ArchitectureDiagram locale="en" />
 
 ## Components
 

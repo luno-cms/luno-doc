@@ -220,13 +220,6 @@
   background: color-mix(in srgb, var(--vp-c-bg-soft) 80%, transparent);
 }
 
-.hub-link-item__icon {
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
-  display: block;
-}
-
 .hub-link-item__mark {
   display: inline-flex;
   align-items: center;
@@ -239,9 +232,31 @@
   background: color-mix(in srgb, var(--vp-c-bg-soft) 55%, var(--vp-c-bg));
 }
 
-/* Only invert true monochrome marks (Next / Cursor / GitHub) */
-.dark .hub-link-item__icon--mono {
+/* Official black marks: show as-is in light; invert (or swap white asset) in dark */
+.hub-link-item__icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.hub-link-item__icon--dark {
+  display: none;
+}
+
+.dark .hub-link-item__icon--light {
+  display: none;
+}
+
+.dark .hub-link-item__icon--dark {
+  display: block;
   filter: invert(1);
+}
+
+/* Official light-on-dark asset — do not invert again */
+.dark .hub-link-item__icon--native-dark {
+  filter: none;
 }
 
 .hub-link-item__text {

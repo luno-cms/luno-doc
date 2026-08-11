@@ -2,8 +2,8 @@
 title: コンテンツ管理
 description: luno のエントリ管理・リビジョンフロー・スケジュール公開・プレビュー・多言語対応の使い方を詳しく説明します。
 prev:
-  text: プラン
-  link: /ja/products/plans
+  text: 多言語
+  link: /ja/products/localization
 next:
   text: フォームビルダー
   link: /ja/guide/form-builder

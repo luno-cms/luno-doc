@@ -165,12 +165,6 @@ const copy = {
             body: "アセット配信、サイトマップ、OGP、構造化データ。",
             href: "/ja/guide/media",
           },
-          {
-            icon: "plans",
-            title: "プラン",
-            body: "Standard / Business の機能境界早見表。",
-            href: "/ja/products/plans",
-          },
         ],
       },
     ],
@@ -180,19 +174,20 @@ const copy = {
         title: "Next.js",
         href: "/ja/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
-        mono: true,
       },
       {
         key: "astro",
         title: "Astro",
         href: "/ja/guide/frameworks/astro",
         logo: "/connect/astro.svg",
+        logoDark: "/connect/astro-dark.svg",
       },
       {
         key: "nuxt",
         title: "Nuxt",
         href: "/ja/guide/frameworks/nuxt",
         logo: "/connect/nuxt.svg",
+        logoDark: "/connect/nuxt-white.svg",
       },
     ],
     agents: [
@@ -202,7 +197,6 @@ const copy = {
         body: "Cursor に LUNO を接続",
         href: "/ja/products/agents",
         logo: "/connect/cursor.svg",
-        mono: true,
       },
       {
         key: "claude-code",
@@ -224,6 +218,7 @@ const copy = {
         body: "Codex に LUNO を接続",
         href: "/ja/products/agents",
         logo: "/connect/codex.svg",
+        logoDark: "/connect/codex-white.svg",
       },
       {
         key: "copilot",
@@ -238,7 +233,6 @@ const copy = {
         body: "GitHub からエージェント連携",
         href: "/ja/products/agents",
         logo: "/connect/github.svg",
-        mono: true,
       },
       {
         key: "openai",
@@ -246,6 +240,7 @@ const copy = {
         body: "OpenAI ツールから接続",
         href: "/ja/products/agents",
         logo: "/connect/openai.svg",
+        logoDark: "/connect/openai-white.svg",
       },
     ],
     refs: [
@@ -392,12 +387,6 @@ const copy = {
             body: "Asset delivery, sitemaps, OGP, structured data.",
             href: "/en/guide/media",
           },
-          {
-            icon: "plans",
-            title: "Plans",
-            body: "Standard / Business feature gate matrix.",
-            href: "/en/products/plans",
-          },
         ],
       },
     ],
@@ -407,19 +396,20 @@ const copy = {
         title: "Next.js",
         href: "/en/guide/frameworks/nextjs",
         logo: "/connect/nextjs.svg",
-        mono: true,
       },
       {
         key: "astro",
         title: "Astro",
         href: "/en/guide/frameworks/astro",
         logo: "/connect/astro.svg",
+        logoDark: "/connect/astro-dark.svg",
       },
       {
         key: "nuxt",
         title: "Nuxt",
         href: "/en/guide/frameworks/nuxt",
         logo: "/connect/nuxt.svg",
+        logoDark: "/connect/nuxt-white.svg",
       },
     ],
     agents: [
@@ -429,7 +419,6 @@ const copy = {
         body: "Connect LUNO to Cursor",
         href: "/en/products/agents",
         logo: "/connect/cursor.svg",
-        mono: true,
       },
       {
         key: "claude-code",
@@ -451,6 +440,7 @@ const copy = {
         body: "Connect LUNO to Codex",
         href: "/en/products/agents",
         logo: "/connect/codex.svg",
+        logoDark: "/connect/codex-white.svg",
       },
       {
         key: "copilot",
@@ -465,7 +455,6 @@ const copy = {
         body: "Agent workflows from GitHub",
         href: "/en/products/agents",
         logo: "/connect/github.svg",
-        mono: true,
       },
       {
         key: "openai",
@@ -473,6 +462,7 @@ const copy = {
         body: "Connect from OpenAI tools",
         href: "/en/products/agents",
         logo: "/connect/openai.svg",
+        logoDark: "/connect/openai-white.svg",
       },
     ],
     refs: [
@@ -625,9 +615,18 @@ const copy = {
         >
           <span class="hub-link-item__mark" aria-hidden="true">
             <img
-              class="hub-link-item__icon"
-              :class="{ 'hub-link-item__icon--mono': item.mono }"
+              class="hub-link-item__icon hub-link-item__icon--light"
               :src="item.logo"
+              alt=""
+              width="28"
+              height="28"
+            />
+            <img
+              class="hub-link-item__icon hub-link-item__icon--dark"
+              :class="{
+                'hub-link-item__icon--native-dark': Boolean(item.logoDark),
+              }"
+              :src="item.logoDark || item.logo"
               alt=""
               width="28"
               height="28"
@@ -652,9 +651,18 @@ const copy = {
         >
           <span class="hub-link-item__mark" aria-hidden="true">
             <img
-              class="hub-link-item__icon"
-              :class="{ 'hub-link-item__icon--mono': item.mono }"
+              class="hub-link-item__icon hub-link-item__icon--light"
               :src="item.logo"
+              alt=""
+              width="28"
+              height="28"
+            />
+            <img
+              class="hub-link-item__icon hub-link-item__icon--dark"
+              :class="{
+                'hub-link-item__icon--native-dark': Boolean(item.logoDark),
+              }"
+              :src="item.logoDark || item.logo"
               alt=""
               width="28"
               height="28"

@@ -6,7 +6,7 @@
 
 luno is a headless CMS on Cloudflare Workers + PostgreSQL (Hyperdrive). Public API base (recommended): `https://api.luno.rest/public/p/{projectId}/v1`; host-based: `https://{your-domain}/public/v1` (no auth by default). Agent API: `https://api.luno.rest/admin/v1` with `Authorization: Bearer sk-agent-…`.
 
-Keywords for discovery: Agents, MCP, Console, API only, Content, Contact, Embed, Pub, Webhooks, Masters, public API keys, localization, plans, Next.js, Astro, Nuxt, framework recipes, projectId, llms.txt.
+Keywords for discovery: Agents, MCP, Console, API only, Headless CMS, Contact Form, Embed, Pub, Webhooks, Masters, public API keys, localization, Next.js, Astro, Nuxt, framework recipes, projectId, llms.txt.
 
 ---
 

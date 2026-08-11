@@ -80,4 +80,4 @@ await fetch('https://api.luno.rest/public/v1/form-sets/blog/entries?limit=1', {
 | Endpoints | [Public API](/en/api/public-api#api-only) |
 | Embed | [Embed & Pub](/en/products/embed) |
 | Agents (different key) | [AI Agents](/en/products/agents) |
-| Plan gates | [Plans](/en/products/plans) |
+| Pricing & plans | [luno.rest](https://luno.rest) |

@@ -5,8 +5,8 @@ prev:
   text: Public API keys
   link: /en/products/public-api-keys
 next:
-  text: Plans
-  link: /en/products/plans
+  text: Content management
+  link: /en/guide/content-management
 ---
 
 # Localization
@@ -78,4 +78,4 @@ await fetch(`${BASE}/form-sets/blog/entries/my-post?locale=ja`)
 | Ops detail | [Content management](/en/guide/content-management) |
 | AI assist | [AI assist](/en/guide/ai-assist) |
 | MCP translation | [AI Agents guide](/en/api/ai-agents) |
-| Plan gates | [Plans](/en/products/plans) |
+| Pricing & plans | [luno.rest](https://luno.rest) |

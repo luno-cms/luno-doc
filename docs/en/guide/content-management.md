@@ -2,8 +2,8 @@
 title: Content Management
 description: How to manage entries and revisions in luno HCMS — the full approval workflow, scheduled publishing, preview links, localization, and slug redirects.
 prev:
-  text: Plans
-  link: /en/products/plans
+  text: Localization
+  link: /en/products/localization
 next:
   text: Form builder
   link: /en/guide/form-builder

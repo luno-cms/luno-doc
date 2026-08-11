@@ -80,4 +80,4 @@ await fetch('https://api.luno.rest/public/v1/form-sets/blog/entries?limit=1', {
 | 公開エンドポイント | [公開 API](/ja/api/public-api#api-only) |
 | Embed | [Embed & Pub](/ja/products/embed) |
 | Agents（別キー） | [AI Agents](/ja/products/agents) |
-| プラン境界 | [プラン](/ja/products/plans) |
+| 料金・プラン | [luno.rest](https://luno.rest) |

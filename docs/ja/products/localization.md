@@ -5,8 +5,8 @@ prev:
   text: 公開 API キー
   link: /ja/products/public-api-keys
 next:
-  text: プラン
-  link: /ja/products/plans
+  text: コンテンツ管理
+  link: /ja/guide/content-management
 ---
 
 # 多言語
@@ -78,4 +78,4 @@ await fetch(`${BASE}/form-sets/blog/entries/my-post?locale=ja`)
 | 運用の詳細 | [コンテンツ管理](/ja/guide/content-management) |
 | AI アシスト | [AI アシスト](/ja/guide/ai-assist) |
 | MCP 翻訳 | [AI Agents ガイド](/ja/api/ai-agents) |
-| プラン境界 | [プラン](/ja/products/plans) |
+| 料金・プラン | [luno.rest](https://luno.rest) |
