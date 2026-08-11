@@ -261,7 +261,8 @@ When a form is submitted, luno sends the submission content to the configured no
 # wrangler.toml
 [vars]
 RESEND_API_KEY = "re_your_resend_api_key"
-APP_BASE_URL   = "https://admin.your-domain.com"
+APP_BASE_URL   = "https://console.luno.rest"
+MAIL_FROM      = "LUNO <noreply@luno.rest>"
 ```
 
 ::: tip About Resend
@@ -276,6 +277,35 @@ Each notification email includes:
 - All submitted field values
 - Submission timestamp
 - A direct link to the submission in the admin panel
+
+## Autoreply (thank-you email)
+
+Enable **autoreply** on the form to send an HTML thank-you email to the submitter.
+
+| Setting | Description |
+|---|---|
+| `autoreply_enabled` | On/off |
+| `autoreply_to_field` | Field key that holds the submitter email |
+| `autoreply_subject` / `autoreply_body` | Subject and body (i18n-capable) |
+| `email_signature` | Optional signature |
+
+## Notifications and integrations
+
+From form settings you can notify or sync on submit (availability depends on plan/config):
+
+- **Chat:** Slack / Microsoft Teams / Discord / Chatwork / LINE Notify
+- **CRM:** HubSpot / kintone
+- **Spam protection:** Honeypot; Cloudflare Turnstile on hosted contact pages
+
+## Hosted forms (contact.luno.rest)
+
+Enable **Publish on contact.luno.rest** in site settings for a LUNO-hosted contact page / iframe embed.
+
+- Example URL: `https://contact.luno.rest/{projectSlug}/{formSlug}`
+- Widget / iframe snippets are available in the admin publish panel
+- Hosted iframes use Turnstile
+
+For a custom frontend, keep using `POST /public/v1/contact-forms/{slug}/submit` (or `/public/p/{projectId}/v1/...`).
 
 ## Viewing Submissions
 

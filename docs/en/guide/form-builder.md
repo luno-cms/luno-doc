@@ -41,18 +41,20 @@ When creating a new form set, describe your use case in plain text and the AI wi
 | Type | UI Control | Localizable | API value type |
 |---|---|:---:|---|
 | `text` | Single-line input | ✓ | `string` |
+| `url` | URL input | — | `string` |
 | `textarea` | Multi-line input | ✓ | `string` |
-| `tiptap` | WYSIWYG rich text editor | ✓ | `string` (HTML) |
+| `tiptap` | WYSIWYG rich text editor | ✓ | Tiptap doc (JSON) or `string` |
 | `number` | Numeric input | — | `number` |
 | `boolean` | Checkbox / toggle | — | `boolean` |
-| `date` | Date/time picker | — | `string` (ISO 8601) |
-| `select` | Dropdown | — | `string` |
-| `radio` | Radio buttons | — | `string` |
+| `date` | Date/time picker | — | `string` (ISO 8601) or `{ from, to }` |
+| `select` | Dropdown | — | `string` (master value) |
+| `radio` | Radio buttons | — | `string` (master value) |
 | `multiselect` | Multi-select checkboxes | — | `string[]` |
 | `image` | Image upload | — | `string` (asset UUID) |
+| `image_gallery` | Image gallery | — | UUID string or `{ assetId, caption? }[]` |
 | `file` | File upload | — | `string` (asset UUID) |
 | `video_embed` | Video embed URL input | — | `string` (URL) |
-| `entry_ref` | Reference to another entry | — | `string` (entry slug) |
+| `entry_ref` | Reference to another entry | — | `string` (referenced entry UUID) |
 
 ## Field Type Details
 
@@ -291,10 +293,10 @@ Stores an embed URL (YouTube, Vimeo, etc.), not a video file upload.
 
 API response:
 ```json
-{ "data": { "author": "jane-doe" } }
+{ "data": { "author": "7c9e6679-7425-40de-944b-e07fc1f90ae7" } }
 ```
 
-References an entry in another form set within the same project. The value in `data[key]` is the referenced entry's slug. Use for: author profiles, related articles, product categories.
+References an entry in another form set within the same project. The value in `data[key]` is the referenced entry's **UUID** (not slug). Use for: author profiles, related articles, product categories.
 
 ::: warning Plan requirement
 `entry_ref` requires the Business plan or above.

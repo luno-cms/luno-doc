@@ -43,7 +43,7 @@ draft
   │                    │                    │
   │                published           scheduled
   │                                         │
-  │                               [Cron, every minute]
+  │                               [Cron, ~every 5 minutes]
   │                                         │
   │                                     published
   │
@@ -104,7 +104,7 @@ Set a future date and time when approving an entry to use scheduled publishing.
 
 ```
 Approve → scheduled (publish_at = 2025-02-01T00:00:00Z)
-              ↓  Cron job (runs every minute)
+              ↓  Cron job (~every 5 minutes)
           published (once publish_at passes)
 ```
 
@@ -114,7 +114,7 @@ The admin panel shows and accepts times in your browser's local timezone. Intern
 
 ### Cron precision
 
-The Cron job runs **every minute**, so the actual publish time may lag by up to 60 seconds. For second-level precision, scheduled publishing is not suitable.
+The Cron job runs **about every 5 minutes**, so the actual publish time may lag by up to about 5 minutes. For second-level precision, scheduled publishing is not suitable.
 
 ### Canceling a schedule
 

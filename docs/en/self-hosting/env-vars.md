@@ -43,33 +43,41 @@ wrangler hyperdrive create luno-hyperdrive \
   --connection-string "postgres://user:password@your-db-host:5432/luno"
 ```
 
-### Local development (no Hyperdrive)
+### Local development
+
+Locally, Postgres is connected via `localConnectionString` on the `[[hyperdrive]]` binding (the app uses `HYPERDRIVE`; there is no `DATABASE_URL` var).
 
 ```toml
-[vars]
-DATABASE_URL = "postgres://luno:luno@127.0.0.1:5432/luno"
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "00000000-0000-4000-8000-000000000001"
+localConnectionString = "postgres://luno:luno@127.0.0.1:5432/luno"
 ```
 
 ## Authentication
 
 | Variable | Default | Description |
 |---|---|---|
-| `DEV_AUTH_ENABLED` | `false` | Enables `POST /admin/v1/auth/dev-token` — **never enable in production** |
+| `LUNO_PRODUCTION` | `false` | When `true`, disables dev-token endpoints (**must be true in production**) |
+| `DEV_AUTH_ENABLED` | (local `.dev.vars`) | Enables `POST /admin/v1/auth/dev-token` — **never enable in production** |
 | `REGISTRATION_ENABLED` | `false` | Allows public self-registration. Set to `false` for invite-only. |
 | `GOOGLE_OAUTH_ENABLED` | `false` | Enables Google OAuth login |
+| `ADMIN_CORS_ORIGIN` | — | Admin SPA origin (e.g. `https://console.luno.rest`) |
+| `AUTH_SUCCESS_REDIRECT` | — | Redirect after successful login |
 
-::: danger DEV_AUTH_ENABLED in production
-With `DEV_AUTH_ENABLED=true`, any user can obtain a valid JWT without a password. **Always set it to `false` in production.**
+::: danger Production auth
+Set `LUNO_PRODUCTION=true` and do not enable `DEV_AUTH_ENABLED`. An open dev-token endpoint lets anyone mint JWTs.
 :::
 
 ### Google OAuth
 
-When `GOOGLE_OAUTH_ENABLED=true`, also configure:
+When `GOOGLE_OAUTH_ENABLED=true`, also configure these as **secrets** (not plaintext vars):
 
 | Variable | Description |
 |---|---|
-| `GOOGLE_OAUTH_CLIENT_ID` | OAuth Client ID from Google Cloud Console |
-| `GOOGLE_OAUTH_CLIENT_SECRET` | OAuth Client Secret |
+| `GOOGLE_CLIENT_ID` | OAuth Client ID from Google Cloud Console |
+| `GOOGLE_CLIENT_SECRET` | OAuth Client Secret |
+| `GOOGLE_OAUTH_REDIRECT_URI` | Callback URL (must match Google Console exactly) |
 
 **Google Cloud Console steps:**
 
@@ -80,7 +88,8 @@ When `GOOGLE_OAUTH_ENABLED=true`, also configure:
 5. Copy the credentials
 
 ```bash
-wrangler secret put GOOGLE_OAUTH_CLIENT_SECRET
+wrangler secret put GOOGLE_CLIENT_ID
+wrangler secret put GOOGLE_CLIENT_SECRET
 ```
 
 ## Email
@@ -88,7 +97,11 @@ wrangler secret put GOOGLE_OAUTH_CLIENT_SECRET
 | Variable | Description | Example |
 |---|---|---|
 | `RESEND_API_KEY` | Resend API key for sending notification emails. Without this, emails are logged. | `re_123abc456def` |
-| `APP_BASE_URL` | Base URL used in email links and OAuth callback URLs | `https://admin.your-domain.com` |
+| `MAIL_FROM` | From address (verified domain) | `LUNO <noreply@luno.rest>` |
+| `APP_BASE_URL` | Base URL for email links / admin SPA | `https://console.luno.rest` |
+| `PUB_ORIGIN` | Origin for pub.luno.rest hosting | `https://pub.luno.rest` |
+| `CONTACT_ORIGIN` | Origin for contact.luno.rest hosting | `https://contact.luno.rest` |
+| `TURNSTILE_SITE_KEY` | Turnstile site key (secret: `TURNSTILE_SECRET_KEY`) | |
 
 ```bash
 wrangler secret put RESEND_API_KEY
@@ -142,7 +155,7 @@ For Stripe-based subscription billing:
 
 | Variable | Description |
 |---|---|
-| `BILLING_ENABLED` | Set to `true` to enable billing features |
+| `LUNO_BILLING_ENABLED` | Set to `true` to enable Stripe billing |
 | `STRIPE_SECRET_KEY` | Stripe secret key (`sk_live_...`) |
 | `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret (`whsec_...`) |
 
@@ -151,7 +164,7 @@ For Stripe-based subscription billing:
 ```toml
 name                 = "luno-api"
 main                 = "src/index.ts"
-compatibility_date   = "2024-06-01"
+compatibility_date   = "2025-03-01"
 compatibility_flags  = ["nodejs_compat"]
 
 # ── Core settings ────────────────────────────────────────────
@@ -160,7 +173,10 @@ DEFAULT_TENANT_ID    = "00000000-0000-0000-0000-000000000001"
 REGISTRATION_ENABLED = "false"
 DEV_AUTH_ENABLED     = "false"
 GOOGLE_OAUTH_ENABLED = "false"
-APP_BASE_URL         = "https://admin.your-domain.com"
+APP_BASE_URL         = "https://console.your-domain.com"
+LUNO_PRODUCTION      = "true"
+ADMIN_CORS_ORIGIN    = "https://console.your-domain.com"
+LUNO_BILLING_ENABLED = "false"
 
 # ── Hyperdrive (PostgreSQL connection pooling) ───────────────
 [[hyperdrive]]
@@ -182,9 +198,9 @@ queue             = "luno-image-variants"
 max_batch_size    = 10
 max_batch_timeout = 30
 
-# ── Cron Triggers (scheduled publishing, every minute) ───────
+# ── Cron Triggers (billing daily + scheduled publish ~5 min) ─
 [triggers]
-crons = ["* * * * *"]
+crons = ["0 2 * * *", "*/5 * * * *", "2-59/5 * * * *"]
 ```
 
 ::: warning JWT_SECRET is a secret
@@ -197,7 +213,8 @@ Do not put `JWT_SECRET` in `[vars]` — that would expose it in your source code
 # Register secrets interactively (prompts for value)
 wrangler secret put JWT_SECRET
 wrangler secret put RESEND_API_KEY
-wrangler secret put GOOGLE_OAUTH_CLIENT_SECRET   # Google OAuth
+wrangler secret put GOOGLE_CLIENT_ID
+wrangler secret put GOOGLE_CLIENT_SECRET
 wrangler secret put STRIPE_SECRET_KEY            # Billing
 
 # List registered secret names (values are never shown)

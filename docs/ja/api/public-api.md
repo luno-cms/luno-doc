@@ -5,9 +5,20 @@ description: luno の公開 API 全エンドポイントの仕様、クエリパ
 
 # 公開 API リファレンス
 
-**ベース URL：** `https://{your-domain}/public/v1`
+認証不要（サイト設定で公開 API キー必須の場合を除く）。すべてのレスポンスは `Content-Type: application/json` です（`/media/:assetId` と XML エンドポイントを除く）。
 
-認証不要。すべてのレスポンスは `Content-Type: application/json` です（`/media/:assetId` と XML エンドポイントを除く）。
+## ベース URL
+
+| 方式 | ベース URL | 用途 |
+|---|---|---|
+| **projectId 固定（推奨）** | `https://api.luno.rest/public/p/{projectId}/v1` | ローカル検証・マルチテナント。Host 解決に依存しない |
+| Host 解決 | `https://{your-domain}/public/v1` | プロジェクトの公開ホスト / カスタムドメイン |
+
+`projectId` は MCP の `get_public_api_info`、または管理画面のプロジェクト設定から取得できます。ローカル（`127.0.0.1`）では Host 版が `DEFAULT_TENANT_ID` に落ちるため、**必ず `/public/p/{projectId}/v1` を使ってください**。
+
+サイト設定で公開 API キー必須の場合は、ヘッダー `X-Luno-Public-Api-Key: luno_pub_…`（またはクエリ）を付けます。エージェントキー（`sk-agent-…`）とは別物です。
+
+以下のパスはいずれも上記ベースの相対パスです。
 
 ---
 
@@ -469,6 +480,17 @@ curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
 
 ---
 
+## マスタ（公開）
+
+サイトで公開済みのマスタエンティティとレコードを取得できます。
+
+```bash
+curl https://api.luno.rest/public/p/{projectId}/v1/master-entities
+curl "https://api.luno.rest/public/p/{projectId}/v1/master-entities/category/records?locale=ja"
+```
+
+---
+
 ## AI エージェント向け
 
 ### GET /llms.txt
@@ -477,7 +499,13 @@ AI クローラー・エージェント向けの**公開コンテンツ一覧**�
 
 ```bash
 curl https://your-domain.com/public/v1/llms.txt
+# または
+curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt
 ```
+
+::: tip docs サイトの llms-full.txt
+長い API 要約は **ドキュメントサイト**の [llms-full.txt](https://doc.luno.rest/llms-full.txt) です。製品の公開 API には `/llms-full.txt` エンドポイントはありません。
+:::
 
 MCP 設定・エージェントキーのスコープ・管理 API の詳細は [AI エージェント向けガイド](/ja/api/ai-agents) を参照してください。
 
@@ -489,16 +517,17 @@ MCP 設定・エージェントキーのスコープ・管理 API の詳細は [
 
 | フィールドタイプ | 型 | 例 |
 |---|---|---|
-| `text` | `string` | `"はじめての投稿"` |
+| `text` / `url` | `string` | `"はじめての投稿"` |
 | `textarea` | `string` | `"複数行\nテキスト"` |
-| `tiptap` | `string`（HTML） | `"<h2>見出し</h2><p>本文</p>"` |
+| `tiptap` | Tiptap doc(JSON) または `string` | `"<h2>見出し</h2><p>本文</p>"` |
 | `number` | `number` | `1980` |
 | `boolean` | `boolean` | `true` |
-| `date` | `string`（ISO 8601） | `"2025-01-15"` または `"2025-01-15T09:00:00Z"` |
-| `select` / `radio` | `string` | `"blog"` |
+| `date` | `string` または `{ from, to }` | `"2025-01-15"` |
+| `select` / `radio` | `string`（マスタ value） | `"blog"` |
 | `multiselect` | `string[]` | `["tag1", "tag2"]` |
 | `image` / `file` | `string`（asset UUID） | `"550e8400-..."` |
+| `image_gallery` | UUID 文字列、または `{ assetId, caption? }[]` | `[{ "assetId": "…" }]` |
 | `video_embed` | `string`（URL） | `"https://youtube.com/..."` |
-| `entry_ref` | `string`（entry slug） | `"author-yamada"` |
+| `entry_ref` | `string`（参照エントリ UUID） | `"7c9e6679-..."` |
 
-`image` / `file` の UUID は `mediaUrls[fieldKey]` で完全 URL に解決されます。
+`image` / `file` の UUID は `mediaUrls[fieldKey]` で完全 URL に解決されます。`/public/p/{projectId}/v1` で取得した場合、`mediaUrls` も同じプレフィックスになります。

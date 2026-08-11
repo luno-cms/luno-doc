@@ -36,38 +36,48 @@ Webhook は **Standard プラン以上**で利用可能です。
 | `entry.published` | エントリが公開されたとき | `scheduled` → `published` または即時公開時 |
 | `entry.updated` | 公開済みエントリが更新されたとき | 既存の公開エントリに新リビジョンが公開された |
 | `entry.deleted` | エントリが削除されたとき | エントリ削除操作 |
+| `master.published` | マスタが公開されたとき | マスタエンティティの公開操作 |
 
 ## ペイロード形式
 
-すべてのイベントで共通のペイロード構造です。
+### エントリイベント
+
+フィールド値（`data`）は**含まれません**。受信側で公開 API などから必要なら再取得してください。
 
 ```json
 {
   "event": "entry.published",
-  "tenant_id": "550e8400-e29b-41d4-a716-446655440000",
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
   "form_set_slug": "blog",
   "entry_slug": "my-first-post",
   "entry_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
-  "published_at": "2025-01-15T10:00:00Z",
-  "data": {
-    "title": "はじめての投稿",
-    "body": "<h2>はじめに</h2><p>こんにちは、世界！</p>",
-    "cover": "asset-uuid-here",
-    "category": "blog",
-    "tags": ["cloudflare", "cms"]
-  }
+  "revision_id": "a2f3d4e5-1111-2222-3333-444455556666",
+  "timestamp": "2025-01-15T10:00:00.000Z"
 }
 ```
 
 | フィールド | 型 | 説明 |
 |---|---|---|
-| `event` | string | イベント種別（`entry.published` / `entry.updated` / `entry.deleted`） |
-| `tenant_id` | string (UUID) | プロジェクト ID |
+| `event` | string | `entry.published` / `entry.updated` / `entry.deleted` |
+| `project_id` | string (UUID) | プロジェクト ID |
 | `form_set_slug` | string | フォームセットの slug |
 | `entry_slug` | string | エントリの slug |
 | `entry_id` | string (UUID) | エントリの ID |
-| `published_at` | string (ISO 8601) | 公開日時（`entry.published` / `entry.updated` のみ） |
-| `data` | object | エントリのフィールド値（`entry.deleted` では `{}`） |
+| `revision_id` | string (UUID) | 公開リビジョン ID（ある場合のみ） |
+| `timestamp` | string (ISO 8601) | 配信時刻 |
+
+### マスタイベント（`master.published`）
+
+```json
+{
+  "event": "master.published",
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "master_entity_id": "b1c2d3e4-...",
+  "master_entity_key": "category",
+  "record_count": 12,
+  "timestamp": "2025-01-15T10:00:00.000Z"
+}
+```
 
 ## 署名検証
 
@@ -274,19 +284,12 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## リトライ動作
+## 配信失敗と再送
 
-Webhook の配信に失敗した場合（5xx エラー・タイムアウト）、luno は自動的に再送します。
-
-| 試行 | 待機時間 |
-|---|---|
-| 1 回目（初回） | 即時 |
-| 2 回目 | 1 分後 |
-| 3 回目 | 5 分後 |
-| 4 回目（最終） | 30 分後 |
+配信に失敗した場合（5xx・タイムアウトなど）は **配信履歴に記録**されます。自動スケジュール再送は行いません。管理画面の配信履歴から **手動で再送（redeliver）** してください。
 
 ::: tip 冪等性の確保
-リトライにより同じイベントが複数回配信される可能性があります。処理が冪等になるよう実装してください（例: `entry_id` + `event` の組み合わせで重複チェック）。
+手動再送や二重配信の可能性に備え、処理は冪等にしてください（例: `entry_id` + `event` + `timestamp` で重複チェック）。
 :::
 
 ## テスト配信
@@ -295,13 +298,14 @@ Webhook の配信に失敗した場合（5xx エラー・タイムアウト）�
 
 ## 配信履歴
 
-管理画面の **「設定」→「Webhook」→「配信履歴」** から、各イベントの配信状況を確認できます：
+管理画面の **「設定」→「Webhook」→「配信履歴」** から、各イベントの配信状況を確認・再送できます：
 
 - 配信日時
 - ステータスコード
 - 送信ペイロード
 - レスポンスボディ
 - 配信に失敗した場合のエラー詳細
+- 失敗時の手動再送
 
 ## よくある注意事項
 

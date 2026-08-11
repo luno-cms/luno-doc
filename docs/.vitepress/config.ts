@@ -123,7 +123,7 @@ export default defineConfig({
       provider: "local",
     },
     socialLinks: [
-      { icon: "github", link: "https://github.com/lunocms/luno" },
+      { icon: "github", link: "https://github.com/luno-cms/luno" },
     ],
   },
 });

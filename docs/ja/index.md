@@ -24,13 +24,13 @@ features:
     details: 下書き → レビュー → 公開の承認フロー、スケジュール公開、差分表示、担当者アサインをサポート。
   - icon: 🔧
     title: フォームビルダー
-    details: テキスト・画像・リッチテキスト・エントリ参照など 11 種のフィールドタイプでコンテンツモデルを設計。
+    details: テキスト・URL・画像ギャラリー・リッチテキスト・エントリ参照など 15 種のフィールドタイプでコンテンツモデルを設計。
   - icon: 🌐
     title: 公開 API（認証不要）
     details: エントリ一覧・詳細・メディアを認証なしで取得できます。フロントエンド・Jamstack サイトから直接利用可能。
   - icon: 🤖
     title: AI エージェント対応
-    details: サイトごとの llms.txt に加え、MCP（@luno-cms/mcp）とスコープ付きエージェント API キー（content / schema）で Claude・Cursor から操作できます。
+    details: サイトごとの llms.txt に加え、MCP（@luno-cms/mcp）とスコープ付きエージェント API キー（full / content / schema）で Claude・Cursor から操作できます。
   - icon: 🪝
     title: Webhook
     details: エントリの公開・更新・削除イベントを HMAC-SHA256 署名付きで配信。外部システムとのリアルタイム連携に。

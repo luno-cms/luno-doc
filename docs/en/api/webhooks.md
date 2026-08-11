@@ -36,35 +36,48 @@ The secret is only displayed at creation time. Store it securely (e.g., as an en
 | `entry.published` | An entry goes live (immediate publish or scheduled publish fires) |
 | `entry.updated` | A published entry's content is replaced by a new revision |
 | `entry.deleted` | An entry is deleted |
+| `master.published` | A master entity is published |
 
 ## Payload Format
+
+### Entry events
+
+Field values (`data`) are **not included**. Fetch content from the Public API if needed.
 
 ```json
 {
   "event": "entry.published",
-  "tenant_id": "550e8400-e29b-41d4-a716-446655440000",
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
   "form_set_slug": "blog",
   "entry_slug": "my-first-post",
   "entry_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
-  "published_at": "2025-01-15T10:00:00Z",
-  "data": {
-    "title": "My First Post",
-    "body": "<h2>Introduction</h2><p>Hello, world!</p>",
-    "cover": "asset-uuid-here",
-    "category": "blog"
-  }
+  "revision_id": "a2f3d4e5-1111-2222-3333-444455556666",
+  "timestamp": "2025-01-15T10:00:00.000Z"
 }
 ```
 
 | Field | Type | Description |
 |---|---|---|
-| `event` | string | Event type |
-| `tenant_id` | string (UUID) | Project ID |
+| `event` | string | `entry.published` / `entry.updated` / `entry.deleted` |
+| `project_id` | string (UUID) | Project ID |
 | `form_set_slug` | string | Form set slug |
 | `entry_slug` | string | Entry slug |
 | `entry_id` | string (UUID) | Entry ID |
-| `published_at` | string (ISO 8601) | Publish time (`entry.published` and `entry.updated` only) |
-| `data` | object | Entry field values (`{}` for `entry.deleted`) |
+| `revision_id` | string (UUID) | Published revision ID (when present) |
+| `timestamp` | string (ISO 8601) | Delivery time |
+
+### Master events (`master.published`)
+
+```json
+{
+  "event": "master.published",
+  "project_id": "550e8400-e29b-41d4-a716-446655440000",
+  "master_entity_id": "b1c2d3e4-...",
+  "master_entity_key": "category",
+  "record_count": 12,
+  "timestamp": "2025-01-15T10:00:00.000Z"
+}
+```
 
 ## Signature Verification
 
@@ -257,19 +270,12 @@ func handleWebhook(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## Retry Policy
+## Failures and Redelivery
 
-When delivery fails (5xx response or timeout), luno retries automatically:
-
-| Attempt | Delay |
-|---|---|
-| 1st (initial) | Immediate |
-| 2nd retry | 1 minute later |
-| 3rd retry | 5 minutes later |
-| 4th retry (final) | 30 minutes later |
+Failed deliveries (5xx, timeout, etc.) are **recorded in Delivery History**. There is no automatic scheduled retry. Use **Redeliver** from Delivery History in the admin console.
 
 ::: tip Make your handler idempotent
-Retries mean the same event can arrive multiple times. Design your handler to be idempotent — use a combination of `entry_id` + `event` to detect and skip duplicates.
+Manual redelivery (or duplicate deliveries) can send the same event more than once. Make handlers idempotent — e.g. dedupe on `entry_id` + `event` + `timestamp`.
 :::
 
 ## Test Delivery
@@ -278,13 +284,14 @@ Click **Send Test** in the webhook settings page to send a dummy payload to your
 
 ## Delivery History
 
-Go to **Settings → Webhooks → Delivery History** to inspect every delivery attempt:
+Go to **Settings → Webhooks → Delivery History** to inspect every delivery attempt and redeliver failures:
 
 - Timestamp
 - HTTP status code received
 - Sent payload
 - Response body
 - Error details for failed attempts
+- Manual redeliver for failures
 
 ## Reference
 

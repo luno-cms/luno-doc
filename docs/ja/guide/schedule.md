@@ -15,17 +15,17 @@ draft（下書き）
 pending_review（承認待ち）
   ↓ 承認（公開日時を指定）
 scheduled（自動公開待ち）  ← publish_at = 指定した日時（UTC）
-  ↓ Cron ジョブ（毎分実行）
+  ↓ Cron ジョブ（約 5 分間隔）
 published（公開済み）      ← 指定日時以降に自動移行
 ```
 
 1. レビュアーがエントリを承認する際に **「公開日時」** を設定
 2. リビジョンのステータスが `scheduled` になる
-3. Cron ジョブが**毎分**実行し、`publish_at <= 現在時刻` のリビジョンを `published` に移行
+3. Cron ジョブが**約 5 分間隔**で実行し、`publish_at <= 現在時刻` のリビジョンを `published` に移行
 4. 公開 API からコンテンツが取得可能になる
 
 ::: tip Cron の精度
-Cron は毎分実行されるため、指定時刻から**最大 1 分の遅延**が生じます。秒単位での精密な公開が必要な用途には向きません。
+Cron は約 5 分間隔のため、指定時刻から**最大約 5 分の遅延**が生じます。秒単位での精密な公開が必要な用途には向きません。
 :::
 
 ## 設定手順
@@ -100,12 +100,12 @@ scheduled → [reject] → rejected → [reopen] → draft
 ```json
 {
   "event": "entry.published",
-  "tenant_id": "project-uuid",
+  "project_id": "project-uuid",
   "form_set_slug": "blog",
   "entry_slug": "my-scheduled-post",
   "entry_id": "entry-uuid",
-  "published_at": "2025-02-01T00:00:00Z",
-  "data": { ... }
+  "revision_id": "revision-uuid",
+  "timestamp": "2025-02-01T00:00:00.000Z"
 }
 ```
 
@@ -126,7 +126,7 @@ scheduled → [reject] → rejected → [reopen] → draft
 
 ```toml
 [triggers]
-crons = ["* * * * *"]  # 毎分実行
+crons = ["*/5 * * * *"]  # 予約公開（実装では他 Cron と併用）
 ```
 
 Cloudflare Workers の Cron Triggers として設定されます。詳細は[デプロイガイド](/ja/self-hosting/deployment)を参照してください。

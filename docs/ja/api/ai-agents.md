@@ -147,31 +147,42 @@ GitHub・フロントエンドのコード・チャットに貼り付けない�
 
 ## MCP ツール一覧
 
-`@luno-cms/mcp` が提供するツール:
+`@luno-cms/mcp` が提供するツール（正本は [npm README](https://www.npmjs.com/package/@luno-cms/mcp)）:
 
-### コンテンツ（`content` スコープ）
+### コンテンツ（`content` / `full`）
 
 | ツール | 説明 |
 |---|---|
 | `get_tenant_schema` | プロジェクト全体のスキーマ |
-| `list_form_sets` / `get_form_set_schema` | Form Set 一覧・フィールド定義 |
+| `list_form_sets` / `get_form_set_schema` | Form Set 一覧・フィールド定義（select 等の `masterEntityKey` / sampleValues 含む） |
+| `get_public_api_info` | `projectId` と公開 API ベース URL（`/public/p/{projectId}/v1`） |
 | `list_entries` / `get_entry` | エントリ一覧・詳細 |
 | `create_entry` / `update_entry` | エントリ作成・slug 更新 |
 | `list_revisions` / `save_revision` / `publish_revision` | リビジョン操作 |
 | `submit_entry_for_review` | 承認申請 |
-| `list_media` | メディア一覧 |
+| `list_media` / `upload_media` | メディア一覧・アップロード（`filePath` / `sourceUrl` / `base64`） |
+| `list_master_entities` / `get_master_entity` | マスタエンティティ |
+| `list_master_records` / `create_master_record` | マスタレコード参照・作成 |
+| `update_master_record` / `update_master_tree` | マスタ更新（**エージェントキー不可** — ユーザ JWT が必要） |
+| `get_project_content_locales` | サイト多言語設定の取得 |
+| `patch_project_content_locales` | 多言語設定の更新（**tenant_admin JWT のみ**） |
+| `translate_entry_locales` | AI ロケール一括翻訳（**Standard+**） |
+| `search_admin_help` / `get_admin_help_article` / `ask_admin_help` | 管理画面ヘルプ KB |
+| `get_login_branding` / `get_login_appearance` / `update_login_appearance` | ログイン見た目 |
+| `list_console_login_ip_allowlists` / `add_…` / `delete_…` | ログイン IP 許可リスト（**Business+**） |
 
-### スキーマセットアップ（**`schema` スコープ必須**）
+### スキーマセットアップ（**`full` / `schema` 必須**）
 
 | ツール | 管理 API |
 |---|---|
 | `apply_form_blueprint` | `POST /admin/v1/form-blueprints/apply` |
+| `validate_master_blueprint` / `apply_master_blueprint` | マスタ Blueprint の検証・適用 |
 | `apply_builtin_form_template` | `POST /admin/v1/form-set-templates/:id/apply` |
-| `create_contact_form` | `POST /admin/v1/contact-forms` |
+| `create_contact_form` / `update_contact_form` | Contact Form 作成・更新（`autoreply_*` 可） |
 
 ### dryRun（スキーマ適用のプレビュー）
 
-`apply_form_blueprint` と `apply_builtin_form_template` は **`dryRun: true`** を渡せます。DB に書き込まず `{ dryRun: true, operations: [...] }` が返るので、blog テンプレ適用前に作成内容を確認してください。
+`apply_form_blueprint`・`apply_master_blueprint`・`apply_builtin_form_template` は **`dryRun: true`** を渡せます。DB に書き込まずプレビューが返ります。
 
 CLI: `hcms form apply --dry-run` / `hcms template apply --dry-run`
 
@@ -302,17 +313,18 @@ curl -X POST https://api.luno.rest/admin/v1/revisions/{revisionId}/publish \
 
 | フィールドタイプ | 値の型 | 例 |
 |---|---|---|
-| `text` | `string` | `"タイトルです"` |
+| `text` / `url` | `string` | `"タイトルです"` / `"https://…"` |
 | `textarea` | `string` | `"複数行\nテキスト"` |
-| `tiptap` | `string`（HTML） | `"<p>本文</p>"` |
+| `tiptap` | Tiptap doc(JSON) または `string` | `"<p>本文</p>"` |
 | `number` | `number` | `42` |
 | `boolean` | `boolean` | `true` |
-| `date` | `string`（ISO 8601） | `"2025-01-15"` |
-| `select` / `radio` | `string` | `"news"` |
+| `date` | `string` または `{ from, to }` | `"2025-01-15"` |
+| `select` / `radio` | `string`（マスタの **value**） | `"news"` |
 | `multiselect` | `string[]` | `["tag1", "tag2"]` |
 | `image` / `file` | `string`（asset UUID） | `"550e8400-..."` |
+| `image_gallery` | UUID 文字列、または `{ assetId, caption? }[]` | `[{ "assetId": "…" }]` |
 | `video_embed` | `string`（URL） | `"https://youtube.com/..."` |
-| `entry_ref` | `string`（entry slug） | `"author-yamada"` |
+| `entry_ref` | `string`（参照エントリ **UUID**） | `"7c9e6679-..."` |
 
 ## エラーハンドリング
 
@@ -329,7 +341,7 @@ curl -X POST https://api.luno.rest/admin/v1/revisions/{revisionId}/publish \
 ## ベストプラクティス
 
 1. **`llms.txt`** で公開コンテンツの全体像を把握する
-2. **キーを分ける** — セットアップは `schema`、日常運用は `content`。セットアップ後は `schema` を revoke
+2. **普段は `full`** — 記事だけに絞るなら `content`。短期のセットアップキーは終わったら revoke
 3. **`include_snapshot=true`** で一覧取得し、個別 GET を減らす
 4. **301 リダイレクト**に従う（slug 変更時）
 5. **`ETag` / `If-None-Match`** でリクエスト数を節約する

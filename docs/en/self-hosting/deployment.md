@@ -29,7 +29,7 @@ Your browser opens to Cloudflare's authentication page.
 ## Step 2: Clone the Repository
 
 ```bash
-git clone https://github.com/lunocms/luno.git
+git clone https://github.com/luno-cms/luno.git
 cd luno
 pnpm install
 ```

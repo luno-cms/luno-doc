@@ -149,31 +149,42 @@ Calling a schema-only endpoint with a `content` key returns **403 Forbidden**.
 
 ## MCP Tools
 
-Tools exposed by `@luno-cms/mcp`:
+Tools exposed by `@luno-cms/mcp` (canonical list: [npm README](https://www.npmjs.com/package/@luno-cms/mcp)):
 
-### Content (`content` scope)
+### Content (`content` / `full`)
 
 | Tool | Description |
 |---|---|
 | `get_tenant_schema` | Project-wide schema (all form sets) |
-| `list_form_sets` / `get_form_set_schema` | Form set list and field definitions |
+| `list_form_sets` / `get_form_set_schema` | Form set list and field definitions (`masterEntityKey` / sampleValues for selects) |
+| `get_public_api_info` | `projectId` and Public API base (`/public/p/{projectId}/v1`) |
 | `list_entries` / `get_entry` | Entry list and detail |
 | `create_entry` / `update_entry` | Create entries and update slugs |
 | `list_revisions` / `save_revision` / `publish_revision` | Revision workflow |
 | `submit_entry_for_review` | Submit for approval |
-| `list_media` | Media library list |
+| `list_media` / `upload_media` | Media list and upload (`filePath` / `sourceUrl` / `base64`) |
+| `list_master_entities` / `get_master_entity` | Master entities |
+| `list_master_records` / `create_master_record` | Master records (list / create) |
+| `update_master_record` / `update_master_tree` | Master updates (**not available with agent keys** — needs user JWT) |
+| `get_project_content_locales` | Content locale settings |
+| `patch_project_content_locales` | Update locales (**tenant_admin JWT only**) |
+| `translate_entry_locales` | AI bulk locale translation (**Standard+**) |
+| `search_admin_help` / `get_admin_help_article` / `ask_admin_help` | Admin help KB |
+| `get_login_branding` / `get_login_appearance` / `update_login_appearance` | Login branding |
+| `list_console_login_ip_allowlists` / `add_…` / `delete_…` | Login IP allowlist (**Business+**) |
 
-### Schema setup (`schema` scope required)
+### Schema setup (`full` / `schema` required)
 
 | Tool | Admin API |
 |---|---|
 | `apply_form_blueprint` | `POST /admin/v1/form-blueprints/apply` |
+| `validate_master_blueprint` / `apply_master_blueprint` | Validate / apply master blueprints |
 | `apply_builtin_form_template` | `POST /admin/v1/form-set-templates/:id/apply` |
-| `create_contact_form` | `POST /admin/v1/contact-forms` |
+| `create_contact_form` / `update_contact_form` | Contact forms (supports `autoreply_*`) |
 
 ### dryRun (schema apply preview)
 
-`apply_form_blueprint` and `apply_builtin_form_template` accept **`dryRun: true`**. The API returns `{ dryRun: true, operations: [...] }` without writing to the database — use this before initial setup to preview form sets, forms, and fields.
+`apply_form_blueprint`, `apply_master_blueprint`, and `apply_builtin_form_template` accept **`dryRun: true`** and return a preview without writing to the database.
 
 CLI equivalents: `hcms form apply --dry-run`, `hcms template apply --dry-run`.
 
@@ -376,17 +387,18 @@ curl -X POST "https://api.luno.rest/admin/v1/revisions/{revisionId}/publish" \
 
 | Field type | Value type | Example |
 |---|---|---|
-| `text` | `string` | `"My Post Title"` |
+| `text` / `url` | `string` | `"My Post Title"` / `"https://…"` |
 | `textarea` | `string` | `"A brief excerpt."` |
-| `tiptap` | `string` (HTML) | `"<p>Body content</p>"` |
+| `tiptap` | Tiptap doc (JSON) or `string` | `"<p>Body content</p>"` |
 | `number` | `number` | `42` |
 | `boolean` | `boolean` | `true` |
-| `date` | `string` (ISO 8601) | `"2025-01-15"` |
-| `select` / `radio` | `string` | `"blog"` |
+| `date` | `string` or `{ from, to }` | `"2025-01-15"` |
+| `select` / `radio` | `string` (master **value**) | `"blog"` |
 | `multiselect` | `string[]` | `["cloudflare", "cms"]` |
 | `image` / `file` | `string` (asset UUID) | `"550e8400-..."` |
+| `image_gallery` | UUID string or `{ assetId, caption? }[]` | `[{ "assetId": "…" }]` |
 | `video_embed` | `string` (URL) | `"https://youtube.com/..."` |
-| `entry_ref` | `string` (entry slug) | `"author-jane"` |
+| `entry_ref` | `string` (referenced entry **UUID**) | `"7c9e6679-..."` |
 
 Resolve `image` / `file` UUIDs using `mediaUrls[fieldKey]` from the response.
 
@@ -405,7 +417,7 @@ Resolve `image` / `file` UUIDs using `mediaUrls[fieldKey]` from the response.
 ## Best Practices
 
 1. **Start with `llms.txt`** to see what published content exists
-2. **Use separate keys** — `schema` for setup, `content` for daily ops; revoke setup keys when done
+2. **Prefer `full` day-to-day** — use `content` to restrict to entries; revoke short-lived setup keys when done
 3. **Use `include_snapshot=true`** on list requests to avoid per-entry round trips
 4. **Follow 301 redirects** — slugs can change after entries are renamed
 5. **Cache with ETags** — send `If-None-Match` to avoid re-downloading unchanged content

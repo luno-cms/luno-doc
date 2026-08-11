@@ -5,9 +5,20 @@ description: Complete specification of all luno Public API endpoints with reques
 
 # Public API Reference
 
-**Base URL:** `https://{your-domain}/public/v1`
+No authentication required by default (unless the project requires a public API key). All responses are `Content-Type: application/json` (except `/media/:assetId` and XML endpoints).
 
-No authentication required. All responses are `Content-Type: application/json` (except `/media/:assetId` and XML endpoints).
+## Base URLs
+
+| Mode | Base URL | When to use |
+|---|---|---|
+| **projectId (recommended)** | `https://api.luno.rest/public/p/{projectId}/v1` | Local testing and multi-tenant; independent of Host resolution |
+| Host-resolved | `https://{your-domain}/public/v1` | Project public host / custom domain |
+
+Get `projectId` from MCP `get_public_api_info` or project settings. On localhost, Host-based URLs fall back to `DEFAULT_TENANT_ID` — **always use `/public/p/{projectId}/v1` locally**.
+
+If the project requires a public API key, send `X-Luno-Public-Api-Key: luno_pub_…` (separate from agent keys `sk-agent-…`).
+
+Paths below are relative to either base.
 
 ---
 
@@ -440,6 +451,17 @@ curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
 
 ---
 
+## Masters (public)
+
+List published master entities and their records:
+
+```bash
+curl https://api.luno.rest/public/p/{projectId}/v1/master-entities
+curl "https://api.luno.rest/public/p/{projectId}/v1/master-entities/category/records?locale=ja"
+```
+
+---
+
 ## AI Agents
 
 ### GET /llms.txt
@@ -448,9 +470,15 @@ AI-readable published content index in Markdown ([llms.txt spec](https://llmstxt
 
 ```bash
 curl https://your-domain.com/public/v1/llms.txt
+# or
+curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt
 ```
 
-For MCP setup, agent key scopes, and Admin API usage, see the [AI Agents Guide](/en/api/ai-agents) and [doc.luno.rest](https://doc.luno.rest/en/api/ai-agents).
+::: tip docs-site llms-full.txt
+The long-form API summary lives on this **docs site**: [llms-full.txt](https://doc.luno.rest/llms-full.txt). The product Public API does **not** expose `/llms-full.txt`.
+:::
+
+For MCP setup, agent key scopes, and Admin API usage, see the [AI Agents Guide](/en/api/ai-agents).
 
 ---
 
@@ -460,16 +488,17 @@ All field values live inside the `data` object of entry responses:
 
 | Field type | Value type | Example |
 |---|---|---|
-| `text` | `string` | `"My First Post"` |
+| `text` / `url` | `string` | `"My First Post"` |
 | `textarea` | `string` | `"A brief summary."` |
-| `tiptap` | `string` (HTML) | `"<h2>Heading</h2><p>Body</p>"` |
+| `tiptap` | Tiptap doc (JSON) or `string` | `"<h2>Heading</h2><p>Body</p>"` |
 | `number` | `number` | `1980` |
 | `boolean` | `boolean` | `true` |
-| `date` | `string` (ISO 8601) | `"2025-01-15"` or `"2025-01-15T09:00:00Z"` |
-| `select` / `radio` | `string` | `"blog"` |
+| `date` | `string` or `{ from, to }` | `"2025-01-15"` |
+| `select` / `radio` | `string` (master value) | `"blog"` |
 | `multiselect` | `string[]` | `["cloudflare", "cms"]` |
 | `image` / `file` | `string` (asset UUID) | `"550e8400-..."` |
+| `image_gallery` | UUID string or `{ assetId, caption? }[]` | `[{ "assetId": "…" }]` |
 | `video_embed` | `string` (URL) | `"https://youtube.com/..."` |
-| `entry_ref` | `string` (entry slug) | `"author-jane"` |
+| `entry_ref` | `string` (referenced entry UUID) | `"7c9e6679-..."` |
 
-`image` and `file` UUIDs resolve to full URLs via `mediaUrls[fieldKey]`.
+`image` and `file` UUIDs resolve to full URLs via `mediaUrls[fieldKey]`. When fetched via `/public/p/{projectId}/v1`, `mediaUrls` use the same prefix.

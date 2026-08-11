@@ -21,13 +21,13 @@ features:
     details: Approval workflow (draft → review → publish), scheduled publishing, revision diffs, and assignee support.
   - icon: 🔧
     title: Form Builder
-    details: Design your content model with 11 field types — text, image, rich text, entry references, and more.
+    details: Design your content model with 15 field types — text, URL, image gallery, rich text, entry references, and more.
   - icon: 🌐
     title: Public API (No Auth Required)
     details: Fetch entries, media, and more without authentication. Works directly from any frontend or Jamstack site.
   - icon: 🤖
     title: AI Agent Ready
-    details: llms.txt per site plus MCP (@luno-cms/mcp) and scoped agent API keys (content / schema) for Claude and Cursor.
+    details: llms.txt per site plus MCP (@luno-cms/mcp) and scoped agent API keys (full / content / schema) for Claude and Cursor.
   - icon: 🪝
     title: Webhooks
     details: Deliver entry publish/update/delete events with HMAC-SHA256 signatures for real-time external integrations.

@@ -35,10 +35,10 @@ description: 公開 API キーとウィジェット ID を指定するだけ。H
 ```html
 <div id="luno-list"
      data-api-key="luno_pub_xxxxxxxx"
-     data-api-url="https://your-api.luno.app"
+     data-api-url="https://api.luno.rest"
      data-widget-id="luno-abcdef12">
 </div>
-<script src="https://your-api.luno.app/public/v1/embed/luno-abcdef12.js?api_key=luno_pub_xxxxxxxx" async></script>
+<script src="https://api.luno.rest/public/v1/embed/luno-abcdef12.js?api_key=luno_pub_xxxxxxxx" async></script>
 ```
 
 | 属性 / URL | 意味 |
@@ -57,7 +57,7 @@ Cloudflare Pages / GitHub Pages / 既存サーバに HTML を置くだけで動�
 [starter-widget](https://github.com/luno-cms/starter-widget) を clone し、HTML 内のプレースホルダ（`YOUR_PUBLIC_API_KEY` 等）を置換してデプロイするのが最速です。
 
 ::: tip YOUR_API_DOMAIN の置換
-テンプレートでは `https://YOUR_API_DOMAIN` と書かれています。ホスト名だけ（例: `api.luno.app`）に置換してください。`https://` を二重に付けないでください。
+テンプレートでは `https://YOUR_API_DOMAIN` と書かれています。ホスト名だけ（例: `api.luno.rest`）に置換してください。`https://` を二重に付けないでください。
 :::
 
 ## ウィジェット種別
@@ -73,7 +73,7 @@ Cloudflare Pages / GitHub Pages / 既存サーバに HTML を置くだけで動�
 ```html
 <div data-luno-top
      data-api-key="luno_pub_…"
-     data-api-url="https://your-api.luno.app"
+     data-api-url="https://api.luno.rest"
      data-widget-id="luno-abcdef12"
      data-count="5"
      data-heading="最新記事"
@@ -89,7 +89,7 @@ Cloudflare Pages / GitHub Pages / 既存サーバに HTML を置くだけで動�
 ```html
 <div id="luno-article"
      data-api-key="luno_pub_…"
-     data-api-url="https://your-api.luno.app"
+     data-api-url="https://api.luno.rest"
      data-widget-id="luno-abcdef12"
      data-show-back="true"
      data-back-label="← 一覧へ">
@@ -103,7 +103,7 @@ Cloudflare Pages / GitHub Pages / 既存サーバに HTML を置くだけで動�
 ```html
 <div data-luno-filter
      data-api-key="luno_pub_…"
-     data-api-url="https://your-api.luno.app"
+     data-api-url="https://api.luno.rest"
      data-type="search"
      data-target="luno-abcdef12">
 </div>

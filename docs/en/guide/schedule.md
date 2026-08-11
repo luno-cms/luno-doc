@@ -15,18 +15,18 @@ draft
 pending_review
   ↓ approve (with a publish date)
 scheduled  ←  publish_at = 2025-02-01T00:00:00Z (UTC)
-  ↓  Cron job runs every minute
+  ↓  Cron job runs about every 5 minutes
 published  ←  once publish_at has passed
 ```
 
 1. An editor submits the entry for review as usual
 2. A `tenant_admin` approves and sets a **Publish Date**
 3. The revision status becomes `scheduled`
-4. A Cron job runs **every minute** and moves any revision past its `publish_at` to `published`
+4. A Cron job runs **about every 5 minutes** and moves any revision past its `publish_at` to `published`
 5. The entry becomes available via the public API
 
 ::: tip Cron precision
-The Cron job runs every minute, so the actual publish time may lag by up to **60 seconds**. If you need second-level precision, scheduled publishing is not the right tool.
+The Cron job runs about every 5 minutes, so the actual publish time may lag by up to **about 5 minutes**. If you need second-level precision, scheduled publishing is not the right tool.
 :::
 
 ## Setting Up a Schedule
@@ -102,12 +102,12 @@ When a `scheduled` revision auto-publishes, luno fires an `entry.published` Webh
 ```json
 {
   "event": "entry.published",
-  "tenant_id": "project-uuid",
+  "project_id": "project-uuid",
   "form_set_slug": "blog",
   "entry_slug": "my-scheduled-post",
   "entry_id": "entry-uuid",
-  "published_at": "2025-02-01T00:00:00Z",
-  "data": { ... }
+  "revision_id": "revision-uuid",
+  "timestamp": "2025-02-01T00:00:00.000Z"
 }
 ```
 
@@ -128,7 +128,7 @@ In a self-hosted environment, add the following Cron trigger to `apps/api/wrangl
 
 ```toml
 [triggers]
-crons = ["* * * * *"]  # Run every minute
+crons = ["*/5 * * * *"]  # Scheduled publish (combined with other crons in production)
 ```
 
 This registers a Cloudflare Workers Cron Trigger. The scheduled-to-published promotion runs as part of the Worker's `scheduled` handler.

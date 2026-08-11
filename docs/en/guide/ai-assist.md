@@ -156,7 +156,7 @@ Purpose: Technical blog articles for a developer audience.
 Fields:
 - title: SEO-optimized article headline (60 chars recommended)
 - body: Full article body as HTML (tiptap editor). NOT Markdown.
-- author: entry_ref to the "authors" form set — use the author's entry slug.
+- author: entry_ref to the "authors" form set — use the author's entry UUID.
 - tags: Technology slugs (e.g., cloudflare, typescript, cms). Comma-separated.
 - og_image: Social sharing image (1200×630 px). Provide as asset UUID.
 - meta_description: 155 chars max. Used for search snippets.

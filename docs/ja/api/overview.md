@@ -50,7 +50,7 @@ curl https://your-domain.com/admin/v1/form-sets \
 | **認証** | エージェント API キー（`sk-agent-` プレフィックス） |
 | **用途** | AI エージェント・自動化からのコンテンツ / スキーマ操作 |
 | **キーの発行** | 管理画面「設定」→「エージェント API キー」（`/settings/api-keys`） |
-| **スコープ** | `content`（記事運用）/ `schema`（Form Set・Contact セットアップ） |
+| **スコープ** | `full`（推奨・記事＋スキーマ）/ `content`（記事のみ）/ `schema`（`full` の互換エイリアス） |
 
 ```bash
 curl https://api.luno.rest/admin/v1/form-sets \
@@ -84,10 +84,10 @@ curl -X POST https://your-domain.com/admin/v1/auth/login/password \
 キーは管理画面から発行します：
 
 1. 「設定」→「エージェント API キー」→「新規作成」
-2. 名前とスコープ（`content` または `schema`）を選択
+2. 名前とスコープ（通常は **`full`**。記事だけに絞るなら **`content`**）を選択
 3. 表示されたキー（`sk-agent-…`）を安全な場所に保存
 
-初期セットアップのみ **`schema`** キーを使い、完了後は revoke して日常運用は **`content`** キーを使うことを推奨します。エージェントキーでは Form Set / Contact Form の削除はできません。
+普段は **`full`** を推奨します。権限を記事運用だけに絞るときは **`content`**。`schema` は `full` と同権限の互換エイリアスです。エージェントキーでは Form Set / Contact Form の削除はできません。
 
 ::: warning キーの取り扱い
 API キーは発行時に一度だけ表示されます。GitHub リポジトリやフロントエンドのコードに直接埋め込まないでください。サーバーサイドの環境変数として管理してください。

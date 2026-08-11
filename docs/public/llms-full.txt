@@ -3,7 +3,7 @@
 > Extended Public + Agent API reference. **Start with the curated index:** https://doc.luno.rest/llms.txt  
 > Product overview & pricing: https://luno.rest/llms.txt
 
-luno is a headless CMS on Cloudflare Workers + PostgreSQL (Hyperdrive). Public API base: `https://{your-domain}/public/v1` (no auth). Agent API: `https://api.luno.rest/admin/v1` with `Authorization: Bearer sk-agent-…`.
+luno is a headless CMS on Cloudflare Workers + PostgreSQL (Hyperdrive). Public API base (recommended): `https://api.luno.rest/public/p/{projectId}/v1`; host-based: `https://{your-domain}/public/v1` (no auth by default). Agent API: `https://api.luno.rest/admin/v1` with `Authorization: Bearer sk-agent-…`.
 
 ---
 
@@ -246,9 +246,9 @@ Short AI-readable API summary (llms.txt spec). Suitable for system prompts.
 
 ---
 
-### GET /llms-full.txt
+### docs site: /llms-full.txt
 
-This document — full API specification for AI agents.
+This file is served by **doc.luno.rest** (static). The product Public API exposes `GET /llms.txt` only — there is no `/llms-full.txt` on the API host.
 
 ---
 
@@ -258,19 +258,20 @@ All field values appear inside the `data` object.
 
 | Field Type | Value Type | Notes |
 |---|---|---|
-| `text` | string | Single-line. Localizable when `localizable: true`. |
+| `text` / `url` | string | Single-line / URL. `text` localizable when `localizable: true`. |
 | `textarea` | string | Multi-line plain text. Localizable when `localizable: true`. |
-| `tiptap` | string (HTML) | Rich text. Localizable when `localizable: true`. |
+| `tiptap` | Tiptap doc (JSON) or string | Rich text. Localizable when `localizable: true`. |
 | `number` | number | Integer or decimal. |
 | `boolean` | boolean | `true` or `false`. |
-| `date` | string | ISO 8601 date `"2025-01-15"` or datetime `"2025-01-15T09:00:00Z"`. |
-| `select` | string | Single selected value. |
-| `radio` | string | Single selected value. |
+| `date` | string or `{ from, to }` | ISO 8601 date `"2025-01-15"` or range object. |
+| `select` | string | Master **value** (not record UUID). |
+| `radio` | string | Master **value**. |
 | `multiselect` | string[] | Array of selected values. |
 | `image` | string | Asset UUID. Resolve to URL via `mediaUrls[key]`. |
+| `image_gallery` | string or `{ assetId, caption? }[]` | Use `assetId` (not `id`). |
 | `file` | string | Asset UUID. Resolve to URL via `mediaUrls[key]`. |
 | `video_embed` | string | Embed URL (YouTube, Vimeo, etc.). |
-| `entry_ref` | string | Slug of the referenced entry in the linked form set. |
+| `entry_ref` | string | UUID of the referenced entry in the linked form set. |
 
 ### Localized Field Values
 
@@ -375,19 +376,22 @@ Event types:
 - `entry.published` — entry goes live (immediate or scheduled)
 - `entry.updated` — published entry's content is replaced
 - `entry.deleted` — entry is removed
+- `master.published` — master entity is published
 
-Payload:
+Entry payload (no field `data`):
 ```json
 {
   "event": "entry.published",
-  "tenant_id": "uuid",
+  "project_id": "uuid",
   "form_set_slug": "string",
   "entry_slug": "string",
   "entry_id": "uuid",
-  "published_at": "ISO8601",
-  "data": { "<field_key>": "<value>" }
+  "revision_id": "uuid",
+  "timestamp": "ISO8601"
 }
 ```
+
+Failed deliveries are logged; redeliver manually from admin (no automatic retry schedule).
 
 Signature header: `X-Luno-Signature: sha256=<HMAC-SHA256 hex digest of raw body>`
 
@@ -438,7 +442,7 @@ Schema scope additionally:
 - **Media**: Cloudflare R2 (S3-compatible object storage)
 - **Admin panel**: Vite 6 + React + Mantine v8 (Cloudflare Pages)
 - **Image variants**: Cloudflare Workers Queue (async processing)
-- **Scheduled publishing**: Cloudflare Workers Cron Triggers (every minute)
+- **Scheduled publishing**: Cloudflare Workers Cron Triggers (~every 5 minutes)
 
 ---
 

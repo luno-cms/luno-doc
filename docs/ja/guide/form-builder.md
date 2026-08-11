@@ -39,18 +39,20 @@ slug は公開 API の URL に使われます（例: `/public/v1/form-sets/blog/
 | タイプ | 管理画面での表示 | ローカライズ | API の値の型 |
 |---|---|:---:|---|
 | `text` | 1 行テキスト | ✓ | `string` |
+| `url` | URL | — | `string` |
 | `textarea` | 複数行テキスト | ✓ | `string` |
-| `tiptap` | リッチテキスト（WYSIWYG） | ✓ | `string`（HTML） |
+| `tiptap` | リッチテキスト（WYSIWYG） | ✓ | Tiptap doc(JSON) または `string` |
 | `number` | 数値 | — | `number` |
 | `boolean` | 真偽値（チェックボックス） | — | `boolean` |
-| `date` | 日付・日時 | — | `string`（ISO 8601） |
-| `select` | 単一選択（ドロップダウン） | — | `string` |
-| `radio` | 単一選択（ラジオボタン） | — | `string` |
+| `date` | 日付・日時 | — | `string`（ISO 8601）または `{ from, to }` |
+| `select` | 単一選択（ドロップダウン） | — | `string`（マスタ value） |
+| `radio` | 単一選択（ラジオボタン） | — | `string`（マスタ value） |
 | `multiselect` | 複数選択 | — | `string[]` |
 | `image` | 画像アップロード | — | `string`（asset UUID） |
+| `image_gallery` | 画像ギャラリー | — | UUID 文字列、または `{ assetId, caption? }[]` |
 | `file` | ファイルアップロード | — | `string`（asset UUID） |
 | `video_embed` | 動画埋め込み URL | — | `string`（URL） |
-| `entry_ref` | 別エントリへの参照 | — | `string`（entry slug） |
+| `entry_ref` | 別エントリへの参照 | — | `string`（参照エントリ UUID） |
 
 ## フィールドタイプ詳細
 
@@ -305,10 +307,10 @@ YouTube・Vimeo などの埋め込み URL を格納します。動画ファイ�
 
 API レスポンス例:
 ```json
-{ "data": { "author": "yamada-taro" } }
+{ "data": { "author": "7c9e6679-7425-40de-944b-e07fc1f90ae7" } }
 ```
 
-同一プロジェクト内の別フォームセットのエントリを参照します。`data[key]` は参照先エントリの slug です。著者プロフィール・関連記事・製品カテゴリなどのリレーション設定に使用します。
+同一プロジェクト内の別フォームセットのエントリを参照します。`data[key]` は参照先エントリの **UUID**（slug ではない）です。著者プロフィール・関連記事・製品カテゴリなどのリレーション設定に使用します。
 
 ::: warning Business プラン制限
 `entry_ref` フィールドは Business プラン以上で利用可能です。

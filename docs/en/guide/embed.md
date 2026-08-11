@@ -35,10 +35,10 @@ The widget editor **Embed tags** panel shows a ready-to-copy snippet for your pr
 ```html
 <div id="luno-list"
      data-api-key="luno_pub_xxxxxxxx"
-     data-api-url="https://your-api.luno.app"
+     data-api-url="https://api.luno.rest"
      data-widget-id="luno-abcdef12">
 </div>
-<script src="https://your-api.luno.app/public/v1/embed/luno-abcdef12.js?api_key=luno_pub_xxxxxxxx" async></script>
+<script src="https://api.luno.rest/public/v1/embed/luno-abcdef12.js?api_key=luno_pub_xxxxxxxx" async></script>
 ```
 
 | Attribute / URL | Meaning |
@@ -57,7 +57,7 @@ Host on Cloudflare Pages, GitHub Pages, or any web server.
 Clone [starter-widget](https://github.com/luno-cms/starter-widget), replace placeholders (`YOUR_PUBLIC_API_KEY`, etc.), and deploy.
 
 ::: tip Replacing YOUR_API_DOMAIN
-Templates use `https://YOUR_API_DOMAIN`. Replace with the **hostname only** (e.g. `api.luno.app`). Do not include `https://` twice.
+Templates use `https://YOUR_API_DOMAIN`. Replace with the **hostname only** (e.g. `api.luno.rest`). Do not include `https://` twice.
 :::
 
 ## Widget types
@@ -73,7 +73,7 @@ Compact list for home or sidebar.
 ```html
 <div data-luno-top
      data-api-key="luno_pub_…"
-     data-api-url="https://your-api.luno.app"
+     data-api-url="https://api.luno.rest"
      data-widget-id="luno-abcdef12"
      data-count="5"
      data-heading="Latest"
@@ -89,7 +89,7 @@ Reads slug from URL, e.g. `article.html?entry=my-post`.
 ```html
 <div id="luno-article"
      data-api-key="luno_pub_…"
-     data-api-url="https://your-api.luno.app"
+     data-api-url="https://api.luno.rest"
      data-widget-id="luno-abcdef12"
      data-show-back="true"
      data-back-label="← Back to list">

@@ -269,7 +269,8 @@ export async function submitContact(formData: FormData) {
 ```toml
 [vars]
 RESEND_API_KEY = "re_your_resend_api_key"
-APP_BASE_URL   = "https://admin.your-domain.com"
+APP_BASE_URL   = "https://console.luno.rest"
+MAIL_FROM      = "LUNO <noreply@luno.rest>"
 ```
 
 ::: tip Resend について
@@ -284,6 +285,35 @@ Resend は開発者向けのメール送信 API サービスです。無料プ�
 - 送信者の入力値（全フィールド）
 - 送信日時
 - 管理画面への直接リンク（送信データの確認ページ）
+
+## 自動返信（サンクスメール）
+
+フォーム設定で **自動返信** を有効にすると、送信者のメールアドレス宛に HTML サンクスメールを送れます。
+
+| 設定 | 説明 |
+|---|---|
+| `autoreply_enabled` | 自動返信の ON/OFF |
+| `autoreply_to_field` | 送信者メールが入るフィールド key（email 型） |
+| `autoreply_subject` / `autoreply_body` | 件名・本文（多言語可） |
+| `email_signature` | 署名（任意） |
+
+## 外部通知・連携
+
+管理画面のフォーム設定から、受信時に次のチャネルへ通知・連携できます（プラン・設定により利用可否が異なります）。
+
+- **チャット通知:** Slack / Microsoft Teams / Discord / Chatwork / LINE Notify
+- **CRM 連携:** HubSpot / kintone
+- **スパム対策:** Honeypot、ホスト型公開時は Cloudflare Turnstile
+
+## ホスト型公開（contact.luno.rest）
+
+サイト設定で **contact.luno.rest で公開** を有効にすると、LUNO がホストするお問い合わせページ / iframe 埋め込みを使えます。
+
+- 公開 URL 例: `https://contact.luno.rest/{projectSlug}/{formSlug}`
+- 埋め込み用の widget / iframe スニペットは管理画面の公開パネルからコピーできます
+- ホスト型 iframe では Turnstile が有効になります
+
+API だけで自前フォームを持つ場合は、従来どおり `POST /public/v1/contact-forms/{slug}/submit`（または `/public/p/{projectId}/v1/...`）を使います。
 
 ## 送信データの確認
 

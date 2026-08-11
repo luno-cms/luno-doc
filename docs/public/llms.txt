@@ -55,9 +55,11 @@ Issue keys in the admin console: **Settings → Agent API Keys** (`https://conso
 
 ### MCP tools
 
-**Content (`content` / `full`):** `get_tenant_schema`, `list_form_sets`, `get_form_set_schema`, `list_entries`, `get_entry`, `create_entry`, `update_entry`, `list_revisions`, `save_revision`, `publish_revision`, `submit_entry_for_review`, `list_media`, `upload_media`
+**Content (`content` / `full`):** `get_tenant_schema`, `list_form_sets`, `get_form_set_schema`, `get_public_api_info`, `list_entries`, `get_entry`, `create_entry`, `update_entry`, `list_revisions`, `save_revision`, `publish_revision`, `submit_entry_for_review`, `list_media`, `upload_media`, `list_master_entities`, `get_master_entity`, `list_master_records`, `create_master_record`, `translate_entry_locales`, `search_admin_help`, `get_admin_help_article`, `ask_admin_help`, `get_project_content_locales`, `get_login_branding` (+ login appearance / IP allowlist tools; some need user JWT or Business+)
 
-**Schema (`full` / `schema`):** `apply_form_blueprint`, `apply_builtin_form_template`, `apply_master_blueprint` (support `dryRun: true`), `create_contact_form`
+**Schema (`full` / `schema`):** `apply_form_blueprint`, `validate_master_blueprint`, `apply_master_blueprint`, `apply_builtin_form_template` (support `dryRun: true`), `create_contact_form`, `update_contact_form`
+
+Canonical tool list: https://www.npmjs.com/package/@luno-cms/mcp
 
 ## API reference
 
@@ -67,7 +69,8 @@ Issue keys in the admin console: **Settings → Agent API Keys** (`https://conso
 - [公開 API (JA)](https://doc.luno.rest/ja/api/public-api): 公開 API 日本語
 - [API 概要 (JA)](https://doc.luno.rest/ja/api/overview): 認証・エラーコード
 
-Public API base: `https://{your-domain}/public/v1`  
+Public API base (recommended): `https://api.luno.rest/public/p/{projectId}/v1`  
+Public API base (host): `https://{your-domain}/public/v1`  
 Agent API base: `https://api.luno.rest/admin/v1` (Bearer `sk-agent-…`)
 
 ## Per-site content discovery

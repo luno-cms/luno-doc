@@ -43,34 +43,41 @@ wrangler hyperdrive create luno-hyperdrive \
   --connection-string "postgres://user:password@your-db-host:5432/luno"
 ```
 
-### ローカル開発（Hyperdrive なし）
+### ローカル開発
+
+ローカルは `[[hyperdrive]]` の `localConnectionString` で Postgres に直結します（アプリは `HYPERDRIVE` バインディングを使います。`DATABASE_URL` vars は使いません）。
 
 ```toml
-[vars]
-# ローカル PostgreSQL への接続文字列
-DATABASE_URL = "postgres://luno:luno@127.0.0.1:5432/luno"
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "00000000-0000-4000-8000-000000000001"
+localConnectionString = "postgres://luno:luno@127.0.0.1:5432/luno"
 ```
 
 ## 認証
 
 | 変数名 | デフォルト | 説明 |
 |---|---|---|
-| `DEV_AUTH_ENABLED` | `false` | `true` にすると `/admin/v1/auth/dev-token` でパスワードなしでトークン取得可（**本番では必ず false**） |
+| `LUNO_PRODUCTION` | `false` | `true` のとき dev-token 等を無効化（**本番は必ず true**） |
+| `DEV_AUTH_ENABLED` | （ローカル `.dev.vars`） | `true` にすると `/admin/v1/auth/dev-token` でパスワードなしでトークン取得可（**本番では設定しない / false**） |
 | `REGISTRATION_ENABLED` | `false` | `true` にするとユーザーの自己登録が可能 |
 | `GOOGLE_OAUTH_ENABLED` | `false` | `true` にすると Google OAuth ログインを有効化 |
+| `ADMIN_CORS_ORIGIN` | — | 管理 SPA のオリジン（例: `https://console.luno.rest`） |
+| `AUTH_SUCCESS_REDIRECT` | — | ログイン成功後のリダイレクト先 |
 
 ::: danger 本番環境の必須設定
-`DEV_AUTH_ENABLED=false` を忘れると、誰でもパスワードなしでトークンを取得できます。**本番環境では絶対に `false` を設定**してください。
+`LUNO_PRODUCTION=true` を設定し、`DEV_AUTH_ENABLED` を有効にしないでください。dev-token が開いたままだと誰でもトークンを取得できます。
 :::
 
 ### Google OAuth の追加設定
 
-`GOOGLE_OAUTH_ENABLED=true` の場合、以下も必須です：
+`GOOGLE_OAUTH_ENABLED=true` の場合、以下も必須です（**シークレット**として登録。vars に平文で置かない）:
 
 | 変数名 | 説明 |
 |---|---|
-| `GOOGLE_OAUTH_CLIENT_ID` | Google Cloud Console の OAuth クライアント ID |
-| `GOOGLE_OAUTH_CLIENT_SECRET` | Google OAuth クライアントシークレット |
+| `GOOGLE_CLIENT_ID` | Google Cloud Console の OAuth クライアント ID |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth クライアントシークレット |
+| `GOOGLE_OAUTH_REDIRECT_URI` | コールバック URL（Google コンソールと完全一致） |
 
 **Google Cloud Console での設定手順：**
 
@@ -85,7 +92,11 @@ DATABASE_URL = "postgres://luno:luno@127.0.0.1:5432/luno"
 | 変数名 | 説明 | 例 |
 |---|---|---|
 | `RESEND_API_KEY` | Resend の API キー。未設定の場合はコンソールにログ出力 | `re_123abc456def` |
-| `APP_BASE_URL` | メール内リンク・コールバック URL のベース | `https://admin.your-domain.com` |
+| `MAIL_FROM` | 送信元（検証済みドメイン） | `LUNO <noreply@luno.rest>` |
+| `APP_BASE_URL` | メール内リンク・管理 SPA のベース | `https://console.luno.rest` |
+| `PUB_ORIGIN` | pub.luno.rest 等の公開サイトオリジン | `https://pub.luno.rest` |
+| `CONTACT_ORIGIN` | contact.luno.rest のオリジン | `https://contact.luno.rest` |
+| `TURNSTILE_SITE_KEY` | Turnstile サイトキー（シークレットは `TURNSTILE_SECRET_KEY`） | |
 
 ```bash
 # Resend のシークレットとして登録
@@ -148,30 +159,38 @@ Stripe を使った課金機能を有効化する場合：
 
 | 変数名 | 説明 |
 |---|---|
-| `BILLING_ENABLED` | `true` にすると Stripe 課金機能を有効化 |
-| `STRIPE_SECRET_KEY` | Stripe のシークレットキー（`sk_live_...`） |
-| `STRIPE_WEBHOOK_SECRET` | Stripe Webhook のシークレット（`whsec_...`） |
+| `LUNO_BILLING_ENABLED` | `true` にすると Stripe 課金機能を有効化 |
+| `STRIPE_SECRET_KEY` | Stripe のシークレットキー（`sk_live_...`）※ secret |
+| `STRIPE_WEBHOOK_SECRET` | Stripe Webhook のシークレット（`whsec_...`）※ secret |
+| `STRIPE_PRICE_ID_*` | 各プランの Stripe Price ID（`wrangler.toml` の例を参照） |
+| `SECRETS_ENCRYPTION_KEY` | FormSet / SNS 等の暗号化キー（32 byte base64）※ secret |
 
 ## wrangler.toml の完全な設定例
 
 ```toml
 name = "luno-api"
 main = "src/index.ts"
-compatibility_date = "2024-06-01"
+compatibility_date = "2025-03-01"
 compatibility_flags = ["nodejs_compat"]
 
 # ── 基本設定 ──────────────────────────────────────────────────
 [vars]
-DEFAULT_TENANT_ID    = "00000000-0000-0000-0000-000000000001"
+LUNO_PRODUCTION      = "true"
+DEFAULT_TENANT_ID    = "00000000-0000-4000-8000-0000000000a1"
 REGISTRATION_ENABLED = "false"
-DEV_AUTH_ENABLED     = "false"
 GOOGLE_OAUTH_ENABLED = "false"
-APP_BASE_URL         = "https://admin.your-domain.com"
+ADMIN_CORS_ORIGIN    = "https://console.your-domain.com"
+AUTH_SUCCESS_REDIRECT = "https://console.your-domain.com/login"
+APP_BASE_URL         = "https://console.your-domain.com"
+PUB_ORIGIN           = "https://pub.your-domain.com"
+CONTACT_ORIGIN       = "https://contact.your-domain.com"
+LUNO_BILLING_ENABLED = "false"
 
 # ── Hyperdrive（PostgreSQL 接続プール）────────────────────────
 [[hyperdrive]]
 binding = "HYPERDRIVE"
 id      = "your-hyperdrive-id-from-wrangler-hyperdrive-create"
+# 本番は wrangler hyperdrive update <id> --caching-disabled true を推奨
 
 # ── R2（メディアストレージ）───────────────────────────────────
 [[r2_buckets]]
@@ -188,14 +207,14 @@ queue              = "luno-image-variants"
 max_batch_size     = 10
 max_batch_timeout  = 30
 
-# ── Cron Triggers（スケジュール公開）─────────────────────────
+# ── Cron Triggers（課金日次 + 予約公開 5 分間隔 等）───────────
 [triggers]
-crons = ["* * * * *"]  # 毎分実行
+crons = ["0 2 * * *", "*/5 * * * *", "2-59/5 * * * *"]
 
 # ── 本番環境設定（環境名: production）─────────────────────────
 [env.production]
 [env.production.vars]
-APP_BASE_URL = "https://admin.your-domain.com"
+APP_BASE_URL = "https://console.your-domain.com"
 ```
 
 ## シークレットの安全な管理
@@ -206,8 +225,10 @@ APP_BASE_URL = "https://admin.your-domain.com"
 # 各シークレットを登録（プロンプトで値を入力）
 wrangler secret put JWT_SECRET
 wrangler secret put RESEND_API_KEY
-wrangler secret put GOOGLE_OAUTH_CLIENT_SECRET  # Google OAuth 使用時
-wrangler secret put STRIPE_SECRET_KEY           # Stripe 使用時
+wrangler secret put GOOGLE_CLIENT_ID       # Google OAuth 使用時
+wrangler secret put GOOGLE_CLIENT_SECRET   # Google OAuth 使用時
+wrangler secret put STRIPE_SECRET_KEY      # Stripe 使用時
+wrangler secret put SECRETS_ENCRYPTION_KEY
 
 # 登録済みシークレットの確認（値は表示されない）
 wrangler secret list

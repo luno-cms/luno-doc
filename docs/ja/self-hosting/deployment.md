@@ -29,7 +29,7 @@ wrangler login
 ## ステップ 2: リポジトリのセットアップ
 
 ```bash
-git clone https://github.com/your-org/luno.git
+git clone https://github.com/luno-cms/luno.git
 cd luno
 pnpm install
 ```
