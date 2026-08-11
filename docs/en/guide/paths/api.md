@@ -1,6 +1,6 @@
 ---
 title: Path C · API only — Done state
-description: What you have after ~3 minutes with the Public API, plus a checklist.
+description: Start path C · API only. Done state after ~3 minutes, checklist, and do-now steps.
 prev:
   text: Path B · Console
   link: /en/guide/paths/console
@@ -11,7 +11,7 @@ next:
 
 # Path C · API only — Done state
 
-In about 3 minutes you can **read published content without opening the admin console** (assumes a project with published content).
+In about 3 minutes you can **read published content without opening the admin console** (assumes published content exists).
 
 ## What you have
 
@@ -20,35 +20,45 @@ In about 3 minutes you can **read published content without opening the admin co
 | Base URL | Using `/public/p/{projectId}/v1` |
 | Discovery | `llms.txt` shows public form sets / entries |
 | Fetch | List and single entry (`include_snapshot=true`) work |
-| (Optional) key | Sending `X-Luno-Public-Api-Key` if the site requires it |
+| (Optional) key | Sending `X-Luno-Public-Api-Key` if required |
 
 ## Checklist
 
-1. You have a `projectId` (MCP `get_public_api_info` or project settings)
-2. These return 200 with Markdown / JSON
+- [ ] You have a `projectId`
+- [ ] `llms.txt` returns 200
+- [ ] Entry list with `include_snapshot=true` works
+- [ ] (Optional) Wired Embed or your own fetch on the site
+
+## Do this now
+
+1. Get `projectId` (project settings, or MCP `get_public_api_info`)
+2. Read the public index
 
 ::: code-group
 
 ```bash [curl]
 curl "https://api.luno.rest/public/p/{projectId}/v1/llms.txt"
-curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true"
 ```
 
 ```ts [JS]
-const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
-const llms = await fetch(`${BASE}/llms.txt`).then((r) => r.text())
-const list = await fetch(
-  `${BASE}/form-sets/blog/entries?include_snapshot=true`
-).then((r) => r.json())
+const text = await fetch(
+  'https://api.luno.rest/public/p/{projectId}/v1/llms.txt'
+).then((r) => r.text())
 ```
 
 ```bash [MCP]
-# Agent prompt example: "Read llms.txt for this projectId and summarize the public structure"
+# "Read llms.txt for this projectId and summarize the public structure"
 ```
 
 :::
 
-3. (Optional) Wired [Embed](/en/products/embed) or your own fetch on the site
+3. Fetch entries with bodies
+
+```bash
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true"
+```
+
+4. Full endpoints: [Public API · API only](/en/api/public-api#api-only)
 
 ## Next
 

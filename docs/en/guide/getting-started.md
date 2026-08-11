@@ -1,6 +1,6 @@
 ---
-title: Quick Start
-description: Get started with LUNO — pick Agents (MCP), Console, or API only, then publish or fetch your first content.
+title: Quick Start · Agents / Console / API only
+description: LUNO start paths A Agents (MCP), B Console, C API only—done states and step-by-step entry points.
 next:
   text: Content
   link: /en/products/content

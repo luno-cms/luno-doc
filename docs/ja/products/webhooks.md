@@ -1,6 +1,6 @@
 ---
 title: Webhooks
-description: LUNO の Webhook — 公開イベント通知、署名検証、手動再送の概要。
+description: LUNO Webhooks — 公開イベント・HMAC 署名・手動再送。完成形チェックと今すぐやる手順。
 prev:
   text: AI Agents
   link: /ja/products/agents
@@ -11,15 +11,16 @@ next:
 
 # Webhooks
 
-エントリやマスタの公開ライフサイクルを、HTTPS エンドポイントへ **HMAC 署名付き**で通知します。ISR 再生成や外部同期のトリガーに使います。
+エントリやマスタの公開ライフサイクルを、HTTPS エンドポイントへ **HMAC 署名付き**で通知します。ISR や外部同期のトリガーに使います（Standard 以上）。
 
-## できること
+## できていること（完成形）
 
-- イベント: `entry.published` / `entry.updated` / `entry.deleted` / `master.published`
-- ペイロードは ID・slug・`timestamp`（フィールド本文 `data` は含まない）
-- `X-Luno-Signature: sha256=…` による検証
-- 配信履歴と**手動再送**（自動スケジュール再送はなし）
-- Standard プラン以上
+| 項目 | 状態 |
+|---|---|
+| エンドポイント | HTTPS の受信 URL が用意されている |
+| Webhook | Console で作成し、対象イベントを購読している |
+| 検証 | `X-Luno-Signature` を raw body で検証できる |
+| 後続処理 | 公開 API で本文を取り、revalidate 等を実行できる |
 
 ## いつ使うか
 
@@ -27,10 +28,45 @@ next:
 - Slack / 自前ワーカーへの通知
 - 公開と同時に検索インデックスや CDN を更新したいとき
 
-## 次のステップ
+## 確認チェックリスト
+
+- [ ] Console → **設定 → Webhook** で URL とイベントを登録した
+- [ ] シークレットを環境変数に保存した（再表示なし）
+- [ ] テスト公開で配送履歴に成功がある
+- [ ] 署名検証後に公開 API で本文を取れる
+
+## 今すぐやる
+
+1. 受信 URL を用意する（例: `/api/webhook/luno`）
+2. Console で Webhook を作成し、`entry.published` 等を購読する
+3. エントリを公開して配送を確認する
+4. 受信後に本文を取り直す（ペイロードに `data` は無い）
+
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries/my-first-post?include_snapshot=true"
+```
+
+```ts [JS]
+const { project_id, form_set_slug, entry_slug } = payload
+const res = await fetch(
+  `https://api.luno.rest/public/p/${project_id}/v1/form-sets/${form_set_slug}/entries/${entry_slug}?include_snapshot=true`
+)
+```
+
+```bash [MCP]
+# 「entry.published 用の署名検証＋revalidate ハンドラを書いて」
+```
+
+:::
+
+5. 署名検証のコードは [Webhook リファレンス](/ja/api/webhooks) へ
+
+## 次の一手
 
 | 目的 | ページ |
 |---|---|
 | ペイロード・署名・実装例 | [Webhook リファレンス](/ja/api/webhooks) |
-| スケジュール公開との関係 | [スケジュール公開](/ja/guide/schedule) |
-| 公開後に本文を取る | [公開 API](/ja/api/public-api) |
+| スケジュール公開 | [スケジュール公開](/ja/guide/schedule) |
+| 公開読み取り（経路 C） | [API only 完成形](/ja/guide/paths/api) |

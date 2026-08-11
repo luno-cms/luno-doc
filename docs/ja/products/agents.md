@@ -1,6 +1,6 @@
 ---
-title: AI Agents
-description: LUNO の AI エージェント連携 — MCP、エージェント API キー、llms.txt の概要。
+title: AI Agents · 経路 A（MCP）
+description: スタート経路 A · Agents（MCP）。MCP セットアップ、エージェントキー、llms.txt の概要と完成形への導線。
 prev:
   text: Embed & Pub
   link: /ja/products/embed
@@ -31,9 +31,10 @@ Cursor / Claude Code / Codex などのエージェントから、LUNO のコン�
 
 | 目的 | ページ |
 |---|---|
-| セットアップ手順（詳細） | [AI エージェント向けガイド](/ja/api/ai-agents) |
-| 公開コンテンツを読むだけ | [公開 API](/ja/api/public-api) |
-| Console で人間が運用 | [クイックスタート](/ja/guide/getting-started#console) |
+| 完成形・今すぐやる | [経路 A · Agents 完成形](/ja/guide/paths/agents) |
+| セットアップ詳細 | [AI Agents（MCP）ガイド](/ja/api/ai-agents) |
+| 経路 C · API only | [完成形](/ja/guide/paths/api) |
+| 経路 B · Console | [完成形](/ja/guide/paths/console) |
 
 ```bash
 npx @luno-cms/mcp setup

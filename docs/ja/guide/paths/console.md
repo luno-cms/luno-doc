@@ -1,6 +1,6 @@
 ---
 title: 経路 B · Console — 完成形
-description: 管理画面で約 10 分後にできている状態と、確認チェックリスト。
+description: スタート経路 B · Console。約 10 分後の完成形、確認チェックリスト、今すぐやる手順。
 prev:
   text: 経路 A · Agents
   link: /ja/guide/paths/agents
@@ -24,15 +24,23 @@ next:
 
 ## 確認チェックリスト
 
-1. [Console](https://console.luno.rest/login) にログインできる
-2. フォームセットでエントリを作成し、ステータスが **公開済み**
-3. 次のどちらかで JSON が返る
+- [ ] [Console](https://console.luno.rest/login) にログインできる
+- [ ] フォームセットでエントリを作成し、ステータスが **公開済み**
+- [ ] 公開 API で JSON が返る
+- [ ] （任意）スケジュール公開やプレビューを一度試した
+
+## 今すぐやる
+
+1. [Console にログイン](https://console.luno.rest/login)する（招待メールまたは Google）
+2. サイドバーのフォームセットを開き、**新規エントリ** → 保存（下書き）
+3. ステータスを **レビュー申請 → 承認 → 公開**（管理者は即時公開可）にする
+4. 公開 API で確認する
 
 ```bash
 curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/{slug}/entries?include_snapshot=true"
 ```
 
-4. （任意）スケジュール公開やプレビューリンクを一度試した
+5. 画面操作の詳細は [クイックスタート · Console](/ja/guide/getting-started#console) へ
 
 ## 次の一手
 
@@ -40,5 +48,5 @@ curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/{slug}/entries?inc
 |---|---|
 | 手順の詳細 | [クイックスタート · Console](/ja/guide/getting-started#console) |
 | 承認・リビジョン | [コンテンツ管理](/ja/guide/content-management) |
-| エージェントでも触る | [経路 A · Agents](/ja/guide/paths/agents) |
-| フロントだけ繋ぐ | [経路 C · API only](/ja/guide/paths/api) |
+| 経路 A · Agents | [完成形](/ja/guide/paths/agents) |
+| 経路 C · API only | [完成形](/ja/guide/paths/api) |

@@ -1,6 +1,6 @@
 ---
-title: 公開 API リファレンス
-description: luno の公開 API 全エンドポイントの仕様、クエリパラメータ、リクエスト・レスポンス例を詳しく説明します。認証不要。
+title: 公開 API · 経路 C · API only
+description: スタート経路 C · API only。/public/p/{projectId}/v1 の全エンドポイント、クエリ、レスポンス例。
 ---
 
 # 公開 API リファレンス

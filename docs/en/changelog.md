@@ -9,6 +9,9 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
+- Added do-now steps and checklists on path done-state pages
+- Aligned Contact / Webhooks overviews to the done-state pattern
+- Tuned titles/descriptions for path keywords (Agents / Console / API only)
 - Added path done-state pages (Agents / Console / API only)
 - Extended curl / JS / MCP (or HTML) tabs to Contact, Embed, and Webhooks
 - Aligned hub JA/EN copy, card density, and CTAs; start cards link to done states

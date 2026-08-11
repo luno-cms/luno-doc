@@ -1,6 +1,6 @@
 ---
 title: Path B · Console — Done state
-description: What you have after ~10 minutes in the admin console, plus a checklist.
+description: Start path B · Console. Done state after ~10 minutes, checklist, and do-now steps.
 prev:
   text: Path A · Agents
   link: /en/guide/paths/agents
@@ -18,21 +18,29 @@ In about 10 minutes you have **one published entry in Console and the same conte
 | Item | State |
 |---|---|
 | Sign-in | Logged into Console |
-| Entry | At least one **Published** entry (draft → review → publish) |
+| Entry | At least one **Published** entry |
 | Delivery | List / single entry work on the Public API |
 | Mental model | Sidebar roles (form sets, media, settings) are clear |
 
 ## Checklist
 
-1. You can sign in at [Console](https://console.luno.rest/login)
-2. An entry in a form set is **Published**
-3. One of these returns JSON
+- [ ] You can sign in at [Console](https://console.luno.rest/login)
+- [ ] An entry is **Published**
+- [ ] Public API returns JSON for that form set
+- [ ] (Optional) Tried scheduled publish or a preview link
+
+## Do this now
+
+1. [Sign in to Console](https://console.luno.rest/login) (invite email or Google)
+2. Open a form set → **New entry** → Save (draft)
+3. Move status **Submit for review → Approve → Publish** (admins can publish immediately)
+4. Verify via Public API
 
 ```bash
 curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/{slug}/entries?include_snapshot=true"
 ```
 
-4. (Optional) Tried scheduled publish or a preview link once
+5. For UI walkthrough details, see [Quick start · Console](/en/guide/getting-started#console)
 
 ## Next
 
@@ -40,5 +48,5 @@ curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/{slug}/entries?inc
 |---|---|
 | Step-by-step | [Quick start · Console](/en/guide/getting-started#console) |
 | Approvals & revisions | [Content management](/en/guide/content-management) |
-| Operate with agents | [Path A · Agents](/en/guide/paths/agents) |
-| Frontend only | [Path C · API only](/en/guide/paths/api) |
+| Path A · Agents | [Done state](/en/guide/paths/agents) |
+| Path C · API only | [Done state](/en/guide/paths/api) |

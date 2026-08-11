@@ -1,6 +1,6 @@
 ---
-title: AI Agents
-description: Overview of LUNO AI agent integration — MCP, agent API keys, and llms.txt.
+title: AI Agents · Path A (MCP)
+description: Start path A · Agents (MCP). Overview of MCP setup, agent keys, llms.txt, and link to the done state.
 prev:
   text: Embed & Pub
   link: /en/products/embed
@@ -31,9 +31,10 @@ Operate LUNO content and schema from agents such as Cursor, Claude Code, and Cod
 
 | Goal | Page |
 |---|---|
-| Full setup guide | [AI agents guide](/en/api/ai-agents) |
-| Read public content only | [Public API](/en/api/public-api) |
-| Operate in Console | [Quick start](/en/guide/getting-started#console) |
+| Done state · do now | [Path A · Agents done state](/en/guide/paths/agents) |
+| Full setup | [AI Agents (MCP) guide](/en/api/ai-agents) |
+| Path C · API only | [Done state](/en/guide/paths/api) |
+| Path B · Console | [Done state](/en/guide/paths/console) |
 
 ```bash
 npx @luno-cms/mcp setup

@@ -1,6 +1,6 @@
 ---
-title: AI エージェント向けガイド
-description: AI エージェントが luno を利用するための完全ガイド。MCP サーバー、エージェント API キーのスコープ、llms.txt、コンテンツ操作の例を説明します。
+title: AI Agents（MCP）ガイド · 経路 A
+description: スタート経路 A · Agents（MCP）。セットアップ、エージェント API キー（full/content/schema）、llms.txt、コンテンツ操作。
 ---
 
 # AI エージェント向けガイド

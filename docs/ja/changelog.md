@@ -9,6 +9,9 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ## 2026-08-11
 
+- 完成形ページに「今すぐやる」手順とチェックリストを追加
+- Contact / Webhooks 概要を完成形同型（できていること・今すぐやる・次の一手）に揃えた
+- 検索向けに title / description を経路名（Agents / Console / API only）で整備
 - 経路別の完成形ページ（Agents / Console / API only）を追加
 - Contact / Embed / Webhooks にも curl・JS・MCP（または HTML）タブを追加
 - 製品ハブの日英文言・カード密度・CTA を揃え、スタートを完成形へ誘導

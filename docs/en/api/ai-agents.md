@@ -1,6 +1,6 @@
 ---
-title: AI Agents Guide
-description: Complete guide for AI agents using luno — MCP server setup for Claude and Cursor, agent API key scopes, llms.txt, content operations, and best practices.
+title: AI Agents (MCP) guide · Path A
+description: Start path A · Agents (MCP). Setup, agent API key scopes (full/content/schema), llms.txt, and content operations.
 ---
 
 # AI Agents Guide

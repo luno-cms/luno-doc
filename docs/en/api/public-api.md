@@ -1,6 +1,6 @@
 ---
-title: Public API Reference
-description: Complete specification of all luno Public API endpoints with request examples, query parameters, and full response schemas.
+title: Public API · Path C · API only
+description: Start path C · API only. Full /public/p/{projectId}/v1 endpoints, query params, and response examples.
 ---
 
 # Public API Reference
