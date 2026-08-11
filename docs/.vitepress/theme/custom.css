@@ -142,9 +142,5 @@
   padding-top: 24px;
 }
 
-/* Ensure page layout (product hub) also clears the fixed sidebar */
-@media (min-width: 960px) {
-  .VPContent.has-sidebar {
-    padding-left: var(--vp-sidebar-width) !important;
-  }
-}
+/* Do not override VPContent.has-sidebar padding — VitePress aligns
+   sidebar + content with shared layout math (≥1440px). */

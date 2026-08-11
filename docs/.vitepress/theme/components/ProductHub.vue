@@ -204,6 +204,7 @@ const copy = {
         body: "Claude Code に LUNO を接続",
         href: "/ja/products/agents",
         logo: "/connect/claude-code.svg",
+        logoDark: "/connect/claude-code.svg",
       },
       {
         key: "claude",
@@ -211,14 +212,15 @@ const copy = {
         body: "Claude に LUNO を接続",
         href: "/ja/products/agents",
         logo: "/connect/claude.svg",
+        logoDark: "/connect/claude.svg",
       },
       {
         key: "codex",
         title: "Codex",
         body: "Codex に LUNO を接続",
         href: "/ja/products/agents",
-        logo: "/connect/codex.svg",
-        logoDark: "/connect/codex-white.svg",
+        logo: "/connect/codex-color.png",
+        logoDark: "/connect/codex-color.png",
       },
       {
         key: "copilot",
@@ -226,6 +228,7 @@ const copy = {
         body: "Copilot に LUNO を接続",
         href: "/ja/products/agents",
         logo: "/connect/copilot.svg",
+        logoDark: "/connect/copilot-white.svg",
       },
       {
         key: "github",
@@ -426,6 +429,7 @@ const copy = {
         body: "Connect LUNO to Claude Code",
         href: "/en/products/agents",
         logo: "/connect/claude-code.svg",
+        logoDark: "/connect/claude-code.svg",
       },
       {
         key: "claude",
@@ -433,14 +437,15 @@ const copy = {
         body: "Connect LUNO to Claude",
         href: "/en/products/agents",
         logo: "/connect/claude.svg",
+        logoDark: "/connect/claude.svg",
       },
       {
         key: "codex",
         title: "Codex",
         body: "Connect LUNO to Codex",
         href: "/en/products/agents",
-        logo: "/connect/codex.svg",
-        logoDark: "/connect/codex-white.svg",
+        logo: "/connect/codex-color.png",
+        logoDark: "/connect/codex-color.png",
       },
       {
         key: "copilot",
@@ -448,6 +453,7 @@ const copy = {
         body: "Connect LUNO to Copilot",
         href: "/en/products/agents",
         logo: "/connect/copilot.svg",
+        logoDark: "/connect/copilot-white.svg",
       },
       {
         key: "github",
