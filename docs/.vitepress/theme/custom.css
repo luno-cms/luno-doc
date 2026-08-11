@@ -50,13 +50,39 @@
 }
 
 .VPNav {
-  border-bottom: 1px solid var(--vp-c-divider);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
+/* Separator below the nav only — full-height border-right cuts through the header */
 .VPSidebar {
-  border-right: 1px solid var(--vp-c-divider);
+  /* keep scroll; hide scrollbar chrome */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.VPSidebar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .VPSidebar::after {
+    content: "";
+    position: absolute;
+    top: var(--vp-nav-height);
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--vp-c-divider);
+    pointer-events: none;
+  }
+}
+
+/* No trailing hairline after appearance when social links are absent */
+.VPNavBar .social-links:not(:has(a)) {
+  display: none !important;
 }
 
 .VPSidebarItem.level-0 > .item > .text {
