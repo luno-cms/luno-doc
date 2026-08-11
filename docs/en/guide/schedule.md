@@ -1,11 +1,23 @@
 ---
 title: Scheduled Publishing
 description: How scheduled publishing works in luno HCMS — setting a publish date, the Cron mechanism, canceling schedules, bulk scheduling, and Webhook integration.
+prev:
+  text: Media
+  link: /en/guide/media
+next:
+  text: SEO & sitemaps
+  link: /en/guide/seo
 ---
 
 # Scheduled Publishing
 
 Scheduled publishing lets you approve content in advance and have it go live automatically at a specific date and time. Use it for press releases, campaign pages, time-sensitive announcements, or any content that needs to be published at a precise moment.
+
+::: tip Do this now (3 lines)
+1. Submit for review, then approve with a **publish date**  
+2. Confirm status becomes `scheduled`  
+3. After the time (up to ~5 min), confirm `published` and Public API  
+:::
 
 ## How It Works
 

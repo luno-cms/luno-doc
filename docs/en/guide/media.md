@@ -1,11 +1,23 @@
 ---
 title: Media Management
 description: How to upload, serve, and use media files in luno HCMS — Cloudflare R2 storage, CDN delivery, image variants, and the mediaUrls response field.
+prev:
+  text: Form builder
+  link: /en/guide/form-builder
+next:
+  text: Scheduled publishing
+  link: /en/guide/schedule
 ---
 
 # Media Management
 
 luno stores all media files in **Cloudflare R2** and serves them through the public API with aggressive CDN caching. Images and files are accessible without authentication via a stable, cacheable URL.
+
+::: tip Do this now (3 lines)
+1. Upload one image under Console **Media**  
+2. Attach it to an entry image field and **Publish**  
+3. Confirm `mediaUrls` on the Public API returns a full URL  
+:::
 
 ## Uploading Files
 

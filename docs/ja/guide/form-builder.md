@@ -5,7 +5,7 @@ prev:
   text: コンテンツ管理
   link: /ja/guide/content-management
 next:
-  text: メディア
+  text: メディア管理
   link: /ja/guide/media
 ---
 

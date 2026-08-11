@@ -1,11 +1,23 @@
 ---
 title: メディア管理
 description: luno のメディアアップロード・Cloudflare R2 ストレージ・画像バリアント生成・CDN 配信の仕組みと使い方を説明します。
+prev:
+  text: フォームビルダー
+  link: /ja/guide/form-builder
+next:
+  text: スケジュール公開
+  link: /ja/guide/schedule
 ---
 
 # メディア管理
 
 luno のメディアは **Cloudflare R2** に保存され、公開 API 経由で CDN キャッシュを効かせながら配信されます。認証なしで高速に画像・ファイルを配信できます。
+
+::: tip 今すぐやる（3 行）
+1. Console の **メディア** で画像を 1 枚アップロードする  
+2. エントリの image フィールドに紐付けて **公開** する  
+3. 公開 API の `mediaUrls` に完全 URL が出ることを確認する  
+:::
 
 ## アップロード
 

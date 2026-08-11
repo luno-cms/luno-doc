@@ -9,6 +9,9 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
+- Added 3-line do-now tips on Media, SEO, and Scheduled publishing
+- Fixed hub mobile horizontal overflow from long copy commands
+- Pinned `packageManager` (pnpm) in package.json
 - Added 3-line do-now tips on Content management and Form builder
 - Rewired Prev/Next: start → done states A/B/C → product overviews → deep guides
 - Documented Changelog ops rules in README

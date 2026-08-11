@@ -1,9 +1,10 @@
 /* Product hub — compact intro + Neon-like start cards */
 
 .hub {
-  max-width: 920px;
+  max-width: min(920px, 100%);
   margin: 0;
   padding: 8px 0 72px;
+  box-sizing: border-box;
 }
 
 .hub-intro {
@@ -97,6 +98,10 @@
   margin-top: 16px;
 }
 
+.hub-grid > * {
+  min-width: 0;
+}
+
 .hub-grid--start,
 .hub-grid--products {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -127,6 +132,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
+  max-width: 100%;
   padding: 18px 18px 16px;
   border-radius: 10px;
   border: 1px solid var(--vp-c-divider);
@@ -186,6 +193,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  max-width: 100%;
   margin-top: 4px;
   padding: 8px 10px;
   border-radius: 8px;
@@ -335,14 +344,16 @@
 
 /* Page layout: hub sits in the content column (sidebar offset handled by VPContent) */
 .VPContent .VPPage {
-  max-width: 1104px;
+  max-width: min(1104px, 100%);
+  width: 100%;
   margin: 0 auto;
   padding: 32px 32px 0;
   box-sizing: border-box;
+  overflow-x: clip;
 }
 
 @media (max-width: 960px) {
   .VPContent .VPPage {
-    padding: 24px 20px 0;
+    padding: 24px 16px 0;
   }
 }

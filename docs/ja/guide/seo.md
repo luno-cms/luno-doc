@@ -1,11 +1,23 @@
 ---
 title: SEO・サイトマップ
 description: luno の自動サイトマップ生成・OGP メタ情報・schema.org JSON-LD・slug リダイレクトなど、SEO 向け機能の使い方を説明します。
+prev:
+  text: スケジュール公開
+  link: /ja/guide/schedule
+next:
+  text: AI アシスト
+  link: /ja/guide/ai-assist
 ---
 
 # SEO・サイトマップ
 
 luno は SEO に必要な機能を標準で提供しています。サイトマップ・OGP・schema.org JSON-LD を自動生成し、slug 変更時の 301 リダイレクトも自動で処理します。
+
+::: tip 今すぐやる（3 行）
+1. 公開エントリが 1 件以上あることを確認する  
+2. `GET /public/p/{projectId}/v1/sitemap.xml` を開く  
+3. フロントの metadata に `ogp.json` / `schema.json` を繋ぐ（任意）  
+:::
 
 ## サイトマップ
 

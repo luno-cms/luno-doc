@@ -1,11 +1,23 @@
 ---
 title: SEO & Sitemaps
 description: luno auto-generates XML sitemaps, OGP meta tags, and schema.org JSON-LD for every published entry. Learn how to integrate them into Next.js, Astro, and other frameworks.
+prev:
+  text: Scheduled publishing
+  link: /en/guide/schedule
+next:
+  text: AI assist
+  link: /en/guide/ai-assist
 ---
 
 # SEO & Sitemaps
 
 luno generates SEO-critical data automatically for every published entry: XML sitemaps, Open Graph metadata, and schema.org JSON-LD. Slug renames trigger automatic 301 redirects to preserve search rankings.
+
+::: tip Do this now (3 lines)
+1. Confirm you have at least one published entry  
+2. Open `GET /public/p/{projectId}/v1/sitemap.xml`  
+3. (Optional) Wire `ogp.json` / `schema.json` into your frontend metadata  
+:::
 
 ## XML Sitemaps
 
