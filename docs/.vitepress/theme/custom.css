@@ -97,12 +97,14 @@
   --vp-local-search-highlight-bg: var(--vp-c-brand-soft);
 }
 
-/* Compact doc content width next to sidebar */
-.VPDoc:not(.has-sidebar) .container,
+/* Compact vertical rhythm for doc pages */
 .VPDoc.has-sidebar .content {
   padding-top: 24px;
 }
 
-.Layout .VPContent.has-sidebar {
-  padding-left: 0;
+/* Ensure page layout (product hub) also clears the fixed sidebar */
+@media (min-width: 960px) {
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width) !important;
+  }
 }

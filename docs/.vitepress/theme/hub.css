@@ -254,9 +254,12 @@
   background: #111827;
 }
 
-/* Page layout: keep hub content aligned in the doc column */
+/* Page layout: hub sits in the content column (sidebar offset handled by VPContent) */
 .VPContent .VPPage {
+  max-width: 1104px;
+  margin: 0 auto;
   padding: 32px 32px 0;
+  box-sizing: border-box;
 }
 
 @media (max-width: 960px) {
