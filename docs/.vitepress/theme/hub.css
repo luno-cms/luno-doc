@@ -137,7 +137,34 @@
 }
 
 .hub-card--product {
-  min-height: 120px;
+  min-height: 132px;
+  gap: 10px;
+}
+
+.hub-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  flex-shrink: 0;
+}
+
+.hub-icon-wrap--accent {
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 32%, var(--vp-c-divider));
+  background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg));
+  color: var(--vp-c-brand-1);
+}
+
+.hub-icon-wrap--muted {
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-2);
+}
+
+.hub-icon {
+  display: block;
 }
 
 .hub-card--tone-accent {

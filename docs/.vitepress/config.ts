@@ -1,8 +1,8 @@
 import { defineConfig } from "vitepress";
 
 /**
- * Sidebar order drives VitePress prev/next.
- * Journey: Start → Product overviews → Deep guides → API → Ops
+ * Sidebar IA: Console-aligned groups (案 A) + Start.
+ * Hub visual: Neon Products (flat+icons) / Platform (案 B look).
  */
 const jaSidebar = [
   {
@@ -23,66 +23,60 @@ const jaSidebar = [
     ],
   },
   {
-    text: "プロダクト",
+    text: "コンテンツ",
     items: [
-      {
-        text: "運用面",
-        collapsed: false,
-        items: [
-          { text: "Content", link: "/ja/products/content" },
-          { text: "Contact", link: "/ja/products/contact" },
-          { text: "Embed & Pub", link: "/ja/products/embed" },
-          { text: "AI Agents", link: "/ja/products/agents" },
-          { text: "Webhooks", link: "/ja/products/webhooks" },
-        ],
-      },
-      {
-        text: "プラットフォーム",
-        collapsed: false,
-        items: [
-          { text: "Masters", link: "/ja/products/masters" },
-          { text: "公開 API キー", link: "/ja/products/public-api-keys" },
-          { text: "多言語", link: "/ja/products/localization" },
-          { text: "プラン", link: "/ja/products/plans" },
-        ],
-      },
-    ],
-  },
-  {
-    text: "フレームワーク",
-    collapsed: true,
-    items: [
-      { text: "概要", link: "/ja/guide/frameworks/" },
-      { text: "Next.js", link: "/ja/guide/frameworks/nextjs" },
-      { text: "Astro", link: "/ja/guide/frameworks/astro" },
-      { text: "Nuxt", link: "/ja/guide/frameworks/nuxt" },
-    ],
-  },
-  {
-    text: "ガイド",
-    items: [
+      { text: "Content", link: "/ja/products/content" },
+      { text: "Masters", link: "/ja/products/masters" },
+      { text: "多言語", link: "/ja/products/localization" },
       { text: "コンテンツ管理", link: "/ja/guide/content-management" },
       { text: "フォームビルダー", link: "/ja/guide/form-builder" },
       { text: "メディア", link: "/ja/guide/media" },
-      { text: "コンタクト実装", link: "/ja/guide/contact-forms" },
-      { text: "埋め込み実装", link: "/ja/guide/embed" },
       { text: "スケジュール公開", link: "/ja/guide/schedule" },
       { text: "SEO・サイトマップ", link: "/ja/guide/seo" },
       { text: "AI アシスト", link: "/ja/guide/ai-assist" },
     ],
   },
   {
-    text: "API",
+    text: "配信・コンタクト",
     items: [
-      { text: "概要", link: "/ja/api/overview" },
-      { text: "公開 API", link: "/ja/api/public-api" },
-      { text: "Webhook", link: "/ja/api/webhooks" },
-      { text: "AI エージェント向け", link: "/ja/api/ai-agents" },
+      { text: "Contact", link: "/ja/products/contact" },
+      { text: "Embed & Pub", link: "/ja/products/embed" },
+      { text: "コンタクト実装", link: "/ja/guide/contact-forms" },
+      { text: "埋め込み実装", link: "/ja/guide/embed" },
     ],
   },
   {
-    text: "運用",
+    text: "連携・自動化",
     items: [
+      { text: "AI Agents", link: "/ja/products/agents" },
+      { text: "Webhooks", link: "/ja/products/webhooks" },
+      { text: "公開 API キー", link: "/ja/products/public-api-keys" },
+      {
+        text: "API リファレンス",
+        collapsed: true,
+        items: [
+          { text: "概要", link: "/ja/api/overview" },
+          { text: "公開 API", link: "/ja/api/public-api" },
+          { text: "Webhook", link: "/ja/api/webhooks" },
+          { text: "AI エージェント向け", link: "/ja/api/ai-agents" },
+        ],
+      },
+      {
+        text: "フレームワーク",
+        collapsed: true,
+        items: [
+          { text: "概要", link: "/ja/guide/frameworks/" },
+          { text: "Next.js", link: "/ja/guide/frameworks/nextjs" },
+          { text: "Astro", link: "/ja/guide/frameworks/astro" },
+          { text: "Nuxt", link: "/ja/guide/frameworks/nuxt" },
+        ],
+      },
+    ],
+  },
+  {
+    text: "サイト・プラン",
+    items: [
+      { text: "プラン", link: "/ja/products/plans" },
       { text: "セルフホスト概要", link: "/ja/self-hosting/" },
       { text: "環境変数", link: "/ja/self-hosting/env-vars" },
       { text: "デプロイ", link: "/ja/self-hosting/deployment" },
@@ -109,66 +103,60 @@ const enSidebar = [
     ],
   },
   {
-    text: "Products",
+    text: "Content",
     items: [
-      {
-        text: "Surfaces",
-        collapsed: false,
-        items: [
-          { text: "Content", link: "/en/products/content" },
-          { text: "Contact", link: "/en/products/contact" },
-          { text: "Embed & Pub", link: "/en/products/embed" },
-          { text: "AI Agents", link: "/en/products/agents" },
-          { text: "Webhooks", link: "/en/products/webhooks" },
-        ],
-      },
-      {
-        text: "Platform",
-        collapsed: false,
-        items: [
-          { text: "Masters", link: "/en/products/masters" },
-          { text: "Public API keys", link: "/en/products/public-api-keys" },
-          { text: "Localization", link: "/en/products/localization" },
-          { text: "Plans", link: "/en/products/plans" },
-        ],
-      },
-    ],
-  },
-  {
-    text: "Frameworks",
-    collapsed: true,
-    items: [
-      { text: "Overview", link: "/en/guide/frameworks/" },
-      { text: "Next.js", link: "/en/guide/frameworks/nextjs" },
-      { text: "Astro", link: "/en/guide/frameworks/astro" },
-      { text: "Nuxt", link: "/en/guide/frameworks/nuxt" },
-    ],
-  },
-  {
-    text: "Guides",
-    items: [
+      { text: "Content", link: "/en/products/content" },
+      { text: "Masters", link: "/en/products/masters" },
+      { text: "Localization", link: "/en/products/localization" },
       { text: "Content management", link: "/en/guide/content-management" },
       { text: "Form builder", link: "/en/guide/form-builder" },
       { text: "Media", link: "/en/guide/media" },
-      { text: "Contact implementation", link: "/en/guide/contact-forms" },
-      { text: "Embed implementation", link: "/en/guide/embed" },
       { text: "Scheduled publishing", link: "/en/guide/schedule" },
       { text: "SEO & sitemaps", link: "/en/guide/seo" },
       { text: "AI assist", link: "/en/guide/ai-assist" },
     ],
   },
   {
-    text: "API",
+    text: "Deliver & Contact",
     items: [
-      { text: "Overview", link: "/en/api/overview" },
-      { text: "Public API", link: "/en/api/public-api" },
-      { text: "Webhooks", link: "/en/api/webhooks" },
-      { text: "AI agents", link: "/en/api/ai-agents" },
+      { text: "Contact", link: "/en/products/contact" },
+      { text: "Embed & Pub", link: "/en/products/embed" },
+      { text: "Contact implementation", link: "/en/guide/contact-forms" },
+      { text: "Embed implementation", link: "/en/guide/embed" },
     ],
   },
   {
-    text: "Ops",
+    text: "Connect & Automate",
     items: [
+      { text: "AI Agents", link: "/en/products/agents" },
+      { text: "Webhooks", link: "/en/products/webhooks" },
+      { text: "Public API keys", link: "/en/products/public-api-keys" },
+      {
+        text: "API reference",
+        collapsed: true,
+        items: [
+          { text: "Overview", link: "/en/api/overview" },
+          { text: "Public API", link: "/en/api/public-api" },
+          { text: "Webhooks", link: "/en/api/webhooks" },
+          { text: "AI agents", link: "/en/api/ai-agents" },
+        ],
+      },
+      {
+        text: "Frameworks",
+        collapsed: true,
+        items: [
+          { text: "Overview", link: "/en/guide/frameworks/" },
+          { text: "Next.js", link: "/en/guide/frameworks/nextjs" },
+          { text: "Astro", link: "/en/guide/frameworks/astro" },
+          { text: "Nuxt", link: "/en/guide/frameworks/nuxt" },
+        ],
+      },
+    ],
+  },
+  {
+    text: "Site & Plans",
+    items: [
+      { text: "Plans", link: "/en/products/plans" },
       { text: "Self-hosting", link: "/en/self-hosting/" },
       { text: "Environment variables", link: "/en/self-hosting/env-vars" },
       { text: "Deployment", link: "/en/self-hosting/deployment" },
@@ -180,10 +168,8 @@ export default defineConfig({
   title: "LUNO",
   description: "AI-native content operations platform",
   base: "/",
-  // Light-first product docs; users can still toggle dark.
   appearance: true,
   head: [
-    // Prefer light on first visit (Neon-like docs shell). Respect later user toggle.
     [
       "script",
       {},
@@ -212,17 +198,17 @@ export default defineConfig({
             items: [
               { text: "Content", link: "/ja/products/content" },
               { text: "Contact", link: "/ja/products/contact" },
-              { text: "Embed", link: "/ja/products/embed" },
+              { text: "Embed & Pub", link: "/ja/products/embed" },
               { text: "AI Agents", link: "/ja/products/agents" },
-              { text: "Webhooks", link: "/ja/products/webhooks" },
               { text: "Masters", link: "/ja/products/masters" },
+              { text: "Webhooks", link: "/ja/products/webhooks" },
               { text: "公開 API キー", link: "/ja/products/public-api-keys" },
               { text: "多言語", link: "/ja/products/localization" },
               { text: "プラン", link: "/ja/products/plans" },
             ],
           },
-          { text: "API", link: "/ja/api/overview" },
-          { text: "運用", link: "/ja/self-hosting/" },
+          { text: "公開 API", link: "/ja/api/public-api" },
+          { text: "サイト・プラン", link: "/ja/products/plans" },
           {
             text: "ログイン",
             link: "https://console.luno.rest/login",
@@ -257,17 +243,17 @@ export default defineConfig({
             items: [
               { text: "Content", link: "/en/products/content" },
               { text: "Contact", link: "/en/products/contact" },
-              { text: "Embed", link: "/en/products/embed" },
+              { text: "Embed & Pub", link: "/en/products/embed" },
               { text: "AI Agents", link: "/en/products/agents" },
-              { text: "Webhooks", link: "/en/products/webhooks" },
               { text: "Masters", link: "/en/products/masters" },
+              { text: "Webhooks", link: "/en/products/webhooks" },
               { text: "Public API keys", link: "/en/products/public-api-keys" },
               { text: "Localization", link: "/en/products/localization" },
               { text: "Plans", link: "/en/products/plans" },
             ],
           },
-          { text: "API", link: "/en/api/overview" },
-          { text: "Ops", link: "/en/self-hosting/" },
+          { text: "Public API", link: "/en/api/public-api" },
+          { text: "Site & Plans", link: "/en/products/plans" },
           {
             text: "Log in",
             link: "https://console.luno.rest/login",

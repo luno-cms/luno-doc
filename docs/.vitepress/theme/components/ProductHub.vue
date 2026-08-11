@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import HubIcon from "./HubIcon.vue";
 
 const props = defineProps<{
   locale: "ja" | "en";
@@ -49,7 +50,7 @@ const copy = {
     startLead: "経路を選ぶ → 完成形を確認 → 手順へ。",
     productsTitle: "プロダクト",
     productsLead:
-      "コンテンツの定義・公開・配信から、エージェント連携・基盤設定まで。各面はエージェント対応です。",
+      "名前のついた製品面と、その下のプラットフォーム能力。",
     connectTitle: "つなぐ",
     connectLead: "ツールを選んで、すぐ使える入口へ。",
     refTitle: "リファレンス",
@@ -93,68 +94,78 @@ const copy = {
     ],
     productGroups: [
       {
-        key: "surfaces",
-        title: "運用面",
-        lead: "コンテンツを作り、届け、自動化する面。",
+        key: "products",
+        title: "プロダクト",
+        lead: "名前のついた製品面（Console のメイン作業に対応）。",
         tone: "accent",
         items: [
           {
+            icon: "content",
             title: "Content",
             body: "15 種フィールド、リビジョン、レビュー、スケジュール公開。",
             href: "/ja/products/content",
           },
           {
+            icon: "contact",
             title: "Contact",
             body: "受信・自動返信・チャット通知。contact.luno.rest ホスト。",
             href: "/ja/products/contact",
           },
           {
+            icon: "embed",
             title: "Embed & Pub",
             body: "widget / iframe と pub.luno.rest でそのまま配信。",
             href: "/ja/products/embed",
           },
           {
+            icon: "agents",
             title: "AI Agents",
             body: "MCP、エージェントキー、サイトごとの llms.txt。",
             href: "/ja/products/agents",
           },
           {
-            title: "Webhooks",
-            body: "HMAC 署名付き公開イベント。ISR・外部連携向け。",
-            href: "/ja/products/webhooks",
+            icon: "masters",
+            title: "Masters",
+            body: "共通選択肢をサイト公開し、公開 API から読む。",
+            href: "/ja/products/masters",
           },
         ],
       },
       {
         key: "platform",
         title: "プラットフォーム",
-        lead: "選択肢・キー・言語・プランなど、運用を支える基盤。",
+        lead: "横断の連携・配信基盤・サイト設定。",
         tone: "muted",
         items: [
           {
-            title: "Masters",
-            body: "共通選択肢をサイト公開し、公開 API から読む。",
-            href: "/ja/products/masters",
+            icon: "webhooks",
+            title: "Webhooks",
+            body: "HMAC 署名付き公開イベント。ISR・外部連携向け。",
+            href: "/ja/products/webhooks",
           },
           {
+            icon: "keys",
             title: "公開 API キー",
             body: "luno_pub_…。Embed / Host 解決。エージェントキーとは別。",
             href: "/ja/products/public-api-keys",
           },
           {
+            icon: "localization",
             title: "多言語",
             body: "サイトロケール、?locale=、AI 翻訳（Standard+）。",
             href: "/ja/products/localization",
           },
           {
-            title: "プラン",
-            body: "Standard / Business の機能境界早見表。",
-            href: "/ja/products/plans",
-          },
-          {
+            icon: "media",
             title: "Media & SEO",
             body: "アセット配信、サイトマップ、OGP、構造化データ。",
             href: "/ja/guide/media",
+          },
+          {
+            icon: "plans",
+            title: "プラン",
+            body: "Standard / Business の機能境界早見表。",
+            href: "/ja/products/plans",
           },
         ],
       },
@@ -239,7 +250,7 @@ const copy = {
     startLead: "Pick a path → see the done state → follow the steps.",
     productsTitle: "Products",
     productsLead:
-      "Define, publish, and deliver content—plus agents and platform controls. Every surface is agent-ready.",
+      "Named product surfaces for content ops—plus platform capabilities underneath.",
     connectTitle: "Connect",
     connectLead: "Pick a tool and jump to the right setup.",
     refTitle: "Reference",
@@ -283,68 +294,78 @@ const copy = {
     ],
     productGroups: [
       {
-        key: "surfaces",
-        title: "Surfaces",
-        lead: "Create, deliver, and automate content.",
+        key: "products",
+        title: "Products",
+        lead: "Named product surfaces that map to day-to-day Console work.",
         tone: "accent",
         items: [
           {
+            icon: "content",
             title: "Content",
             body: "15 field types, revisions, review, scheduled publishing.",
             href: "/en/products/content",
           },
           {
+            icon: "contact",
             title: "Contact",
             body: "Inbox, autoreply, chat notify. Host on contact.luno.rest.",
             href: "/en/products/contact",
           },
           {
+            icon: "embed",
             title: "Embed & Pub",
             body: "widget / iframe and pub.luno.rest for drop-in delivery.",
             href: "/en/products/embed",
           },
           {
+            icon: "agents",
             title: "AI Agents",
             body: "MCP, agent keys, and per-site llms.txt.",
             href: "/en/products/agents",
           },
           {
-            title: "Webhooks",
-            body: "HMAC-signed publish events for ISR and integrations.",
-            href: "/en/products/webhooks",
+            icon: "masters",
+            title: "Masters",
+            body: "Shared options published to site and Public API.",
+            href: "/en/products/masters",
           },
         ],
       },
       {
         key: "platform",
         title: "Platform",
-        lead: "Shared options, keys, locales, and plan gates.",
+        lead: "Cross-cutting delivery, keys, locales, and plan gates.",
         tone: "muted",
         items: [
           {
-            title: "Masters",
-            body: "Shared options published to site and Public API.",
-            href: "/en/products/masters",
+            icon: "webhooks",
+            title: "Webhooks",
+            body: "HMAC-signed publish events for ISR and integrations.",
+            href: "/en/products/webhooks",
           },
           {
+            icon: "keys",
             title: "Public API keys",
             body: "luno_pub_… for Embed / Host. Not agent keys.",
             href: "/en/products/public-api-keys",
           },
           {
+            icon: "localization",
             title: "Localization",
             body: "Site locales, ?locale=, AI translation (Standard+).",
             href: "/en/products/localization",
           },
           {
-            title: "Plans",
-            body: "Standard / Business feature gate matrix.",
-            href: "/en/products/plans",
-          },
-          {
+            icon: "media",
             title: "Media & SEO",
             body: "Asset delivery, sitemaps, OGP, structured data.",
             href: "/en/guide/media",
+          },
+          {
+            icon: "plans",
+            title: "Plans",
+            body: "Standard / Business feature gate matrix.",
+            href: "/en/products/plans",
           },
         ],
       },
@@ -518,6 +539,17 @@ const copy = {
             "
             :href="item.href"
           >
+            <span
+              class="hub-icon-wrap"
+              :class="
+                group.tone === 'accent'
+                  ? 'hub-icon-wrap--accent'
+                  : 'hub-icon-wrap--muted'
+              "
+              aria-hidden="true"
+            >
+              <HubIcon :name="item.icon" />
+            </span>
             <h3>{{ item.title }}</h3>
             <p>{{ item.body }}</p>
           </a>
