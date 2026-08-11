@@ -44,8 +44,10 @@ Content-Type: application/json
 
 ### Request example
 
-```bash
-curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
+::: code-group
+
+```bash [curl]
+curl -X POST "https://api.luno.rest/public/p/{projectId}/v1/contact-forms/contact/submit" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Jane Smith",
@@ -55,6 +57,29 @@ curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
     "inquiry_type": "pricing"
   }'
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+
+await fetch(`${BASE}/contact-forms/contact/submit`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: 'Jane Smith',
+    email: 'jane@example.com',
+    company: 'Acme Corp',
+    message: 'I would like to learn more about your pricing.',
+    inquiry_type: 'pricing',
+  }),
+})
+```
+
+```bash [MCP]
+npx @luno-cms/mcp setup
+# Agent prompt example: "Submit a test contact form and confirm it arrived"
+```
+
+:::
 
 ### Success response (HTTP 200)
 

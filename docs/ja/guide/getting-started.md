@@ -12,11 +12,11 @@ LUNO は AI ネイティブなコンテンツ運用プラットフォームで�
 
 ## 経路を選ぶ
 
-| 経路 | 向いている人 | 所要 | 入口 |
+| 経路 | 向いている人 | 所要 | 完成形 → 入口 |
 |---|---|---|---|
-| **A. Agents（MCP）** | Cursor / Claude Code / Codex でコンテンツを触りたい | 約 5 分 | [AI Agents](/ja/products/agents) → [詳細ガイド](/ja/api/ai-agents) |
-| **B. Console** | 管理画面で作成・承認・公開を理解したい | 約 10 分 | [このページの手順](#console) |
-| **C. API only** | 公開済みコンテンツを読む・サイトに繋ぐだけ | 約 3 分 | [公開 API](/ja/api/public-api#api-only) |
+| **A. Agents（MCP）** | Cursor / Claude Code / Codex で触りたい | 約 5 分 | [完成形](/ja/guide/paths/agents) → [概要](/ja/products/agents) |
+| **B. Console** | 管理画面で作成・承認・公開を理解したい | 約 10 分 | [完成形](/ja/guide/paths/console) → [手順](#console) |
+| **C. API only** | 公開コンテンツを読む・サイトに繋ぐだけ | 約 3 分 | [完成形](/ja/guide/paths/api) → [公開 API](/ja/api/public-api#api-only) |
 
 ```bash
 # 経路 A（推奨・最短）

@@ -12,11 +12,11 @@ LUNO is an AI-native content operations platform. Start on the path that matches
 
 ## Choose a path
 
-| Path | Best for | Time | Start here |
+| Path | Best for | Time | Done state → start |
 |---|---|---|---|
-| **A. Agents (MCP)** | Operate content from Cursor / Claude Code / Codex | ~5 min | [AI Agents](/en/products/agents) → [full guide](/en/api/ai-agents) |
-| **B. Console** | Learn create → approve → publish in the admin UI | ~10 min | [Steps on this page](#console) |
-| **C. API only** | Read published content and wire your site | ~3 min | [Public API](/en/api/public-api#api-only) |
+| **A. Agents (MCP)** | Operate from Cursor / Claude Code / Codex | ~5 min | [Done state](/en/guide/paths/agents) → [overview](/en/products/agents) |
+| **B. Console** | Learn create → approve → publish in admin | ~10 min | [Done state](/en/guide/paths/console) → [steps](#console) |
+| **C. API only** | Read published content and wire your site | ~3 min | [Done state](/en/guide/paths/api) → [Public API](/en/api/public-api#api-only) |
 
 ```bash
 # Path A (recommended / fastest)

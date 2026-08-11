@@ -79,6 +79,34 @@ Field values (`data`) are **not included**. Fetch content from the Public API if
 }
 ```
 
+## Typical flow after delivery
+
+Payloads do not include field bodies — refetch from the Public API when needed.
+
+::: code-group
+
+```bash [curl]
+# After entry.published, fetch the body
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries/my-first-post?include_snapshot=true"
+```
+
+```ts [JS]
+// After signature verification (see below)
+const { project_id, form_set_slug, entry_slug } = payload
+const res = await fetch(
+  `https://api.luno.rest/public/p/${project_id}/v1/form-sets/${form_set_slug}/entries/${entry_slug}?include_snapshot=true`
+)
+const entry = await res.json()
+// → ISR revalidate / search index update, etc.
+```
+
+```bash [MCP]
+# Agent prompt example:
+# "Write a handler that on entry.published fetches the body and revalidates /blog"
+```
+
+:::
+
 ## Signature Verification
 
 Every webhook request includes an `X-Luno-Signature` header:

@@ -9,10 +9,12 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
-- Product hub: Connect logo grid and start paths A / B / C
-- Added Content / Contact / Embed / Agents / Webhooks overview pages
+- Added path done-state pages (Agents / Console / API only)
+- Extended curl / JS / MCP (or HTML) tabs to Contact, Embed, and Webhooks
+- Aligned hub JA/EN copy, card density, and CTAs; start cards link to done states
+- Product hub: Connect logo grid, start paths A / B / C, and product overviews
 - Grouped Public API and Quick start examples into curl / JS / MCP tabs
-- Synced webhook payload (`project_id` / `timestamp`, manual redelivery) and agent scopes (`full` / `content` / `schema`) with the product
+- Synced webhook payload and agent scopes with the product
 - Documented `/public/p/{projectId}/v1` as the recommended Public API base
 
 ## Earlier

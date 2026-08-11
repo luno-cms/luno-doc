@@ -9,10 +9,12 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ## 2026-08-11
 
-- 製品ハブに Connect ロゴグリッドとスタート経路 A/B/C を追加
-- Content / Contact / Embed / Agents / Webhooks の概要ページを追加
+- 経路別の完成形ページ（Agents / Console / API only）を追加
+- Contact / Embed / Webhooks にも curl・JS・MCP（または HTML）タブを追加
+- 製品ハブの日英文言・カード密度・CTA を揃え、スタートを完成形へ誘導
+- Connect ロゴグリッドとスタート経路 A/B/C、Products overview を追加
 - 公開 API・クイックスタートのコード例を curl / JS / MCP タブに整理
-- Webhook ペイロード（`project_id` / `timestamp`、手動再送）とエージェントスコープ（`full` / `content` / `schema`）を製品実装に同期
+- Webhook ペイロードとエージェントスコープを製品実装に同期
 - 公開 API の推奨ベースを `/public/p/{projectId}/v1` に明示
 
 ## それ以前

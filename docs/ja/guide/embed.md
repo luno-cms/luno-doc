@@ -32,7 +32,9 @@ description: 公開 API キーとウィジェット ID を指定するだけ。H
 
 ### Step 2: HTML に貼り付け
 
-```html
+::: code-group
+
+```html [HTML]
 <div id="luno-list"
      data-api-key="luno_pub_xxxxxxxx"
      data-api-url="https://api.luno.rest"
@@ -40,6 +42,26 @@ description: 公開 API キーとウィジェット ID を指定するだけ。H
 </div>
 <script src="https://api.luno.rest/public/v1/embed/luno-abcdef12.js?api_key=luno_pub_xxxxxxxx" async></script>
 ```
+
+```ts [JS]
+const mount = document.getElementById('luno-list')!
+mount.dataset.apiKey = 'luno_pub_xxxxxxxx'
+mount.dataset.apiUrl = 'https://api.luno.rest'
+mount.dataset.widgetId = 'luno-abcdef12'
+
+const s = document.createElement('script')
+s.src =
+  'https://api.luno.rest/public/v1/embed/luno-abcdef12.js?api_key=luno_pub_xxxxxxxx'
+s.async = true
+document.body.appendChild(s)
+```
+
+```bash [MCP]
+npx @luno-cms/mcp setup
+# エージェント例: 「公開ウィジェットの埋め込みスニペットを出して」
+```
+
+:::
 
 | 属性 / URL | 意味 |
 |------------|------|

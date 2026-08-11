@@ -79,6 +79,34 @@ Webhook は **Standard プラン以上**で利用可能です。
 }
 ```
 
+## 受信後の典型フロー
+
+ペイロードに本文はないので、必要なら公開 API で取り直します。
+
+::: code-group
+
+```bash [curl]
+# entry.published 受信後に本文を取得
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries/my-first-post?include_snapshot=true"
+```
+
+```ts [JS]
+// 署名検証後（下節参照）
+const { project_id, form_set_slug, entry_slug } = payload
+const res = await fetch(
+  `https://api.luno.rest/public/p/${project_id}/v1/form-sets/${form_set_slug}/entries/${entry_slug}?include_snapshot=true`
+)
+const entry = await res.json()
+// → ISR revalidate / 検索インデックス更新など
+```
+
+```bash [MCP]
+# エージェント例:
+# 「entry.published を受けたら公開 API で本文を取り、/blog を revalidate するハンドラを書いて」
+```
+
+:::
+
 ## 署名検証
 
 すべてのリクエストには `X-Luno-Signature` ヘッダーが付与されます。
