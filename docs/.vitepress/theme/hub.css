@@ -1,0 +1,204 @@
+/* Product hub (docs home) — calm product map, Neon-like IA without imitating Neon chrome */
+
+.hub {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 24px 80px;
+}
+
+.hub-section {
+  margin-top: 56px;
+}
+
+.hub-section__head h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--vp-c-text-1);
+}
+
+.hub-section__head p {
+  margin: 8px 0 0;
+  color: var(--vp-c-text-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 48rem;
+}
+
+.hub-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.hub-grid--start {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hub-grid--products {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hub-grid--connect {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+  .hub-grid--start,
+  .hub-grid--products,
+  .hub-grid--connect {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hub-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 20px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  text-decoration: none !important;
+  color: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.hub-card:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 45%, var(--vp-c-divider));
+  background: var(--vp-c-bg-elv);
+  transform: translateY(-1px);
+}
+
+.hub-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--vp-c-text-1);
+}
+
+.hub-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--vp-c-text-2);
+}
+
+.hub-card--start {
+  min-height: 190px;
+}
+
+.hub-card__cta {
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 550;
+  color: var(--vp-c-brand-1);
+}
+
+.hub-badge {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: var(--vp-c-bg);
+}
+
+.hub-card--connect code {
+  font-size: 0.8rem;
+  color: var(--vp-c-brand-1);
+  background: transparent;
+  padding: 0;
+}
+
+.hub-refs {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.hub-refs a {
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  font-size: 0.92rem;
+  border-bottom: 1px solid transparent;
+}
+
+.hub-refs a:hover {
+  color: var(--vp-c-brand-1);
+  border-bottom-color: color-mix(in srgb, var(--vp-c-brand-1) 50%, transparent);
+}
+
+.hub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.hub-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 550;
+  text-decoration: none !important;
+  border: 1px solid transparent;
+}
+
+.hub-btn--primary {
+  background: var(--vp-c-brand-1);
+  color: #fff !important;
+}
+
+.hub-btn--primary:hover {
+  background: var(--vp-c-brand-2);
+}
+
+.hub-btn--ghost {
+  border-color: var(--vp-c-divider);
+  color: var(--vp-c-text-1) !important;
+  background: transparent;
+}
+
+.hub-btn--ghost:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* Soften default home chrome so the hub reads as one composition */
+.VPHome {
+  padding-bottom: 0 !important;
+}
+
+.VPHome .VPHero {
+  padding-bottom: 24px !important;
+}
+
+.VPHome .VPFeatures {
+  display: none !important;
+}
+
+.dark .hub-card {
+  background: #0c121a;
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+.dark .hub-card:hover {
+  border-color: rgba(14, 165, 233, 0.35);
+  background: #101826;
+  box-shadow: none;
+}

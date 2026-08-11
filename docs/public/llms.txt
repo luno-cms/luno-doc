@@ -6,10 +6,13 @@ This file is for **AI agents and developers** wiring Cursor, Claude Desktop, or 
 
 ## Start here
 
+- [Product hub (EN)](https://doc.luno.rest/en/): Get started / Products / Connect map
+- [製品ハブ (JA)](https://doc.luno.rest/ja/): スタート・プロダクト・接続の入口
 - [AI Agents Guide (EN)](https://doc.luno.rest/en/api/ai-agents): MCP setup, agent API keys, scopes, llms.txt per site, best practices
 - [AI エージェント向けガイド (JA)](https://doc.luno.rest/ja/api/ai-agents): 上記の日本語版
 - [Quick Start (EN)](https://doc.luno.rest/en/guide/getting-started): First project in the admin console
 - [クイックスタート (JA)](https://doc.luno.rest/ja/guide/getting-started): 管理画面での初期セットアップ
+- Console: https://console.luno.rest · Sign up: https://console.luno.rest/register
 
 ## MCP (Model Context Protocol)
 

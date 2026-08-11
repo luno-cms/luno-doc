@@ -1,40 +1,22 @@
 ---
 title: LUNO ドキュメント
-description: LUNO の使い方・公開 API リファレンス・AI エージェント向けガイドです。
+description: LUNO の製品マップ、クイックスタート、公開 API、AI エージェント連携の入口。
 layout: home
 
 hero:
   name: LUNO
-  text: ドキュメント
-  tagline: コンテンツの作成・管理から、API 連携・AI エージェント活用まで。
+  text: Documentation
+  tagline: AI ネイティブなコンテンツ運用プラットフォーム。定義・作成・承認・公開・配信まで。
   actions:
     - theme: brand
-      text: はじめに
-      link: /ja/guide/getting-started
+      text: MCP で始める
+      link: /ja/api/ai-agents
     - theme: alt
-      text: サイトへの埋め込み
-      link: /ja/guide/embed
+      text: Console
+      link: https://console.luno.rest
     - theme: alt
-      text: 公開 API リファレンス
-      link: /ja/api/public-api
-
-features:
-  - icon: 📝
-    title: コンテンツ管理
-    details: 下書き → レビュー → 公開の承認フロー、スケジュール公開、差分表示、担当者アサインをサポート。
-  - icon: 🔧
-    title: フォームビルダー
-    details: テキスト・URL・画像ギャラリー・リッチテキスト・エントリ参照など 15 種のフィールドタイプでコンテンツモデルを設計。
-  - icon: 🌐
-    title: 公開 API（認証不要）
-    details: エントリ一覧・詳細・メディアを認証なしで取得できます。フロントエンド・Jamstack サイトから直接利用可能。
-  - icon: 🤖
-    title: AI エージェント対応
-    details: サイトごとの llms.txt に加え、MCP（@luno-cms/mcp）とスコープ付きエージェント API キー（full / content / schema）で Claude・Cursor から操作できます。
-  - icon: 🪝
-    title: Webhook
-    details: エントリの公開・更新・削除イベントを HMAC-SHA256 署名付きで配信。外部システムとのリアルタイム連携に。
-  - icon: 📬
-    title: コンタクトフォーム
-    details: お問い合わせフォームの作成・受信管理・Slack / Teams / LINE Notify への通知連携が標準搭載。
+      text: アカウント作成
+      link: https://console.luno.rest/register
 ---
+
+<ProductHub locale="ja" />
