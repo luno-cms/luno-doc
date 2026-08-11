@@ -31,7 +31,7 @@ const copy = {
     productsTitle: "プロダクト",
     productsLead: "コンテンツ運用に必要な面を、ひとつのプラットフォームで。",
     connectTitle: "つなぐ",
-    connectLead: "AI エージェントとフロントエンドからすぐ接続できます。",
+    connectLead: "エージェントとフロントエンドからすぐ接続。ロゴを選んで入口へ。",
     refTitle: "リファレンス",
     refLead: "認証・エンドポイント・運用設定の仕様。",
     copyLabel: "コピー",
@@ -99,19 +99,39 @@ const copy = {
     ],
     connect: [
       {
-        title: "Cursor / Claude / Codex",
-        body: "npx @luno-cms/mcp setup",
+        key: "cursor",
+        title: "Cursor",
+        body: "MCP setup",
         href: "/ja/products/agents",
+        logo: "/connect/cursor.svg",
       },
       {
-        title: "公開 API + projectId",
-        body: "/public/p/{projectId}/v1",
+        key: "claude",
+        title: "Claude Code",
+        body: "MCP setup",
+        href: "/ja/products/agents",
+        logo: "/connect/claude.svg",
+      },
+      {
+        key: "codex",
+        title: "Codex",
+        body: "MCP setup",
+        href: "/ja/products/agents",
+        logo: "/connect/codex.svg",
+      },
+      {
+        key: "nextjs",
+        title: "Next.js",
+        body: "Public API",
         href: "/ja/api/public-api#api-only",
+        logo: "/connect/nextjs.svg",
       },
       {
-        title: "ウィジェット埋め込み",
-        body: "snippet をコピーして配置",
+        key: "widget",
+        title: "Widget",
+        body: "Embed / Pub",
         href: "/ja/products/embed",
+        logo: "/connect/widget.svg",
       },
     ],
     refs: [
@@ -135,7 +155,7 @@ const copy = {
     productsTitle: "Products",
     productsLead: "Content operations surfaces in one platform.",
     connectTitle: "Connect",
-    connectLead: "Hook up AI agents and frontends in minutes.",
+    connectLead: "Pick a tool to jump into the right setup path.",
     refTitle: "Reference",
     refLead: "Auth, endpoints, and ops configuration.",
     copyLabel: "Copy",
@@ -203,19 +223,39 @@ const copy = {
     ],
     connect: [
       {
-        title: "Cursor / Claude / Codex",
-        body: "npx @luno-cms/mcp setup",
+        key: "cursor",
+        title: "Cursor",
+        body: "MCP setup",
         href: "/en/products/agents",
+        logo: "/connect/cursor.svg",
       },
       {
-        title: "Public API + projectId",
-        body: "/public/p/{projectId}/v1",
+        key: "claude",
+        title: "Claude Code",
+        body: "MCP setup",
+        href: "/en/products/agents",
+        logo: "/connect/claude.svg",
+      },
+      {
+        key: "codex",
+        title: "Codex",
+        body: "MCP setup",
+        href: "/en/products/agents",
+        logo: "/connect/codex.svg",
+      },
+      {
+        key: "nextjs",
+        title: "Next.js",
+        body: "Public API",
         href: "/en/api/public-api#api-only",
+        logo: "/connect/nextjs.svg",
       },
       {
-        title: "Widget embed",
-        body: "Copy a snippet and ship",
+        key: "widget",
+        title: "Widget",
+        body: "Embed / Pub",
         href: "/en/products/embed",
+        logo: "/connect/widget.svg",
       },
     ],
     refs: [
@@ -301,12 +341,15 @@ const copy = {
       <div class="hub-grid hub-grid--connect">
         <a
           v-for="item in copy[locale].connect"
-          :key="item.href"
+          :key="item.key"
           class="hub-card hub-card--connect"
           :href="item.href"
         >
+          <span class="hub-connect__logo" aria-hidden="true">
+            <img :src="item.logo" :alt="''" width="28" height="28" />
+          </span>
           <h3>{{ item.title }}</h3>
-          <code>{{ item.body }}</code>
+          <span class="hub-connect__meta">{{ item.body }}</span>
         </a>
       </div>
     </section>

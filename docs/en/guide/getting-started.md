@@ -1,6 +1,9 @@
 ---
 title: Quick Start
 description: Get started with LUNO — pick Agents (MCP), Console, or API only, then publish or fetch your first content.
+next:
+  text: Content
+  link: /en/products/content
 ---
 
 # Quick Start

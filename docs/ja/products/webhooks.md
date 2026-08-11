@@ -1,6 +1,12 @@
 ---
 title: Webhooks
 description: LUNO の Webhook — 公開イベント通知、署名検証、手動再送の概要。
+prev:
+  text: AI Agents
+  link: /ja/products/agents
+next:
+  text: コンテンツ管理
+  link: /ja/guide/content-management
 ---
 
 # Webhooks

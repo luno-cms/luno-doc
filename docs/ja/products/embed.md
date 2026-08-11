@@ -1,6 +1,12 @@
 ---
 title: Embed & Pub
 description: LUNO の埋め込みと Pub — widget.js、iframe、pub.luno.rest 公開の概要。
+prev:
+  text: Contact
+  link: /ja/products/contact
+next:
+  text: AI Agents
+  link: /ja/products/agents
 ---
 
 # Embed & Pub

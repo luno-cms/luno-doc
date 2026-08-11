@@ -1,6 +1,12 @@
 ---
 title: Contact
 description: LUNO のコンタクトフォーム — 受信、自動返信、通知連携、contact.luno.rest ホスト公開の概要。
+prev:
+  text: Content
+  link: /ja/products/content
+next:
+  text: Embed & Pub
+  link: /ja/products/embed
 ---
 
 # Contact

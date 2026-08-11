@@ -1,6 +1,12 @@
 ---
 title: AI Agents
 description: LUNO の AI エージェント連携 — MCP、エージェント API キー、llms.txt の概要。
+prev:
+  text: Embed & Pub
+  link: /ja/products/embed
+next:
+  text: Webhooks
+  link: /ja/products/webhooks
 ---
 
 # AI Agents

@@ -1,6 +1,12 @@
 ---
 title: Contact
 description: Overview of LUNO contact forms — intake, auto-reply, notifications, and contact.luno.rest hosting.
+prev:
+  text: Content
+  link: /en/products/content
+next:
+  text: Embed & Pub
+  link: /en/products/embed
 ---
 
 # Contact

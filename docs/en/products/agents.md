@@ -1,6 +1,12 @@
 ---
 title: AI Agents
 description: Overview of LUNO AI agent integration — MCP, agent API keys, and llms.txt.
+prev:
+  text: Embed & Pub
+  link: /en/products/embed
+next:
+  text: Webhooks
+  link: /en/products/webhooks
 ---
 
 # AI Agents

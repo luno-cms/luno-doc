@@ -1,16 +1,19 @@
 import { defineConfig } from "vitepress";
 
+/**
+ * Sidebar order drives VitePress prev/next.
+ * Journey: Start → Product overviews → Deep guides → API → Ops
+ */
 const jaSidebar = [
   {
     text: "スタート",
     items: [
       { text: "製品ハブ", link: "/ja/" },
       { text: "クイックスタート（3経路）", link: "/ja/guide/getting-started" },
-      { text: "AI Agents 概要", link: "/ja/products/agents" },
     ],
   },
   {
-    text: "プロダクト概要",
+    text: "プロダクト",
     items: [
       { text: "Content", link: "/ja/products/content" },
       { text: "Contact", link: "/ja/products/contact" },
@@ -25,8 +28,8 @@ const jaSidebar = [
       { text: "コンテンツ管理", link: "/ja/guide/content-management" },
       { text: "フォームビルダー", link: "/ja/guide/form-builder" },
       { text: "メディア", link: "/ja/guide/media" },
-      { text: "コンタクトフォーム", link: "/ja/guide/contact-forms" },
-      { text: "埋め込み & Pub", link: "/ja/guide/embed" },
+      { text: "コンタクト実装", link: "/ja/guide/contact-forms" },
+      { text: "埋め込み実装", link: "/ja/guide/embed" },
       { text: "スケジュール公開", link: "/ja/guide/schedule" },
       { text: "SEO・サイトマップ", link: "/ja/guide/seo" },
       { text: "AI アシスト", link: "/ja/guide/ai-assist" },
@@ -57,11 +60,10 @@ const enSidebar = [
     items: [
       { text: "Product hub", link: "/en/" },
       { text: "Quick start (3 paths)", link: "/en/guide/getting-started" },
-      { text: "AI Agents overview", link: "/en/products/agents" },
     ],
   },
   {
-    text: "Product overviews",
+    text: "Products",
     items: [
       { text: "Content", link: "/en/products/content" },
       { text: "Contact", link: "/en/products/contact" },
@@ -76,8 +78,8 @@ const enSidebar = [
       { text: "Content management", link: "/en/guide/content-management" },
       { text: "Form builder", link: "/en/guide/form-builder" },
       { text: "Media", link: "/en/guide/media" },
-      { text: "Contact forms", link: "/en/guide/contact-forms" },
-      { text: "Embed & Pub", link: "/en/guide/embed" },
+      { text: "Contact implementation", link: "/en/guide/contact-forms" },
+      { text: "Embed implementation", link: "/en/guide/embed" },
       { text: "Scheduled publishing", link: "/en/guide/schedule" },
       { text: "SEO & sitemaps", link: "/en/guide/seo" },
       { text: "AI assist", link: "/en/guide/ai-assist" },
@@ -127,6 +129,10 @@ export default defineConfig({
       lang: "ja",
       link: "/ja/",
       themeConfig: {
+        docFooter: {
+          prev: "前のページ",
+          next: "次のページ",
+        },
         nav: [
           { text: "スタート", link: "/ja/guide/getting-started" },
           {
@@ -164,6 +170,10 @@ export default defineConfig({
       lang: "en",
       link: "/en/",
       themeConfig: {
+        docFooter: {
+          prev: "Previous",
+          next: "Next",
+        },
         nav: [
           { text: "Start", link: "/en/guide/getting-started" },
           {

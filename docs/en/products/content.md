@@ -1,6 +1,12 @@
 ---
 title: Content
 description: Overview of LUNO content operations — form sets, entries, revisions, approval, and scheduled publishing.
+prev:
+  text: Quick start
+  link: /en/guide/getting-started
+next:
+  text: Contact
+  link: /en/products/contact
 ---
 
 # Content

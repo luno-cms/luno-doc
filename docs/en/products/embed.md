@@ -1,6 +1,12 @@
 ---
 title: Embed & Pub
 description: Overview of LUNO embed and Pub — widget.js, iframe, and pub.luno.rest hosting.
+prev:
+  text: Contact
+  link: /en/products/contact
+next:
+  text: AI Agents
+  link: /en/products/agents
 ---
 
 # Embed & Pub

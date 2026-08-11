@@ -1,6 +1,12 @@
 ---
 title: Content
 description: LUNO のコンテンツ運用 — フォーム定義、エントリ、リビジョン、承認、スケジュール公開の概要。
+prev:
+  text: クイックスタート
+  link: /ja/guide/getting-started
+next:
+  text: Contact
+  link: /ja/products/contact
 ---
 
 # Content

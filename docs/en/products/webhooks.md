@@ -1,6 +1,12 @@
 ---
 title: Webhooks
 description: Overview of LUNO webhooks — publish events, signature verification, and manual redelivery.
+prev:
+  text: AI Agents
+  link: /en/products/agents
+next:
+  text: Content management
+  link: /en/guide/content-management
 ---
 
 # Webhooks

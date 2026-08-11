@@ -1,6 +1,9 @@
 ---
 title: クイックスタート
 description: LUNO のはじめ方 — Agents（MCP）・Console・API only の3経路から選び、管理画面または公開 API まで進めます。
+next:
+  text: Content
+  link: /ja/products/content
 ---
 
 # クイックスタート
