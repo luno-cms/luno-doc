@@ -9,6 +9,8 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ## 2026-08-11
 
+- Content / Embed 概要を完成形同型に揃え、サイドバーの完成形を折りたたみグループ化
+- `llms.txt` に経路 A/B/C と Products 一覧を追加（検索・エージェント向けキーワード同期）
 - 完成形ページに「今すぐやる」手順とチェックリストを追加
 - Contact / Webhooks 概要を完成形同型（できていること・今すぐやる・次の一手）に揃えた
 - 検索向けに title / description を経路名（Agents / Console / API only）で整備

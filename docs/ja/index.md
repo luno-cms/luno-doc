@@ -1,6 +1,6 @@
 ---
-title: LUNO ドキュメント
-description: LUNO の製品マップ、クイックスタート、公開 API、AI エージェント連携の入口。
+title: LUNO ドキュメント · Agents / Console / API only
+description: LUNO 製品ハブ。スタート経路 A Agents（MCP）・B Console・C API only。Content / Contact / Embed / Webhooks の入口。
 layout: page
 aside: false
 ---

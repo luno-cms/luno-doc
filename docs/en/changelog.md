@@ -9,6 +9,8 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
+- Aligned Content / Embed overviews to the done-state pattern; collapsed done-state group in the sidebar
+- Added start paths A/B/C and Products list to `llms.txt` (search / agent keyword sync)
 - Added do-now steps and checklists on path done-state pages
 - Aligned Contact / Webhooks overviews to the done-state pattern
 - Tuned titles/descriptions for path keywords (Agents / Console / API only)

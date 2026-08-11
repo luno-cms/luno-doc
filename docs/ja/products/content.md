@@ -1,6 +1,6 @@
 ---
-title: Content
-description: LUNO のコンテンツ運用 — フォーム定義、エントリ、リビジョン、承認、スケジュール公開の概要。
+title: Content · Console / Agents
+description: LUNO Content — Form Set・エントリ・承認・公開。完成形チェックと今すぐやる手順（経路 B Console / 経路 A Agents）。
 prev:
   text: クイックスタート
   link: /ja/guide/getting-started
@@ -13,13 +13,14 @@ next:
 
 コンテンツの**定義・作成・承認・公開**を一つのフローで回します。Form Set で型を決め、エントリとリビジョンで版管理し、公開 API / Pub / Embed へ届けます。
 
-## できること
+## できていること（完成形）
 
-- **Form Set** — 15 種のフィールドでコンテンツモデルを設計
-- **リビジョン** — draft → review → published（またはスケジュール公開）
-- **メディア** — 画像・ファイルをアセットとして紐付け
-- **多言語** — ローカライズ可能なフィールドと AI 翻訳（プランによる）
-- **マスタ** — カテゴリ等の共通選択肢を参照
+| 項目 | 状態 |
+|---|---|
+| Form Set | 公開したい型（例: blog）がある |
+| エントリ | **公開済み**が 1 件以上 |
+| 配信 | 公開 API で一覧 / 単体が取れる |
+| （任意） | レビュー承認またはスケジュール公開を一度使った |
 
 ## いつ使うか
 
@@ -27,12 +28,47 @@ next:
 - 承認が必要なチーム運用
 - 公開後に API / 埋め込み / Pub で配信したいとき
 
-## 次のステップ
+## 確認チェックリスト
+
+- [ ] フォームセットの slug を把握している
+- [ ] エントリが **公開済み**
+- [ ] `include_snapshot=true` で本文が返る
+- [ ] （任意）メディアが `mediaUrls` に出る
+
+## 今すぐやる
+
+1. 経路を選ぶ — [B · Console 完成形](/ja/guide/paths/console) または [A · Agents 完成形](/ja/guide/paths/agents)
+2. 1 件公開する（Console またはエージェント）
+3. 公開 API で確認する
+
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true"
+```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+const res = await fetch(
+  `${BASE}/form-sets/blog/entries?include_snapshot=true`
+)
+const data = await res.json()
+```
+
+```bash [MCP]
+# 「blog の公開エントリを本文付きで一覧して」
+```
+
+:::
+
+4. モデル設計は [フォームビルダー](/ja/guide/form-builder)、承認詳細は [コンテンツ管理](/ja/guide/content-management) へ
+
+## 次の一手
 
 | 目的 | ページ |
 |---|---|
-| 管理画面で最初の1件を公開する | [クイックスタート（Console）](/ja/guide/getting-started#console) |
-| フィールドとモデルを設計する | [フォームビルダー](/ja/guide/form-builder) |
-| 承認・差分・担当を深く見る | [コンテンツ管理](/ja/guide/content-management) |
-| 日時指定で公開する | [スケジュール公開](/ja/guide/schedule) |
-| AI で記事を作る | [AI エージェント](/ja/products/agents) |
+| 経路 B · Console | [完成形](/ja/guide/paths/console) |
+| 経路 A · Agents | [完成形](/ja/guide/paths/agents) |
+| フィールド設計 | [フォームビルダー](/ja/guide/form-builder) |
+| 承認・リビジョン | [コンテンツ管理](/ja/guide/content-management) |
+| スケジュール公開 | [スケジュール公開](/ja/guide/schedule) |

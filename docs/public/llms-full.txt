@@ -1,9 +1,12 @@
 # luno — Full API Reference for AI Agents
 
 > Extended Public + Agent API reference. **Start with the curated index:** https://doc.luno.rest/llms.txt  
-> Product overview & pricing: https://luno.rest/llms.txt
+> Product overview & pricing: https://luno.rest/llms.txt  
+> Docs start paths: **A Agents (MCP)** · **B Console** · **C API only** — see https://doc.luno.rest/llms.txt
 
 luno is a headless CMS on Cloudflare Workers + PostgreSQL (Hyperdrive). Public API base (recommended): `https://api.luno.rest/public/p/{projectId}/v1`; host-based: `https://{your-domain}/public/v1` (no auth by default). Agent API: `https://api.luno.rest/admin/v1` with `Authorization: Bearer sk-agent-…`.
+
+Keywords for discovery: Agents, MCP, Console, API only, Content, Contact, Embed, Pub, Webhooks, projectId, llms.txt.
 
 ---
 
