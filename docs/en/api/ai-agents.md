@@ -231,9 +231,26 @@ curl https://your-domain.com/public/v1/sitemap.xml
 
 ### Fetch an entry list
 
-```bash
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?include_snapshot=true&limit=10"
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true&limit=10"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+const res = await fetch(
+  `${BASE}/form-sets/blog/entries?include_snapshot=true&limit=10`
+)
+const data = await res.json()
+```
+
+```bash [MCP]
+npx @luno-cms/mcp setup
+# Agent prompt example: "List 10 published blog entries with bodies"
+```
+
+:::
 
 ### Python — paginate all entries
 

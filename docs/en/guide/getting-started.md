@@ -95,12 +95,37 @@ Draft → Submit for Review → Approve → Published
 
 Once published, you can retrieve the content without any authentication. Prefer [`/public/p/{projectId}/v1`](/en/api/public-api) in production.
 
-#### Verify with curl
+#### List entries
 
-```bash
-# Get all published entries in your form set
-curl https://cms.example.com/public/v1/form-sets/blog/entries
+::: code-group
+
+```bash [curl]
+# Recommended: projectId base
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true"
+
+# Host-resolved (when you have a public host)
+curl "https://cms.example.com/public/v1/form-sets/blog/entries?include_snapshot=true"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+
+const res = await fetch(
+  `${BASE}/form-sets/blog/entries?include_snapshot=true`
+)
+if (!res.ok) throw new Error(`API error: ${res.status}`)
+const { items } = await res.json()
+```
+
+```bash [MCP]
+# Once in your site repo
+npx @luno-cms/mcp setup
+
+# Then ask your agent, e.g.:
+# "List published entries in the blog form set"
+```
+
+:::
 
 Response:
 
@@ -130,12 +155,35 @@ Response:
 }
 ```
 
-##### Fetch a single entry with all field values
+#### Fetch a single entry with field values
 
-```bash
-# Add include_snapshot=true to get field values in the response
-curl "https://cms.example.com/public/v1/form-sets/blog/entries/my-first-post?include_snapshot=true"
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries/my-first-post?include_snapshot=true"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+
+async function getPost(slug: string) {
+  const res = await fetch(
+    `${BASE}/form-sets/blog/entries/${slug}?include_snapshot=true`
+  )
+  if (!res.ok) {
+    if (res.status === 404) throw new Error('Post not found')
+    throw new Error(`API error: ${res.status}`)
+  }
+  return res.json()
+}
+```
+
+```bash [MCP]
+# Ask your agent, e.g.:
+# "Fetch the published body for slug my-first-post"
+```
+
+:::
 
 Response:
 
@@ -156,47 +204,16 @@ Response:
 }
 ```
 
-The `data` object keys match the field keys you defined in the form set. The `mediaUrls` object provides fully-qualified URLs for image and file fields.
-
-#### JavaScript / TypeScript
-
-```typescript
-const BASE = 'https://cms.example.com/public/v1'
-
-// Fetch a paginated list of entries
-async function getPosts(page = 1) {
-  const res = await fetch(
-    `${BASE}/form-sets/blog/entries?page=${page}&include_snapshot=true`
-  )
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
-  return res.json()
-}
-
-// Fetch a single entry
-async function getPost(slug: string) {
-  const res = await fetch(`${BASE}/form-sets/blog/entries/${slug}`)
-  if (!res.ok) {
-    if (res.status === 404) throw new Error('Post not found')
-    throw new Error(`API error: ${res.status}`)
-  }
-  return res.json()
-}
-
-// Usage
-const { items } = await getPosts()
-items.forEach(({ entry, published }) => {
-  console.log(entry.slug, published.updatedAt)
-})
-```
+`data` keys match form-set field keys. `mediaUrls` holds fully-qualified asset URLs.
 
 #### Next.js integration
 
-```typescript
+```ts
 // app/blog/page.tsx
 export default async function BlogPage() {
   const res = await fetch(
-    'https://cms.example.com/public/v1/form-sets/blog/entries?include_snapshot=true',
-    { next: { revalidate: 60 } }  // Cache for 60 seconds
+    'https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true',
+    { next: { revalidate: 60 } }
   )
   const { items } = await res.json()
 

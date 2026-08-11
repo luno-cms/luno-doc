@@ -227,9 +227,26 @@ curl https://your-domain.com/public/v1/sitemap.xml
 
 ### エントリ一覧の取得
 
-```bash
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?include_snapshot=true&limit=10"
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true&limit=10"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+const res = await fetch(
+  `${BASE}/form-sets/blog/entries?include_snapshot=true&limit=10`
+)
+const data = await res.json()
+```
+
+```bash [MCP]
+npx @luno-cms/mcp setup
+# エージェント例: 「blog の公開エントリを 10 件、本文付きで一覧して」
+```
+
+:::
 
 ### Python でのページング処理
 

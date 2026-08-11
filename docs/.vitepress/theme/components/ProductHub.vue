@@ -145,6 +145,14 @@ const copy = {
     loginHref: "https://console.luno.rest/login",
     signupCta: "アカウント作成",
     signupHref: "https://console.luno.rest/register",
+    trust: [
+      { title: "Changelog", href: "/ja/changelog", external: false },
+      {
+        title: "Status",
+        href: "https://status.luno.rest",
+        external: true,
+      },
+    ],
   },
   en: {
     pageTitle: "LUNO Documentation",
@@ -269,6 +277,14 @@ const copy = {
     loginHref: "https://console.luno.rest/login",
     signupCta: "Sign up",
     signupHref: "https://console.luno.rest/register",
+    trust: [
+      { title: "Changelog", href: "/en/changelog", external: false },
+      {
+        title: "Status",
+        href: "https://status.luno.rest",
+        external: true,
+      },
+    ],
   },
 } as const;
 </script>
@@ -276,7 +292,21 @@ const copy = {
 <template>
   <div class="hub" :data-locale="props.locale">
     <header class="hub-intro">
-      <p class="hub-kicker">LUNO</p>
+      <div class="hub-intro__top">
+        <p class="hub-kicker">LUNO</p>
+        <nav class="hub-trust" aria-label="Changelog and status">
+          <a
+            v-for="item in copy[locale].trust"
+            :key="item.href"
+            :href="item.href"
+            :target="item.external ? '_blank' : undefined"
+            :rel="item.external ? 'noopener' : undefined"
+          >
+            {{ item.title
+            }}<span v-if="item.external" class="hub-trust__ext">↗</span>
+          </a>
+        </nav>
+      </div>
       <h1>{{ copy[locale].pageTitle }}</h1>
       <p class="hub-intro__lead">{{ copy[locale].pageLead }}</p>
     </header>

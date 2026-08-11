@@ -43,9 +43,25 @@ Returns form set metadata and the published content of its primary entry (prefer
 
 **Request**
 
-```bash
-curl https://your-domain.com/public/v1/form-sets/settings?locale=en
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/settings?locale=en"
+# or
+curl "https://your-domain.com/public/v1/form-sets/settings?locale=en"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+const res = await fetch(`${BASE}/form-sets/settings?locale=en`)
+const data = await res.json()
+```
+
+```bash [MCP]
+# Agent prompt example: "Fetch the published settings form set"
+```
+
+:::
 
 **Response (200)**
 
@@ -99,19 +115,36 @@ Returns a paginated list of published entries in a form set.
 
 **Request examples**
 
-```bash
+::: code-group
+
+```bash [curl]
 # Default (first 20 entries)
-curl "https://your-domain.com/public/v1/form-sets/blog/entries"
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries"
 
 # With field values included
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?limit=5&include_snapshot=true"
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?limit=5&include_snapshot=true"
 
-# Full-text search (Business plan+)
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?q=cloudflare&locale=en"
-
-# Sorted by update time, newest first
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?sort=updated_at:desc"
+# Full-text search (Business plan+) / sort
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?q=cloudflare&locale=en"
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?sort=updated_at:desc"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+const qs = new URLSearchParams({
+  limit: '5',
+  include_snapshot: 'true',
+  sort: 'updated_at:desc',
+})
+const res = await fetch(`${BASE}/form-sets/blog/entries?${qs}`)
+const data = await res.json()
+```
+
+```bash [MCP]
+# Agent prompt example: "List 5 published blog entries with bodies, newest first"
+```
+
+:::
 
 **Response (200)**
 
@@ -474,11 +507,25 @@ curl "https://api.luno.rest/public/p/{projectId}/v1/master-entities/category/rec
 
 AI-readable published content index in Markdown ([llms.txt spec](https://llmstxt.org/)).
 
-```bash
-curl https://your-domain.com/public/v1/llms.txt
-# or
+::: code-group
+
+```bash [curl]
 curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt
+# or
+curl https://your-domain.com/public/v1/llms.txt
 ```
+
+```ts [JS]
+const text = await fetch(
+  'https://api.luno.rest/public/p/{projectId}/v1/llms.txt'
+).then((r) => r.text())
+```
+
+```bash [MCP]
+# Agent prompt example: "Read this project's llms.txt and summarize the public structure"
+```
+
+:::
 
 ::: tip docs-site llms-full.txt
 The long-form API summary lives on this **docs site**: [llms-full.txt](https://doc.luno.rest/llms-full.txt). The product Public API does **not** expose `/llms-full.txt`.

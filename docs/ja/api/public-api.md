@@ -43,9 +43,25 @@ description: luno の公開 API 全エンドポイントの仕様、クエリパ
 
 **リクエスト例**
 
-```bash
-curl https://your-domain.com/public/v1/form-sets/settings?locale=ja
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/settings?locale=ja"
+# or
+curl "https://your-domain.com/public/v1/form-sets/settings?locale=ja"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+const res = await fetch(`${BASE}/form-sets/settings?locale=ja`)
+const data = await res.json()
+```
+
+```bash [MCP]
+# エージェント例: 「settings フォームセットの公開内容を取得して」
+```
+
+:::
 
 **レスポンス例（200）**
 
@@ -99,19 +115,36 @@ curl https://your-domain.com/public/v1/form-sets/settings?locale=ja
 
 **リクエスト例**
 
-```bash
-# ページ 1 を取得（デフォルト）
-curl "https://your-domain.com/public/v1/form-sets/blog/entries"
+::: code-group
 
-# フィールド値付きで 5 件取得
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?limit=5&include_snapshot=true"
+```bash [curl]
+# ページ 1（デフォルト）
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries"
 
-# 全文検索（Business プラン以上）
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?q=cloudflare&locale=ja"
+# フィールド値付きで 5 件
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?limit=5&include_snapshot=true"
 
-# 更新日時降順でソート
-curl "https://your-domain.com/public/v1/form-sets/blog/entries?sort=updated_at:desc"
+# 全文検索（Business 以上） / ソート
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?q=cloudflare&locale=ja"
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?sort=updated_at:desc"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+const qs = new URLSearchParams({
+  limit: '5',
+  include_snapshot: 'true',
+  sort: 'updated_at:desc',
+})
+const res = await fetch(`${BASE}/form-sets/blog/entries?${qs}`)
+const data = await res.json()
+```
+
+```bash [MCP]
+# エージェント例: 「blog の公開エントリを更新日時降順で 5 件、本文付きで」
+```
+
+:::
 
 **レスポンス例（200）**
 
@@ -503,11 +536,25 @@ curl "https://api.luno.rest/public/p/{projectId}/v1/master-entities/category/rec
 
 AI クローラー・エージェント向けの**公開コンテンツ一覧**（[llms.txt 仕様](https://llmstxt.org/) 準拠）を返します。
 
-```bash
-curl https://your-domain.com/public/v1/llms.txt
-# または
+::: code-group
+
+```bash [curl]
 curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt
+# or
+curl https://your-domain.com/public/v1/llms.txt
 ```
+
+```ts [JS]
+const text = await fetch(
+  'https://api.luno.rest/public/p/{projectId}/v1/llms.txt'
+).then((r) => r.text())
+```
+
+```bash [MCP]
+# エージェント例: 「このプロジェクトの llms.txt を読んで公開構造を要約して」
+```
+
+:::
 
 ::: tip docs サイトの llms-full.txt
 長い API 要約は **ドキュメントサイト**の [llms-full.txt](https://doc.luno.rest/llms-full.txt) です。製品の公開 API には `/llms-full.txt` エンドポイントはありません。

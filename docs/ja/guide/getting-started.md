@@ -97,12 +97,38 @@ luno の管理画面 URL（例: `https://cms.example.com`）にアクセスし�
 
 公開後すぐに、認証なしで公開 API からコンテンツを取得できます。本番では [`/public/p/{projectId}/v1`](/ja/api/public-api) を推奨します。
 
-#### curl で確認する
+#### エントリ一覧を取得する
 
-```bash
-# 公開済みエントリ一覧を取得
-curl https://cms.example.com/public/v1/form-sets/blog/entries
+::: code-group
+
+```bash [curl]
+# 推奨: projectId 固定ベース
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true"
+
+# Host 解決（公開ホストがある場合）
+curl "https://cms.example.com/public/v1/form-sets/blog/entries?include_snapshot=true"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+
+const res = await fetch(
+  `${BASE}/form-sets/blog/entries?include_snapshot=true`
+)
+if (!res.ok) throw new Error(`API error: ${res.status}`)
+const { items } = await res.json()
+```
+
+```bash [MCP]
+# サイトリポジトリで一度だけ
+npx @luno-cms/mcp setup
+
+# エージェントに例:
+# 「blog フォームセットの公開エントリを一覧して」
+# MCP が Public API / Admin API 経由で取得します
+```
+
+:::
 
 レスポンス例：
 
@@ -134,10 +160,33 @@ curl https://cms.example.com/public/v1/form-sets/blog/entries
 
 #### 特定エントリを全フィールド付きで取得する
 
-```bash
-# include_snapshot=true でフィールド値も含めて取得
-curl "https://cms.example.com/public/v1/form-sets/blog/entries/my-first-post?include_snapshot=true"
+::: code-group
+
+```bash [curl]
+curl "https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries/my-first-post?include_snapshot=true"
 ```
+
+```ts [JS]
+const BASE = 'https://api.luno.rest/public/p/{projectId}/v1'
+
+async function getPost(slug: string) {
+  const res = await fetch(
+    `${BASE}/form-sets/blog/entries/${slug}?include_snapshot=true`
+  )
+  if (!res.ok) {
+    if (res.status === 404) throw new Error('記事が見つかりません')
+    throw new Error(`API error: ${res.status}`)
+  }
+  return res.json()
+}
+```
+
+```bash [MCP]
+# エージェントに例:
+# 「slug my-first-post の公開本文を取得して」
+```
+
+:::
 
 レスポンス例：
 
@@ -158,47 +207,16 @@ curl "https://cms.example.com/public/v1/form-sets/blog/entries/my-first-post?inc
 }
 ```
 
-`data` オブジェクトのキーはフォームセットで定義したフィールドの `key` と対応します。`mediaUrls` には画像フィールドの完全な URL が入ります。
-
-#### JavaScript / TypeScript での取得例
-
-```typescript
-const BASE = 'https://cms.example.com/public/v1'
-
-// エントリ一覧を取得
-async function getPosts(page = 1) {
-  const res = await fetch(
-    `${BASE}/form-sets/blog/entries?page=${page}&include_snapshot=true`
-  )
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
-  return res.json()
-}
-
-// 単一エントリを取得
-async function getPost(slug: string) {
-  const res = await fetch(`${BASE}/form-sets/blog/entries/${slug}`)
-  if (!res.ok) {
-    if (res.status === 404) throw new Error('記事が見つかりません')
-    throw new Error(`API error: ${res.status}`)
-  }
-  return res.json()
-}
-
-// 使用例
-const { items } = await getPosts()
-items.forEach(({ entry, published }) => {
-  console.log(entry.slug, published.updatedAt)
-})
-```
+`data` のキーはフォームセットのフィールド `key` と対応します。`mediaUrls` に画像の完全 URL が入ります。
 
 #### Next.js での使用例
 
-```typescript
+```ts
 // app/blog/page.tsx
 export default async function BlogPage() {
   const res = await fetch(
-    'https://cms.example.com/public/v1/form-sets/blog/entries?include_snapshot=true',
-    { next: { revalidate: 60 } }  // 60秒キャッシュ
+    'https://api.luno.rest/public/p/{projectId}/v1/form-sets/blog/entries?include_snapshot=true',
+    { next: { revalidate: 60 } }
   )
   const { items } = await res.json()
 

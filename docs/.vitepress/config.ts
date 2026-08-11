@@ -10,6 +10,7 @@ const jaSidebar = [
     items: [
       { text: "製品ハブ", link: "/ja/" },
       { text: "クイックスタート（3経路）", link: "/ja/guide/getting-started" },
+      { text: "Changelog", link: "/ja/changelog" },
     ],
   },
   {
@@ -60,6 +61,7 @@ const enSidebar = [
     items: [
       { text: "Product hub", link: "/en/" },
       { text: "Quick start (3 paths)", link: "/en/guide/getting-started" },
+      { text: "Changelog", link: "/en/changelog" },
     ],
   },
   {
