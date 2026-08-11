@@ -1,11 +1,23 @@
 ---
 title: AI アシスト
 description: luno の AI 機能（コンテンツ生成・フォームセット提案・ウィジェット CSS 生成・AI エージェント連携）の使い方を説明します。
+prev:
+  text: SEO・サイトマップ
+  link: /ja/guide/seo
+next:
+  text: Changelog
+  link: /ja/changelog
 ---
 
 # AI アシスト
 
 luno はコンテンツ管理作業を効率化する複数の AI アシスト機能を備えています。コンテンツの下書き生成からフォームセットの構造提案、AI エージェントとの連携まで、幅広く対応します。
+
+::: tip 今すぐやる（3 行）
+1. エントリ編集で text / tiptap フィールドを開き **AI** を押す  
+2. 短い指示（例: 「150 字の要約」）で候補を生成し、採用する  
+3. エージェント運用は [経路 A · Agents](/ja/guide/paths/agents) へ  
+:::
 
 ## コンテンツ AI
 

@@ -144,6 +144,20 @@
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02);
 }
 
+a.hub-card,
+.hub-card__main,
+.hub-card__cta {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.hub-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
 .hub-card:hover {
   border-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, var(--vp-c-divider));
   background: var(--vp-c-bg-soft);

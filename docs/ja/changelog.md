@@ -9,6 +9,9 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ## 2026-08-11
 
+- AI アシストに「今すぐやる」3 行を追加
+- ハブのコピーボタンをカードリンクから分離し、コピー成功表示を安定化
+- GitHub Actions を checkout/setup-node/pnpm-action の現行 major に更新（Node 20 警告対策）
 - メディア / SEO / スケジュール公開に「今すぐやる」3 行を追加
 - ハブのモバイル横スクロール（長いコピーコマンド）を修正
 - `packageManager`（pnpm@10）を package.json に固定し、CI と揃えた

@@ -1,11 +1,23 @@
 ---
 title: AI Assist
 description: luno's AI features — content generation in the editor, form set field suggestions, widget CSS generation, and AI agent integration via MCP.
+prev:
+  text: SEO & sitemaps
+  link: /en/guide/seo
+next:
+  text: Changelog
+  link: /en/changelog
 ---
 
 # AI Assist
 
 luno includes several AI-powered features that accelerate content creation and CMS configuration — from drafting body copy to suggesting form structures and generating widget styles.
+
+::: tip Do this now (3 lines)
+1. Open a text / tiptap field in the entry editor and click **AI**  
+2. Prompt briefly (e.g. “150-char summary”), then accept a suggestion  
+3. For agent workflows, go to [Path A · Agents](/en/guide/paths/agents)  
+:::
 
 ## Content AI
 

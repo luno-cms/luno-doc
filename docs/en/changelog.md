@@ -9,6 +9,9 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
+- Added 3-line do-now tips on AI Assist
+- Separated hub copy buttons from card links and hardened copy feedback
+- Bumped GitHub Actions majors (checkout / setup-node / pnpm-action) to clear Node 20 warnings
 - Added 3-line do-now tips on Media, SEO, and Scheduled publishing
 - Fixed hub mobile horizontal overflow from long copy commands
 - Pinned `packageManager` (pnpm@10) in package.json to match CI

@@ -7,18 +7,36 @@ const props = defineProps<{
 
 const copiedKey = ref<string | null>(null);
 
-async function copyCommand(command: string, key: string, event: Event) {
-  event.preventDefault();
-  event.stopPropagation();
+async function writeClipboard(text: string): Promise<boolean> {
   try {
-    await navigator.clipboard.writeText(command);
-    copiedKey.value = key;
-    window.setTimeout(() => {
-      if (copiedKey.value === key) copiedKey.value = null;
-    }, 1600);
+    await navigator.clipboard.writeText(text);
+    return true;
   } catch {
-    // ignore clipboard failures
+    // Fallback for restricted clipboard permissions
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch {
+      return false;
+    }
   }
+}
+
+async function copyCommand(command: string, key: string) {
+  const ok = await writeClipboard(command);
+  if (!ok) return;
+  copiedKey.value = key;
+  window.setTimeout(() => {
+    if (copiedKey.value === key) copiedKey.value = null;
+  }, 1600);
 }
 
 /** Keep ja/en card count, badges, and CTA density aligned. */
@@ -318,21 +336,23 @@ const copy = {
         <p>{{ copy[locale].startLead }}</p>
       </header>
       <div class="hub-grid hub-grid--start">
-        <a
+        <div
           v-for="item in copy[locale].start"
           :key="item.key"
           class="hub-card hub-card--start"
-          :href="item.href"
         >
-          <span class="hub-badge">{{ item.badge }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.body }}</p>
+          <a class="hub-card__main" :href="item.href">
+            <span class="hub-badge">{{ item.badge }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.body }}</p>
+          </a>
           <div v-if="item.command" class="hub-cmd">
             <code>{{ item.command }}</code>
             <button
               type="button"
               class="hub-cmd__btn"
-              @click="copyCommand(item.command!, item.key, $event)"
+              :aria-label="copy[locale].copyLabel"
+              @click="copyCommand(item.command!, item.key)"
             >
               {{
                 copiedKey === item.key
@@ -341,8 +361,8 @@ const copy = {
               }}
             </button>
           </div>
-          <span class="hub-card__cta">{{ item.cta }} →</span>
-        </a>
+          <a class="hub-card__cta" :href="item.href">{{ item.cta }} →</a>
+        </div>
       </div>
     </section>
 
