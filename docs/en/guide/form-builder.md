@@ -327,6 +327,8 @@ References an entry in another form set within the same project. The value in `d
 
 ## Master Data Integration
 
+For the overview, site publish, and Public API, see [Masters](/en/products/masters).
+
 Options for `select`, `radio`, and `multiselect` can come from **Master Data** instead of a static list. Master data is a shared option list that multiple form sets can reference — ideal for shared taxonomies like regions, industries, or product categories.
 
 ## List View Configuration

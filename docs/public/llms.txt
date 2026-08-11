@@ -27,6 +27,10 @@ This file is for **AI agents and developers** wiring Cursor, Claude Desktop, or 
 - [Embed & Pub](https://doc.luno.rest/en/products/embed) · [JA](https://doc.luno.rest/ja/products/embed) — widget.js, iframe, pub.luno.rest
 - [AI Agents](https://doc.luno.rest/en/products/agents) · [JA](https://doc.luno.rest/ja/products/agents) — MCP, agent keys, llms.txt
 - [Webhooks](https://doc.luno.rest/en/products/webhooks) · [JA](https://doc.luno.rest/ja/products/webhooks) — HMAC publish events
+- [Masters](https://doc.luno.rest/en/products/masters) · [JA](https://doc.luno.rest/ja/products/masters) — Entities/records, site publish, Public API
+- [Public API keys](https://doc.luno.rest/en/products/public-api-keys) · [JA](https://doc.luno.rest/ja/products/public-api-keys) — `luno_pub_…` vs `sk-agent-…`
+- [Localization](https://doc.luno.rest/en/products/localization) · [JA](https://doc.luno.rest/ja/products/localization) — Site locales, `?locale=`, AI translate
+- [Plans](https://doc.luno.rest/en/products/plans) · [JA](https://doc.luno.rest/ja/products/plans) — Standard+ / Business+ feature gates
 
 ## Framework recipes (Path C)
 

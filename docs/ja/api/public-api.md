@@ -17,7 +17,7 @@ next:
 管理画面なしで公開コンテンツを読む入口です。サイト配線は [フレームワーク別レシピ](/ja/guide/frameworks/)。ほかの経路: [Agents（MCP）](/ja/products/agents) · [Console クイックスタート](/ja/guide/getting-started#console)。
 :::
 
-認証不要（サイト設定で公開 API キー必須の場合を除く）。すべてのレスポンスは `Content-Type: application/json` です（`/media/:assetId` と XML エンドポイントを除く）。
+デフォルトは認証不要です。すべてのレスポンスは `Content-Type: application/json` です（`/media/:assetId` と XML エンドポイントを除く）。
 
 ## ベース URL
 
@@ -28,7 +28,7 @@ next:
 
 `projectId` は MCP の `get_public_api_info`、または管理画面のプロジェクト設定から取得できます。ローカル（`127.0.0.1`）では Host 版が `DEFAULT_TENANT_ID` に落ちるため、**必ず `/public/p/{projectId}/v1` を使ってください**。
 
-サイト設定で公開 API キー必須の場合は、ヘッダー `X-Luno-Public-Api-Key: luno_pub_…`（またはクエリ）を付けます。エージェントキー（`sk-agent-…`）とは別物です。
+公開 API キー（`luno_pub_…`）は Embed・Host 解決などで使います。ヘッダー `X-Luno-Public-Api-Key`（または `Authorization: Bearer` / クエリ）に付けます。詳細は [公開 API キー](/ja/products/public-api-keys)。エージェントキー（`sk-agent-…`）とは別物です。
 
 以下のパスはいずれも上記ベースの相対パスです。
 
@@ -525,9 +525,9 @@ curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
 
 ---
 
-## マスタ（公開）
+## マスタ（公開） {#masters}
 
-サイトで公開済みのマスタエンティティとレコードを取得できます。
+サイトへ公開済み（`site_published_at` あり）のマスタエンティティとレコードを取得できます。未公開は一覧に出ず、個別取得も 404 です。レコードの `value` は言語共通 ID、`label` は `?locale=` で解決した表示名です。概要は [Masters](/ja/products/masters)。
 
 ```bash
 curl https://api.luno.rest/public/p/{projectId}/v1/master-entities

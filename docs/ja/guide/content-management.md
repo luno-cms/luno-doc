@@ -2,8 +2,8 @@
 title: コンテンツ管理
 description: luno のエントリ管理・リビジョンフロー・スケジュール公開・プレビュー・多言語対応の使い方を詳しく説明します。
 prev:
-  text: Webhooks
-  link: /ja/products/webhooks
+  text: プラン
+  link: /ja/products/plans
 next:
   text: フォームビルダー
   link: /ja/guide/form-builder
@@ -178,7 +178,9 @@ Location: /public/v1/form-sets/blog/entries/new-slug
 
 ## 多言語対応（ロケール）
 
-`text`、`textarea`、`tiptap` タイプのフィールドは `localizable: true` を設定することで多言語対応できます。
+概要・プラン上限・AI 翻訳は [多言語](/ja/products/localization) を参照してください。
+
+`text`、`textarea`、`tiptap` タイプのフィールドはサイト多言語 ON 時に言語別になります（共通にしたい場合は `locale_shared`）。
 
 ### ロケールの指定
 

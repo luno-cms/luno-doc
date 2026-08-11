@@ -111,6 +111,26 @@ const copy = {
         href: "/ja/products/webhooks",
       },
       {
+        title: "Masters",
+        body: "共通選択肢をサイト公開し、公開 API から読む。",
+        href: "/ja/products/masters",
+      },
+      {
+        title: "公開 API キー",
+        body: "luno_pub_…。Embed / Host 解決。エージェントキーとは別。",
+        href: "/ja/products/public-api-keys",
+      },
+      {
+        title: "多言語",
+        body: "サイトロケール、?locale=、AI 翻訳（Standard+）。",
+        href: "/ja/products/localization",
+      },
+      {
+        title: "プラン",
+        body: "Standard / Business の機能境界早見表。",
+        href: "/ja/products/plans",
+      },
+      {
         title: "Media & SEO",
         body: "アセット配信、サイトマップ、OGP、構造化データ。",
         href: "/ja/guide/media",
@@ -256,6 +276,26 @@ const copy = {
         title: "Webhooks",
         body: "HMAC-signed publish events for ISR and integrations.",
         href: "/en/products/webhooks",
+      },
+      {
+        title: "Masters",
+        body: "Shared options published to site and Public API.",
+        href: "/en/products/masters",
+      },
+      {
+        title: "Public API keys",
+        body: "luno_pub_… for Embed / Host. Not agent keys.",
+        href: "/en/products/public-api-keys",
+      },
+      {
+        title: "Localization",
+        body: "Site locales, ?locale=, AI translation (Standard+).",
+        href: "/en/products/localization",
+      },
+      {
+        title: "Plans",
+        body: "Standard / Business feature gate matrix.",
+        href: "/en/products/plans",
       },
       {
         title: "Media & SEO",

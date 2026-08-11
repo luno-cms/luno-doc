@@ -5,8 +5,8 @@ prev:
   text: AI Agents
   link: /ja/products/agents
 next:
-  text: コンテンツ管理
-  link: /ja/guide/content-management
+  text: Masters
+  link: /ja/products/masters
 ---
 
 # Webhooks

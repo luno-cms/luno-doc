@@ -2,8 +2,8 @@
 title: Content Management
 description: How to manage entries and revisions in luno HCMS — the full approval workflow, scheduled publishing, preview links, localization, and slug redirects.
 prev:
-  text: Webhooks
-  link: /en/products/webhooks
+  text: Plans
+  link: /en/products/plans
 next:
   text: Form builder
   link: /en/guide/form-builder
@@ -175,7 +175,9 @@ Your frontend should follow redirects (the default behavior of `fetch` with `red
 
 ## Localization
 
-Fields of type `text`, `textarea`, and `tiptap` can be marked `localizable: true` in the form builder. Requests with a `?locale=` parameter receive the value for that locale.
+For the overview, plan limits, and AI translation, see [Localization](/en/products/localization).
+
+With site locales enabled, `text` / `textarea` / `tiptap` fields are per-locale (use `locale_shared` when a value should be shared). Requests with `?locale=` receive the resolved value.
 
 ```bash
 # Get content in Japanese

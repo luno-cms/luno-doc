@@ -17,7 +17,7 @@ next:
 Read published content without the admin console. Site wiring: [Framework recipes](/en/guide/frameworks/). Other paths: [Agents (MCP)](/en/products/agents) · [Console quick start](/en/guide/getting-started#console).
 :::
 
-No authentication required by default (unless the project requires a public API key). All responses are `Content-Type: application/json` (except `/media/:assetId` and XML endpoints).
+No authentication required by default. All responses are `Content-Type: application/json` (except `/media/:assetId` and XML endpoints).
 
 ## Base URLs
 
@@ -28,7 +28,7 @@ No authentication required by default (unless the project requires a public API 
 
 Get `projectId` from MCP `get_public_api_info` or project settings. On localhost, Host-based URLs fall back to `DEFAULT_TENANT_ID` — **always use `/public/p/{projectId}/v1` locally**.
 
-If the project requires a public API key, send `X-Luno-Public-Api-Key: luno_pub_…` (separate from agent keys `sk-agent-…`).
+Public API keys (`luno_pub_…`) are used for Embed and Host resolution. Send header `X-Luno-Public-Api-Key` (or `Authorization: Bearer` / query). See [Public API keys](/en/products/public-api-keys). Separate from agent keys (`sk-agent-…`).
 
 Paths below are relative to either base.
 
@@ -496,9 +496,9 @@ curl -X POST https://your-domain.com/public/v1/contact-forms/contact/submit \
 
 ---
 
-## Masters (public)
+## Masters (public) {#masters}
 
-List published master entities and their records:
+List master entities and records that are **published to the site** (`site_published_at` set). Unpublished masters are omitted (and return 404 by key). Record `value` is locale-stable; `label` resolves with `?locale=`. Overview: [Masters](/en/products/masters).
 
 ```bash
 curl https://api.luno.rest/public/p/{projectId}/v1/master-entities
