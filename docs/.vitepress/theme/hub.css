@@ -102,23 +102,31 @@
   min-width: 0;
 }
 
-.hub-grid--start,
+.hub-grid--start {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .hub-grid--products {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .hub-grid--connect {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
 }
 
 @media (max-width: 1100px) {
-  .hub-grid--start,
-  .hub-grid--products {
+  .hub-grid--start {
     grid-template-columns: 1fr;
   }
 
-  .hub-grid--connect {
+  .hub-grid--products {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .hub-grid--products {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -156,6 +164,65 @@ a.hub-card,
   flex-direction: column;
   gap: 8px;
   min-width: 0;
+}
+
+.hub-card__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hub-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.hub-icon-wrap--start {
+  width: 36px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 28%, var(--vp-c-divider));
+  background: color-mix(in srgb, var(--vp-c-brand-1) 8%, var(--vp-c-bg));
+  color: var(--vp-c-brand-1);
+}
+
+.hub-icon-wrap--accent {
+  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 32%, var(--vp-c-divider));
+  background: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--vp-c-bg));
+  color: var(--vp-c-brand-1);
+}
+
+.hub-icon-wrap--muted {
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+}
+
+.hub-icon {
+  display: block;
+}
+
+.hub-card--product {
+  gap: 10px;
+  min-height: 148px;
+}
+
+.hub-card--tone-accent {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 26%, var(--vp-c-divider));
+}
+
+.hub-card--tone-accent:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 55%, var(--vp-c-divider));
+  background: color-mix(in srgb, var(--vp-c-brand-1) 4%, var(--vp-c-bg));
+}
+
+.hub-card--tone-muted {
+  border-color: var(--vp-c-divider);
 }
 
 .hub-card:hover {
