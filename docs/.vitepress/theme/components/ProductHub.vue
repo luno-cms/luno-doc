@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import HubIcon from "./HubIcon.vue";
 
 const props = defineProps<{
   locale: "ja" | "en";
@@ -59,7 +58,6 @@ const copy = {
     start: [
       {
         key: "mcp",
-        icon: "agents",
         badge: "A · Agents · ~5 min",
         title: "MCP で始める",
         body: "サイトリポジトリで setup。Cursor / Claude Code / Codex から操作。",
@@ -69,7 +67,6 @@ const copy = {
       },
       {
         key: "console",
-        icon: "console",
         badge: "B · Console · ~10 min",
         title: "管理画面で始める",
         body: "ログインから最初の公開まで。承認とスケジュール公開の入口。",
@@ -79,7 +76,6 @@ const copy = {
       },
       {
         key: "api",
-        icon: "api",
         badge: "C · API only · ~3 min",
         title: "公開 API で読む",
         body: "認証不要（または公開キー）でエントリ・マスタ・メディアを取得。",
@@ -90,71 +86,51 @@ const copy = {
     ],
     products: [
       {
-        icon: "content",
-        tone: "accent",
         title: "Content",
         body: "15 種フィールド、リビジョン、レビュー、スケジュール公開。",
         href: "/ja/products/content",
       },
       {
-        icon: "contact",
-        tone: "accent",
         title: "Contact",
         body: "受信・自動返信・チャット通知。contact.luno.rest ホスト。",
         href: "/ja/products/contact",
       },
       {
-        icon: "embed",
-        tone: "accent",
         title: "Embed & Pub",
         body: "widget / iframe と pub.luno.rest でそのまま配信。",
         href: "/ja/products/embed",
       },
       {
-        icon: "agents",
-        tone: "accent",
         title: "AI Agents",
         body: "MCP、エージェントキー、サイトごとの llms.txt。",
         href: "/ja/products/agents",
       },
       {
-        icon: "webhooks",
-        tone: "accent",
         title: "Webhooks",
         body: "HMAC 署名付き公開イベント。ISR・外部連携向け。",
         href: "/ja/products/webhooks",
       },
       {
-        icon: "masters",
-        tone: "accent",
         title: "Masters",
         body: "共通選択肢をサイト公開し、公開 API から読む。",
         href: "/ja/products/masters",
       },
       {
-        icon: "keys",
-        tone: "muted",
         title: "公開 API キー",
         body: "luno_pub_…。Embed / Host 解決。エージェントキーとは別。",
         href: "/ja/products/public-api-keys",
       },
       {
-        icon: "localization",
-        tone: "muted",
         title: "多言語",
         body: "サイトロケール、?locale=、AI 翻訳（Standard+）。",
         href: "/ja/products/localization",
       },
       {
-        icon: "plans",
-        tone: "muted",
         title: "プラン",
         body: "Standard / Business の機能境界早見表。",
         href: "/ja/products/plans",
       },
       {
-        icon: "media",
-        tone: "muted",
         title: "Media & SEO",
         body: "アセット配信、サイトマップ、OGP、構造化データ。",
         href: "/ja/guide/media",
@@ -249,7 +225,6 @@ const copy = {
     start: [
       {
         key: "mcp",
-        icon: "agents",
         badge: "A · Agents · ~5 min",
         title: "Start with MCP",
         body: "Run setup in your site repo. Operate from Cursor / Claude Code / Codex.",
@@ -259,7 +234,6 @@ const copy = {
       },
       {
         key: "console",
-        icon: "console",
         badge: "B · Console · ~10 min",
         title: "Start in Console",
         body: "From sign-in to first publish—approvals and scheduled publishing.",
@@ -269,7 +243,6 @@ const copy = {
       },
       {
         key: "api",
-        icon: "api",
         badge: "C · API only · ~3 min",
         title: "Read via Public API",
         body: "Fetch entries, masters, and media with no auth (or a public key).",
@@ -280,71 +253,51 @@ const copy = {
     ],
     products: [
       {
-        icon: "content",
-        tone: "accent",
         title: "Content",
         body: "15 field types, revisions, review, scheduled publishing.",
         href: "/en/products/content",
       },
       {
-        icon: "contact",
-        tone: "accent",
         title: "Contact",
         body: "Inbox, autoreply, chat notify. Host on contact.luno.rest.",
         href: "/en/products/contact",
       },
       {
-        icon: "embed",
-        tone: "accent",
         title: "Embed & Pub",
         body: "widget / iframe and pub.luno.rest for drop-in delivery.",
         href: "/en/products/embed",
       },
       {
-        icon: "agents",
-        tone: "accent",
         title: "AI Agents",
         body: "MCP, agent keys, and per-site llms.txt.",
         href: "/en/products/agents",
       },
       {
-        icon: "webhooks",
-        tone: "accent",
         title: "Webhooks",
         body: "HMAC-signed publish events for ISR and integrations.",
         href: "/en/products/webhooks",
       },
       {
-        icon: "masters",
-        tone: "accent",
         title: "Masters",
         body: "Shared options published to site and Public API.",
         href: "/en/products/masters",
       },
       {
-        icon: "keys",
-        tone: "muted",
         title: "Public API keys",
         body: "luno_pub_… for Embed / Host. Not agent keys.",
         href: "/en/products/public-api-keys",
       },
       {
-        icon: "localization",
-        tone: "muted",
         title: "Localization",
         body: "Site locales, ?locale=, AI translation (Standard+).",
         href: "/en/products/localization",
       },
       {
-        icon: "plans",
-        tone: "muted",
         title: "Plans",
         body: "Standard / Business feature gate matrix.",
         href: "/en/products/plans",
       },
       {
-        icon: "media",
-        tone: "muted",
         title: "Media & SEO",
         body: "Asset delivery, sitemaps, OGP, structured data.",
         href: "/en/guide/media",
@@ -459,12 +412,7 @@ const copy = {
           class="hub-card hub-card--start"
         >
           <a class="hub-card__main" :href="item.href">
-            <div class="hub-card__topline">
-              <span class="hub-icon-wrap hub-icon-wrap--start" aria-hidden="true">
-                <HubIcon :name="item.icon" />
-              </span>
-              <span class="hub-badge">{{ item.badge }}</span>
-            </div>
+            <span class="hub-badge">{{ item.badge }}</span>
             <h3>{{ item.title }}</h3>
             <p>{{ item.body }}</p>
           </a>
@@ -497,25 +445,9 @@ const copy = {
         <a
           v-for="item in copy[locale].products"
           :key="item.href"
-          class="hub-card hub-card--product"
-          :class="
-            item.tone === 'accent'
-              ? 'hub-card--tone-accent'
-              : 'hub-card--tone-muted'
-          "
+          class="hub-card"
           :href="item.href"
         >
-          <span
-            class="hub-icon-wrap"
-            :class="
-              item.tone === 'accent'
-                ? 'hub-icon-wrap--accent'
-                : 'hub-icon-wrap--muted'
-            "
-            aria-hidden="true"
-          >
-            <HubIcon :name="item.icon" />
-          </span>
           <h3>{{ item.title }}</h3>
           <p>{{ item.body }}</p>
         </a>
