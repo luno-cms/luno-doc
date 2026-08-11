@@ -1,6 +1,12 @@
 ---
 title: AI Agents（MCP）ガイド · 経路 A
 description: スタート経路 A · Agents（MCP）。セットアップ、エージェント API キー（full/content/schema）、llms.txt、コンテンツ操作。
+prev:
+  text: 完成形 A · Agents
+  link: /ja/guide/paths/agents
+next:
+  text: 公開 API
+  link: /ja/api/public-api
 ---
 
 # AI エージェント向けガイド

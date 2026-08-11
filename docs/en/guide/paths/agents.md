@@ -5,8 +5,8 @@ prev:
   text: Quick start
   link: /en/guide/getting-started
 next:
-  text: AI Agents overview
-  link: /en/products/agents
+  text: Done state B · Console
+  link: /en/guide/paths/console
 ---
 
 # Path A · Agents (MCP) — Done state

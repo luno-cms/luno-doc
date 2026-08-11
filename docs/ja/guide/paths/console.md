@@ -2,11 +2,11 @@
 title: 経路 B · Console — 完成形
 description: スタート経路 B · Console。約 10 分後の完成形、確認チェックリスト、今すぐやる手順。
 prev:
-  text: 経路 A · Agents
+  text: 完成形 A · Agents
   link: /ja/guide/paths/agents
 next:
-  text: クイックスタート（手順）
-  link: /ja/guide/getting-started#console
+  text: 完成形 C · API only
+  link: /ja/guide/paths/api
 ---
 
 # 経路 B · Console — 完成形

@@ -1,6 +1,12 @@
 ---
 title: AI Agents (MCP) guide · Path A
 description: Start path A · Agents (MCP). Setup, agent API key scopes (full/content/schema), llms.txt, and content operations.
+prev:
+  text: Done state A · Agents
+  link: /en/guide/paths/agents
+next:
+  text: Public API
+  link: /en/api/public-api
 ---
 
 # AI Agents Guide

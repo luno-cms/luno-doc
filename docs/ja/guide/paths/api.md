@@ -2,11 +2,11 @@
 title: 経路 C · API only — 完成形
 description: スタート経路 C · API only。約 3 分後の完成形、確認チェックリスト、今すぐやる手順。
 prev:
-  text: 経路 B · Console
+  text: 完成形 B · Console
   link: /ja/guide/paths/console
 next:
-  text: 公開 API
-  link: /ja/api/public-api#api-only
+  text: Content
+  link: /ja/products/content
 ---
 
 # 経路 C · API only — 完成形

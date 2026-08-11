@@ -1,6 +1,12 @@
 ---
 title: サイトへの埋め込み
 description: 公開 API キーとウィジェット ID を指定するだけ。HTML に script を貼って記事一覧・詳細を表示します（npm / ビルド不要）。
+prev:
+  text: Embed & Pub
+  link: /ja/products/embed
+next:
+  text: 公開 API
+  link: /ja/api/public-api
 ---
 
 # サイトへの埋め込み

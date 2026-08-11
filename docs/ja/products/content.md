@@ -2,8 +2,8 @@
 title: Content · Console / Agents
 description: LUNO Content — Form Set・エントリ・承認・公開。完成形チェックと今すぐやる手順（経路 B Console / 経路 A Agents）。
 prev:
-  text: クイックスタート
-  link: /ja/guide/getting-started
+  text: 完成形 C · API only
+  link: /ja/guide/paths/api
 next:
   text: Contact
   link: /ja/products/contact

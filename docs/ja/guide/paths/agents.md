@@ -5,8 +5,8 @@ prev:
   text: クイックスタート
   link: /ja/guide/getting-started
 next:
-  text: AI Agents 概要
-  link: /ja/products/agents
+  text: 完成形 B · Console
+  link: /ja/guide/paths/console
 ---
 
 # 経路 A · Agents（MCP）— 完成形

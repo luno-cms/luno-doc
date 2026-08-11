@@ -1,6 +1,12 @@
 ---
 title: Webhook
 description: luno の Webhook 設定、イベント種別、ペイロード形式、HMAC-SHA256 署名検証（Node.js・Python・Go）、リトライ動作を説明します。
+prev:
+  text: 公開 API
+  link: /ja/api/public-api
+next:
+  text: AI Agents ガイド
+  link: /ja/api/ai-agents
 ---
 
 # Webhook

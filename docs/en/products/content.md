@@ -2,8 +2,8 @@
 title: Content · Console / Agents
 description: LUNO Content — form sets, entries, approval, publish. Done-state checklist and do-now steps (path B Console / path A Agents).
 prev:
-  text: Quick start
-  link: /en/guide/getting-started
+  text: Done state C · API only
+  link: /en/guide/paths/api
 next:
   text: Contact
   link: /en/products/contact

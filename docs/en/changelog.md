@@ -9,6 +9,9 @@ Docs and public-spec updates, newest first. For platform uptime, see [Status](ht
 
 ## 2026-08-11
 
+- Added 3-line do-now tips on Content management and Form builder
+- Rewired Prev/Next: start → done states A/B/C → product overviews → deep guides
+- Documented Changelog ops rules in README
 - Aligned Content / Embed overviews to the done-state pattern; collapsed done-state group in the sidebar
 - Added start paths A/B/C and Products list to `llms.txt` (search / agent keyword sync)
 - Added do-now steps and checklists on path done-state pages

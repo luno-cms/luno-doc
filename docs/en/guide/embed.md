@@ -1,6 +1,12 @@
 ---
 title: Embed on Your Site
 description: Add a script tag and widget ID to display article lists and detail pages on any site—no npm or build step required.
+prev:
+  text: Embed & Pub
+  link: /en/products/embed
+next:
+  text: Public API
+  link: /en/api/public-api
 ---
 
 # Embed on Your Site

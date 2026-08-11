@@ -2,11 +2,11 @@
 title: Path B · Console — Done state
 description: Start path B · Console. Done state after ~10 minutes, checklist, and do-now steps.
 prev:
-  text: Path A · Agents
+  text: Done state A · Agents
   link: /en/guide/paths/agents
 next:
-  text: Quick start (steps)
-  link: /en/guide/getting-started#console
+  text: Done state C · API only
+  link: /en/guide/paths/api
 ---
 
 # Path B · Console — Done state

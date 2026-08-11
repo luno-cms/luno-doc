@@ -2,11 +2,11 @@
 title: Path C · API only — Done state
 description: Start path C · API only. Done state after ~3 minutes, checklist, and do-now steps.
 prev:
-  text: Path B · Console
+  text: Done state B · Console
   link: /en/guide/paths/console
 next:
-  text: Public API
-  link: /en/api/public-api#api-only
+  text: Content
+  link: /en/products/content
 ---
 
 # Path C · API only — Done state

@@ -1,6 +1,12 @@
 ---
 title: 公開 API · 経路 C · API only
 description: スタート経路 C · API only。/public/p/{projectId}/v1 の全エンドポイント、クエリ、レスポンス例。
+prev:
+  text: 完成形 C · API only
+  link: /ja/guide/paths/api
+next:
+  text: Webhook
+  link: /ja/api/webhooks
 ---
 
 # 公開 API リファレンス

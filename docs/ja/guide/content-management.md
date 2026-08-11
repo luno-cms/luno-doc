@@ -1,11 +1,23 @@
 ---
 title: コンテンツ管理
 description: luno のエントリ管理・リビジョンフロー・スケジュール公開・プレビュー・多言語対応の使い方を詳しく説明します。
+prev:
+  text: Webhooks
+  link: /ja/products/webhooks
+next:
+  text: フォームビルダー
+  link: /ja/guide/form-builder
 ---
 
 # コンテンツ管理
 
 luno のコンテンツ管理は **エントリ（Entry）** と **リビジョン（Revision）** を中心に設計されています。このページでは、コンテンツの作成から公開まで、承認ワークフローの全体像と各操作の詳細を説明します。
+
+::: tip 今すぐやる（3 行）
+1. [Content 概要](/ja/products/content) の完成形を確認する  
+2. Console で下書き →（必要ならレビュー）→ **公開** まで進める  
+3. 公開 API で `include_snapshot=true` の一覧が返ることを確認する  
+:::
 
 ## エントリとリビジョンの概念
 

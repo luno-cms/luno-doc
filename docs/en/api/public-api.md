@@ -1,6 +1,12 @@
 ---
 title: Public API · Path C · API only
 description: Start path C · API only. Full /public/p/{projectId}/v1 endpoints, query params, and response examples.
+prev:
+  text: Done state C · API only
+  link: /en/guide/paths/api
+next:
+  text: Webhooks
+  link: /en/api/webhooks
 ---
 
 # Public API Reference

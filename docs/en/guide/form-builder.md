@@ -1,11 +1,23 @@
 ---
 title: Form Builder
 description: How to create form sets (content types) in luno HCMS and a complete reference for all field types, their configuration options, and API response formats.
+prev:
+  text: Content management
+  link: /en/guide/content-management
+next:
+  text: Media
+  link: /en/guide/media
 ---
 
 # Form Builder
 
 A **Form Set** is luno's content model. It defines the structure of a category of content by combining typed fields. Create one form set for each type of content you manage — "Blog Posts", "News", "Products", "Team Members", etc.
+
+::: tip Do this now (3 lines)
+1. **Settings → Form Sets → New** (display name + slug)  
+2. Add 2–3 required fields and save  
+3. Create one entry, then hit `/form-sets/{slug}/entries` on the Public API  
+:::
 
 ## Creating a Form Set
 

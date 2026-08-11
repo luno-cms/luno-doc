@@ -2,8 +2,8 @@
 title: Quick Start · Agents / Console / API only
 description: LUNO start paths A Agents (MCP), B Console, C API only—done states and step-by-step entry points.
 next:
-  text: Content
-  link: /en/products/content
+  text: Done state A · Agents
+  link: /en/guide/paths/agents
 ---
 
 # Quick Start

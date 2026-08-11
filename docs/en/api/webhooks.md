@@ -1,6 +1,12 @@
 ---
 title: Webhooks
 description: luno Webhook setup, event types, payload format, and HMAC-SHA256 signature verification in Node.js, Python, and Go.
+prev:
+  text: Public API
+  link: /en/api/public-api
+next:
+  text: AI Agents guide
+  link: /en/api/ai-agents
 ---
 
 # Webhooks

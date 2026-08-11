@@ -2,8 +2,8 @@
 title: クイックスタート · Agents / Console / API only
 description: LUNO スタート経路 A Agents（MCP）・B Console・C API only。完成形と手順への入口。
 next:
-  text: Content
-  link: /ja/products/content
+  text: 完成形 A · Agents
+  link: /ja/guide/paths/agents
 ---
 
 # クイックスタート
