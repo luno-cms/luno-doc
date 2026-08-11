@@ -25,15 +25,27 @@ const jaSidebar = [
   {
     text: "プロダクト",
     items: [
-      { text: "Content", link: "/ja/products/content" },
-      { text: "Contact", link: "/ja/products/contact" },
-      { text: "Embed & Pub", link: "/ja/products/embed" },
-      { text: "AI Agents", link: "/ja/products/agents" },
-      { text: "Webhooks", link: "/ja/products/webhooks" },
-      { text: "Masters", link: "/ja/products/masters" },
-      { text: "公開 API キー", link: "/ja/products/public-api-keys" },
-      { text: "多言語", link: "/ja/products/localization" },
-      { text: "プラン", link: "/ja/products/plans" },
+      {
+        text: "運用面",
+        collapsed: false,
+        items: [
+          { text: "Content", link: "/ja/products/content" },
+          { text: "Contact", link: "/ja/products/contact" },
+          { text: "Embed & Pub", link: "/ja/products/embed" },
+          { text: "AI Agents", link: "/ja/products/agents" },
+          { text: "Webhooks", link: "/ja/products/webhooks" },
+        ],
+      },
+      {
+        text: "プラットフォーム",
+        collapsed: false,
+        items: [
+          { text: "Masters", link: "/ja/products/masters" },
+          { text: "公開 API キー", link: "/ja/products/public-api-keys" },
+          { text: "多言語", link: "/ja/products/localization" },
+          { text: "プラン", link: "/ja/products/plans" },
+        ],
+      },
     ],
   },
   {
@@ -99,15 +111,27 @@ const enSidebar = [
   {
     text: "Products",
     items: [
-      { text: "Content", link: "/en/products/content" },
-      { text: "Contact", link: "/en/products/contact" },
-      { text: "Embed & Pub", link: "/en/products/embed" },
-      { text: "AI Agents", link: "/en/products/agents" },
-      { text: "Webhooks", link: "/en/products/webhooks" },
-      { text: "Masters", link: "/en/products/masters" },
-      { text: "Public API keys", link: "/en/products/public-api-keys" },
-      { text: "Localization", link: "/en/products/localization" },
-      { text: "Plans", link: "/en/products/plans" },
+      {
+        text: "Surfaces",
+        collapsed: false,
+        items: [
+          { text: "Content", link: "/en/products/content" },
+          { text: "Contact", link: "/en/products/contact" },
+          { text: "Embed & Pub", link: "/en/products/embed" },
+          { text: "AI Agents", link: "/en/products/agents" },
+          { text: "Webhooks", link: "/en/products/webhooks" },
+        ],
+      },
+      {
+        text: "Platform",
+        collapsed: false,
+        items: [
+          { text: "Masters", link: "/en/products/masters" },
+          { text: "Public API keys", link: "/en/products/public-api-keys" },
+          { text: "Localization", link: "/en/products/localization" },
+          { text: "Plans", link: "/en/products/plans" },
+        ],
+      },
     ],
   },
   {

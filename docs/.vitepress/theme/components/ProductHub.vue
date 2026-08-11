@@ -48,7 +48,8 @@ const copy = {
     startTitle: "スタート",
     startLead: "経路を選ぶ → 完成形を確認 → 手順へ。",
     productsTitle: "プロダクト",
-    productsLead: "コンテンツ運用に必要な面を、ひとつのプラットフォームで。",
+    productsLead:
+      "コンテンツの定義・公開・配信から、エージェント連携・基盤設定まで。各面はエージェント対応です。",
     connectTitle: "つなぐ",
     connectLead: "ツールを選んで、すぐ使える入口へ。",
     refTitle: "リファレンス",
@@ -90,56 +91,72 @@ const copy = {
         command: "curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt",
       },
     ],
-    products: [
+    productGroups: [
       {
-        title: "Content",
-        body: "15 種フィールド、リビジョン、レビュー、スケジュール公開。",
-        href: "/ja/products/content",
+        key: "surfaces",
+        title: "運用面",
+        lead: "コンテンツを作り、届け、自動化する面。",
+        tone: "accent",
+        items: [
+          {
+            title: "Content",
+            body: "15 種フィールド、リビジョン、レビュー、スケジュール公開。",
+            href: "/ja/products/content",
+          },
+          {
+            title: "Contact",
+            body: "受信・自動返信・チャット通知。contact.luno.rest ホスト。",
+            href: "/ja/products/contact",
+          },
+          {
+            title: "Embed & Pub",
+            body: "widget / iframe と pub.luno.rest でそのまま配信。",
+            href: "/ja/products/embed",
+          },
+          {
+            title: "AI Agents",
+            body: "MCP、エージェントキー、サイトごとの llms.txt。",
+            href: "/ja/products/agents",
+          },
+          {
+            title: "Webhooks",
+            body: "HMAC 署名付き公開イベント。ISR・外部連携向け。",
+            href: "/ja/products/webhooks",
+          },
+        ],
       },
       {
-        title: "Contact",
-        body: "受信・自動返信・チャット通知。contact.luno.rest ホスト。",
-        href: "/ja/products/contact",
-      },
-      {
-        title: "Embed & Pub",
-        body: "widget / iframe と pub.luno.rest でそのまま配信。",
-        href: "/ja/products/embed",
-      },
-      {
-        title: "AI Agents",
-        body: "MCP、エージェントキー、サイトごとの llms.txt。",
-        href: "/ja/products/agents",
-      },
-      {
-        title: "Webhooks",
-        body: "HMAC 署名付き公開イベント。ISR・外部連携向け。",
-        href: "/ja/products/webhooks",
-      },
-      {
-        title: "Masters",
-        body: "共通選択肢をサイト公開し、公開 API から読む。",
-        href: "/ja/products/masters",
-      },
-      {
-        title: "公開 API キー",
-        body: "luno_pub_…。Embed / Host 解決。エージェントキーとは別。",
-        href: "/ja/products/public-api-keys",
-      },
-      {
-        title: "多言語",
-        body: "サイトロケール、?locale=、AI 翻訳（Standard+）。",
-        href: "/ja/products/localization",
-      },
-      {
-        title: "プラン",
-        body: "Standard / Business の機能境界早見表。",
-        href: "/ja/products/plans",
-      },
-      {
-        title: "Media & SEO",
-        body: "アセット配信、サイトマップ、OGP、構造化データ。",
-        href: "/ja/guide/media",
+        key: "platform",
+        title: "プラットフォーム",
+        lead: "選択肢・キー・言語・プランなど、運用を支える基盤。",
+        tone: "muted",
+        items: [
+          {
+            title: "Masters",
+            body: "共通選択肢をサイト公開し、公開 API から読む。",
+            href: "/ja/products/masters",
+          },
+          {
+            title: "公開 API キー",
+            body: "luno_pub_…。Embed / Host 解決。エージェントキーとは別。",
+            href: "/ja/products/public-api-keys",
+          },
+          {
+            title: "多言語",
+            body: "サイトロケール、?locale=、AI 翻訳（Standard+）。",
+            href: "/ja/products/localization",
+          },
+          {
+            title: "プラン",
+            body: "Standard / Business の機能境界早見表。",
+            href: "/ja/products/plans",
+          },
+          {
+            title: "Media & SEO",
+            body: "アセット配信、サイトマップ、OGP、構造化データ。",
+            href: "/ja/guide/media",
+          },
+        ],
       },
     ],
     connect: [
@@ -221,7 +238,8 @@ const copy = {
     startTitle: "Get started",
     startLead: "Pick a path → see the done state → follow the steps.",
     productsTitle: "Products",
-    productsLead: "Content operations surfaces in one platform.",
+    productsLead:
+      "Define, publish, and deliver content—plus agents and platform controls. Every surface is agent-ready.",
     connectTitle: "Connect",
     connectLead: "Pick a tool and jump to the right setup.",
     refTitle: "Reference",
@@ -263,56 +281,72 @@ const copy = {
         command: "curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt",
       },
     ],
-    products: [
+    productGroups: [
       {
-        title: "Content",
-        body: "15 field types, revisions, review, scheduled publishing.",
-        href: "/en/products/content",
+        key: "surfaces",
+        title: "Surfaces",
+        lead: "Create, deliver, and automate content.",
+        tone: "accent",
+        items: [
+          {
+            title: "Content",
+            body: "15 field types, revisions, review, scheduled publishing.",
+            href: "/en/products/content",
+          },
+          {
+            title: "Contact",
+            body: "Inbox, autoreply, chat notify. Host on contact.luno.rest.",
+            href: "/en/products/contact",
+          },
+          {
+            title: "Embed & Pub",
+            body: "widget / iframe and pub.luno.rest for drop-in delivery.",
+            href: "/en/products/embed",
+          },
+          {
+            title: "AI Agents",
+            body: "MCP, agent keys, and per-site llms.txt.",
+            href: "/en/products/agents",
+          },
+          {
+            title: "Webhooks",
+            body: "HMAC-signed publish events for ISR and integrations.",
+            href: "/en/products/webhooks",
+          },
+        ],
       },
       {
-        title: "Contact",
-        body: "Inbox, autoreply, chat notify. Host on contact.luno.rest.",
-        href: "/en/products/contact",
-      },
-      {
-        title: "Embed & Pub",
-        body: "widget / iframe and pub.luno.rest for drop-in delivery.",
-        href: "/en/products/embed",
-      },
-      {
-        title: "AI Agents",
-        body: "MCP, agent keys, and per-site llms.txt.",
-        href: "/en/products/agents",
-      },
-      {
-        title: "Webhooks",
-        body: "HMAC-signed publish events for ISR and integrations.",
-        href: "/en/products/webhooks",
-      },
-      {
-        title: "Masters",
-        body: "Shared options published to site and Public API.",
-        href: "/en/products/masters",
-      },
-      {
-        title: "Public API keys",
-        body: "luno_pub_… for Embed / Host. Not agent keys.",
-        href: "/en/products/public-api-keys",
-      },
-      {
-        title: "Localization",
-        body: "Site locales, ?locale=, AI translation (Standard+).",
-        href: "/en/products/localization",
-      },
-      {
-        title: "Plans",
-        body: "Standard / Business feature gate matrix.",
-        href: "/en/products/plans",
-      },
-      {
-        title: "Media & SEO",
-        body: "Asset delivery, sitemaps, OGP, structured data.",
-        href: "/en/guide/media",
+        key: "platform",
+        title: "Platform",
+        lead: "Shared options, keys, locales, and plan gates.",
+        tone: "muted",
+        items: [
+          {
+            title: "Masters",
+            body: "Shared options published to site and Public API.",
+            href: "/en/products/masters",
+          },
+          {
+            title: "Public API keys",
+            body: "luno_pub_… for Embed / Host. Not agent keys.",
+            href: "/en/products/public-api-keys",
+          },
+          {
+            title: "Localization",
+            body: "Site locales, ?locale=, AI translation (Standard+).",
+            href: "/en/products/localization",
+          },
+          {
+            title: "Plans",
+            body: "Standard / Business feature gate matrix.",
+            href: "/en/products/plans",
+          },
+          {
+            title: "Media & SEO",
+            body: "Asset delivery, sitemaps, OGP, structured data.",
+            href: "/en/guide/media",
+          },
+        ],
       },
     ],
     connect: [
@@ -462,16 +496,32 @@ const copy = {
         <h2>{{ copy[locale].productsTitle }}</h2>
         <p>{{ copy[locale].productsLead }}</p>
       </header>
-      <div class="hub-grid hub-grid--products">
-        <a
-          v-for="item in copy[locale].products"
-          :key="item.href"
-          class="hub-card"
-          :href="item.href"
-        >
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.body }}</p>
-        </a>
+      <div
+        v-for="group in copy[locale].productGroups"
+        :key="group.key"
+        class="hub-product-group"
+        :data-tone="group.tone"
+      >
+        <header class="hub-product-group__head">
+          <h3>{{ group.title }}</h3>
+          <p>{{ group.lead }}</p>
+        </header>
+        <div class="hub-grid hub-grid--products">
+          <a
+            v-for="item in group.items"
+            :key="item.href"
+            class="hub-card hub-card--product"
+            :class="
+              group.tone === 'accent'
+                ? 'hub-card--tone-accent'
+                : 'hub-card--tone-muted'
+            "
+            :href="item.href"
+          >
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.body }}</p>
+          </a>
+        </div>
       </div>
     </section>
 

@@ -107,6 +107,52 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.hub-product-group {
+  margin-top: 22px;
+}
+
+.hub-product-group:first-of-type {
+  margin-top: 18px;
+}
+
+.hub-product-group__head h3 {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+}
+
+.hub-product-group__head p {
+  margin: 4px 0 0;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--vp-c-text-3);
+  max-width: 40rem;
+}
+
+.hub-product-group .hub-grid--products {
+  margin-top: 12px;
+}
+
+.hub-card--product {
+  min-height: 120px;
+}
+
+.hub-card--tone-accent {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 28%, var(--vp-c-divider));
+}
+
+.hub-card--tone-accent:hover {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 55%, var(--vp-c-divider));
+  background: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg-soft));
+}
+
+.hub-card--tone-muted {
+  border-color: var(--vp-c-divider);
+}
+
 .hub-grid--connect {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
