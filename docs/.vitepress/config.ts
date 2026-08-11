@@ -86,6 +86,16 @@ export default defineConfig({
   title: "LUNO",
   description: "AI-native content operations platform",
   base: "/",
+  // Light-first product docs; users can still toggle dark.
+  appearance: true,
+  head: [
+    // Prefer light on first visit (Neon-like docs shell). Respect later user toggle.
+    [
+      "script",
+      {},
+      `(() => { try { const k = 'vitepress-theme-appearance'; if (!localStorage.getItem(k)) localStorage.setItem(k, 'light'); } catch (_) {} })();`,
+    ],
+  ],
 
   sitemap: {
     hostname: "https://doc.luno.rest",
@@ -112,8 +122,14 @@ export default defineConfig({
           { text: "API", link: "/ja/api/overview" },
           { text: "運用", link: "/ja/self-hosting/" },
           {
-            text: "Console",
-            link: "https://console.luno.rest",
+            text: "ログイン",
+            link: "https://console.luno.rest/login",
+            target: "_blank",
+            rel: "noopener",
+          },
+          {
+            text: "アカウント作成",
+            link: "https://console.luno.rest/register",
             target: "_blank",
             rel: "noopener",
           },
@@ -143,8 +159,14 @@ export default defineConfig({
           { text: "API", link: "/en/api/overview" },
           { text: "Ops", link: "/en/self-hosting/" },
           {
-            text: "Console",
-            link: "https://console.luno.rest",
+            text: "Log in",
+            link: "https://console.luno.rest/login",
+            target: "_blank",
+            rel: "noopener",
+          },
+          {
+            text: "Sign up",
+            link: "https://console.luno.rest/register",
             target: "_blank",
             rel: "noopener",
           },

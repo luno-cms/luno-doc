@@ -1,10 +1,31 @@
 <script setup lang="ts">
-defineProps<{
+import { ref } from "vue";
+
+const props = defineProps<{
   locale: "ja" | "en";
 }>();
 
+const copiedKey = ref<string | null>(null);
+
+async function copyCommand(command: string, key: string, event: Event) {
+  event.preventDefault();
+  event.stopPropagation();
+  try {
+    await navigator.clipboard.writeText(command);
+    copiedKey.value = key;
+    window.setTimeout(() => {
+      if (copiedKey.value === key) copiedKey.value = null;
+    }, 1600);
+  } catch {
+    // ignore clipboard failures
+  }
+}
+
 const copy = {
   ja: {
+    pageTitle: "LUNO Documentation",
+    pageLead:
+      "AI ネイティブなコンテンツ運用プラットフォーム。定義・作成・承認・公開・配信までの入口です。",
     startTitle: "スタート",
     startLead: "最短で触る、管理画面で理解する、API でつなぐ。",
     productsTitle: "プロダクト",
@@ -13,27 +34,35 @@ const copy = {
     connectLead: "AI エージェントとフロントエンドからすぐ接続できます。",
     refTitle: "リファレンス",
     refLead: "認証・エンドポイント・運用設定の仕様。",
+    copyLabel: "コピー",
+    copiedLabel: "コピー済み",
     start: [
       {
-        badge: "~5 min",
+        key: "mcp",
+        badge: "Quick · ~5 min",
         title: "MCP で始める",
         body: "既存サイトリポジトリで setup。キーを置いて Cursor / Claude Code / Codex から操作。",
         href: "/ja/api/ai-agents",
-        cta: "AI エージェントガイド",
+        cta: "ガイドを開く",
+        command: "npx @luno-cms/mcp setup",
       },
       {
-        badge: "Console",
+        key: "console",
+        badge: "Guided · Console",
         title: "管理画面クイックスタート",
         body: "ログインから最初のエントリ公開まで。承認フローとスケジュール公開の入口。",
         href: "/ja/guide/getting-started",
         cta: "クイックスタート",
+        command: null,
       },
       {
+        key: "api",
         badge: "API",
         title: "公開 API で読む",
         body: "認証不要（または公開キー）でエントリ・マスタ・メディアを取得。",
         href: "/ja/api/public-api",
         cta: "公開 API",
+        command: "curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt",
       },
     ],
     products: [
@@ -92,12 +121,15 @@ const copy = {
       { title: "環境変数", href: "/ja/self-hosting/env-vars" },
       { title: "デプロイ", href: "/ja/self-hosting/deployment" },
     ],
-    consoleCta: "Console を開く",
-    consoleHref: "https://console.luno.rest",
+    loginCta: "ログイン",
+    loginHref: "https://console.luno.rest/login",
     signupCta: "アカウント作成",
     signupHref: "https://console.luno.rest/register",
   },
   en: {
+    pageTitle: "LUNO Documentation",
+    pageLead:
+      "An AI-native content operations platform—entry points to define, create, review, publish, and distribute.",
     startTitle: "Get started",
     startLead: "Touch it fast, learn the console, then wire the API.",
     productsTitle: "Products",
@@ -106,27 +138,35 @@ const copy = {
     connectLead: "Hook up AI agents and frontends in minutes.",
     refTitle: "Reference",
     refLead: "Auth, endpoints, and ops configuration.",
+    copyLabel: "Copy",
+    copiedLabel: "Copied",
     start: [
       {
-        badge: "~5 min",
+        key: "mcp",
+        badge: "Quick · ~5 min",
         title: "Start with MCP",
         body: "Run setup in your site repo, store keys, operate from Cursor / Claude Code / Codex.",
         href: "/en/api/ai-agents",
-        cta: "AI Agents guide",
+        cta: "Open guide",
+        command: "npx @luno-cms/mcp setup",
       },
       {
-        badge: "Console",
+        key: "console",
+        badge: "Guided · Console",
         title: "Admin quick start",
         body: "From sign-in to first publish—approval flow and scheduled publishing.",
         href: "/en/guide/getting-started",
         cta: "Quick start",
+        command: null,
       },
       {
+        key: "api",
         badge: "API",
         title: "Read via Public API",
         body: "Fetch entries, masters, and media with no auth (or a public API key).",
         href: "/en/api/public-api",
         cta: "Public API",
+        command: "curl https://api.luno.rest/public/p/{projectId}/v1/llms.txt",
       },
     ],
     products: [
@@ -185,16 +225,22 @@ const copy = {
       { title: "Environment variables", href: "/en/self-hosting/env-vars" },
       { title: "Deployment", href: "/en/self-hosting/deployment" },
     ],
-    consoleCta: "Open Console",
-    consoleHref: "https://console.luno.rest",
-    signupCta: "Create account",
+    loginCta: "Log in",
+    loginHref: "https://console.luno.rest/login",
+    signupCta: "Sign up",
     signupHref: "https://console.luno.rest/register",
   },
 } as const;
 </script>
 
 <template>
-  <div class="hub" :data-locale="locale">
+  <div class="hub" :data-locale="props.locale">
+    <header class="hub-intro">
+      <p class="hub-kicker">LUNO</p>
+      <h1>{{ copy[locale].pageTitle }}</h1>
+      <p class="hub-intro__lead">{{ copy[locale].pageLead }}</p>
+    </header>
+
     <section class="hub-section">
       <header class="hub-section__head">
         <h2>{{ copy[locale].startTitle }}</h2>
@@ -203,13 +249,27 @@ const copy = {
       <div class="hub-grid hub-grid--start">
         <a
           v-for="item in copy[locale].start"
-          :key="item.href"
+          :key="item.key"
           class="hub-card hub-card--start"
           :href="item.href"
         >
           <span class="hub-badge">{{ item.badge }}</span>
           <h3>{{ item.title }}</h3>
           <p>{{ item.body }}</p>
+          <div v-if="item.command" class="hub-cmd">
+            <code>{{ item.command }}</code>
+            <button
+              type="button"
+              class="hub-cmd__btn"
+              @click="copyCommand(item.command!, item.key, $event)"
+            >
+              {{
+                copiedKey === item.key
+                  ? copy[locale].copiedLabel
+                  : copy[locale].copyLabel
+              }}
+            </button>
+          </div>
           <span class="hub-card__cta">{{ item.cta }} →</span>
         </a>
       </div>
@@ -262,11 +322,11 @@ const copy = {
         </li>
       </ul>
       <div class="hub-actions">
-        <a class="hub-btn hub-btn--primary" :href="copy[locale].consoleHref">
-          {{ copy[locale].consoleCta }}
-        </a>
-        <a class="hub-btn hub-btn--ghost" :href="copy[locale].signupHref">
+        <a class="hub-btn hub-btn--primary" :href="copy[locale].signupHref">
           {{ copy[locale].signupCta }}
+        </a>
+        <a class="hub-btn hub-btn--ghost" :href="copy[locale].loginHref">
+          {{ copy[locale].loginCta }}
         </a>
       </div>
     </section>

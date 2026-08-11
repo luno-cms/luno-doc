@@ -1,137 +1,108 @@
-/* ── Brand colors ── */
+/* Light-first docs shell (Neon-like calm product docs). Dark remains optional. */
+
 :root {
-  --vp-c-brand-1: #0ea5e9;
-  --vp-c-brand-2: #38bdf8;
-  --vp-c-brand-3: #7dd3fc;
-  --vp-c-brand-soft: rgba(14, 165, 233, 0.12);
+  --vp-c-brand-1: #0284c7;
+  --vp-c-brand-2: #0ea5e9;
+  --vp-c-brand-3: #38bdf8;
+  --vp-c-brand-soft: rgba(2, 132, 199, 0.1);
+
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f8fafc;
+  --vp-c-bg-soft: #f8fafc;
+  --vp-c-bg-mute: #f1f5f9;
+  --vp-c-bg-elv: #ffffff;
+
+  --vp-c-text-1: #0f172a;
+  --vp-c-text-2: #475569;
+  --vp-c-text-3: #64748b;
+
+  --vp-c-divider: #e2e8f0;
+  --vp-c-border: #e2e8f0;
+  --vp-c-gutter: #e2e8f0;
+
+  --vp-nav-bg-color: rgba(255, 255, 255, 0.86);
+  --vp-sidebar-bg-color: #ffffff;
+  --vp-code-bg: #f1f5f9;
 }
 
-/* ── Dark mode: LP に合わせた背景・表面色 ── */
 .dark {
-  --vp-c-bg: #080b0f;
-  --vp-c-bg-soft: #0e1520;
-  --vp-c-bg-mute: #111827;
-  --vp-c-bg-elv: #0e1520;
+  --vp-c-brand-1: #38bdf8;
+  --vp-c-brand-2: #7dd3fc;
+  --vp-c-brand-3: #bae6fd;
+  --vp-c-brand-soft: rgba(56, 189, 248, 0.12);
+
+  --vp-c-bg: #0b1220;
+  --vp-c-bg-alt: #0f172a;
+  --vp-c-bg-soft: #111827;
+  --vp-c-bg-mute: #1e293b;
+  --vp-c-bg-elv: #111827;
 
   --vp-c-text-1: #f1f5f9;
   --vp-c-text-2: #94a3b8;
   --vp-c-text-3: #64748b;
 
-  --vp-c-divider: rgba(14, 165, 233, 0.12);
-  --vp-c-border: rgba(14, 165, 233, 0.15);
+  --vp-c-divider: rgba(148, 163, 184, 0.16);
+  --vp-c-border: rgba(148, 163, 184, 0.18);
 
-  /* nav */
-  --vp-nav-bg-color: rgba(8, 11, 15, 0.85);
-
-  /* sidebar */
-  --vp-sidebar-bg-color: #080b0f;
+  --vp-nav-bg-color: rgba(11, 18, 32, 0.88);
+  --vp-sidebar-bg-color: #0b1220;
+  --vp-code-bg: #0f172a;
 }
 
-/* ── Nav bar ── */
-.dark .VPNav {
-  border-bottom: 1px solid rgba(14, 165, 233, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+.VPNav {
+  border-bottom: 1px solid var(--vp-c-divider);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* ── Logo: 控えめな存在感 ── */
-.VPNavBarTitle .logo {
-  filter: none;
+.VPSidebar {
+  border-right: 1px solid var(--vp-c-divider);
 }
 
-/* ── Hero ── */
-.dark .VPHero .name {
-  color: #f1f5f9;
-  background: none;
-  -webkit-text-fill-color: unset;
-}
-
-.dark .VPHero .tagline {
-  color: #94a3b8;
-}
-
-/* ── ボタン ── */
-.dark .VPButton.medium.brand {
-  background: #0ea5e9;
-  border-color: #0ea5e9;
-  box-shadow: none;
-  color: #fff;
-}
-.dark .VPButton.medium.brand:hover {
-  background: #38bdf8;
-  border-color: #38bdf8;
-}
-.dark .VPButton.medium.alt {
-  background: transparent;
-  border-color: rgba(14, 165, 233, 0.4);
-  color: #0ea5e9;
-}
-.dark .VPButton.medium.alt:hover {
-  border-color: #0ea5e9;
-  background: rgba(14, 165, 233, 0.08);
-}
-
-/* ── Sidebar ── */
-.dark .VPSidebarItem.level-0 > .item > .text {
-  color: #94a3b8;
+.VPSidebarItem.level-0 > .item > .text {
+  color: var(--vp-c-text-3);
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.dark .VPSidebarItem.is-active > .item > .link > .text {
-  color: #0ea5e9;
-}
-.dark .VPSidebarItem > .item > .link:hover > .text {
-  color: #38bdf8;
+
+.VPSidebarItem.is-active > .item > .link > .text {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
 }
 
-/* ── Code blocks ── */
-.dark div[class*='language-'] {
-  background: #0a0f1a !important;
-  border: 1px solid rgba(14, 165, 233, 0.12);
+.VPSidebarItem > .item > .link:hover > .text {
+  color: var(--vp-c-brand-1);
 }
 
-/* ── Inline code ── */
-.dark :not(pre) > code {
-  background: rgba(14, 165, 233, 0.1);
-  color: #38bdf8;
+.VPNavBarTitle .logo {
+  filter: none;
+}
+
+:not(pre) > code {
   border-radius: 4px;
 }
 
-/* ── Links ── */
-.dark .vp-doc a {
-  color: #0ea5e9;
+.vp-doc a {
+  color: var(--vp-c-brand-1);
   text-decoration: none;
 }
-.dark .vp-doc a:hover {
-  color: #38bdf8;
+
+.vp-doc a:hover {
   text-decoration: underline;
 }
 
-/* ── Table ── */
-.dark .vp-doc table thead tr {
-  background: #0e1520;
-}
-.dark .vp-doc table tr:nth-child(2n) {
-  background: rgba(14, 165, 233, 0.04);
+.VPLocalSearchBox {
+  --vp-local-search-highlight-bg: var(--vp-c-brand-soft);
 }
 
-/* ── Custom block (tip/warning/danger) ── */
-.dark .custom-block.tip {
-  background: rgba(14, 165, 233, 0.08);
-  border-color: rgba(14, 165, 233, 0.3);
+/* Compact doc content width next to sidebar */
+.VPDoc:not(.has-sidebar) .container,
+.VPDoc.has-sidebar .content {
+  padding-top: 24px;
 }
 
-/* ── Search ── */
-.dark .VPLocalSearchBox {
-  --vp-local-search-bg: #0e1520;
-  --vp-local-search-highlight-bg: rgba(14, 165, 233, 0.2);
-}
-
-/* ── Force dark mode always (LP はダークのみ) ── */
-@media (prefers-color-scheme: light) {
-  :root:not(.light) {
-    color-scheme: dark;
-  }
+.Layout .VPContent.has-sidebar {
+  padding-left: 0;
 }
