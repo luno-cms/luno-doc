@@ -1,28 +1,40 @@
-/* Light-first docs shell (Neon-like calm product docs). Dark remains optional. */
+/* Docs shell: light + dark (#000) both must differ so the appearance switch works. */
 
 :root {
+  /* Shell: 1280px max, centered (header / sidebar / content) */
+  --vp-sidebar-width: 312px;
+  --vp-layout-max-width: 1280px;
+  --luno-shell-pad: 32px;
+  --luno-content-max: 52rem;
+  --luno-hub-max: 100%;
+  --vp-nav-logo-height: 20px; /* default 24px */
+  --luno-nav-row1: 56px;
+  --luno-nav-row2: 36px;
+  --luno-nav-row: var(--luno-nav-row1); /* alias for row1 controls */
+  --vp-nav-height: 64px; /* mobile single row; desktop overridden below */
+
   --vp-c-brand-1: #0284c7;
   --vp-c-brand-2: #0ea5e9;
   --vp-c-brand-3: #38bdf8;
   --vp-c-brand-soft: rgba(2, 132, 199, 0.1);
 
-  --vp-c-bg: #ffffff;
-  --vp-c-bg-alt: #f8fafc;
-  --vp-c-bg-soft: #f8fafc;
-  --vp-c-bg-mute: #f1f5f9;
+  --vp-c-bg: #f4f6f8;
+  --vp-c-bg-alt: #eef1f4;
+  --vp-c-bg-soft: #eef1f4;
+  --vp-c-bg-mute: #e5e9ee;
   --vp-c-bg-elv: #ffffff;
 
   --vp-c-text-1: #0f172a;
   --vp-c-text-2: #475569;
   --vp-c-text-3: #64748b;
 
-  --vp-c-divider: #e2e8f0;
-  --vp-c-border: #e2e8f0;
-  --vp-c-gutter: #e2e8f0; /* nav hairline */
+  --vp-c-divider: #dde3ea;
+  --vp-c-border: #dde3ea;
+  --vp-c-gutter: #dde3ea;
 
-  --vp-nav-bg-color: rgba(255, 255, 255, 0.86);
-  --vp-sidebar-bg-color: #ffffff;
-  --vp-code-bg: #f1f5f9;
+  --vp-nav-bg-color: rgba(244, 246, 248, 0.9);
+  --vp-sidebar-bg-color: #f4f6f8;
+  --vp-code-bg: #e8ecf1;
 }
 
 .dark {
@@ -31,11 +43,11 @@
   --vp-c-brand-3: #bae6fd;
   --vp-c-brand-soft: rgba(56, 189, 248, 0.12);
 
-  --vp-c-bg: #0b1220;
-  --vp-c-bg-alt: #0f172a;
-  --vp-c-bg-soft: #111827;
-  --vp-c-bg-mute: #1e293b;
-  --vp-c-bg-elv: #111827;
+  --vp-c-bg: #000000;
+  --vp-c-bg-alt: #0a0a0a;
+  --vp-c-bg-soft: #0a0a0a;
+  --vp-c-bg-mute: #141414;
+  --vp-c-bg-elv: #0a0a0a;
 
   --vp-c-text-1: #f1f5f9;
   --vp-c-text-2: #94a3b8;
@@ -45,9 +57,9 @@
   --vp-c-border: rgba(148, 163, 184, 0.18);
   --vp-c-gutter: rgba(148, 163, 184, 0.16);
 
-  --vp-nav-bg-color: rgba(11, 18, 32, 0.88);
-  --vp-sidebar-bg-color: #0b1220;
-  --vp-code-bg: #0f172a;
+  --vp-nav-bg-color: rgba(0, 0, 0, 0.9);
+  --vp-sidebar-bg-color: #000000;
+  --vp-code-bg: #0a0a0a;
 }
 
 .VPNav {
@@ -55,10 +67,11 @@
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Full-bleed header hairline (VitePress offsets it under the sidebar by default) */
-.VPNavBar .divider {
+/* Full-bleed header hairline under logo + nav (do not re-offset with sidebar pad) */
+.VPNavBar .divider,
+.VPNavBar.has-sidebar .divider {
   padding-left: 0 !important;
-  width: 100%;
+  width: 100% !important;
 }
 
 .VPNavBar .divider-line {
@@ -95,6 +108,270 @@
 /* No trailing hairline after appearance when social links are absent */
 .VPNavBar .social-links:not(:has(a)) {
   display: none !important;
+}
+
+/* Language + appearance switches live in the footer only */
+.VPNavBar .translations,
+.VPNavScreen .translations,
+.VPNavBarExtra .translations,
+.VPNavScreenTranslations,
+.VPNavBarTranslations,
+.VPNavBar .VPNavBarAppearance,
+.VPNavBar .appearance,
+.VPNavScreenAppearance,
+.VPNavBarExtra .appearance {
+  display: none !important;
+}
+
+/* Auth CTAs (row 1 right) */
+.luno-nav-auth {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-left: 8px;
+}
+
+.luno-nav-auth__login,
+.luno-nav-auth__signup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--vp-c-text-1);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none !important;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.luno-nav-auth__login {
+  color: var(--vp-c-text-1);
+  background: transparent;
+}
+
+.luno-nav-auth__login:hover {
+  background: color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
+}
+
+.luno-nav-auth__signup {
+  color: var(--vp-c-bg);
+  background: var(--vp-c-text-1);
+}
+
+.luno-nav-auth__signup:hover {
+  background: color-mix(in srgb, var(--vp-c-text-1) 88%, var(--vp-c-bg));
+}
+
+.VPNavScreen .luno-nav-auth {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 16px 0 0;
+}
+
+/* GitHub: keep icon-only social control */
+.VPNavBar .social-links {
+  margin-right: 4px;
+}
+
+.VPNavBar .VPSocialLink[aria-label="github"] {
+  width: 36px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--vp-c-text-1) 35%, transparent);
+  border-radius: 999px;
+  color: var(--vp-c-text-1);
+}
+
+.VPNavBar .VPSocialLink[aria-label="github"]:hover {
+  border-color: var(--vp-c-text-1);
+  color: var(--vp-c-text-1);
+}
+
+/*
+ * Two-row header (Neon-like), desktop:
+ *  row1 — logo | centered search | social + auth
+ *  row2 — nav groups (logo-aligned, compact)
+ */
+@media (min-width: 960px) {
+  :root {
+    --vp-nav-height: calc(var(--luno-nav-row1) + var(--luno-nav-row2));
+  }
+
+  .luno-nav-auth {
+    display: inline-flex;
+  }
+
+  .VPNavBar {
+    height: var(--vp-nav-height);
+    background-color: var(--vp-c-bg) !important;
+  }
+
+  .VPNavBar .wrapper,
+  .VPNavBar .container {
+    height: var(--vp-nav-height);
+    background-color: var(--vp-c-bg);
+  }
+
+  .VPNavBar.has-sidebar .container > .title {
+    height: var(--luno-nav-row1) !important;
+    background-color: var(--vp-c-bg);
+  }
+
+  .VPNavBarTitle .title,
+  .VPNavBar.has-sidebar .container > .title .title {
+    height: var(--luno-nav-row1) !important;
+  }
+
+  /* Let search/menu position against .VPNavBar, not the offset .content */
+  .VPNavBar.has-sidebar .content {
+    position: static !important;
+  }
+
+  .VPNavBar .content-body {
+    position: static !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* keep row1 controls in the top band */
+    justify-content: flex-end;
+    column-gap: 8px;
+    height: var(--vp-nav-height);
+    background-color: var(--vp-c-bg) !important;
+  }
+
+  /* Pushes search + social/auth to the right on row 1 */
+  .VPNavBar .content-body::before {
+    content: "";
+    order: 0;
+    flex: 1 1 auto;
+    height: var(--luno-nav-row1);
+  }
+
+  /* Search: ~1.5× wider, right-aligned before auth CTAs */
+  .VPNavBar .content-body > .search {
+    order: 1;
+    position: static;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: min(630px, 54vw);
+    height: var(--luno-nav-row1);
+    margin-right: 8px;
+  }
+
+  .VPNavBar .content-body > .social-links,
+  .VPNavBar .content-body > .luno-nav-auth {
+    order: 2;
+    align-self: flex-start;
+    height: var(--luno-nav-row1);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Desktop: no overflow menu / hamburger (auth+theme live elsewhere) */
+  .VPNavBar .content-body > .hamburger,
+  .VPNavBar .content-body > .extra,
+  .VPNavBar .VPNavBarExtra {
+    display: none !important;
+  }
+
+  /* Row 2: full-bleed, left-aligned with logo */
+  .VPNavBar .content-body > .menu {
+    order: 3;
+    position: absolute;
+    top: var(--luno-nav-row1);
+    left: 0;
+    right: 0;
+    z-index: 3;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: var(--luno-nav-row2);
+    padding-left: max(32px, calc((100vw - var(--vp-layout-max-width)) / 2));
+    padding-right: max(32px, calc((100vw - var(--vp-layout-max-width)) / 2));
+    border-top: 1px solid var(--vp-c-divider);
+    background-color: var(--vp-c-bg);
+  }
+
+  .VPNavBar .DocSearch-Button {
+    width: 100%;
+    max-width: 630px;
+    height: 36px;
+    border: 1px solid color-mix(in srgb, var(--vp-c-text-1) 18%, transparent);
+    border-radius: 8px;
+    background-color: color-mix(in srgb, var(--vp-c-bg-alt) 80%, transparent);
+  }
+
+  /* .menu and .VPNavBarMenu are the same element */
+  .VPNavBar .VPNavBarMenu.menu {
+    display: flex;
+    align-items: center;
+    height: var(--luno-nav-row2);
+  }
+
+  /* VPFlyout defaults to height: var(--vp-nav-height) — force compact row2 */
+  .VPNavBar .VPNavBarMenu.menu > .VPNavBarMenuLink,
+  .VPNavBar .VPNavBarMenu.menu > .VPNavBarMenuGroup,
+  .VPNavBar .VPNavBarMenu.menu > .VPFlyout,
+  .VPNavBar .VPNavBarMenu.menu > .VPFlyout > .button,
+  .VPNavBar .VPNavBarMenu.menu > .VPFlyout > .button .text {
+    height: var(--luno-nav-row2) !important;
+    min-height: 0 !important;
+    line-height: var(--luno-nav-row2) !important;
+  }
+
+  .VPNavBar .VPNavBarMenu.menu > .VPNavBarMenuLink,
+  .VPNavBar .VPNavBarMenu.menu > .VPFlyout > .button {
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    font-weight: 500;
+  }
+
+  /* Flush first item text with logo left edge */
+  .VPNavBar .VPNavBarMenu.menu > .VPFlyout:first-of-type > .button,
+  .VPNavBar .VPNavBarMenu.menu > .VPNavBarMenuLink:first-of-type {
+    padding-left: 0 !important;
+  }
+
+  .VPNavBar .VPNavBarMenu.menu > .VPFlyout > .button .text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px !important;
+    line-height: 1 !important;
+  }
+
+  /*
+   * Dropdown: below the trigger, left-aligned to the item.
+   * Default is right:0 which pushes the first (左端) panel off-screen.
+   */
+  .VPNavBar .VPNavBarMenu.menu > .VPFlyout > .menu {
+    top: 100% !important;
+    left: 0 !important;
+    right: auto !important;
+    z-index: 70;
+  }
+
+  /* Sidebar content must clear the taller 2-row header */
+  .VPSidebar {
+    padding-top: var(--vp-nav-height) !important;
+  }
+
+  /*
+   * VitePress hardcodes curtain sticky top: -64px (default nav height).
+   * With 2-row header (92px) that leaves the curtain 28px too low and
+   * buries the first sidebar labels under an opaque band.
+   */
+  .VPSidebar .curtain {
+    top: calc(var(--vp-nav-height) * -1) !important;
+    height: var(--vp-nav-height) !important;
+    margin-top: calc(var(--vp-nav-height) * -1) !important;
+  }
 }
 
 .VPSidebarItem.level-0 > .item > .text {
@@ -156,6 +433,44 @@
 
 .VPNavBarTitle .logo {
   filter: none;
+  display: block;
+  height: var(--vp-nav-logo-height);
+  /* luno-logo.svg viewBox aspect 110×25 — width:auto was collapsing to 0 */
+  width: calc(var(--vp-nav-logo-height) * 110 / 25);
+  max-width: none;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+/* Hit-area over the wordmark only → luno.rest (same tab) */
+.luno-logo-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: calc(var(--vp-nav-logo-height) * 110 / 25);
+  cursor: pointer;
+}
+
+/* Neon-style: LUNO | Docs */
+.luno-docs-mark {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--vp-c-text-2);
+}
+
+.luno-docs-mark::before {
+  content: "|";
+  margin-right: 10px;
+  font-weight: 400;
+  color: var(--vp-c-text-3);
 }
 
 :not(pre) > code {
@@ -180,5 +495,109 @@
   padding-top: 24px;
 }
 
-/* Do not override VPContent.has-sidebar padding — VitePress aligns
-   sidebar + content with shared layout math (≥1440px). */
+/*
+ * Shell: header / content / footer max 1280px, centered.
+ * Logo (header left) and sidebar menu share the same left edge.
+ */
+.VPNavBarTitle .title {
+  position: relative;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (min-width: 960px) and (max-width: 1279.98px) {
+  .VPSidebar {
+    padding-left: var(--luno-shell-pad) !important;
+    padding-right: var(--luno-shell-pad) !important;
+    width: var(--vp-sidebar-width) !important;
+    max-width: var(--vp-sidebar-width) !important;
+  }
+
+  .VPNavBar.has-sidebar .container > .title {
+    padding-left: var(--luno-shell-pad) !important;
+    padding-right: var(--luno-shell-pad) !important;
+    width: var(--vp-sidebar-width) !important;
+  }
+
+  .VPNavBar.has-sidebar .content {
+    padding-left: var(--vp-sidebar-width) !important;
+    padding-right: var(--luno-shell-pad) !important;
+  }
+
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width) !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .VPSidebar {
+    padding-left: max(
+      32px,
+      calc((100vw - var(--vp-layout-max-width)) / 2)
+    ) !important;
+    padding-right: 32px !important;
+    width: calc(
+      max(32px, (100vw - var(--vp-layout-max-width)) / 2) + var(--vp-sidebar-width) -
+        32px
+    ) !important;
+    max-width: none !important;
+  }
+
+  .VPNavBar.has-sidebar .container > .title {
+    padding-left: max(
+      32px,
+      calc((100vw - var(--vp-layout-max-width)) / 2)
+    ) !important;
+    padding-right: 32px !important;
+    width: calc(
+      max(32px, (100vw - var(--vp-layout-max-width)) / 2) + var(--vp-sidebar-width) -
+        32px
+    ) !important;
+  }
+
+  .VPNavBar.has-sidebar .content {
+    padding-left: calc(
+      max(32px, (100vw - var(--vp-layout-max-width)) / 2) + var(--vp-sidebar-width) -
+        32px
+    ) !important;
+    padding-right: calc(
+      max(32px, (100vw - var(--vp-layout-max-width)) / 2) + 32px
+    ) !important;
+  }
+
+  .VPContent.has-sidebar {
+    padding-left: calc(
+      max(32px, (100vw - var(--vp-layout-max-width)) / 2) + var(--vp-sidebar-width) -
+        32px
+    ) !important;
+    padding-right: max(
+      32px,
+      calc((100vw - var(--vp-layout-max-width)) / 2)
+    ) !important;
+  }
+}
+
+.VPDoc.has-sidebar .content-container {
+  max-width: min(var(--luno-content-max), 100%) !important;
+}
+
+.VPDoc.has-sidebar.has-aside .content-container {
+  max-width: min(45rem, 100%) !important;
+}
+
+.VPContent .VPPage {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 32px var(--luno-shell-pad) 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 959px) {
+  .VPContent .VPPage {
+    padding: 24px 16px 0;
+  }
+}
+
+/* Footer inner band owned by footer.css (full-bleed chrome, 1280 centered). */

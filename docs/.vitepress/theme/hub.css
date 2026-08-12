@@ -13,48 +13,6 @@
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.hub-intro__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.hub-kicker {
-  margin: 0;
-  font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-3);
-}
-
-.hub-trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-}
-
-.hub-trust a {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--vp-c-text-2);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-
-.hub-trust a:hover {
-  color: var(--vp-c-brand-1);
-  border-bottom-color: color-mix(in srgb, var(--vp-c-brand-1) 40%, transparent);
-}
-
-.hub-trust__ext {
-  margin-left: 2px;
-  font-size: 0.7rem;
-  opacity: 0.75;
-}
-
 .hub-intro h1 {
   margin: 0;
   font-size: 1.75rem;
@@ -479,13 +437,27 @@ a.hub-card,
   border: 1px solid transparent;
 }
 
+/* アカウント作成: white fill → black fill */
 .hub-btn--primary {
-  background: var(--vp-c-brand-1);
+  background: #000;
+  border-color: #000;
   color: #fff !important;
 }
 
 .hub-btn--primary:hover {
-  background: var(--vp-c-brand-2);
+  background: #111;
+  border-color: #111;
+}
+
+.dark .hub-btn--primary {
+  background: #000;
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff !important;
+}
+
+.dark .hub-btn--primary:hover {
+  background: #0a0a0a;
+  border-color: #fff;
 }
 
 .hub-btn--ghost {
@@ -509,18 +481,7 @@ a.hub-card,
   background: var(--vp-c-bg-soft);
 }
 
-/* Page layout: hub sits in the content column (sidebar offset handled by VPContent) */
+/* Hub page box model is owned by custom.css (Neon-like shell spacing). */
 .VPContent .VPPage {
-  max-width: min(1104px, 100%);
-  width: 100%;
-  margin: 0 auto;
-  padding: 32px 32px 0;
-  box-sizing: border-box;
   overflow-x: clip;
-}
-
-@media (max-width: 960px) {
-  .VPContent .VPPage {
-    padding: 24px 16px 0;
-  }
 }

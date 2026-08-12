@@ -55,7 +55,7 @@ const jaSidebar = [
         text: "API リファレンス",
         collapsed: true,
         items: [
-          { text: "概要", link: "/ja/api/overview" },
+          { text: "API 概要", link: "/ja/api/overview" },
           { text: "公開 API", link: "/ja/api/public-api" },
           { text: "Webhook", link: "/ja/api/webhooks" },
           { text: "AI エージェント向け", link: "/ja/api/ai-agents" },
@@ -65,7 +65,7 @@ const jaSidebar = [
         text: "フレームワーク",
         collapsed: true,
         items: [
-          { text: "概要", link: "/ja/guide/frameworks/" },
+          { text: "フレームワーク概要", link: "/ja/guide/frameworks/" },
           { text: "Next.js", link: "/ja/guide/frameworks/nextjs" },
           { text: "Astro", link: "/ja/guide/frameworks/astro" },
           { text: "Nuxt", link: "/ja/guide/frameworks/nuxt" },
@@ -134,7 +134,7 @@ const enSidebar = [
         text: "API reference",
         collapsed: true,
         items: [
-          { text: "Overview", link: "/en/api/overview" },
+          { text: "API overview", link: "/en/api/overview" },
           { text: "Public API", link: "/en/api/public-api" },
           { text: "Webhooks", link: "/en/api/webhooks" },
           { text: "AI agents", link: "/en/api/ai-agents" },
@@ -144,7 +144,7 @@ const enSidebar = [
         text: "Frameworks",
         collapsed: true,
         items: [
-          { text: "Overview", link: "/en/guide/frameworks/" },
+          { text: "Frameworks overview", link: "/en/guide/frameworks/" },
           { text: "Next.js", link: "/en/guide/frameworks/nextjs" },
           { text: "Astro", link: "/en/guide/frameworks/astro" },
           { text: "Nuxt", link: "/en/guide/frameworks/nuxt" },
@@ -163,15 +163,11 @@ const enSidebar = [
 ];
 
 /** Top nav mirrors sidebar groups (same labels / same links). */
-function navFromSidebar(
-  sidebar: typeof jaSidebar,
-  extras: { text: string; link: string; target?: string; rel?: string }[],
-) {
-  const groups = sidebar.map((group) => ({
+function navFromSidebar(sidebar: typeof jaSidebar) {
+  return sidebar.map((group) => ({
     text: group.text,
     items: flattenNavItems(group.items),
   }));
-  return [...groups, ...extras];
 }
 
 function flattenNavItems(
@@ -198,12 +194,14 @@ export default defineConfig({
   title: "LUNO",
   description: "AI-native content operations platform",
   base: "/",
-  appearance: true,
+  appearance: "dark",
   head: [
+    ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
+    ["link", { rel: "apple-touch-icon", href: "/apple-touch-icon.svg" }],
     [
       "script",
       {},
-      `(() => { try { const k = 'vitepress-theme-appearance'; if (!localStorage.getItem(k)) localStorage.setItem(k, 'light'); } catch (_) {} })();`,
+      `(() => { try { const k = 'vitepress-theme-appearance'; if (!localStorage.getItem(k)) localStorage.setItem(k, 'dark'); } catch (_) {} })();`,
     ],
   ],
 
@@ -221,20 +219,7 @@ export default defineConfig({
           prev: "前のページ",
           next: "次のページ",
         },
-        nav: navFromSidebar(jaSidebar, [
-          {
-            text: "ログイン",
-            link: "https://console.luno.rest/login",
-            target: "_blank",
-            rel: "noopener",
-          },
-          {
-            text: "アカウント作成",
-            link: "https://console.luno.rest/register",
-            target: "_blank",
-            rel: "noopener",
-          },
-        ]),
+        nav: navFromSidebar(jaSidebar),
         sidebar: {
           "/ja/": jaSidebar,
         },
@@ -249,20 +234,7 @@ export default defineConfig({
           prev: "Previous",
           next: "Next",
         },
-        nav: navFromSidebar(enSidebar, [
-          {
-            text: "Log in",
-            link: "https://console.luno.rest/login",
-            target: "_blank",
-            rel: "noopener",
-          },
-          {
-            text: "Sign up",
-            link: "https://console.luno.rest/register",
-            target: "_blank",
-            rel: "noopener",
-          },
-        ]),
+        nav: navFromSidebar(enSidebar),
         sidebar: {
           "/en/": enSidebar,
         },
@@ -273,6 +245,9 @@ export default defineConfig({
   themeConfig: {
     logo: "/luno-logo.svg",
     siteTitle: false,
+    socialLinks: [
+      { icon: "github", link: "https://github.com/luno-cms/luno" },
+    ],
     search: {
       provider: "local",
     },

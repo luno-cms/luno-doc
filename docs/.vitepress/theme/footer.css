@@ -1,0 +1,243 @@
+/* LP SiteFooter — full-bleed under sidebar+content, inner 1280 centered */
+
+.luno-footer {
+  --lf-bg: #000000;
+  --lf-on: #eef2f7;
+  --lf-muted: #9aadc2;
+  --lf-mist: #8fa0b5;
+  --lf-accent: #0ea5e9;
+  --lf-line: rgba(255, 255, 255, 0.1);
+  --lf-max: var(--vp-layout-max-width, 1280px);
+
+  position: relative;
+  z-index: 30; /* above fixed sidebar so footer spans both columns */
+  border-top: 1px solid var(--lf-line);
+  background: var(--lf-bg);
+  color: var(--lf-on);
+  /* Isolate from VitePress body line-height so height matches LP */
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.luno-footer__inner {
+  /* Same horizontal gutters as the 1280 centered shell (logo / sidebar left) */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.5rem max(32px, calc((100vw - var(--lf-max)) / 2));
+}
+
+@media (min-width: 768px) {
+  .luno-footer__inner {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.luno-footer__brand {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.luno-footer__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.luno-footer__logo img {
+  display: block;
+  height: 16px;
+  width: auto;
+}
+
+.luno-footer__blurb {
+  margin: 0.625rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.375; /* leading-snug */
+  white-space: nowrap;
+  color: var(--lf-muted);
+}
+
+.luno-footer__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.luno-footer__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--lf-muted);
+}
+
+.luno-footer__pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(238, 242, 247, 0.65);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.luno-footer__pill-btn--text {
+  width: auto;
+  min-width: 20px;
+  padding: 0 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.luno-footer__pill-btn:hover {
+  color: var(--lf-on);
+}
+
+.luno-footer__pill-btn.is-active {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: var(--lf-on);
+}
+
+.luno-footer__icon {
+  display: block;
+  width: 11px;
+  height: 11px;
+  background: currentColor;
+  -webkit-mask: center / contain no-repeat;
+  mask: center / contain no-repeat;
+}
+
+.luno-footer__icon--monitor {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='12' rx='1.5'/%3E%3Cpath d='M8 20h8M12 16v4'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='12' rx='1.5'/%3E%3Cpath d='M8 20h8M12 16v4'/%3E%3C/svg%3E");
+}
+
+.luno-footer__icon--sun {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4'/%3E%3C/svg%3E");
+}
+
+.luno-footer__icon--moon {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 14.5A8.5 8.5 0 0 1 9.5 3 7 7 0 1 0 21 14.5Z'/%3E%3C/svg%3E");
+}
+
+.luno-footer__legal {
+  margin-top: auto;
+  padding-top: 2.5rem;
+}
+
+.luno-footer__legal p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.625; /* leading-relaxed */
+  color: var(--lf-mist);
+}
+
+.luno-footer__legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 0.75rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1rem; /* LP legal row ~16px */
+}
+
+.luno-footer__legal a {
+  font-size: 0.75rem;
+  line-height: inherit;
+  color: var(--lf-mist);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.luno-footer__legal a:hover {
+  color: var(--lf-on);
+}
+
+.luno-footer__columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .luno-footer__columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .luno-footer__columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: auto;
+    max-width: 36rem;
+    margin-left: auto;
+    gap: 3rem;
+    justify-items: start;
+  }
+}
+
+.luno-footer__col-title {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.5; /* matches LP ~16.5px */
+  text-transform: uppercase;
+  color: #ffffff; /* LP column titles */
+}
+
+.luno-footer__col ul {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  line-height: 20px; /* LP link row */
+}
+
+.luno-footer__col li {
+  line-height: 20px;
+}
+
+.luno-footer__col li + li {
+  margin-top: 0.625rem; /* space-y-2.5 */
+}
+
+.luno-footer__col a {
+  display: inline-block;
+  font-size: 0.875rem; /* text-sm */
+  line-height: 20px;
+  color: var(--lf-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.luno-footer__col a:hover {
+  color: var(--lf-on);
+}
