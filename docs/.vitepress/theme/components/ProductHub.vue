@@ -45,7 +45,7 @@ const copy = {
   ja: {
     pageTitle: "LUNO Documentation",
     pageLead:
-      "AI ネイティブなコンテンツ運用。定義・作成・承認・公開・配信の入口です。",
+      "Free な AI 時代の backend platform。Headless CMS・MCP・secure API・Cloudflare Workers。定義・作成・承認・公開・配信の入口です。",
     startTitle: "スタート",
     startLead: "経路を選ぶ → 完成形を確認 → 手順へ。",
     productsTitle: "プロダクト",
@@ -262,7 +262,7 @@ const copy = {
   en: {
     pageTitle: "LUNO Documentation",
     pageLead:
-      "AI-native content operations—entry points to define, create, review, publish, and deliver.",
+      "Free AI-era backend platform—Headless CMS, MCP, secure APIs, Cloudflare Workers. Define, create, review, publish, and deliver.",
     startTitle: "Get started",
     startLead: "Pick a path → see the done state → follow the steps.",
     productsTitle: "Products",

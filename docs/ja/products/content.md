@@ -1,6 +1,6 @@
 ---
 title: Headless CMS · Console / Agents
-description: LUNO Headless CMS — Form Set・エントリ・承認・公開。完成形チェックと今すぐやる手順（経路 B Console / 経路 A Agents）。
+description: LUNO の free backend 上の Headless CMS — Form Set・エントリ・承認・公開。secure API。経路 B Console / 経路 A MCP。
 prev:
   text: 完成形 C · API only
   link: /ja/guide/paths/api
@@ -11,7 +11,7 @@ next:
 
 # Headless CMS
 
-コンテンツの**定義・作成・承認・公開**を一つのフローで回します。Form Set で型を決め、エントリとリビジョンで版管理し、公開 API / Pub / Embed へ届けます。
+backend platform 上の **Headless CMS** 能力です。コンテンツの**定義・作成・承認・公開**を一つのフローで回します。Form Set で型を決め、エントリとリビジョンで版管理し、公開 API / Pub / Embed へ届けます。
 
 ## できていること（完成形）
 

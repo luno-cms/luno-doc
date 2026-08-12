@@ -1,6 +1,6 @@
 ---
-title: Quick Start · Agents / Console / API only
-description: LUNO start paths A Agents (MCP), B Console, C API only—done states and step-by-step entry points.
+title: Quick Start · Backend / MCP / free
+description: Start LUNO — free AI-era backend (Headless CMS) via MCP, Console, or secure Public API on Cloudflare Workers. Paths A/B/C.
 next:
   text: Done state A · Agents
   link: /en/guide/paths/agents
@@ -8,7 +8,7 @@ next:
 
 # Quick Start
 
-LUNO is an AI-native content operations platform. Start on the path that matches your goal.
+LUNO is a **free AI-era backend platform** (Headless CMS + forms + secure APIs) on Cloudflare Workers. Start on the path that matches your goal.
 
 ## Choose a path
 

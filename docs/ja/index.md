@@ -1,6 +1,6 @@
 ---
-title: LUNO ドキュメント · Agents / Console / API only
-description: LUNO 製品ハブ。スタート経路 A Agents（MCP）・B Console・C API only。Content / Contact / Embed / Webhooks の入口。
+title: LUNO ドキュメント · Backend / MCP / Headless CMS
+description: LUNO — free な AI 時代の backend platform（Headless CMS・secure API）。MCP 対応、Cloudflare Workers。経路 A Agents / B Console / C API only。
 layout: page
 aside: false
 ---

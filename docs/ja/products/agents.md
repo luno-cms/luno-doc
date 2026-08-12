@@ -1,6 +1,6 @@
 ---
 title: AI Agents · 経路 A（MCP）
-description: スタート経路 A · Agents（MCP）。MCP セットアップ、エージェントキー、llms.txt の概要と完成形への導線。
+description: LUNO を AI agent 向け free backend として MCP で操作。secure なエージェントキー、Headless CMS、Cloudflare Workers。経路 A の概要と完成形。
 prev:
   text: Embed & Pub
   link: /ja/products/embed
@@ -11,7 +11,7 @@ next:
 
 # AI Agents
 
-Cursor / Claude Code / Codex などのエージェントから、LUNO のコンテンツとスキーマを操作します。正本パッケージは [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) です。
+Cursor / Claude Code / Codex などのエージェントから、LUNO を **backend** として使い、Headless CMS のコンテンツとスキーマを MCP で操作します。正本パッケージは [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) です。
 
 ## できること
 

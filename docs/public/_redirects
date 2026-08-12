@@ -1,0 +1,15 @@
+# Forced redirects (override static files where needed)
+/  /en/  302!
+
+# Legacy paths → canonical guides
+/ja/guide/widgets  /ja/guide/embed  301!
+/ja/guide/widgets.html  /ja/guide/embed  301!
+/en/guide/widgets  /en/guide/embed  301!
+/en/guide/widgets.html  /en/guide/embed  301!
+/ja/docs/embed  /ja/guide/embed  301!
+/ja/docs/embed.html  /ja/guide/embed  301!
+/en/docs/embed  /en/guide/embed  301!
+/en/docs/embed.html  /en/guide/embed  301!
+
+# Prefer extensionless canonicals
+/*.html  /:splat  301

@@ -1,6 +1,6 @@
 ---
 title: Headless CMS · Console / Agents
-description: LUNO Headless CMS — form sets, entries, approval, publish. Done-state checklist and do-now steps (path B Console / path A Agents).
+description: LUNO Headless CMS capability on a free AI-era backend—form sets, entries, approval, publish. Secure APIs; path B Console / path A MCP.
 prev:
   text: Done state C · API only
   link: /en/guide/paths/api
@@ -11,7 +11,7 @@ next:
 
 # Headless CMS
 
-Define, create, approve, and publish content in one flow. Form Sets shape the model; entries and revisions manage versions; public API, Pub, and Embed deliver the result.
+LUNO’s **Headless CMS** capability on the backend platform: define, create, approve, and publish in one flow. Form Sets shape the model; entries and revisions manage versions; public API, Pub, and Embed deliver the result.
 
 ## What you have (done state)
 

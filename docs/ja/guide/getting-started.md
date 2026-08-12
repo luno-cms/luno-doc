@@ -1,6 +1,6 @@
 ---
-title: クイックスタート · Agents / Console / API only
-description: LUNO スタート経路 A Agents（MCP）・B Console・C API only。完成形と手順への入口。
+title: クイックスタート · Backend / MCP / free
+description: LUNO — free な AI 時代の backend（Headless CMS）を MCP / Console / secure Public API で開始。Cloudflare Workers。経路 A/B/C。
 next:
   text: 完成形 A · Agents
   link: /ja/guide/paths/agents
@@ -8,7 +8,7 @@ next:
 
 # クイックスタート
 
-LUNO は AI ネイティブなコンテンツ運用プラットフォームです。目的に合わせて次のどれかから始めてください。
+LUNO は **free な AI 時代の backend platform**（Headless CMS・フォーム・secure API）です。Cloudflare Workers 上で、目的に合わせて次のどれかから始めてください。
 
 ## 経路を選ぶ
 

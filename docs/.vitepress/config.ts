@@ -1,4 +1,11 @@
 import { defineConfig } from "vitepress";
+import {
+  SEO_DESCRIPTION_EN,
+  SEO_KEYWORDS,
+  seoHeadForPage,
+  seoTransformHead,
+  transformSitemapItems,
+} from "./seo";
 
 /**
  * Sidebar + top nav share the same Console-aligned groups.
@@ -192,12 +199,35 @@ function flattenNavItems(
 
 export default defineConfig({
   title: "LUNO",
-  description: "AI-native content operations platform",
+  description: SEO_DESCRIPTION_EN,
   base: "/",
+  cleanUrls: true,
   appearance: "dark",
   head: [
     ["link", { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" }],
     ["link", { rel: "apple-touch-icon", href: "/apple-touch-icon.svg" }],
+    [
+      "meta",
+      {
+        name: "keywords",
+        content: SEO_KEYWORDS,
+      },
+    ],
+    [
+      "script",
+      {
+        async: "",
+        src: "https://www.googletagmanager.com/gtag/js?id=G-S7812CRNZ2",
+      },
+    ],
+    [
+      "script",
+      {},
+      `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S7812CRNZ2');`,
+    ],
     [
       "script",
       {},
@@ -205,8 +235,20 @@ export default defineConfig({
     ],
   ],
 
+  transformPageData(pageData) {
+    const extra = seoHeadForPage(pageData);
+    if (!extra.length) return;
+    pageData.frontmatter.head ??= [];
+    pageData.frontmatter.head.push(...extra);
+  },
+
+  async transformHead(ctx) {
+    return seoTransformHead(ctx);
+  },
+
   sitemap: {
     hostname: "https://doc.luno.rest",
+    transformItems: (items) => transformSitemapItems(items),
   },
 
   locales: {

@@ -1,6 +1,6 @@
 ---
-title: LUNO Documentation · Agents / Console / API only
-description: LUNO product hub. Start paths A Agents (MCP), B Console, C API only. Entry points for Content, Contact, Embed, Webhooks.
+title: LUNO Docs · Backend / MCP / Headless CMS
+description: LUNO — free AI-era backend platform (Headless CMS + secure APIs) via MCP on Cloudflare Workers. Paths A Agents / B Console / C API only.
 layout: page
 aside: false
 ---

@@ -1,6 +1,6 @@
 ---
 title: AI Agents · Path A (MCP)
-description: Start path A · Agents (MCP). Overview of MCP setup, agent keys, llms.txt, and link to the done state.
+description: Use LUNO as a free AI-agent backend via MCP—secure agent keys, Headless CMS ops, Cloudflare Workers. Path A setup and done state.
 prev:
   text: Embed & Pub
   link: /en/products/embed
@@ -11,7 +11,7 @@ next:
 
 # AI Agents
 
-Operate LUNO content and schema from agents such as Cursor, Claude Code, and Codex. The canonical package is [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp).
+Use LUNO as the **backend** from agents such as Cursor, Claude Code, and Codex. Operate Headless CMS content and schema via MCP. The canonical package is [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp).
 
 ## Capabilities
 
