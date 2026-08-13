@@ -62,9 +62,22 @@
   --vp-code-bg: #0a0a0a;
 }
 
-.VPNav {
+/*
+ * Blur on .VPNavBar only — NOT .VPNav.
+ * backdrop-filter on .VPNav creates a fixed containing block the size of the
+ * header, so .VPNavScreen (fixed; top: nav-height; bottom: 0) gets height: 0
+ * and the mobile hamburger appears to do nothing.
+ */
+.VPNavBar {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* VitePress hides the screen at 768px, but we keep the hamburger until 960px */
+@media (min-width: 768px) and (max-width: 959.98px) {
+  .VPNavScreen {
+    display: block !important;
+  }
 }
 
 /* Full-bleed header hairline under logo + nav (do not re-offset with sidebar pad) */
