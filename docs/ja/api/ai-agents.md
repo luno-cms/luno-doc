@@ -129,6 +129,18 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 
 日常のサイト開発では `npx @luno-cms/mcp setup` を使い、キーを `.agents/luno/` に置いて `dev` / `stg` / `prod` を切り替えてください。
 
+### エージェント向けトラブルシュート
+
+| 症状 | 想定原因 | 次の一手 | 同入力で再試行? |
+|---|---|---|---|
+| `slug` / `name` 欠落・不正（ツール引数） | 必須引数不足 | ツール説明どおり必須を埋める | **No** |
+| `Slug already exists for this tenant`（+ `hint`） | Form Set slug 衝突 | `list_form_sets` か別 slug | **No** |
+| `Slug already exists for this form set` | エントリ slug 衝突 | `list_entries` か別 slug | **No** |
+| `REVISION_CONFLICT` / revision mismatch | 古い `revision` / `revisionRowId` | `list_revisions`；`save_revision` の `id` と `revision` を `publish_revision` に渡す | **No** |
+| `401` / Invalid agent key | キー誤り・未設定 | `npx @luno-cms/mcp env set-key …` のあと MCP 再接続 | **No** |
+
+API エラーには任意で `error.hint` / `error.retryable` が付くことがあります（OpenAPI `ApiError`）。`retryable: false` のときは入力を変えてから再実行。idempotency の詳細は [luno#59](https://github.com/luno-cms/luno/issues/59)。
+
 ## エージェント API キーの発行
 
 管理 API（MCP 含む）を呼ぶには **エージェント API キー**が必要です。

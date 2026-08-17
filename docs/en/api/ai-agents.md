@@ -129,6 +129,18 @@ If you are not using `setup` / `.agents/luno/`, you can put the variables direct
 
 For day-to-day site work, prefer `npx @luno-cms/mcp setup` so keys stay in `.agents/luno/` and you can switch `dev` / `stg` / `prod`.
 
+### Troubleshooting for Agents
+
+| Symptom | Likely cause | What to do | Retry same input? |
+|---|---|---|---|
+| Missing / invalid `slug` or `name` (tool args) | Required args omitted | Pass required fields from the tool description | **No** |
+| `Slug already exists for this tenant` (+ `hint`) | Form Set slug collision | `list_form_sets` or pick a new slug | **No** |
+| `Slug already exists for this form set` | Entry slug collision | `list_entries` or new slug | **No** |
+| `REVISION_CONFLICT` / revision mismatch | Stale `revision` / `revisionRowId` | `list_revisions`; use `save_revision`’s `id` + `revision` for `publish_revision` | **No** |
+| `401` / Invalid agent key | Bad or missing key | `npx @luno-cms/mcp env set-key …` then reconnect MCP | **No** |
+
+API errors may include additive `error.hint` and `error.retryable` (OpenAPI `ApiError`). When `retryable` is `false`, change input before calling again. Deeper idempotency: [luno#59](https://github.com/luno-cms/luno/issues/59).
+
 ## Issuing an Agent API Key
 
 AI agents that call the Admin API (including the MCP server) need an **agent API key**.
