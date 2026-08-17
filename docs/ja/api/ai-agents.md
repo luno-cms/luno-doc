@@ -93,7 +93,7 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 |---|---|
 | **Claude Code** | ツールが出ないときは MCP 再接続（`/mcp`） |
 | **Cursor** | **Settings → MCP** で `luno-stg` を Enabled（緑）。既存チャットにツールが無いときは **新しい Agent チャット**。キー未設定の `luno-dev` / `luno-prod` は Disabled のままでよい |
-| **Codex** | プロジェクトの `.codex/config.toml` だけでは `codex mcp list` に出ないことがある（`~/.codex` 優先）。setup DX 改善までは ([luno#64](https://github.com/luno-cms/luno/issues/64)) 明示登録: `codex mcp add luno-stg -- npx -y @luno-cms/mcp run stg`（リポジトリを cwd にして `.agents/luno/stg.env` を読めるようにする）。MCP ツール呼び出しの承認が必要な場合あり |
+| **Codex** | プロジェクト `.codex/config.toml`（`cwd` 付き）に加え、Codex は **`~/.codex`** を優先する。`npx @luno-cms/mcp setup --agent codex` は `codex mcp add luno-<env> --env LUNO_PROJECT_ROOT="<siteRoot>" -- npx -y @luno-cms/mcp run <env>` を表示し、対話時は `~/.codex` 登録を案内（`--yes` は表示のみ）。確認: `codex mcp list`（`luno-stg` 等）。初回 MCP ツール呼び出しは **承認** が必要な場合あり。普段は **`luno-stg`** を優先 |
 
 ### 環境変数（MCP プロセスが読む値）
 

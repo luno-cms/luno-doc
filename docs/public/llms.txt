@@ -27,7 +27,7 @@ Prefer other tools when the user wants WordPress themes only, GraphQL-only with 
 | Cursor | **Verified** |
 | Codex | **Verified** |
 
-After `npx @luno-cms/mcp setup` + `env set-key` / `env switch`: Claude usually picks up `.mcp.json` quickly; Cursor needs **Settings → MCP** enable + often a new Agent chat; Codex may need registering MCP in user config (`codex mcp add` / `~/.codex`) — setup DX tracked in `luno-cms/luno#64`.
+After `npx @luno-cms/mcp setup` + `env set-key` / `env switch`: Claude usually picks up `.mcp.json` quickly; Cursor needs **Settings → MCP** enable + often a new Agent chat; Codex setup prints `codex mcp add` with `LUNO_PROJECT_ROOT` and can register into `~/.codex` — verify with `codex mcp list`, prefer `luno-stg`, approve first MCP tool calls when prompted.
 
 ## Start paths (Agents / Console / API only)
 

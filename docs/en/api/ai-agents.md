@@ -93,7 +93,7 @@ Do **not** commit `.agents/luno/*.env`. Keep secrets out of git; use one key per
 |---|---|
 | **Claude Code** | Restart / reconnect MCP if tools are missing (`/mcp`) |
 | **Cursor** | **Settings → MCP**: enable `luno-stg` (green). Open a **new Agent chat** if tools do not appear in an existing chat. Leave `luno-dev` / `luno-prod` Disabled until those keys exist |
-| **Codex** | Project `.codex/config.toml` alone may not show up in `codex mcp list` (user `~/.codex` wins). Until setup DX is improved ([luno#64](https://github.com/luno-cms/luno/issues/64)), register explicitly, with `cwd` set to the site repo so `run stg` finds `.agents/luno/stg.env`: `codex mcp add luno-stg -- npx -y @luno-cms/mcp run stg` (then approve MCP tool calls when prompted) |
+| **Codex** | Setup writes project `.codex/config.toml` (with `cwd`) **and** prints `codex mcp add luno-<env> --env LUNO_PROJECT_ROOT="<siteRoot>" -- npx -y @luno-cms/mcp run <env>` because Codex prefers **`~/.codex`**. Interactive setup offers home registration; `--yes` prints commands only. Verify: `codex mcp list` (expect `luno-stg`, etc.). First MCP tool calls may require **approval**. Prefer **`luno-stg`** when that env is active |
 
 ### Environment variables (what the MCP process reads)
 
