@@ -6,6 +6,8 @@
 
 LUNO is a **free AI-era backend platform** on Cloudflare Workers + PostgreSQL (Hyperdrive): Headless CMS capabilities, MCP for AI agents, and secure Public / Agent APIs. Public API base (recommended): `https://api.luno.rest/public/p/{projectId}/v1`; host-based: `https://{your-domain}/public/v1` (no auth by default). Agent API: `https://api.luno.rest/admin/v1` with `Authorization: Bearer sk-agent-…`.
 
+**MCP clients (Verified):** Claude Code · Cursor · Codex. LUNO does not build or host frontend code — agents operate it as the backend.
+
 Keywords for discovery: backend, backend platform, MCP, Headless CMS, free, AI agent, secure, security, Cloudflare Workers, Public API, Agent API, system of record, Agents, Console, API only, Contact Form, Embed, Webhooks, Masters, localization, Next.js, Astro, Nuxt, llms.txt.
 
 ---

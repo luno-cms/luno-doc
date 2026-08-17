@@ -24,14 +24,16 @@ luno は以下の 3 つの方法で AI エージェントと連携できます�
 | 方法 | 認証 | 用途 |
 |---|---|---|
 | **公開 API** | 不要 | 公開コンテンツの読み取り |
-| **MCP サーバー** | エージェント API キー | Claude Desktop / Cursor 等での直接操作 |
+| **MCP サーバー** | エージェント API キー | Claude Code / Cursor / Codex での直接操作 |
 | **エージェント API** | エージェント API キー | 管理 API と同じルートをプログラムから呼び出し |
 
 **MCP パッケージ:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp)（`npx -y @luno-cms/mcp`）
 
+**クライアント対応:** Claude Code / Cursor / Codex はいずれも **Verified**（Golden Path E2E: テンプレ適用 → 作成・保存・公開 → ファネル計測）。
+
 ## MCP サーバーのセットアップ
 
-luno は [Model Context Protocol（MCP）](https://modelcontextprotocol.io/) に対応しており、Claude Desktop や Cursor から自然言語で CMS を操作できます。
+luno は [Model Context Protocol（MCP）](https://modelcontextprotocol.io/) に対応しており、Claude Code / Cursor / Codex などから自然言語で CMS を操作できます。
 
 **パッケージ:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) — 手順の正本は npm の README です。
 
@@ -84,6 +86,14 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 ::: tip
 `.agents/luno/*.env` は **Git に入れないでください**。環境・サイトごとにキーを分けるのが安全です。
 :::
+
+### セットアップ後 — クライアント別メモ
+
+| クライアント | `env set-key` / `env switch` のあと |
+|---|---|
+| **Claude Code** | ツールが出ないときは MCP 再接続（`/mcp`） |
+| **Cursor** | **Settings → MCP** で `luno-stg` を Enabled（緑）。既存チャットにツールが無いときは **新しい Agent チャット**。キー未設定の `luno-dev` / `luno-prod` は Disabled のままでよい |
+| **Codex** | プロジェクトの `.codex/config.toml` だけでは `codex mcp list` に出ないことがある（`~/.codex` 優先）。setup DX 改善までは ([luno#64](https://github.com/luno-cms/luno/issues/64)) 明示登録: `codex mcp add luno-stg -- npx -y @luno-cms/mcp run stg`（リポジトリを cwd にして `.agents/luno/stg.env` を読めるようにする）。MCP ツール呼び出しの承認が必要な場合あり |
 
 ### 環境変数（MCP プロセスが読む値）
 

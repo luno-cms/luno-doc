@@ -13,6 +13,8 @@ next:
 
 Cursor / Claude Code / Codex などのエージェントから、LUNO を **backend** として使い、Headless CMS のコンテンツとスキーマを MCP で操作します。正本パッケージは [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) です。
 
+**MCP クライアント（Verified）:** Claude Code · Cursor · Codex（Golden Path E2E）。
+
 ## できること
 
 - **`npx @luno-cms/mcp setup`** — 既存サイトリポジトリへのワンコマンド接続

@@ -17,7 +17,7 @@ next:
 
 | 項目 | 状態 |
 |---|---|
-| MCP 設定 | Cursor / Claude Code / Codex のいずれかに接続済み |
+| MCP 設定 | Cursor / Claude Code / Codex のいずれかに接続済み（**Verified**） |
 | キー | `.agents/luno/{dev,stg,prod}.env` に分離 |
 | スコープ | 推奨は `full`（または `content` / `schema`） |
 | 操作 | チャットからエントリ一覧・作成・公開、スキーマ確認ができる |

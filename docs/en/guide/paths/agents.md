@@ -17,7 +17,7 @@ In about 5 minutes you can **operate LUNO from your site repo via an agent**.
 
 | Item | State |
 |---|---|
-| MCP | Connected in Cursor / Claude Code / Codex |
+| MCP | Connected in Cursor / Claude Code / Codex (**Verified**) |
 | Keys | Split across `.agents/luno/{dev,stg,prod}.env` |
 | Scope | Prefer `full` (or `content` / `schema`) |
 | Ops | List / create / publish entries and inspect schema from chat |

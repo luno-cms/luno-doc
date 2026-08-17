@@ -24,14 +24,16 @@ luno supports three integration models for AI agents:
 | Method | Auth | Capability |
 |---|---|---|
 | **Public API** | None | Read published content |
-| **MCP Server** | Agent API key | Content and schema ops via Claude Desktop / Cursor |
+| **MCP Server** | Agent API key | Content and schema ops via Claude Code / Cursor / Codex |
 | **Agent API** | Agent API key | Same Admin API routes, programmatic access |
 
 **MCP package:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) (`npx -y @luno-cms/mcp`)
 
+**Client support:** Claude Code, Cursor, and Codex are all **Verified** (Golden Path E2E: apply builtin template → create/save/publish entry → funnel events).
+
 ## MCP Server Setup
 
-luno ships a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that lets Claude, Cursor, and other MCP-compatible tools interact with your CMS in natural language.
+luno ships a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that lets Claude Code, Cursor, Codex, and other MCP-compatible tools interact with your CMS in natural language.
 
 **Package:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) — the npm README is the canonical setup guide.
 
@@ -84,6 +86,14 @@ MCP server names: `luno-dev` / `luno-stg` / `luno-prod`
 ::: tip
 Do **not** commit `.agents/luno/*.env`. Keep secrets out of git; use one key per environment / site as needed.
 :::
+
+### After setup — client-specific notes
+
+| Client | What to do after `env set-key` / `env switch` |
+|---|---|
+| **Claude Code** | Restart / reconnect MCP if tools are missing (`/mcp`) |
+| **Cursor** | **Settings → MCP**: enable `luno-stg` (green). Open a **new Agent chat** if tools do not appear in an existing chat. Leave `luno-dev` / `luno-prod` Disabled until those keys exist |
+| **Codex** | Project `.codex/config.toml` alone may not show up in `codex mcp list` (user `~/.codex` wins). Until setup DX is improved ([luno#64](https://github.com/luno-cms/luno/issues/64)), register explicitly, with `cwd` set to the site repo so `run stg` finds `.agents/luno/stg.env`: `codex mcp add luno-stg -- npx -y @luno-cms/mcp run stg` (then approve MCP tool calls when prompted) |
 
 ### Environment variables (what the MCP process reads)
 

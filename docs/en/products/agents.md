@@ -13,6 +13,8 @@ next:
 
 Use LUNO as the **backend** from agents such as Cursor, Claude Code, and Codex. Operate Headless CMS content and schema via MCP. The canonical package is [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp).
 
+**MCP clients (Verified):** Claude Code · Cursor · Codex (Golden Path E2E).
+
 ## Capabilities
 
 - **`npx @luno-cms/mcp setup`** — one-command connect in an existing site repo
