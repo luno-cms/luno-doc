@@ -138,8 +138,21 @@ For day-to-day site work, prefer `npx @luno-cms/mcp setup` so keys stay in `.age
 | `Slug already exists for this form set` | Entry slug collision | `list_entries` or new slug | **No** |
 | `REVISION_CONFLICT` / revision mismatch | Stale `revision` / `revisionRowId` | `list_revisions`; use `save_revision`’s `id` + `revision` for `publish_revision` | **No** |
 | `401` / Invalid agent key | Bad or missing key | `npx @luno-cms/mcp env set-key …` then reconnect MCP | **No** |
+| Timeout after create | Network / client abort | Retry with the **same** `idempotencyKey` | **Yes** (keyed creates) |
 
-API errors may include additive `error.hint` and `error.retryable` (OpenAPI `ApiError`). When `retryable` is `false`, change input before calling again. Deeper idempotency: [luno#59](https://github.com/luno-cms/luno/issues/59).
+API errors may include additive `error.hint` and `error.retryable` (OpenAPI `ApiError`). When `retryable` is `false`, change input before calling again.
+
+### Idempotency keys (optional)
+
+Admin UI does not send keys — behavior without a key is unchanged. Agents may pass `idempotencyKey` on major creates (or `Idempotency-Key` header):
+
+| MCP tool | Without key | Same key replay |
+|---|---|---|
+| `apply_form_blueprint` / `apply_builtin_form_template` | Create / 409 on slug clash | Same 201 body |
+| `create_entry` | New row / 409 | Same entry `id` |
+| `save_revision` | Always new revision | Same revision row |
+| `create_contact_form` | New / 409 | Same `id` |
+| `publish_revision` | Existing `already_published` + outbox dedupe | (no extra key needed) |
 
 ## Issuing an Agent API Key
 

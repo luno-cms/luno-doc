@@ -138,8 +138,21 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 | `Slug already exists for this form set` | エントリ slug 衝突 | `list_entries` か別 slug | **No** |
 | `REVISION_CONFLICT` / revision mismatch | 古い `revision` / `revisionRowId` | `list_revisions`；`save_revision` の `id` と `revision` を `publish_revision` に渡す | **No** |
 | `401` / Invalid agent key | キー誤り・未設定 | `npx @luno-cms/mcp env set-key …` のあと MCP 再接続 | **No** |
+| create 後のタイムアウト | ネットワーク / クライアント中断 | **同じ** `idempotencyKey` で再送 | **Yes**（キー付き create 系） |
 
-API エラーには任意で `error.hint` / `error.retryable` が付くことがあります（OpenAPI `ApiError`）。`retryable: false` のときは入力を変えてから再実行。idempotency の詳細は [luno#59](https://github.com/luno-cms/luno/issues/59)。
+API エラーには任意で `error.hint` / `error.retryable` が付くことがあります（OpenAPI `ApiError`）。`retryable: false` のときは入力を変えてから再実行。
+
+### 冪等キー（任意）
+
+管理画面はキーを送りません。キーなしの挙動は従来どおりです。エージェントは主要 create に `idempotencyKey`（または `Idempotency-Key` ヘッダ）を付けられます。
+
+| MCP ツール | キーなし | 同一キー再送 |
+|---|---|---|
+| `apply_form_blueprint` / `apply_builtin_form_template` | 作成 / slug 衝突は 409 | 同じ 201 本文 |
+| `create_entry` | 新規 / 409 | 同じ entry `id` |
+| `save_revision` | 常に新リビジョン | 同じ revision 行 |
+| `create_contact_form` | 新規 / 409 | 同じ `id` |
+| `publish_revision` | 既存の `already_published` + outbox 重複排除 | （追加キー不要） |
 
 ## エージェント API キーの発行
 
