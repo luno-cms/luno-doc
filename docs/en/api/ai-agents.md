@@ -206,7 +206,7 @@ Tools exposed by `@luno-cms/mcp` (canonical list: [npm README](https://www.npmjs
 
 | Tool | Description |
 |---|---|
-| `get_project_overview` | Project summary (form sets, contact forms, masters, media counts, locales, public API) |
+| `get_project_overview` | Project summary (form sets, contact forms, masters, storage, login appearance, IP allowlist, locales, public API) |
 | `get_tenant_schema` | Project-wide schema (all form sets) |
 | `list_form_sets` / `get_form_set_schema` | Form set list and field definitions (`masterEntityKey` / sampleValues for selects) |
 | `get_public_api_info` | `projectId` and Public API base (`/public/p/{projectId}/v1`) |

@@ -204,7 +204,7 @@ GitHub・フロントエンドのコード・チャットに貼り付けない�
 
 | ツール | 説明 |
 |---|---|
-| `get_project_overview` | プロジェクト要約（Form Sets / Contact Forms / Masters / メディア / locales / 公開 API） |
+| `get_project_overview` | プロジェクト要約（Form Sets / Contact / Masters / storage / ログイン見た目 / IP allowlist / locales / 公開 API） |
 | `get_tenant_schema` | プロジェクト全体のスキーマ |
 | `list_form_sets` / `get_form_set_schema` | Form Set 一覧・フィールド定義（select 等の `masterEntityKey` / sampleValues 含む） |
 | `get_public_api_info` | `projectId` と公開 API ベース URL（`/public/p/{projectId}/v1`） |
