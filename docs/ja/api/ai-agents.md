@@ -194,10 +194,17 @@ GitHub・フロントエンドのコード・チャットに貼り付けない�
 
 `@luno-cms/mcp` が提供するツール（正本は [npm README](https://www.npmjs.com/package/@luno-cms/mcp)）:
 
+### 既存プロジェクトを再開するとき
+
+1. **`get_project_overview`** — 何があるかの要約（推奨・最初）
+2. 必要なら `get_form_set_schema` / `list_entries`
+3. 新規サイト作成の Golden Path（builtin template → entry → publish）とは別
+
 ### コンテンツ（`content` / `full`）
 
 | ツール | 説明 |
 |---|---|
+| `get_project_overview` | プロジェクト要約（Form Sets / Contact Forms / Masters / メディア / locales / 公開 API） |
 | `get_tenant_schema` | プロジェクト全体のスキーマ |
 | `list_form_sets` / `get_form_set_schema` | Form Set 一覧・フィールド定義（select 等の `masterEntityKey` / sampleValues 含む） |
 | `get_public_api_info` | `projectId` と公開 API ベース URL（`/public/p/{projectId}/v1`） |

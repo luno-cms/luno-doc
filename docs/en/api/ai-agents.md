@@ -196,10 +196,17 @@ Calling a schema-only endpoint with a `content` key returns **403 Forbidden**.
 
 Tools exposed by `@luno-cms/mcp` (canonical list: [npm README](https://www.npmjs.com/package/@luno-cms/mcp)):
 
+### Resuming an existing project
+
+1. **`get_project_overview`** — inventory summary (recommended first call)
+2. Then `get_form_set_schema` / `list_entries` as needed
+3. Separate from the Golden Path for new sites (builtin template → entry → publish)
+
 ### Content (`content` / `full`)
 
 | Tool | Description |
 |---|---|
+| `get_project_overview` | Project summary (form sets, contact forms, masters, media counts, locales, public API) |
 | `get_tenant_schema` | Project-wide schema (all form sets) |
 | `list_form_sets` / `get_form_set_schema` | Form set list and field definitions (`masterEntityKey` / sampleValues for selects) |
 | `get_public_api_info` | `projectId` and Public API base (`/public/p/{projectId}/v1`) |
