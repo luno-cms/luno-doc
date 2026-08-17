@@ -138,6 +138,7 @@ For day-to-day site work, prefer `npx @luno-cms/mcp setup` so keys stay in `.age
 | `Slug already exists for this form set` | Entry slug collision | `list_entries` or new slug | **No** |
 | `REVISION_CONFLICT` / revision mismatch | Stale `revision` / `revisionRowId` | `list_revisions`; use `save_revision`’s `id` + `revision` for `publish_revision` | **No** |
 | `401` / Invalid agent key | Bad or missing key | `npx @luno-cms/mcp env set-key …` then reconnect MCP | **No** |
+| `429` / `RATE_LIMITED` | Per-key rate limit exceeded | Wait for `Retry-After` seconds; reduce tight tool loops | **Yes** (after wait) |
 | Timeout after create | Network / client abort | Retry with the **same** `idempotencyKey` | **Yes** (keyed creates) |
 
 API errors may include additive `error.hint` and `error.retryable` (OpenAPI `ApiError`). When `retryable` is `false`, change input before calling again.
@@ -191,6 +192,27 @@ Each agent key has a `scope` that limits what it can do. Keys are bound to the p
 - Issue other API keys, invite members, or change billing / SNS settings
 
 Calling a schema-only endpoint with a `content` key returns **403 Forbidden**.
+
+## Rate limits
+
+Agent API keys (`sk-agent-…`) are rate-limited on **Admin API** requests. **JWT console sessions are not** limited by this feature.
+
+| Plan | Active keys | Requests / window (per key) |
+|---|---|---|
+| Free / Solo | **1** | **60** / **60 seconds** |
+| Standard / Business / Enterprise | Multiple | **300** / **60 seconds** |
+
+When exceeded:
+
+- HTTP **429**
+- Error code **`RATE_LIMITED`**
+- Response header **`Retry-After`** (seconds until the window resets, best-effort)
+
+Limits are enforced in-memory per Cloudflare Workers isolate (**best-effort** — not strictly shared across isolates). Normal MCP / Golden Path usage should stay well under the Free tier cap.
+
+::: tip Handling 429 in agents
+Respect `Retry-After` before retrying. Batch reads (`get_project_overview`, `list_entries` with pagination) instead of tight tool loops.
+:::
 
 ## MCP Tools
 
@@ -477,6 +499,7 @@ Resolve `image` / `file` UUIDs using `mediaUrls[fieldKey]` from the response.
 |---|---|---|
 | 400 | `VALIDATION_ERROR` | Fix the request parameters per the error message |
 | 401 | `UNAUTHORIZED` | API key is invalid, revoked, or missing |
+| 429 | `RATE_LIMITED` | Wait for `Retry-After` seconds, then retry; reduce parallel tool calls |
 | 403 | `FORBIDDEN` | Scope too narrow (e.g., blueprint apply with `content` key) |
 | 403 | `PLAN_REQUIRED` | Full-text search (`?q=`) requires Business plan+ |
 | 404 | `NOT_FOUND` | Verify the slug or ID |

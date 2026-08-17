@@ -138,6 +138,7 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 | `Slug already exists for this form set` | エントリ slug 衝突 | `list_entries` か別 slug | **No** |
 | `REVISION_CONFLICT` / revision mismatch | 古い `revision` / `revisionRowId` | `list_revisions`；`save_revision` の `id` と `revision` を `publish_revision` に渡す | **No** |
 | `401` / Invalid agent key | キー誤り・未設定 | `npx @luno-cms/mcp env set-key …` のあと MCP 再接続 | **No** |
+| `429` / `RATE_LIMITED` | キーごとのレート制限超過 | `Retry-After` 秒待って再試行。連続ツール呼び出しを間引く | **Yes**（待機後） |
 | create 後のタイムアウト | ネットワーク / クライアント中断 | **同じ** `idempotencyKey` で再送 | **Yes**（キー付き create 系） |
 
 API エラーには任意で `error.hint` / `error.retryable` が付くことがあります（OpenAPI `ApiError`）。`retryable: false` のときは入力を変えてから再実行。
@@ -189,6 +190,27 @@ GitHub・フロントエンドのコード・チャットに貼り付けない�
 - 他 API キーの発行、メンバー招待、課金・SNS 設定の変更
 
 `content` キーで Blueprint 適用などを呼ぶと **403 Forbidden** になります。
+
+## レート制限
+
+エージェント API キー（`sk-agent-…`）で認証した **Admin API** リクエストに per-key のレート制限があります。**JWT コンソールセッションは対象外**です。
+
+| プラン | 有効キー数 | リクエスト / ウィンドウ（キーごと） |
+|---|---|---|
+| Free / Solo | **1** | **60** / **60 秒** |
+| Standard / Business / Enterprise | 複数可 | **300** / **60 秒** |
+
+超過時:
+
+- HTTP **429**
+- エラーコード **`RATE_LIMITED`**
+- レスポンスヘッダ **`Retry-After`**（ウィンドウ残り秒数・best-effort）
+
+Workers isolate 内の in-memory カウンタで適用（**best-effort** — isolate 間で厳密共有されない）。通常の MCP / Golden Path 利用では Free でも上限に達しにくい想定です。
+
+::: tip 429 の扱い
+`Retry-After` 秒待ってから再試行してください。連続ツール呼び出しは間引き、`get_project_overview` やページング付き `list_entries` で読み取りをまとめると安全です。
+:::
 
 ## MCP ツール一覧
 
@@ -401,6 +423,7 @@ curl -X POST https://api.luno.rest/admin/v1/revisions/{revisionId}/publish \
 |---|---|---|
 | 400 | `VALIDATION_ERROR` | パラメータを確認して修正 |
 | 401 | `UNAUTHORIZED` | キーが無効・失効・未設定 |
+| 429 | `RATE_LIMITED` | `Retry-After` 秒待って再試行。並列ツール呼び出しを減らす |
 | 403 | `FORBIDDEN` | スコープ不足（例: `content` キーで Blueprint 適用） |
 | 403 | `PLAN_REQUIRED` | 全文検索（`q`）は Business プラン以上 |
 | 404 | `NOT_FOUND` | slug が正しいか確認 |

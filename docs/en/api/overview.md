@@ -145,6 +145,7 @@ All responses use `Content-Type: application/json`.
 | `FORBIDDEN` | 403 | Insufficient permissions | Use a higher-privilege role |
 | `PLAN_REQUIRED` | 403 | Feature requires a higher plan | Upgrade to access this feature |
 | `CONFLICT` | 409 | Conflict (e.g., duplicate slug) | Use a different slug |
+| `RATE_LIMITED` | 429 | Agent API request rate limit exceeded | Wait for `Retry-After` seconds, then retry |
 | `INTERNAL_ERROR` | 500 | Unexpected server error | Retry; contact support if it persists |
 
 ## Pagination
@@ -218,8 +219,8 @@ You can call the public API directly from browser JavaScript with `fetch()` with
 | API | Limit |
 |---|---|
 | Public API | Governed by Cloudflare Workers standard limits |
-| Admin API | Varies by plan |
-| Agent API | Configurable per API key |
+| Admin API (JWT) | Not limited by agent key rate limits |
+| Agent API | Per key: Free / Solo **60** / **60 s**; Standard+ **300** / **60 s** (see [AI Agents](/en/api/ai-agents#rate-limits)) |
 
 ::: tip Reduce request volume with ETags
 Use `ETag` + `If-None-Match` to skip re-fetching unchanged content. `304` responses are significantly cheaper than full responses at scale.

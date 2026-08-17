@@ -150,6 +150,7 @@ API キーは発行時に一度だけ表示されます。GitHub リポジトリ
 | `FORBIDDEN` | 403 | 権限不足 | 上位ロールのユーザーで操作 |
 | `PLAN_REQUIRED` | 403 | 上位プランが必要な機能 | プランをアップグレード |
 | `CONFLICT` | 409 | 競合（slug 重複など） | 別の slug を使用 |
+| `RATE_LIMITED` | 429 | エージェント API のレート制限超過 | `Retry-After` 秒待ってから再試行 |
 | `INTERNAL_ERROR` | 500 | サーバー内部エラー | 時間を置いて再試行、解消しない場合はサポートへ |
 
 ## ページネーション
@@ -224,8 +225,8 @@ Access-Control-Allow-Headers: Content-Type
 | API | 制限 |
 |---|---|
 | 公開 API | Cloudflare Workers の標準制限に準拠 |
-| 管理 API | プランにより異なる |
-| エージェント API | API キーごとに設定可能 |
+| 管理 API（JWT） | エージェントキーのレート制限対象外 |
+| エージェント API | キーごと: Free / Solo **60** / **60 秒**、Standard+ **300** / **60 秒**（[AI エージェント](/ja/api/ai-agents#レート制限)） |
 
 ::: tip キャッシュで制限を緩和
 `ETag` / `If-None-Match` を活用することでリクエスト数を大幅に削減できます。コンテンツが変更されていない場合の `304` レスポンスはカウントが少なくなります。
