@@ -35,6 +35,7 @@ Use LUNO as the **backend** from agents such as Cursor, Claude Code, and Codex. 
 |---|---|
 | Done state · do now | [Path A · Agents done state](/en/guide/paths/agents) |
 | Full setup | [AI Agents (MCP) guide](/en/api/ai-agents) |
+| Production Safety | [Governed agent operations](/en/guide/production-safety) |
 | Path C · API only | [Done state](/en/guide/paths/api) |
 | Path B · Console | [Done state](/en/guide/paths/console) |
 

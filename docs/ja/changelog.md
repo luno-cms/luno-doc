@@ -7,6 +7,14 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ドキュメントと公開仕様の更新を新しい順に記録します。製品の稼働状況は [Status](https://status.luno.rest) を参照してください。
 
+## 2026-08-25
+
+- ドキュメントホームの冒頭をホスト型 AI-era Backend Platform + Agent Backend（BUILD / OPERATE / GOVERN）に変更。Headless CMS は capability のまま
+- AI エージェント向けガイド: 連携モデルの前に Agent lifecycle。MCP の主語を CMS に戻さない
+- [AI エージェントの Production Safety](/ja/guide/production-safety) を追加（スコープ、承認、Change Plan、dryRun、冪等、監査）
+- `llms.txt` に Product Identity と Core Model。製品 / セキュリティは https://luno.rest/llms.txt
+- Headless CMS 製品ページ: capability vs カテゴリ、ホームへのリンク
+
 ## 2026-08-11
 
 - セルフホスト概要のアーキテクチャ図をビジュアル図に差し替え

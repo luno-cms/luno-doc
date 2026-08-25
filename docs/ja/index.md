@@ -1,6 +1,6 @@
 ---
-title: LUNO ドキュメント · Backend / MCP / Headless CMS
-description: LUNO — free な AI 時代の backend platform（Headless CMS・secure API）。MCP 対応、Cloudflare Workers。経路 A Agents / B Console / C API only。
+title: LUNO ドキュメント · AI-era Backend Platform
+description: LUNO は AI エージェント向けのホスト型 Backend Platform。BUILD / OPERATE / GOVERN。CMS・フォームは capability。
 layout: page
 aside: false
 ---

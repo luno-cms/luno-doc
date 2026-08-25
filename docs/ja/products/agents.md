@@ -35,6 +35,7 @@ Cursor / Claude Code / Codex などのエージェントから、LUNO を **back
 |---|---|
 | 完成形・今すぐやる | [経路 A · Agents 完成形](/ja/guide/paths/agents) |
 | セットアップ詳細 | [AI Agents（MCP）ガイド](/ja/api/ai-agents) |
+| Production Safety | [govern されたエージェント運用](/ja/guide/production-safety) |
 | 経路 C · API only | [完成形](/ja/guide/paths/api) |
 | 経路 B · Console | [完成形](/ja/guide/paths/console) |
 

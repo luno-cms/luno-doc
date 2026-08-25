@@ -1,6 +1,6 @@
 ---
-title: Headless CMS · Console / Agents
-description: LUNO Headless CMS capability on a free AI-era backend—form sets, entries, approval, publish. Secure APIs; path B Console / path A MCP.
+title: Headless CMS · Backend capability
+description: Headless CMS is a LUNO Backend Platform capability—not the product category. Form sets, entries, approval, publish.
 prev:
   text: Done state C · API only
   link: /en/guide/paths/api
@@ -11,7 +11,22 @@ next:
 
 # Headless CMS
 
-LUNO’s **Headless CMS** capability on the backend platform: define, create, approve, and publish in one flow. Form Sets shape the model; entries and revisions manage versions; public API, Pub, and Embed deliver the result.
+Headless CMS is a **capability of the LUNO Backend Platform**, not the product category.
+
+```text
+LUNO
+└── AI-era Backend Platform
+    ├── Agent Backend
+    ├── Headless CMS   ← this page
+    ├── Forms
+    ├── Auth
+    ├── Storage
+    └── APIs
+```
+
+See [Docs Home · Agent Backend](/en/#agent-backend) for BUILD / OPERATE / GOVERN. This page is the content capability: define, create, approve, and publish in one flow. Form Sets shape the model; entries and revisions manage versions; public API, Pub, and Embed deliver the result.
+
+Do not read “LUNO is a CMS” as the category claim. CMS, forms, and publishing sit under the platform.
 
 ## What you have (done state)
 
@@ -67,6 +82,7 @@ const data = await res.json()
 
 | Goal | Page |
 |---|---|
+| Platform model | [Docs Home · Agent Backend](/en/#agent-backend) |
 | Path B · Console | [Done state](/en/guide/paths/console) |
 | Path A · Agents | [Done state](/en/guide/paths/agents) |
 | Field design | [Form builder](/en/guide/form-builder) |

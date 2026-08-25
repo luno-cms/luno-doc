@@ -1,6 +1,6 @@
 ---
-title: Headless CMS · Console / Agents
-description: LUNO の free backend 上の Headless CMS — Form Set・エントリ・承認・公開。secure API。経路 B Console / 経路 A MCP。
+title: Headless CMS · Backend の capability
+description: Headless CMS は LUNO Backend Platform の capability であり、製品カテゴリではありません。Form Set・エントリ・承認・公開。
 prev:
   text: 完成形 C · API only
   link: /ja/guide/paths/api
@@ -11,7 +11,22 @@ next:
 
 # Headless CMS
 
-backend platform 上の **Headless CMS** 能力です。コンテンツの**定義・作成・承認・公開**を一つのフローで回します。Form Set で型を決め、エントリとリビジョンで版管理し、公開 API / Pub / Embed へ届けます。
+Headless CMS は **LUNO Backend Platform の capability** であり、製品カテゴリではありません。
+
+```text
+LUNO
+└── AI-era Backend Platform
+    ├── Agent Backend
+    ├── Headless CMS   ← このページ
+    ├── Forms
+    ├── Auth
+    ├── Storage
+    └── APIs
+```
+
+BUILD / OPERATE / GOVERN は [ドキュメントホーム · Agent Backend](/ja/#agent-backend) を見てください。このページはコンテンツ capability です。**定義・作成・承認・公開**を一つのフローで回します。Form Set で型を決め、エントリとリビジョンで版管理し、公開 API / Pub / Embed へ届けます。
+
+「LUNO は CMS」をカテゴリ主張として読まないでください。CMS・フォーム・公開はプラットフォームの下にあります。
 
 ## できていること（完成形）
 
@@ -67,6 +82,7 @@ const data = await res.json()
 
 | 目的 | ページ |
 |---|---|
+| プラットフォームの軸 | [ドキュメントホーム · Agent Backend](/ja/#agent-backend) |
 | 経路 B · Console | [完成形](/ja/guide/paths/console) |
 | 経路 A · Agents | [完成形](/ja/guide/paths/agents) |
 | フィールド設計 | [フォームビルダー](/ja/guide/form-builder) |

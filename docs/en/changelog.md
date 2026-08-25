@@ -7,6 +7,14 @@ description: Notable updates to LUNO docs and public specifications.
 
 Docs and public-spec updates, newest first. For platform uptime, see [Status](https://status.luno.rest).
 
+## 2026-08-25
+
+- Docs Home leads with hosted AI-era Backend Platform + Agent Backend (BUILD / OPERATE / GOVERN); Headless CMS stays a capability
+- AI Agents Guide: agent lifecycle before integration models; MCP wording no longer says “your CMS”
+- New [Production Safety for AI Agents](/en/guide/production-safety) (scopes, approval, Change Plans, dryRun, idempotency, audit)
+- `llms.txt` Product Identity + Core Model; points to https://luno.rest/llms.txt for product/security
+- Headless CMS product page: capability vs category + link to Docs Home
+
 ## 2026-08-11
 
 - Replaced self-hosting ASCII architecture with a visual diagram

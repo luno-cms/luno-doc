@@ -1,7 +1,7 @@
 ---
 layout: false
-title: LUNO Docs · Backend, MCP, Headless CMS, free, secure
-description: LUNO is a free AI-era backend platform (Headless CMS + secure APIs) operable via MCP on Cloudflare Workers. English and Japanese docs.
+title: LUNO Docs · AI-era Backend Platform
+description: LUNO is a hosted AI-era Backend Platform for AI agents. BUILD / OPERATE / GOVERN via MCP and APIs. English and Japanese docs.
 ---
 
 <script setup>
@@ -18,9 +18,9 @@ onMounted(() => {
 <main style="font-family: system-ui, sans-serif; max-width: 40rem; margin: 3rem auto; padding: 0 1.25rem; line-height: 1.5">
   <h1>LUNO Docs</h1>
   <p>
-    Free <strong>AI-era backend platform</strong>
-    (<strong>Headless CMS</strong> + forms + <strong>secure</strong> APIs)
-    operable via <strong>MCP</strong> on <strong>Cloudflare Workers</strong>.
+    Hosted <strong>AI-era Backend Platform</strong> for AI agents.
+    Agents <strong>build and operate</strong> backends via <strong>MCP</strong>;
+    humans <strong>govern</strong> production. Content and CMS are capabilities.
   </p>
   <p>
     <a href="/en/">English documentation</a>

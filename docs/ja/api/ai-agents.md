@@ -15,7 +15,21 @@ next:
 このページは **Agents（MCP）** 経路の詳細です。全体の入口は [クイックスタート](/ja/guide/getting-started) と [AI Agents 概要](/ja/products/agents) を参照してください。
 :::
 
-このページでは、AI エージェント（Claude・GPT・Cursor など LLM ベースのシステム）が luno を使ってコンテンツを読み取り・作成・管理するための設定と API の使い方を説明します。
+このガイドでは、AI エージェントが MCP と Agent API で LUNO backend を構築・運用する方法と、権限・レビュー・承認で本番変更を govern する方法を説明します。
+
+## Agent lifecycle
+
+### BUILD — スキーマ、フォーム、コンテンツ構造の作成・設定
+
+エージェントは Blueprint や builtin テンプレを適用し、Contact Form を作り、書く前に field types / schema を読みます。
+
+### OPERATE — MCP または Agent API での読み取り・作成・更新・リビジョン・公開
+
+コンテンツ、スキーマ、フォーム、メディア、リビジョン、公開は、エージェントが操作できる **backend リソース** として露出します。
+
+### GOVERN — スコープ付きキー、レビュー / 承認、Production Safety
+
+本番の権限は人間が保持します。[AI エージェントの Production Safety](/ja/guide/production-safety) を参照してください。
 
 ## luno の AI 連携の概要
 
@@ -33,7 +47,9 @@ luno は以下の 3 つの方法で AI エージェントと連携できます�
 
 ## MCP サーバーのセットアップ
 
-luno は [Model Context Protocol（MCP）](https://modelcontextprotocol.io/) に対応しており、Claude Code / Cursor / Codex などから自然言語で CMS を操作できます。
+LUNO は MCP サーバーを同梱しており、Claude Code / Cursor / Codex など MCP 対応エージェントが自然言語で **LUNO backend を構築・運用**できます。
+
+コンテンツ、スキーマ、フォーム、メディア、リビジョン、公開は、エージェントが操作できる **backend リソース** です。境界は [Production Safety](/ja/guide/production-safety) を参照してください。
 
 **パッケージ:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) — 手順の正本は npm の README です。
 
@@ -274,7 +290,7 @@ curl https://your-domain.com/public/v1/llms.txt
 
 ```
 [システムプロンプト例]
-あなたは luno CMS のコンテンツ管理を支援する AI アシスタントです。
+あなたは LUNO backend のコンテンツ管理を支援する AI アシスタントです。
 以下が公開コンテンツの一覧です。
 
 {llms.txt の内容}
@@ -441,6 +457,7 @@ curl -X POST https://api.luno.rest/admin/v1/revisions/{revisionId}/publish \
 
 ## 次のステップ
 
+- [AI エージェントの Production Safety](/ja/guide/production-safety) — スコープ、承認、dryRun、冪等、監査
 - [AI アシスト](/ja/guide/ai-assist) — 管理画面での AI 機能
 - [公開 API リファレンス](/ja/api/public-api) — 全エンドポイントの仕様
 - [API 概要](/ja/api/overview) — 認証・エラーコードの詳細

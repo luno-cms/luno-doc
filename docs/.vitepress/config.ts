@@ -56,6 +56,7 @@ const jaSidebar = [
     text: "連携・自動化",
     items: [
       { text: "AI Agents", link: "/ja/products/agents" },
+      { text: "Production Safety", link: "/ja/guide/production-safety" },
       { text: "Webhooks", link: "/ja/products/webhooks" },
       { text: "公開 API キー", link: "/ja/products/public-api-keys" },
       {
@@ -135,6 +136,7 @@ const enSidebar = [
     text: "Connect & Automate",
     items: [
       { text: "AI Agents", link: "/en/products/agents" },
+      { text: "Production Safety", link: "/en/guide/production-safety" },
       { text: "Webhooks", link: "/en/products/webhooks" },
       { text: "Public API keys", link: "/en/products/public-api-keys" },
       {

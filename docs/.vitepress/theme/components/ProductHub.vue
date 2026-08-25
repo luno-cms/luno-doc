@@ -44,8 +44,31 @@ async function copyCommand(command: string, key: string) {
 const copy = {
   ja: {
     pageTitle: "LUNO Documentation",
-    pageLead:
-      "Free な AI 時代の backend platform。Headless CMS・MCP・secure API・Cloudflare Workers。定義・作成・承認・公開・配信の入口です。",
+    pageLeads: [
+      "LUNO は、AI エージェント向けのホスト型 AI-era Backend Platform です。",
+      "エージェントは MCP と API で backend リソースを構築・運用できます。本番の権限・レビュー・承認・安全制御は人間が保持します。",
+      "コンテンツ、フォーム、認証、ストレージ、API、公開は、プラットフォームに組み込まれた capability です。",
+    ],
+    architectureTitle: "Agent Backend",
+    architectureLead:
+      "製品面の前に、エージェントが触る軸です。Headless CMS は下の capability として残します。",
+    architecture: [
+      {
+        axis: "BUILD",
+        body: "スキーマ / フォーム / リソース",
+        href: "/ja/api/ai-agents#agent-lifecycle",
+      },
+      {
+        axis: "OPERATE",
+        body: "コンテンツ / メディア / API / 公開",
+        href: "/ja/api/ai-agents#agent-lifecycle",
+      },
+      {
+        axis: "GOVERN",
+        body: "エージェントキー / 権限 / レビュー / 承認 / 監査 / 安全制御",
+        href: "/ja/guide/production-safety",
+      },
+    ],
     startTitle: "スタート",
     startLead: "経路を選ぶ → 完成形を確認 → 手順へ。",
     productsTitle: "プロダクト",
@@ -248,6 +271,7 @@ const copy = {
     ],
     refs: [
       { title: "API 概要", href: "/ja/api/overview" },
+      { title: "Production Safety", href: "/ja/guide/production-safety" },
       { title: "公開 API", href: "/ja/api/public-api" },
       { title: "フレームワーク", href: "/ja/guide/frameworks/" },
       { title: "Webhook", href: "/ja/api/webhooks" },
@@ -261,8 +285,31 @@ const copy = {
   },
   en: {
     pageTitle: "LUNO Documentation",
-    pageLead:
-      "Free AI-era backend platform—Headless CMS, MCP, secure APIs, Cloudflare Workers. Define, create, review, publish, and deliver.",
+    pageLeads: [
+      "LUNO is a hosted AI-era Backend Platform for AI agents.",
+      "Agents can build and operate backend resources through MCP and APIs. Humans retain control over production through permissions, review, approval, and safety controls.",
+      "Content, forms, authentication, storage, APIs, and publishing are built-in backend capabilities.",
+    ],
+    architectureTitle: "Agent Backend",
+    architectureLead:
+      "The product model agents operate against. Headless CMS stays below as a discoverable capability.",
+    architecture: [
+      {
+        axis: "BUILD",
+        body: "Schemas / Forms / Resources",
+        href: "/en/api/ai-agents#agent-lifecycle",
+      },
+      {
+        axis: "OPERATE",
+        body: "Content / Media / API / Publishing",
+        href: "/en/api/ai-agents#agent-lifecycle",
+      },
+      {
+        axis: "GOVERN",
+        body: "Agent keys / Permissions / Review / Approval / Audit / Safety",
+        href: "/en/guide/production-safety",
+      },
+    ],
     startTitle: "Get started",
     startLead: "Pick a path → see the done state → follow the steps.",
     productsTitle: "Products",
@@ -465,6 +512,7 @@ const copy = {
     ],
     refs: [
       { title: "API overview", href: "/en/api/overview" },
+      { title: "Production Safety", href: "/en/guide/production-safety" },
       { title: "Public API", href: "/en/api/public-api" },
       { title: "Frameworks", href: "/en/guide/frameworks/" },
       { title: "Webhooks", href: "/en/api/webhooks" },
@@ -483,7 +531,13 @@ const copy = {
   <div class="hub" :data-locale="props.locale">
     <header class="hub-intro">
       <h1>{{ copy[locale].pageTitle }}</h1>
-      <p class="hub-intro__lead">{{ copy[locale].pageLead }}</p>
+      <p
+        v-for="(lead, i) in copy[locale].pageLeads"
+        :key="i"
+        class="hub-intro__lead"
+      >
+        {{ lead }}
+      </p>
     </header>
 
     <section class="hub-section">
@@ -528,6 +582,24 @@ const copy = {
           </div>
           <a class="hub-card__cta" :href="item.href">{{ item.cta }} →</a>
         </div>
+      </div>
+    </section>
+
+    <section class="hub-section" id="agent-backend">
+      <header class="hub-section__head">
+        <h2>{{ copy[locale].architectureTitle }}</h2>
+        <p>{{ copy[locale].architectureLead }}</p>
+      </header>
+      <div class="hub-arch">
+        <a
+          v-for="item in copy[locale].architecture"
+          :key="item.axis"
+          class="hub-arch__item"
+          :href="item.href"
+        >
+          <span class="hub-arch__axis">{{ item.axis }}</span>
+          <span class="hub-arch__body">{{ item.body }}</span>
+        </a>
       </div>
     </section>
 

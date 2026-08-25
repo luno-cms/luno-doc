@@ -13,11 +13,11 @@ export const SEO_KEYWORDS =
 
 /** Default meta description (EN) — backend-first, CMS as capability. */
 export const SEO_DESCRIPTION_EN =
-  "LUNO is a free AI-era backend platform (Headless CMS + forms + secure Public/Agent APIs) operable via MCP on Cloudflare Workers.";
+  "LUNO is a hosted AI-era Backend Platform for AI agents. BUILD / OPERATE / GOVERN via MCP and APIs. Content, forms, and CMS are capabilities.";
 
 /** Default meta description (JA). */
 export const SEO_DESCRIPTION_JA =
-  "LUNO は free な AI 時代の backend platform（Headless CMS・フォーム・secure な Public/Agent API）。MCP で操作、Cloudflare Workers 上。";
+  "LUNO は AI エージェント向けのホスト型 Backend Platform。BUILD / OPERATE / GOVERN。CMS・フォームは capability。";
 
 const LEGACY_PATHS = new Set([
   "/ja/guide/widgets",

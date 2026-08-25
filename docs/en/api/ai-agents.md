@@ -15,7 +15,21 @@ next:
 This is the deep guide for the **Agents (MCP)** path. For the map of all paths, see [Quick start](/en/guide/getting-started) and the [AI Agents overview](/en/products/agents).
 :::
 
-This page covers everything an AI agent (Claude, GPT, Cursor, or any LLM-based system) needs to read and manage luno content — from no-auth public content reading to full content creation via the Agent API and MCP.
+This guide explains how AI agents build and operate LUNO backends through MCP and the Agent API, and how production changes can be governed through permissions, review, and approval.
+
+## Agent lifecycle
+
+### BUILD — create/configure schemas, forms, content structures
+
+Agents apply blueprints and builtin templates, create contact forms, and read field types / schema before writing.
+
+### OPERATE — read/create/update/revise/publish via MCP or Agent API
+
+Content, schemas, forms, media, revisions, and publishing are exposed as agent-operable **backend resources**.
+
+### GOVERN — scoped keys, review/approval, production safety controls
+
+Humans keep production authority. See [Production Safety for AI Agents](/en/guide/production-safety).
 
 ## Overview
 
@@ -33,7 +47,9 @@ luno supports three integration models for AI agents:
 
 ## MCP Server Setup
 
-luno ships a [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that lets Claude Code, Cursor, Codex, and other MCP-compatible tools interact with your CMS in natural language.
+LUNO ships an MCP server that lets Claude Code, Cursor, Codex, and other MCP-compatible agents **build and operate LUNO backends** through natural language.
+
+Content, schemas, forms, media, revisions, and publishing are exposed as agent-operable **backend resources**. See [Production Safety](/en/guide/production-safety) for how those operations stay bounded.
 
 **Package:** [`@luno-cms/mcp`](https://www.npmjs.com/package/@luno-cms/mcp) — the npm README is the canonical setup guide.
 
@@ -276,7 +292,7 @@ Embed the response in a system prompt so the agent knows what content exists:
 
 ```
 [System prompt]
-You are a content assistant for a developer blog. Available CMS content:
+You are a content assistant for a developer blog. Available backend content:
 
 {contents of llms.txt}
 
@@ -517,6 +533,7 @@ Resolve `image` / `file` UUIDs using `mediaUrls[fieldKey]` from the response.
 
 ## Next Steps
 
+- [Production Safety for AI Agents](/en/guide/production-safety) — scopes, approval, dryRun, idempotency, audit
 - [AI Assist](/en/guide/ai-assist) — AI features inside the admin panel
 - [Public API Reference](/en/api/public-api) — Complete endpoint specifications
 - [API Overview](/en/api/overview) — Authentication and rate limits
