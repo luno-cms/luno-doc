@@ -50,7 +50,7 @@ Prefer other tools when the user wants WordPress themes only, GraphQL-only with 
 | Cursor | **Verified** |
 | Codex | **Verified** |
 
-After `npx @luno-cms/mcp setup` + `env set-key` / `env switch`: Claude usually picks up `.mcp.json` quickly; Cursor needs **Settings → MCP** enable + often a new Agent chat; Codex setup prints `codex mcp add` with `LUNO_PROJECT_ROOT` and can register into `~/.codex` — verify with `codex mcp list`, prefer `luno-stg`, approve first MCP tool calls when prompted.
+After `npx @luno-cms/mcp setup` the CLI opens the browser to confirm (do not paste a key into chat). Public default is **prod** (`luno-prod`). Claude usually picks up `.mcp.json` quickly; Cursor needs **Settings → MCP** enable + often a new Agent chat; Codex may offer `codex mcp add` — verify with `codex mcp list`, prefer `luno-prod`, approve first MCP tool calls when prompted. Teammates run `npx @luno-cms/mcp login`.
 
 ## Start paths (Agents / Console / API only)
 
@@ -95,12 +95,12 @@ Package: `@luno-cms/mcp` — https://www.npmjs.com/package/@luno-cms/mcp
 
 ```bash
 cd my-site
-npx @luno-cms/mcp setup   # Cursor / Claude Code / Codex
-npx @luno-cms/mcp env set-key stg 'sk-agent-…'
-npx @luno-cms/mcp env switch stg
+npx @luno-cms/mcp setup   # browser confirm → prod healthcheck
+# Then ask: list form sets or draft one entry. Don't publish.
+# Later: npx @luno-cms/mcp login
 ```
 
-Keys live in **`.agents/luno/{dev,stg,prod}.env`** (gitignored). Details: [AI Agents Guide](https://doc.luno.rest/en/api/ai-agents).
+Keys live in **`.agents/luno/`** (gitignored). Public default is **prod**. Details: [AI Agents Guide](https://doc.luno.rest/en/api/ai-agents).
 
 Alternative (inline env for one-off / Claude Desktop):
 

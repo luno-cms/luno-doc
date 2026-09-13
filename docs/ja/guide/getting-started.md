@@ -21,6 +21,7 @@ LUNO は **free な AI 時代の backend platform**（Headless CMS・フォー�
 ```bash
 # 経路 A（推奨・最短）
 npx @luno-cms/mcp setup
+# → ブラウザで確認 → フォーム一覧か下書き 1 件（公開しない）
 ```
 
 経路 B の手順は以下です。経路 A / C は上のリンク先へ進んでください。
@@ -123,9 +124,8 @@ const { items } = await res.json()
 # サイトリポジトリで一度だけ
 npx @luno-cms/mcp setup
 
-# エージェントに例:
-# 「blog フォームセットの公開エントリを一覧して」
-# MCP が Public API / Admin API 経由で取得します
+# エージェントに:
+# 「この LUNO のフォーム一覧を出して。または下書きを1件。公開やスキーマ変更はしないで。」
 ```
 
 :::

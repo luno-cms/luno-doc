@@ -182,20 +182,11 @@ luno integrates directly with AI agents via the Model Context Protocol (MCP) and
 
 ### MCP server setup
 
-```json
-{
-  "mcpServers": {
-    "luno": {
-      "command": "npx",
-      "args": ["-y", "@luno-cms/mcp"],
-      "env": {
-        "LUNO_API_URL": "https://api.luno.rest/admin",
-        "LUNO_AGENT_KEY": "sk-agent-xxxxxxxx"
-      }
-    }
-  }
-}
+```bash
+npx @luno-cms/mcp setup
 ```
+
+The CLI opens the browser to confirm. Do not paste a key into the agent chat.
 
 See [AI Agents Guide](/en/api/ai-agents) for the full setup.
 

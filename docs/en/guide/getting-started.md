@@ -21,6 +21,7 @@ LUNO is a **free AI-era backend platform** (Headless CMS + forms + secure APIs) 
 ```bash
 # Path A (recommended / fastest)
 npx @luno-cms/mcp setup
+# → browser confirm → ask: list form sets or draft one entry (don't publish)
 ```
 
 Path B continues below. For A and C, follow the links above.
@@ -121,8 +122,8 @@ const { items } = await res.json()
 # Once in your site repo
 npx @luno-cms/mcp setup
 
-# Then ask your agent, e.g.:
-# "List published entries in the blog form set"
+# Then ask your agent:
+# "List the form sets on this LUNO, or draft one entry. Don't publish or change the schema."
 ```
 
 :::

@@ -18,15 +18,15 @@ next:
 | 項目 | 状態 |
 |---|---|
 | MCP 設定 | Cursor / Claude Code / Codex のいずれかに接続済み（**Verified**） |
-| キー | `.agents/luno/{dev,stg,prod}.env` に分離 |
+| キー | `.agents/luno/` に保存（gitignore）。公開デフォルトは **prod** |
 | スコープ | 推奨は `full`（または `content` / `schema`） |
-| 操作 | チャットからエントリ一覧・作成・公開、スキーマ確認ができる |
+| 最初の依頼 | フォーム一覧か下書き 1 件。公開はしない |
 
 ## 確認チェックリスト
 
-- [ ] `npx @luno-cms/mcp setup` が完了している
-- [ ] エージェントキー（`sk-agent-…`）を `env set-key` で入れた
-- [ ] 「blog の公開エントリを一覧して」で応答が返る
+- [ ] `npx @luno-cms/mcp setup` が完了している（ブラウザで確認）
+- [ ] エージェントでワークスペース信頼 / MCP を許可した
+- [ ] 「この LUNO のフォーム一覧を出して。または下書きを1件。公開やスキーマ変更はしないで。」で応答が返る
 - [ ] （任意）`llms.txt` で公開構造を読める
 
 ## 今すぐやる
@@ -38,19 +38,21 @@ next:
 ```bash
 cd my-existing-site
 npx @luno-cms/mcp setup
-# → 1) Claude Code  2) Cursor  3) Codex
+# → ブラウザで確認 → production へ healthcheck
 ```
 
-2. Console の **設定 → エージェント API キー** でキーを発行し、入れる
+エージェントのチャットにキーを貼らないでください。
 
-```bash
-npx @luno-cms/mcp env set-key stg 'sk-agent-…'
-npx @luno-cms/mcp env switch stg
-npx @luno-cms/mcp env status
+2. 選んだエージェントでプロジェクトを開き、信頼 / MCP を求められたら許可する
+
+3. 聞く:
+
+```
+この LUNO のフォーム一覧を出して。または下書きを1件。公開やスキーマ変更はしないで。
 ```
 
-3. エージェントに確認する  
-   「blog フォームセットの公開エントリを一覧して」
+あとから: チームは `npx @luno-cms/mcp login`。`--env stg` はアクセスがある人だけ。
+
 4. 詰まったら [AI エージェント向けガイド](/ja/api/ai-agents) のセットアップ節へ
 
 ## 次の一手

@@ -18,15 +18,15 @@ In about 5 minutes you can **operate LUNO from your site repo via an agent**.
 | Item | State |
 |---|---|
 | MCP | Connected in Cursor / Claude Code / Codex (**Verified**) |
-| Keys | Split across `.agents/luno/{dev,stg,prod}.env` |
+| Keys | In `.agents/luno/` (gitignored). Public default is **prod** |
 | Scope | Prefer `full` (or `content` / `schema`) |
-| Ops | List / create / publish entries and inspect schema from chat |
+| First ask | List form sets or draft one entry — not publish |
 
 ## Checklist
 
-- [ ] `npx @luno-cms/mcp setup` completed
-- [ ] Agent key (`sk-agent-…`) set via `env set-key`
-- [ ] “List published blog entries” returns a real response
+- [ ] `npx @luno-cms/mcp setup` completed (browser confirm)
+- [ ] Agent approved workspace trust / MCP
+- [ ] “List the form sets on this LUNO, or draft one entry. Don't publish or change the schema.” returns a real response
 - [ ] (Optional) Public structure readable via `llms.txt`
 
 ## Do this now
@@ -38,18 +38,21 @@ Follow in order to reach the done state.
 ```bash
 cd my-existing-site
 npx @luno-cms/mcp setup
-# → 1) Claude Code  2) Cursor  3) Codex
+# → browser confirm → healthcheck against production
 ```
 
-2. Create a key in Console **Settings → Agent API keys**, then store it
+Do not paste a key into the agent chat.
 
-```bash
-npx @luno-cms/mcp env set-key stg 'sk-agent-…'
-npx @luno-cms/mcp env switch stg
-npx @luno-cms/mcp env status
+2. Open the project in the chosen agent and approve trust / MCP if prompted
+
+3. Ask:
+
+```
+List the form sets on this LUNO, or draft one entry. Don't publish or change the schema.
 ```
 
-3. Ask your agent: “List published entries in the blog form set”
+Later: teammates run `npx @luno-cms/mcp login`. Use `--env stg` only if you have access.
+
 4. If stuck, open the [AI agents guide](/en/api/ai-agents) setup section
 
 ## Next

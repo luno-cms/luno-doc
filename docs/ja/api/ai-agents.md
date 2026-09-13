@@ -45,7 +45,7 @@ luno は以下の 3 つの方法で AI エージェントと連携できます�
 
 **クライアント対応:** Claude Code / Cursor / Codex はいずれも **Verified**（Golden Path E2E: テンプレ適用 → 作成・保存・公開 → ファネル計測）。
 
-## MCP サーバーのセットアップ
+## MCP サーバーのセットアップ {#mcp}
 
 LUNO は MCP サーバーを同梱しており、Claude Code / Cursor / Codex など MCP 対応エージェントが自然言語で **LUNO backend を構築・運用**できます。
 
@@ -60,8 +60,12 @@ LUNO は MCP サーバーを同梱しており、Claude Code / Cursor / Codex �
 ```bash
 cd my-existing-site
 npx @luno-cms/mcp setup
-# → 1) Claude Code  2) Cursor  3) Codex を選択
+# → このマシンで見つかったエージェントを出す（または --agent claude|cursor|codex）
+# → ブラウザを開いて確認する（または --key / --no-browser）
+# → production（https://api.luno.rest/admin）へ healthcheck
 ```
+
+エージェントのチャットにキーを貼らないでください。`--key` / `--no-browser` はブラウザが使えないときだけです。
 
 | 選択 | 書き込まれるもの |
 |---|---|
@@ -85,19 +89,20 @@ LUNO_API_URL=https://api.luno.rest/admin
 LUNO_AGENT_KEY=sk-agent-xxxxxxxx
 ```
 
+公開デフォルトは **prod**（`luno-prod`）。`dev` / `stg` は消さない。明示したときだけ `setup --env stg` / `run stg` / `env switch stg`。
+
 その後:
 
-1. 管理画面 **設定 → エージェント API キー** でキーを発行
-2. エージェントで `/luno` に貼るか、非対話で:
+1. 選んだエージェントでプロジェクトを開く
+2. ワークスペース信頼 / MCP を求められたら許可する
+3. 聞く: `この LUNO のフォーム一覧を出して。または下書きを1件。公開やスキーマ変更はしないで。`
 
-```bash
-npx @luno-cms/mcp env set-key stg 'sk-agent-…'
-npx @luno-cms/mcp env switch stg
-npx @luno-cms/mcp env status
-```
+あとから: チームは `npx @luno-cms/mcp login`。`--env stg` はアクセスがある人だけ。
+
+`/luno` はセットアップ後のショートカット。入場券ではない。キーを聞かない。
 
 MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`  
-（`npx @luno-cms/mcp run stg` は `.agents/luno/stg.env` を読みます）
+（`npx @luno-cms/mcp run prod` は `.agents/luno/prod.env` を読みます）
 
 ::: tip
 `.agents/luno/*.env` は **Git に入れないでください**。環境・サイトごとにキーを分けるのが安全です。
@@ -105,11 +110,11 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 
 ### セットアップ後 — クライアント別メモ
 
-| クライアント | `env set-key` / `env switch` のあと |
+| クライアント | メモ |
 |---|---|
 | **Claude Code** | ツールが出ないときは MCP 再接続（`/mcp`） |
-| **Cursor** | **Settings → MCP** で `luno-stg` を Enabled（緑）。既存チャットにツールが無いときは **新しい Agent チャット**。キー未設定の `luno-dev` / `luno-prod` は Disabled のままでよい |
-| **Codex** | プロジェクト `.codex/config.toml`（`cwd` 付き）に加え、Codex は **`~/.codex`** を優先する。`npx @luno-cms/mcp setup --agent codex` は `codex mcp add luno-<env> --env LUNO_PROJECT_ROOT="<siteRoot>" -- npx -y @luno-cms/mcp run <env>` を表示し、対話時は `~/.codex` 登録を案内（`--yes` は表示のみ）。確認: `codex mcp list`（`luno-stg` 等）。初回 MCP ツール呼び出しは **承認** が必要な場合あり。普段は **`luno-stg`** を優先 |
+| **Cursor** | **Settings → MCP** で `luno-prod` を Enabled。既存チャットにツールが無いときは **新しい Agent チャット**。キー未設定の `luno-dev` / `luno-stg` は Disabled のままでよい |
+| **Codex** | プロジェクト `.codex/config.toml`（`cwd` 付き）に加え、Codex は **`~/.codex`** を優先する。setup が `codex mcp add` を案内することがある。確認: `codex mcp list`（`luno-prod`）。初回 MCP ツール呼び出しは **承認** が必要な場合あり。普段は **`luno-prod`** を優先 |
 
 ### 環境変数（MCP プロセスが読む値）
 
@@ -141,9 +146,9 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 }
 ```
 
-**Cursor** — Settings → MCP、またはプロジェクトの `.cursor/mcp.json` に同様の形。キー発行後、管理画面 **設定 → エージェント API キー** にも貼り付け用スニペットが出ます。
+**Cursor** — Settings → MCP、またはプロジェクトの `.cursor/mcp.json` に同様の形。JSON の手書きより `setup` を使う。
 
-日常のサイト開発では `npx @luno-cms/mcp setup` を使い、キーを `.agents/luno/` に置いて `dev` / `stg` / `prod` を切り替えてください。
+日常のサイト開発では `npx @luno-cms/mcp setup` を使い、キーを `.agents/luno/` に置いてください。`dev` / `stg` / `prod` の切替はアクセスがあるときだけ。
 
 ### エージェント向けトラブルシュート
 
@@ -153,7 +158,7 @@ MCP サーバー名: `luno-dev` / `luno-stg` / `luno-prod`
 | `Slug already exists for this tenant`（+ `hint`） | Form Set slug 衝突 | `list_form_sets` か別 slug | **No** |
 | `Slug already exists for this form set` | エントリ slug 衝突 | `list_entries` か別 slug | **No** |
 | `REVISION_CONFLICT` / revision mismatch | 古い `revision` / `revisionRowId` | `list_revisions`；`save_revision` の `id` と `revision` を `publish_revision` に渡す | **No** |
-| `401` / Invalid agent key | キー誤り・未設定 | `npx @luno-cms/mcp env set-key …` のあと MCP 再接続 | **No** |
+| `401` / Invalid agent key | キー誤り・未設定 | `npx @luno-cms/mcp login` のあと MCP 再接続 | **No** |
 | `429` / `RATE_LIMITED` | キーごとのレート制限超過 | `Retry-After` 秒待って再試行。連続ツール呼び出しを間引く | **Yes**（待機後） |
 | create 後のタイムアウト | ネットワーク / クライアント中断 | **同じ** `idempotencyKey` で再送 | **Yes**（キー付き create 系） |
 
@@ -174,6 +179,10 @@ API エラーには任意で `error.hint` / `error.retryable` が付くことが
 ## エージェント API キーの発行
 
 管理 API（MCP 含む）を呼ぶには **エージェント API キー**が必要です。
+
+推奨は `npx @luno-cms/mcp setup` でブラウザ確認。チャットにキーを貼らない。
+
+手作業の発行（`--key` / `--no-browser` のときだけ）:
 
 1. 管理画面 **設定 → エージェント API キー** → **新規作成**
 2. 名前（例: `Claude Agent`）を入力

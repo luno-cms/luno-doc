@@ -177,9 +177,11 @@ luno は AI エージェント（Claude・GPT など）からコンテンツを�
 
 ### MCP サーバーとの連携
 
-Claude Desktop などの MCP 対応ツールで luno MCP サーバーを設定すると、AI が直接コンテンツを作成・公開できます。
+```bash
+npx @luno-cms/mcp setup
+```
 
-詳細は [AI エージェント向けガイド](/ja/api/ai-agents) を参照してください。
+CLI がブラウザを開いて確認します。チャットにキーを貼らないでください。詳細は [AI エージェント向けガイド](/ja/api/ai-agents) です。
 
 ### API キーで直接操作
 
