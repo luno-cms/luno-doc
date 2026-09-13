@@ -45,7 +45,7 @@ luno supports three integration models for AI agents:
 
 **Client support:** Claude Code, Cursor, and Codex are all **Verified** (Golden Path E2E: apply builtin template → create/save/publish entry → funnel events).
 
-## MCP Server Setup
+## MCP Server Setup {#mcp}
 
 LUNO ships an MCP server that lets Claude Code, Cursor, Codex, and other MCP-compatible agents **build and operate LUNO backends** through natural language.
 
@@ -60,8 +60,12 @@ From the **root of your site repository**:
 ```bash
 cd my-existing-site
 npx @luno-cms/mcp setup
-# → pick 1) Claude Code  2) Cursor  3) Codex
+# → lists agents found on this machine (or pass --agent claude|cursor|codex)
+# → opens the browser to confirm (or --key / --no-browser)
+# → healthcheck against production (https://api.luno.rest/admin)
 ```
+
+Do not paste a key into the agent chat. Use `--key` or `--no-browser` only when you cannot use the browser.
 
 | Choice | What gets written |
 |---|---|
@@ -85,19 +89,20 @@ LUNO_API_URL=https://api.luno.rest/admin
 LUNO_AGENT_KEY=sk-agent-xxxxxxxx
 ```
 
+Public default is **prod** (`luno-prod`). `dev` / `stg` stay on disk for explicit `setup --env stg` / `run stg` / `env switch stg`.
+
 Then:
 
-1. Issue a key in the admin panel (**Settings → Agent API Keys**)
-2. Paste it via `/luno` in the agent, or non-interactively:
+1. Open the project in the chosen agent
+2. Approve workspace trust / MCP if prompted
+3. Ask: `List the form sets on this LUNO, or draft one entry. Don't publish or change the schema.`
 
-```bash
-npx @luno-cms/mcp env set-key stg 'sk-agent-…'
-npx @luno-cms/mcp env switch stg
-npx @luno-cms/mcp env status
-```
+Later: teammates run `npx @luno-cms/mcp login`. Use `--env stg` only if you have access.
+
+`/luno` is an optional shortcut after setup. It is not required, and it must not ask for a key.
 
 MCP server names: `luno-dev` / `luno-stg` / `luno-prod`  
-(`npx @luno-cms/mcp run stg` loads `.agents/luno/stg.env`)
+(`npx @luno-cms/mcp run prod` loads `.agents/luno/prod.env`)
 
 ::: tip
 Do **not** commit `.agents/luno/*.env`. Keep secrets out of git; use one key per environment / site as needed.
@@ -105,11 +110,11 @@ Do **not** commit `.agents/luno/*.env`. Keep secrets out of git; use one key per
 
 ### After setup — client-specific notes
 
-| Client | What to do after `env set-key` / `env switch` |
+| Client | Notes |
 |---|---|
-| **Claude Code** | Restart / reconnect MCP if tools are missing (`/mcp`) |
-| **Cursor** | **Settings → MCP**: enable `luno-stg` (green). Open a **new Agent chat** if tools do not appear in an existing chat. Leave `luno-dev` / `luno-prod` Disabled until those keys exist |
-| **Codex** | Setup writes project `.codex/config.toml` (with `cwd`) **and** prints `codex mcp add luno-<env> --env LUNO_PROJECT_ROOT="<siteRoot>" -- npx -y @luno-cms/mcp run <env>` because Codex prefers **`~/.codex`**. Interactive setup offers home registration; `--yes` prints commands only. Verify: `codex mcp list` (expect `luno-stg`, etc.). First MCP tool calls may require **approval**. Prefer **`luno-stg`** when that env is active |
+| **Claude Code** | If tools are missing, reconnect MCP (`/mcp`) |
+| **Cursor** | **Settings → MCP**: enable `luno-prod`. Open a **new Agent chat** if tools do not appear. Leave `luno-dev` / `luno-stg` Disabled until those keys exist |
+| **Codex** | Setup writes project `.codex/config.toml` (with `cwd`) **and** may offer `codex mcp add` because Codex prefers **`~/.codex`**. Verify: `codex mcp list` (expect `luno-prod`). First MCP tool calls may require **approval**. Prefer **`luno-prod`** |
 
 ### Environment variables (what the MCP process reads)
 
@@ -141,9 +146,9 @@ If you are not using `setup` / `.agents/luno/`, you can put the variables direct
 }
 ```
 
-**Cursor** — Settings → MCP, or project `.cursor/mcp.json` with the same shape. The admin panel also shows a copy-paste snippet after you issue a key (**Settings → Agent API Keys**).
+**Cursor** — Settings → MCP, or project `.cursor/mcp.json` with the same shape. Prefer `setup` over hand-editing JSON.
 
-For day-to-day site work, prefer `npx @luno-cms/mcp setup` so keys stay in `.agents/luno/` and you can switch `dev` / `stg` / `prod`.
+For day-to-day site work, prefer `npx @luno-cms/mcp setup` so keys stay in `.agents/luno/` and you can switch `dev` / `stg` / `prod` when you have access.
 
 ### Troubleshooting for Agents
 
@@ -153,7 +158,7 @@ For day-to-day site work, prefer `npx @luno-cms/mcp setup` so keys stay in `.age
 | `Slug already exists for this tenant` (+ `hint`) | Form Set slug collision | `list_form_sets` or pick a new slug | **No** |
 | `Slug already exists for this form set` | Entry slug collision | `list_entries` or new slug | **No** |
 | `REVISION_CONFLICT` / revision mismatch | Stale `revision` / `revisionRowId` | `list_revisions`; use `save_revision`’s `id` + `revision` for `publish_revision` | **No** |
-| `401` / Invalid agent key | Bad or missing key | `npx @luno-cms/mcp env set-key …` then reconnect MCP | **No** |
+| `401` / Invalid agent key | Bad or missing key | `npx @luno-cms/mcp login` then reconnect MCP | **No** |
 | `429` / `RATE_LIMITED` | Per-key rate limit exceeded | Wait for `Retry-After` seconds; reduce tight tool loops | **Yes** (after wait) |
 | Timeout after create | Network / client abort | Retry with the **same** `idempotencyKey` | **Yes** (keyed creates) |
 
@@ -174,6 +179,10 @@ Admin UI does not send keys — behavior without a key is unchanged. Agents may 
 ## Issuing an Agent API Key
 
 AI agents that call the Admin API (including the MCP server) need an **agent API key**.
+
+Preferred path: run `npx @luno-cms/mcp setup` and confirm in the browser. You do not paste the key into chat.
+
+Manual issue (for `--key` / `--no-browser` only):
 
 1. Open **Settings → Agent API Keys** (`/settings/api-keys`) in the admin panel
 2. Set a descriptive name (e.g., `Claude Agent`, `Setup Bot`)

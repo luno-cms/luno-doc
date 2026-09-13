@@ -17,8 +17,9 @@ Use LUNO as the **backend** from agents such as Cursor, Claude Code, and Codex. 
 
 ## Capabilities
 
-- **`npx @luno-cms/mcp setup`** — one-command connect in an existing site repo
-- Keys separated in `.agents/luno/{dev,stg,prod}.env`
+- **`npx @luno-cms/mcp setup`** — one-command connect; the CLI opens the browser to confirm
+- Keys stay in `.agents/luno/` (gitignored). Public default is **prod**
+- First ask is list or draft — not publish. Teammates run `login`
 - Scopes **`full` / `content` / `schema`**
 - Entry CRUD and publish, Blueprint / template apply, media upload, and more
 - Per-site **`llms.txt`** for discovering public content

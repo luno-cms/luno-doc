@@ -17,8 +17,9 @@ Cursor / Claude Code / Codex などのエージェントから、LUNO を **back
 
 ## できること
 
-- **`npx @luno-cms/mcp setup`** — 既存サイトリポジトリへのワンコマンド接続
-- キーを `.agents/luno/{dev,stg,prod}.env` に分離
+- **`npx @luno-cms/mcp setup`** — ワンコマンド接続。CLI がブラウザを開いて確認する
+- キーは `.agents/luno/`（gitignore）。公開デフォルトは **prod**
+- 最初の依頼は一覧か下書き。公開はしない。チームは `login`
 - スコープ **`full` / `content` / `schema`**
 - エントリ CRUD・公開、Blueprint / テンプレ適用、メディア upload など
 - サイトごとの **`llms.txt`** で公開コンテンツを発見
