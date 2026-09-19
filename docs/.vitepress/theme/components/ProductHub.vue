@@ -45,32 +45,40 @@ const copy = {
   ja: {
     pageTitle: "LUNO Documentation",
     pageLeads: [
-      "LUNO は、AI エージェント向けのホスト型 AI-era Backend Platform です。",
-      "エージェントは MCP と API で backend リソースを構築・運用できます。本番の権限・レビュー・承認・安全制御は人間が保持します。",
-      "コンテンツ、フォーム、認証、ストレージ、API、公開は、プラットフォームに組み込まれた capability です。",
+      "人はバックエンドを REGISTER / GOVERN する。エージェントは BUILD / OPERATE する。アプリは CONSUME する。全員が同じ正本で動く。",
+      "LUNO はホスト型の AI-era Backend Platform です — 人間用 CMS でもエージェント用 CMS でもない。",
+      "Publish は backend state。Ship はフロントエンドのリリース。Connected ≠ activated。",
     ],
-    architectureTitle: "Agent Backend",
+    architectureTitle: "Four operators",
     architectureLead:
-      "製品面の前に、エージェントが触る軸です。Headless CMS は下の capability として残します。",
+      "同じバックエンド。権限は異なる。Headless CMS は下の capability として残す。",
     architecture: [
       {
-        axis: "BUILD",
-        body: "スキーマ / フォーム / リソース",
-        href: "/ja/api/ai-agents#agent-lifecycle",
+        axis: "BUILD / OPERATE",
+        body: "Agent — スキーマ、フォーム、エントリ、MCP で backend state を公開。",
+        href: "/ja/guide/paths/agents",
       },
       {
-        axis: "OPERATE",
-        body: "コンテンツ / メディア / API / 公開",
-        href: "/ja/api/ai-agents#agent-lifecycle",
+        axis: "REGISTER / GOVERN",
+        body: "Human — サイト作成、接続確認、キー、承認、監査。",
+        href: "/ja/guide/paths/console",
       },
       {
-        axis: "GOVERN",
-        body: "エージェントキー / 権限 / レビュー / 承認 / 監査 / 安全制御",
-        href: "/ja/guide/production-safety",
+        axis: "CONSUME",
+        body: "Application — 公開 API / embed。公開コンテンツは認証不要。",
+        href: "/ja/guide/paths/api",
       },
     ],
     startTitle: "スタート",
     startLead: "経路を選ぶ → 完成形を確認 → 手順へ。",
+    spine: [
+      { label: "Discover", href: "/ja/guide/getting-started" },
+      { label: "Connect", href: "/ja/guide/paths/agents" },
+      { label: "Build", href: "/ja/api/ai-agents#agent-lifecycle" },
+      { label: "Operate", href: "/ja/api/ai-agents#agent-lifecycle" },
+      { label: "Verify", href: "/ja/guide/paths/agents" },
+      { label: "Govern", href: "/ja/guide/production-safety" },
+    ],
     productsTitle: "プロダクト",
     productsLead:
       "名前のついた製品面と、その下のプラットフォーム能力。",
@@ -90,19 +98,19 @@ const copy = {
         badgeLabel: "AGENTS",
         badgeTime: "~5 MIN",
         marker: "hot",
-        title: "MCP で始める",
-        body: "サイトリポジトリで setup。Cursor / Claude Code / Codex から操作。",
+        title: "BUILD / OPERATE",
+        body: "人がテナントを REGISTER したあと、エージェントが MCP で BUILD / OPERATE する。",
         href: "/ja/guide/paths/agents",
         cta: "完成形を見る",
-        command: "npx @luno-cms/mcp setup",
+        command: "npx -y @luno-cms/mcp setup",
       },
       {
         key: "console",
         badgeLabel: "CONSOLE",
         badgeTime: "~10 MIN",
         marker: "hot",
-        title: "管理画面で始める",
-        body: "ログインから最初の公開まで。承認とスケジュール公開の入口。",
+        title: "REGISTER / GOVERN",
+        body: "人がテナントを作成し、エージェントに何を許すかを GOVERN する。",
         href: "/ja/guide/paths/console",
         cta: "完成形を見る",
         command: null,
@@ -112,7 +120,7 @@ const copy = {
         badgeLabel: "API",
         badgeTime: "~3 MIN",
         marker: "cool",
-        title: "公開 API で読む",
+        title: "CONSUME",
         body: "認証不要（または公開キー）でエントリ・マスタ・メディアを取得。",
         href: "/ja/guide/paths/api",
         cta: "完成形を見る",
@@ -286,32 +294,40 @@ const copy = {
   en: {
     pageTitle: "LUNO Documentation",
     pageLeads: [
-      "LUNO is a hosted AI-era Backend Platform for AI agents.",
-      "Agents can build and operate backend resources through MCP and APIs. Humans retain control over production through permissions, review, approval, and safety controls.",
-      "Content, forms, authentication, storage, APIs, and publishing are built-in backend capabilities.",
+      "Humans govern the backend. Agents build and operate it. Applications consume it. Everyone works from the same system of record.",
+      "LUNO is a hosted AI-era Backend Platform — not a CMS for humans and not a CMS for agents.",
+      "Publish is backend state. Ship is frontend release. Connected is not activated.",
     ],
-    architectureTitle: "Agent Backend",
+    architectureTitle: "Four operators",
     architectureLead:
-      "The product model agents operate against. Headless CMS stays below as a discoverable capability.",
+      "Same backend. Different authority. Headless CMS stays below as a capability.",
     architecture: [
       {
-        axis: "BUILD",
-        body: "Schemas / Forms / Resources",
-        href: "/en/api/ai-agents#agent-lifecycle",
+        axis: "BUILD / OPERATE",
+        body: "Agent — schema, forms, entries, publish backend state via MCP.",
+        href: "/en/guide/paths/agents",
       },
       {
-        axis: "OPERATE",
-        body: "Content / Media / API / Publishing",
-        href: "/en/api/ai-agents#agent-lifecycle",
+        axis: "REGISTER / GOVERN",
+        body: "Human — create the site, confirm the connection, keys, approval, audit.",
+        href: "/en/guide/paths/console",
       },
       {
-        axis: "GOVERN",
-        body: "Agent keys / Permissions / Review / Approval / Audit / Safety",
-        href: "/en/guide/production-safety",
+        axis: "CONSUME",
+        body: "Application — public API / embed. Published content needs no auth.",
+        href: "/en/guide/paths/api",
       },
     ],
     startTitle: "Get started",
     startLead: "Pick a path → see the done state → follow the steps.",
+    spine: [
+      { label: "Discover", href: "/en/guide/getting-started" },
+      { label: "Connect", href: "/en/guide/paths/agents" },
+      { label: "Build", href: "/en/api/ai-agents#agent-lifecycle" },
+      { label: "Operate", href: "/en/api/ai-agents#agent-lifecycle" },
+      { label: "Verify", href: "/en/guide/paths/agents" },
+      { label: "Govern", href: "/en/guide/production-safety" },
+    ],
     productsTitle: "Products",
     productsLead:
       "Named product surfaces for content ops—plus platform capabilities underneath.",
@@ -331,19 +347,19 @@ const copy = {
         badgeLabel: "AGENTS",
         badgeTime: "~5 MIN",
         marker: "hot",
-        title: "Start with MCP",
-        body: "Run setup in your site repo. Operate from Cursor / Claude Code / Codex.",
+        title: "BUILD / OPERATE",
+        body: "After the human registers the tenant, the agent builds and operates the backend via MCP.",
         href: "/en/guide/paths/agents",
         cta: "See done state",
-        command: "npx @luno-cms/mcp setup",
+        command: "npx -y @luno-cms/mcp setup",
       },
       {
         key: "console",
         badgeLabel: "CONSOLE",
         badgeTime: "~10 MIN",
         marker: "hot",
-        title: "Start in Console",
-        body: "From sign-in to first publish—approvals and scheduled publishing.",
+        title: "REGISTER / GOVERN",
+        body: "Human creates the tenant and governs what the agent may do.",
         href: "/en/guide/paths/console",
         cta: "See done state",
         command: null,
@@ -353,7 +369,7 @@ const copy = {
         badgeLabel: "API",
         badgeTime: "~3 MIN",
         marker: "cool",
-        title: "Read via Public API",
+        title: "CONSUME",
         body: "Fetch entries, masters, and media with no auth (or a public key).",
         href: "/en/guide/paths/api",
         cta: "See done state",
@@ -545,6 +561,17 @@ const copy = {
         <h2>{{ copy[locale].startTitle }}</h2>
         <p>{{ copy[locale].startLead }}</p>
       </header>
+      <nav class="hub-spine" aria-label="Discover to Govern">
+        <ol class="hub-spine__list">
+          <li
+            v-for="item in copy[locale].spine"
+            :key="item.label"
+            class="hub-spine__item"
+          >
+            <a class="hub-spine__step" :href="item.href">{{ item.label }}</a>
+          </li>
+        </ol>
+      </nav>
       <div class="hub-grid hub-grid--start">
         <div
           v-for="item in copy[locale].start"
@@ -744,3 +771,49 @@ const copy = {
     </section>
   </div>
 </template>
+
+<style>
+/* Spine strip — local to ProductHub; hub.css stays untouched. */
+.hub-spine {
+  margin-top: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  background: var(--vp-c-bg-soft);
+}
+
+.hub-spine__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hub-spine__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hub-spine__item:not(:last-child)::after {
+  content: "·";
+  margin: 0 0.55rem;
+  color: var(--vp-c-text-3);
+  font-weight: 700;
+}
+
+.hub-spine__step {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--vp-c-brand-1);
+}
+
+.hub-spine__step:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
+}
+</style>

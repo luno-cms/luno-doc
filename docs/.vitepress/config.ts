@@ -16,13 +16,13 @@ const jaSidebar = [
     text: "スタート",
     items: [
       { text: "製品ハブ", link: "/ja/" },
-      { text: "クイックスタート（3経路）", link: "/ja/guide/getting-started" },
+      { text: "クイックスタート（スパイン）", link: "/ja/guide/getting-started" },
       {
         text: "完成形",
         collapsed: true,
         items: [
           { text: "A · Agents（MCP）", link: "/ja/guide/paths/agents" },
-          { text: "B · Console", link: "/ja/guide/paths/console" },
+          { text: "B · Console（REGISTER / GOVERN）", link: "/ja/guide/paths/console" },
           { text: "C · API only", link: "/ja/guide/paths/api" },
         ],
       },
@@ -96,13 +96,13 @@ const enSidebar = [
     text: "Start",
     items: [
       { text: "Product hub", link: "/en/" },
-      { text: "Quick start (3 paths)", link: "/en/guide/getting-started" },
+      { text: "Quick start (spine)", link: "/en/guide/getting-started" },
       {
         text: "Done states",
         collapsed: true,
         items: [
           { text: "A · Agents (MCP)", link: "/en/guide/paths/agents" },
-          { text: "B · Console", link: "/en/guide/paths/console" },
+          { text: "B · Console (REGISTER / GOVERN)", link: "/en/guide/paths/console" },
           { text: "C · API only", link: "/en/guide/paths/api" },
         ],
       },
