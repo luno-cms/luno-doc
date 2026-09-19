@@ -17,16 +17,26 @@ In about 5 minutes you can **operate LUNO from your site repo via an agent**.
 
 | Item | State |
 |---|---|
-| MCP | Connected in Cursor / Claude Code / Codex (**Verified**) |
+| MCP | Browser-confirmed setup. Connected ≠ activated. |
 | Keys | In `.agents/luno/` (gitignored). Public default is **prod** |
 | Scope | Prefer `full` (or `content` / `schema`) |
 | First ask | List form sets or draft one entry — not publish |
 
+## Activation
+
+Connected is not activated.
+
+- **Agent activated:** browser-confirmed `npx -y @luno-cms/mcp setup` **and** the first meaningful backend mutation (model or publish) remains on the record Console can open.
+- **Human activated:** they hold a Free site **and** can open that same record in Console.
+
+Do not treat MCP connectivity alone as task success. The human registers the tenant — the agent does not create it.
+
 ## Checklist
 
-- [ ] `npx @luno-cms/mcp setup` completed (browser confirm)
+- [ ] `npx -y @luno-cms/mcp setup` completed (browser confirm)
 - [ ] Agent approved workspace trust / MCP
 - [ ] “List the form sets on this LUNO, or draft one entry. Don't publish or change the schema.” returns a real response
+- [ ] Console can open the record the agent just created (draft or publish) — a read-only response is not activation
 - [ ] (Optional) Public structure readable via `llms.txt`
 
 ## Do this now
@@ -37,7 +47,7 @@ Follow in order to reach the done state.
 
 ```bash
 cd my-existing-site
-npx @luno-cms/mcp setup
+npx -y @luno-cms/mcp setup
 # → browser confirm → healthcheck against production
 ```
 

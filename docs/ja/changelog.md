@@ -7,6 +7,11 @@ description: LUNO ドキュメントと公開仕様の主な更新履歴。
 
 ドキュメントと公開仕様の更新を新しい順に記録します。製品の稼働状況は [Status](https://status.luno.rest) を参照してください。
 
+## 2026-09-19
+
+- 製品ハブ / クイックスタート / 経路 A 完成形 / `llms.txt` に four-operator スパイン（Agent BUILD / OPERATE · Human REGISTER / GOVERN · Application CONSUME · 共通バックエンド）を追加
+- サイドバー: クイックスタート（スパイン）、B · Console（REGISTER / GOVERN）
+
 ## 2026-08-25
 
 - ドキュメントホームの冒頭をホスト型 AI-era Backend Platform + Agent Backend（BUILD / OPERATE / GOVERN）に変更。Headless CMS は capability のまま

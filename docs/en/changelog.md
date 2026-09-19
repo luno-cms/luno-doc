@@ -7,6 +7,11 @@ description: Notable updates to LUNO docs and public specifications.
 
 Docs and public-spec updates, newest first. For platform uptime, see [Status](https://status.luno.rest).
 
+## 2026-09-19
+
+- Four-operator spine on Product hub, Quick start, Path A done state, and `llms.txt` (Agent BUILD / OPERATE · Human REGISTER / GOVERN · Application CONSUME · shared backend)
+- Sidebar: Quick start (spine); B · Console (REGISTER / GOVERN)
+
 ## 2026-08-25
 
 - Docs Home leads with hosted AI-era Backend Platform + Agent Backend (BUILD / OPERATE / GOVERN); Headless CMS stays a capability
